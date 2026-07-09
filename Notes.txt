@@ -1,0 +1,92 @@
+1/ Khởi tạo dự án Express JS -> npm init -> thay đổi main (package.json) thành 'server.js' -> thay đổi type thành module  -> gắn thêm start 'node server.js' -> npm i express -> npm i nodemon -> thêm dev nodemon server.js
+
+2/ npm i sequelize mysql2
+
+3/ npm install prisma @types/node --save-dev -> npm install @prisma/client @prisma/adapter-mariadb dotenv -> npx prisma init --datasource-provider mysql --output ../generated/prisma -> update file env -> update file prisma.config.ts -> update file scheme.prisma -> npx prisma generate -> npx prisma db pull
+
+4/ npm i cors
+
+5/ thêm vào package json scripts "prisma": "npx prisma db pull && npx prisma generate"
+
+6/ npm i bcrypt
+
+7/ npm i jsonwebtoken
+
+8/ npm i cryto
+
+9/ npm install cookie-parser
+
+10/ npm i passport passport-google-oauth20 (Login Google)
+
+12/ https://www.passportjs.org/packages/passport-google-oauth20/
+
+13/ npm i multer
+
+14/ https://www.npmjs.com/package/multer
+
+15/ npm i cloudinary
+
+16/ https://cloudinary.com/documentation/node_image_and_video_upload
+
+17/ https://www.npmjs.com/package/swagger-ui-express - npm install swagger-ui-express
+
+18/ https://swagger.io/docs/specification/v3_0/basic-structure/
+
+19/ https://transform.tools/yaml-to-json
+
+20/ https://socket.io/docs/v4/server-installation/
+
+21/ npm install socket.io
+
+22/ npm i -g @nestjs/cli (cài 1 lần duy nhất cho 1 máy)
+
+23/ nest new gateway
+
+24/ npm run start:dev
+
+25/ Prisma cho dự án NestJS:
+(1) https://www.prisma.io/docs/guides/frameworks/nestjs -> (2) npm install prisma --save-dev -> (3) npm install @prisma/client @prisma/adapter-mariadb -> (4) npx prisma init -> (5) npx prisma db pull
+
+26/ npm i --save class-validator class-transformer
+
+27/ https://docs.nestjs.com/guards
+
+28/ CRUD generator: https://docs.nestjs.com/recipes/crud-generator -> nest g resource
+
+29/ https://redis.io/
+
+30/ https://docs.nestjs.com/techniques/caching -> npm install @nestjs/cache-manager cache-manager -> npm install @keyv/redis
+
+31/ https://hub.docker.com/search?q=redis -> https://hub.docker.com/_/redis -> docker run --name some-redis -d -p 6380:6379 redis (terminal)
+
+32/ https://www.elastic.co/docs/deploy-manage/deploy/self-managed/install-kibana-with-docker -> docker pull docker.elastic.co/elasticsearch/elasticsearch:9.4.2 -> docker run --name es01 --net elastic -p 9200:9200 -it -m 1GB docker.elastic.co/elasticsearch/elasticsearch:9.4.2 -> docker pull docker.elastic.co/kibana/kibana:9.4.2 -> docker run --name kib01 --net elastic -p 5601:5601 docker.elastic.co/kibana/kibana:9.4.2
+
+33/ https://www.npmjs.com/package/@nestjs/elasticsearch -> npm i --save @nestjs/elasticsearch @elastic/elasticsearch
+
+34/ nest g module
+
+35/ npm i otplib
+
+36/ npm i qrcode
+
+37/ https://docs.nestjs.com/openapi/introduction ->  npm install --save @nestjs/swagger
+
+38/ https://www.rabbitmq.com/docs/download -> https://hub.docker.com/_/rabbitmq/ ->
+
+docker run --detach --hostname my-rabbit --name some-rabbit --env RABBITMQ_DEFAULT_USER=user --env RABBITMQ_DEFAULT_PASS=password --publish 15672:15672 --publish 5672:5672 rabbitmq:management
+
+39/ npm i --save @nestjs/microservices
+
+40/ npm i --save amqplib amqp-connection-manager
+
+41/ tạo folder order, dùng nest new .
+
+42/ nhớ cài lại npm i dotenv
+
+43/ https://nodemailer.com/ -> npm install nodemailer
+
+44/ https://transform.tools/js-object-to-typescript
+
+45/ docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}" 7238269ff87e0f13ad40eb6857a7ace08051bc9d6346afc8517dcb2b994bec55
+
+46/ docker ps -a
