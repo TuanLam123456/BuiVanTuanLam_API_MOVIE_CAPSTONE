@@ -1,0 +1,111 @@
+generator client {
+  provider     = "prisma-client-js"
+  output       = "../src/common/prisma/generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model Banner {
+  ma_banner Int     @id @default(autoincrement())
+  ma_phim   Int
+  hinh_anh  String? @db.VarChar(255)
+  Phim      Phim    @relation(fields: [ma_phim], references: [ma_phim], onDelete: Cascade, map: "fk_banner_phim")
+
+  @@index([ma_phim], map: "fk_banner_phim")
+}
+
+model CumRap {
+  ma_cum_rap      Int        @id @default(autoincrement())
+  ten_cum_rap     String     @db.VarChar(255)
+  dia_chi         String?    @db.VarChar(255)
+  ma_he_thong_rap Int
+  HeThongRap      HeThongRap @relation(fields: [ma_he_thong_rap], references: [ma_he_thong_rap], onDelete: Cascade, map: "fk_cumrap_hethongrap")
+  RapPhim         RapPhim[]
+
+  @@index([ma_he_thong_rap], map: "fk_cumrap_hethongrap")
+}
+
+model DatVe {
+  ma_dat_ve     Int       @id @default(autoincrement())
+  tai_khoan     Int
+  ma_lich_chieu Int
+  ma_ghe        Int
+  Ghe           Ghe       @relation(fields: [ma_ghe], references: [ma_ghe], onDelete: Cascade, map: "fk_datve_ghe")
+  LichChieu     LichChieu @relation(fields: [ma_lich_chieu], references: [ma_lich_chieu], onDelete: Cascade, map: "fk_datve_lichchieu")
+  NguoiDung     NguoiDung @relation(fields: [tai_khoan], references: [tai_khoan], onDelete: Cascade, map: "fk_datve_nguoidung")
+
+  @@unique([ma_lich_chieu, ma_ghe], map: "unique_ghe_trong_lich_chieu")
+  @@index([ma_ghe], map: "fk_datve_ghe")
+  @@index([tai_khoan], map: "fk_datve_nguoidung")
+}
+
+model Ghe {
+  ma_ghe   Int     @id @default(autoincrement())
+  ten_ghe  String  @db.VarChar(100)
+  loai_ghe String? @db.VarChar(100)
+  ma_rap   Int
+  DatVe    DatVe[]
+  RapPhim  RapPhim @relation(fields: [ma_rap], references: [ma_rap], onDelete: Cascade, map: "fk_ghe_rapphim")
+
+  @@index([ma_rap], map: "fk_ghe_rapphim")
+}
+
+model HeThongRap {
+  ma_he_thong_rap  Int      @id @default(autoincrement())
+  ten_he_thong_rap String   @db.VarChar(255)
+  logo             String?  @db.VarChar(255)
+  CumRap           CumRap[]
+}
+
+model LichChieu {
+  ma_lich_chieu  Int      @id @default(autoincrement())
+  ma_rap         Int
+  ma_phim        Int
+  ngay_gio_chieu DateTime @db.DateTime(0)
+  gia_ve         Int
+  DatVe          DatVe[]
+  Phim           Phim     @relation(fields: [ma_phim], references: [ma_phim], onDelete: Cascade, map: "fk_lichchieu_phim")
+  RapPhim        RapPhim  @relation(fields: [ma_rap], references: [ma_rap], onDelete: Cascade, map: "fk_lichchieu_rapphim")
+
+  @@index([ma_phim], map: "fk_lichchieu_phim")
+  @@index([ma_rap], map: "fk_lichchieu_rapphim")
+}
+
+model NguoiDung {
+  tai_khoan       Int     @id @default(autoincrement())
+  ho_ten          String  @db.VarChar(255)
+  email           String  @unique(map: "email") @db.VarChar(255)
+  so_dt           String? @db.VarChar(20)
+  mat_khau        String  @db.VarChar(255)
+  loai_nguoi_dung String? @db.VarChar(100)
+  DatVe           DatVe[]
+}
+
+model Phim {
+  ma_phim         Int         @id @default(autoincrement())
+  ten_phim        String      @db.VarChar(255)
+  trailer         String?     @db.VarChar(255)
+  hinh_anh        String?     @db.VarChar(255)
+  mo_ta           String?     @db.Text
+  ngay_khoi_chieu DateTime?   @db.Date
+  danh_gia        Int?
+  hot             Boolean?    @default(false)
+  dang_chieu      Boolean?    @default(false)
+  sap_chieu       Boolean?    @default(false)
+  Banner          Banner[]
+  LichChieu       LichChieu[]
+}
+
+model RapPhim {
+  ma_rap     Int         @id @default(autoincrement())
+  ten_rap    String      @db.VarChar(255)
+  ma_cum_rap Int
+  Ghe        Ghe[]
+  LichChieu  LichChieu[]
+  CumRap     CumRap      @relation(fields: [ma_cum_rap], references: [ma_cum_rap], onDelete: Cascade, map: "fk_rapphim_cumrap")
+
+  @@index([ma_cum_rap], map: "fk_rapphim_cumrap")
+}
