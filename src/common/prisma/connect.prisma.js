@@ -1,7 +1,7 @@
 import "dotenv/config";
 import { PrismaMariaDb } from '@prisma/adapter-mariadb';
 import { PrismaClient } from './generated/prisma/index.js';
-import { DATABASE_URL } from './../app.constant.js';
+import { DATABASE_URL } from "../constants/app.constant.js";
 
 const url = new URL(DATABASE_URL);
 const adapter = new PrismaMariaDb({

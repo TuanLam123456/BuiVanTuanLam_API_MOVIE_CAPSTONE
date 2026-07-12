@@ -24,7 +24,9 @@
     "@prisma/client": "^7.8.0",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
-    "nodemon": "^3.1.14"
+    "mysql2": "^3.22.6",
+    "nodemon": "^3.1.14",
+    "sequelize": "^6.37.8"
   },
   "devDependencies": {
     "@types/node": "^26.1.1",
