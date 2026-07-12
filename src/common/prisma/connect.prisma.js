@@ -14,7 +14,7 @@ const adapter = new PrismaMariaDb({
 const prisma = new PrismaClient({ adapter });
 
 try {
-  await prisma.$queryRaw`SELECT 1+1 as result`;
+  await prisma.$connect();
   console.log(`[PRISMA] connection has been established successfully`);
 } catch (error) {
   console.error(`[PRISMA] is unable to connect to the database:`, error);

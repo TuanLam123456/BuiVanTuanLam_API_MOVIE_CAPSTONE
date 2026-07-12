@@ -1,9 +1,9 @@
 import express from 'express'
-import movieRouter from './movie.router.js';
+import phimRouter from './phim.router.js';
 
 
 const rootRouter = express.Router();
 
-rootRouter.use('/movie',movieRouter)
+rootRouter.use('/phim',phimRouter)
 
 export default rootRouter;

@@ -1,9 +1,9 @@
-import { movieService } from "../services/movie.service.js";
+import { phimService } from "../services/phim.service.js";
 
-export const movieController = {
+export const phimController = {
   async findAll(request, response, next) {
     // gọi service
-    const movies = await movieService.findAll();
+    const movies = await phimService.findAll();
     response.json({
       status: "success",
       statusCode: 200,
