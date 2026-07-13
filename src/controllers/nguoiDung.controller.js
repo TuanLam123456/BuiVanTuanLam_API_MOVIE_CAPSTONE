@@ -41,4 +41,15 @@ export const nguoiDungController = {
 
     res.status(response.statusCode).json(response);
   },
+  // Lấy danh sách người dùng phân trang controller
+  async getUsersPagination(req, res, next) {
+    const result = await nguoiDungService.getUsersPagination(req);
+
+    const response = responseSuccess(
+      result,
+      "Lấy danh sách người dùng phân trang thành công",
+    );
+
+    res.status(response.statusCode).json(response);
+  },
 };

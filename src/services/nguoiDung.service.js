@@ -8,6 +8,7 @@ import {
   signAccessToken,
   signRefreshToken,
 } from "./../common/helpers/jwt.helper.js";
+import { buildQueryPrismaHelper } from "./../common/helpers/build-query-prisma.helper.js";
 export const nguoiDungService = {
   // Đăng ký Service
   async register(req) {
@@ -139,5 +140,42 @@ export const nguoiDungService = {
       },
     });
     return danhSachNguoiDung;
+  },
+
+  // Lấy danh sách người dùng có phân trang service
+  async getUsersPagination(req) {
+    const { page, pageSize, index, filters } = buildQueryPrismaHelper(req);
+
+    const [danhSachNguoiDung, totalItem] = await prisma.$transaction([
+      prisma.nguoiDung.findMany({
+        where: filters,
+        skip: index,
+        take: pageSize,
+        select: {
+          tai_khoan: true,
+          ho_ten: true,
+          email: true,
+          so_dt: true,
+          loai_nguoi_dung: true,
+        },
+        orderBy: {
+          tai_khoan: "desc",
+        },
+      }),
+
+      prisma.nguoiDung.count({
+        where: filters,
+      }),
+    ]);
+
+    const totalPage = Math.ceil(totalItem / pageSize);
+
+    return {
+      page,
+      pageSize,
+      totalItem,
+      totalPage,
+      items: danhSachNguoiDung,
+    };
   },
 };
