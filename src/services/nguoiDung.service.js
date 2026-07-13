@@ -9,7 +9,7 @@ import {
   signRefreshToken,
 } from "./../common/helpers/jwt.helper.js";
 export const nguoiDungService = {
-  // Đăng ký người dùng
+  // Đăng ký Service
   async register(req) {
     // Lấy dữ liệu từ body
     const { ho_ten, email, so_dt, mat_khau, loai_nguoi_dung } = req.body;
@@ -60,7 +60,7 @@ export const nguoiDungService = {
     return nguoiDungMoi;
   },
 
-  // Đăng nhập người dùng
+  // Đăng nhập Service
   async login(req) {
     // Lấy email và mật khẩu từ body
     const { email, mat_khau } = req.body;
@@ -122,5 +122,22 @@ export const nguoiDungService = {
         loai_nguoi_dung: nguoiDungExists.loai_nguoi_dung,
       },
     };
+  },
+
+  // Lấy danh sách người dùng Service
+  async getUsers(req) {
+    const danhSachNguoiDung = await prisma.nguoiDung.findMany({
+      select: {
+        tai_khoan: true,
+        ho_ten: true,
+        email: true,
+        so_dt: true,
+        loai_nguoi_dung: true,
+      },
+      orderBy: {
+        tai_khoan: "desc",
+      },
+    });
+    return danhSachNguoiDung;
   },
 };

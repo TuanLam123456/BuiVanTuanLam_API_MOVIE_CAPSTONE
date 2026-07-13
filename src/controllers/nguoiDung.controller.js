@@ -10,12 +10,13 @@ const COOKIE_OPTIONS = {
 };
 
 export const nguoiDungController = {
+  // Đăng ký controller
   async register(req, res, next) {
     const result = await nguoiDungService.register(req);
     const response = responseSuccess(result, `Đăng ký người dùng thành công`);
     res.status(response.statusCode).json(response);
   },
-
+  // Đăng nhập controller
   async login(req, res, next) {
     const { accessToken, refreshToken, nguoiDung } =
       await nguoiDungService.login(req);
@@ -27,6 +28,17 @@ export const nguoiDungController = {
       { accessToken, nguoiDung },
       `Đăng nhập thành công`,
     );
+    res.status(response.statusCode).json(response);
+  },
+  // Lấy danh sách người dùng controller
+  async getUsers(req, res, next) {
+    const result = await nguoiDungService.getUsers(req);
+
+    const response = responseSuccess(
+      result,
+      "Lấy danh sách người dùng thành công",
+    );
+
     res.status(response.statusCode).json(response);
   },
 };
