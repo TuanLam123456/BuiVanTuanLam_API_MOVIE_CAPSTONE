@@ -12,7 +12,7 @@
 
 7/ npm i jsonwebtoken
 
-8/ npm i cryto
+8/ npm i crypto
 
 9/ npm install cookie-parser
 
