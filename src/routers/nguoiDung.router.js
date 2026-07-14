@@ -16,5 +16,7 @@ nguoiDungRouter.get(
   authCookie,
   nguoiDungController.getUsersPagination,
 );
+// Tìm kiếm người dùng bằng từ khóa Router
+nguoiDungRouter.get("/timKiem", authCookie, nguoiDungController.searchUsers);
 
 export default nguoiDungRouter;

@@ -52,4 +52,12 @@ export const nguoiDungController = {
 
     res.status(response.statusCode).json(response);
   },
+  // Tìm kiếm người dùng bằng từ khóa controller
+  async searchUsers(req, res, next) {
+    const result = await nguoiDungService.searchUsers(req);
+
+    const response = responseSuccess(result, "Tìm kiếm người dùng thành công");
+    
+    res.status(response.statusCode).json(response);
+  },
 };

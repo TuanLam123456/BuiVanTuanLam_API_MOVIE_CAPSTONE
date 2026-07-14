@@ -178,4 +178,65 @@ export const nguoiDungService = {
       items: danhSachNguoiDung,
     };
   },
+
+  // Tìm kiếm người dùng bằng từ khóa service
+  async searchUsers(req) {
+    // Lấy keyword từ query params
+    let { keyword } = req.query;
+
+    // Kiểm tra từ khóa tìm kiếm
+    if (!keyword || !keyword.trim()) {
+      throw new BadRequestError("Vui lòng nhập từ khóa tìm kiếm");
+    }
+
+    // Xóa khoảng trắng ở đầu và cuối
+    keyword = keyword.trim();
+
+    // Chuyển từ khóa sang số để tìm theo tài khoản
+    const taiKhoan = Number(keyword);
+
+    // Các điều kiện tìm kiếm
+    const searchConditions = [
+      {
+        ho_ten: {
+          contains: keyword,
+        },
+      },
+      {
+        email: {
+          contains: keyword,
+        },
+      },
+      {
+        so_dt: {
+          contains: keyword,
+        },
+      },
+    ];
+
+    // Nếu keyword là số thì tìm thêm theo tài khoản
+    if (!Number.isNaN(taiKhoan)) {
+      searchConditions.push({
+        tai_khoan: taiKhoan,
+      });
+    }
+
+    const danhSachNguoiDung = await prisma.nguoiDung.findMany({
+      where: {
+        OR: searchConditions,
+      },
+      select: {
+        tai_khoan: true,
+        ho_ten: true,
+        email: true,
+        so_dt: true,
+        loai_nguoi_dung: true,
+      },
+      orderBy: {
+        tai_khoan: "desc",
+      },
+    });
+
+    return danhSachNguoiDung;
+  },
 };
