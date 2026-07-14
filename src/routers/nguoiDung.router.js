@@ -7,4 +7,7 @@ const nguoiDungRouter = express.Router();
 // Đăng ký Router
 nguoiDungRouter.post("/dangKy", nguoiDungController.dangKy);
 
+// Đăng nhập Router
+nguoiDungRouter.post("/dangNhap", nguoiDungController.dangNhap);
+
 export default nguoiDungRouter;

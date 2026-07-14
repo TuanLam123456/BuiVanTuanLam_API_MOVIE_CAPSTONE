@@ -10,7 +10,7 @@ import {
 } from "./../common/helpers/jwt.helper.js";
 import { buildQueryPrismaHelper } from "./../common/helpers/build-query-prisma.helper.js";
 export const nguoiDungService = {
-  // đăng ký service
+  // đăng ký Service
   async dangKy(req) {
     const { tai_khoan, mat_khau, email, so_dt, ma_nhom, ho_ten } = req.body;
 
@@ -59,5 +59,53 @@ export const nguoiDungService = {
     });
 
     return nguoiDungMoi;
+  },
+  // đăng nhập Service
+  async dangNhap(req) {
+    const { tai_khoan, mat_khau } = req.body;
+
+    // Kiểm tra tài khoản có tồn tại hay không
+    // Nếu chưa tồn tại thì trả về lỗi, kêu người dùng đăng ký
+    // Nếu đã tồn tại thì so sánh password
+    const existingTaiKhoan = await prisma.nguoiDung.findUnique({
+      where: {
+        tai_khoan: tai_khoan,
+      },
+      omit: {
+        mat_khau: false,
+      },
+    });
+
+    const isMatKhauValid = bcrypt.compareSync(
+      mat_khau,
+      existingTaiKhoan.mat_khau,
+    );
+
+    if (!existingTaiKhoan && !isMatKhauValid) {
+      throw new BadRequestError(
+        `Thông tin người dùng không đúng, vui lòng thử lại`,
+      );
+    }
+
+    // Tạo access token
+    // B1: tạo payload chứa thông tin: tai_khoan, email
+    const nguoiDung = {
+      tai_khoan: existingTaiKhoan.tai_khoan,
+      email: existingTaiKhoan.email,
+      so_dt: existingTaiKhoan.so_dt,
+      ma_nhom: existingTaiKhoan.ma_nhom,
+      ho_ten: existingTaiKhoan.ho_ten,
+    };
+    // B2: tạo access token từ payload
+    const accessToken = signAccessToken(nguoiDung);
+
+    // tạo refresh token từ payload
+    const refreshToken = signRefreshToken(nguoiDung);
+
+    return {
+      accessToken,
+      refreshToken,
+      nguoiDung
+    }
   },
 };
