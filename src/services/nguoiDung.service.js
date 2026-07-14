@@ -319,4 +319,29 @@ export const nguoiDungService = {
       items: danhSachNguoiDung,
     };
   },
+
+  // Lấy thông tin tài khoản từ Cookie service
+  async getProfile(req) {
+    const { tai_khoan } = req.user;
+
+    const nguoiDung = await prisma.nguoiDung.findUnique({
+      where: {
+        tai_khoan,
+      },
+      select: {
+        tai_khoan: true,
+        ho_ten: true,
+        email: true,
+        so_dt: true,
+        loai_nguoi_dung: true,
+      },
+    });
+
+    return nguoiDung;
+  },
+
+  // Lấy thông tin tài khoản từ Cookie service
+  async getProfile(req) {
+    return req.nguoiDung;
+  },
 };

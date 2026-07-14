@@ -67,13 +67,25 @@ export const nguoiDungController = {
 
   // Tìm kiếm phân trang người dùng bằng từ khóa controller
   async searchUsersPagination(req, res, next) {
-  const result = await nguoiDungService.searchUsersPagination(req);
+    const result = await nguoiDungService.searchUsersPagination(req);
 
-  const response = responseSuccess(
-    result,
-    "Tìm kiếm người dùng phân trang thành công",
-  );
+    const response = responseSuccess(
+      result,
+      "Tìm kiếm người dùng phân trang thành công",
+    );
 
-  res.status(response.statusCode).json(response);
-},
+    res.status(response.statusCode).json(response);
+  },
+
+  // Lấy thông tin tài khoản từ Cookie controller
+  async getProfile(req, res, next) {
+    const result = await nguoiDungService.getProfile(req);
+
+    const response = responseSuccess(
+      result,
+      "Lấy thông tin tài khoản thành công",
+    );
+
+    res.status(response.statusCode).json(response);
+  },
 };

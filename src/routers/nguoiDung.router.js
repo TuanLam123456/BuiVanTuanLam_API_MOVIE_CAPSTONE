@@ -30,4 +30,11 @@ nguoiDungRouter.get(
   nguoiDungController.searchUsersPagination,
 );
 
+// Lấy thông tin tài khoản từ Cookie Router
+nguoiDungRouter.get(
+  "/thongTinTaiKhoan",
+  authCookie,
+  nguoiDungController.getProfile,
+);
+
 export default nguoiDungRouter;
