@@ -623,5 +623,3 @@ FROM Ghe g
 JOIN LichChieu lc ON lc.ma_rap = g.ma_rap
 WHERE lc.ma_lich_chieu = 16
   AND g.ten_ghe = 'B05';
-
-COMMIT;

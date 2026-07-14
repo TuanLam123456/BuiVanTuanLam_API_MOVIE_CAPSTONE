@@ -1,7 +1,6 @@
 export const buildQueryPrismaHelper = (req) => {
   // Xử lý phân trang
   let { page, pageSize, filters } = req.query;
-  console.log({ page, pageSize });
 
   const pageDefault = 1;
   const pageSizeDefault = 3;
@@ -23,8 +22,6 @@ export const buildQueryPrismaHelper = (req) => {
   } catch (error) {
     filters = {};
   }
-
-  console.log({ page, pageSize, index, filters });
 
   // Xử lý filter -> {contains: "Nextjs"}
   // {content: "Nextjs"} -> {content: {contains: "Nextjs"}}
