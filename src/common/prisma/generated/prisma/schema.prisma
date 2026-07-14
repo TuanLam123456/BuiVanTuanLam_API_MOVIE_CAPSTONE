@@ -81,7 +81,11 @@ model NguoiDung {
   so_dt           String? @db.VarChar(20)
   mat_khau        String  @db.VarChar(255)
   loai_nguoi_dung String? @db.VarChar(100)
+  ma_nhom         String  @default("GP01") @db.VarChar(4)
   DatVe           DatVe[]
+  Nhom            Nhom    @relation(fields: [ma_nhom], references: [ma_nhom], map: "fk_nguoidung_nhom")
+
+  @@index([ma_nhom], map: "fk_nguoidung_nhom")
 }
 
 model Phim {
@@ -95,8 +99,12 @@ model Phim {
   hot             Boolean?    @default(false)
   dang_chieu      Boolean?    @default(false)
   sap_chieu       Boolean?    @default(false)
+  ma_nhom         String      @default("GP01") @db.VarChar(4)
   Banner          Banner[]
   LichChieu       LichChieu[]
+  Nhom            Nhom        @relation(fields: [ma_nhom], references: [ma_nhom], map: "fk_phim_nhom")
+
+  @@index([ma_nhom], map: "fk_phim_nhom")
 }
 
 model RapPhim {
@@ -108,4 +116,11 @@ model RapPhim {
   CumRap     CumRap      @relation(fields: [ma_cum_rap], references: [ma_cum_rap], onDelete: Cascade, map: "fk_rapphim_cumrap")
 
   @@index([ma_cum_rap], map: "fk_rapphim_cumrap")
+}
+
+model Nhom {
+  ma_nhom   String      @id @db.VarChar(4)
+  ten_nhom  String?     @db.VarChar(100)
+  NguoiDung NguoiDung[]
+  Phim      Phim[]
 }

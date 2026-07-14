@@ -58,6 +58,11 @@ export type Phim = $Result.DefaultSelection<Prisma.$PhimPayload>
  * 
  */
 export type RapPhim = $Result.DefaultSelection<Prisma.$RapPhimPayload>
+/**
+ * Model Nhom
+ * 
+ */
+export type Nhom = $Result.DefaultSelection<Prisma.$NhomPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -269,6 +274,16 @@ export class PrismaClient<
     * ```
     */
   get rapPhim(): Prisma.RapPhimDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.nhom`: Exposes CRUD operations for the **Nhom** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Nhoms
+    * const nhoms = await prisma.nhom.findMany()
+    * ```
+    */
+  get nhom(): Prisma.NhomDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -711,7 +726,8 @@ export namespace Prisma {
     LichChieu: 'LichChieu',
     NguoiDung: 'NguoiDung',
     Phim: 'Phim',
-    RapPhim: 'RapPhim'
+    RapPhim: 'RapPhim',
+    Nhom: 'Nhom'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -727,7 +743,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "banner" | "cumRap" | "datVe" | "ghe" | "heThongRap" | "lichChieu" | "nguoiDung" | "phim" | "rapPhim"
+      modelProps: "banner" | "cumRap" | "datVe" | "ghe" | "heThongRap" | "lichChieu" | "nguoiDung" | "phim" | "rapPhim" | "nhom"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1325,6 +1341,72 @@ export namespace Prisma {
           }
         }
       }
+      Nhom: {
+        payload: Prisma.$NhomPayload<ExtArgs>
+        fields: Prisma.NhomFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.NhomFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NhomPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.NhomFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NhomPayload>
+          }
+          findFirst: {
+            args: Prisma.NhomFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NhomPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.NhomFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NhomPayload>
+          }
+          findMany: {
+            args: Prisma.NhomFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NhomPayload>[]
+          }
+          create: {
+            args: Prisma.NhomCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NhomPayload>
+          }
+          createMany: {
+            args: Prisma.NhomCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.NhomDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NhomPayload>
+          }
+          update: {
+            args: Prisma.NhomUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NhomPayload>
+          }
+          deleteMany: {
+            args: Prisma.NhomDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.NhomUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.NhomUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NhomPayload>
+          }
+          aggregate: {
+            args: Prisma.NhomAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateNhom>
+          }
+          groupBy: {
+            args: Prisma.NhomGroupByArgs<ExtArgs>
+            result: $Utils.Optional<NhomGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.NhomCountArgs<ExtArgs>
+            result: $Utils.Optional<NhomCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1442,6 +1524,7 @@ export namespace Prisma {
     nguoiDung?: NguoiDungOmit
     phim?: PhimOmit
     rapPhim?: RapPhimOmit
+    nhom?: NhomOmit
   }
 
   /* Types for Logging */
@@ -1749,6 +1832,46 @@ export namespace Prisma {
    */
   export type RapPhimCountOutputTypeCountLichChieuArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: LichChieuWhereInput
+  }
+
+
+  /**
+   * Count Type NhomCountOutputType
+   */
+
+  export type NhomCountOutputType = {
+    NguoiDung: number
+    Phim: number
+  }
+
+  export type NhomCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    NguoiDung?: boolean | NhomCountOutputTypeCountNguoiDungArgs
+    Phim?: boolean | NhomCountOutputTypeCountPhimArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * NhomCountOutputType without action
+   */
+  export type NhomCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NhomCountOutputType
+     */
+    select?: NhomCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * NhomCountOutputType without action
+   */
+  export type NhomCountOutputTypeCountNguoiDungArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NguoiDungWhereInput
+  }
+
+  /**
+   * NhomCountOutputType without action
+   */
+  export type NhomCountOutputTypeCountPhimArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PhimWhereInput
   }
 
 
@@ -7664,6 +7787,7 @@ export namespace Prisma {
     so_dt: string | null
     mat_khau: string | null
     loai_nguoi_dung: string | null
+    ma_nhom: string | null
   }
 
   export type NguoiDungMaxAggregateOutputType = {
@@ -7673,6 +7797,7 @@ export namespace Prisma {
     so_dt: string | null
     mat_khau: string | null
     loai_nguoi_dung: string | null
+    ma_nhom: string | null
   }
 
   export type NguoiDungCountAggregateOutputType = {
@@ -7682,6 +7807,7 @@ export namespace Prisma {
     so_dt: number
     mat_khau: number
     loai_nguoi_dung: number
+    ma_nhom: number
     _all: number
   }
 
@@ -7693,6 +7819,7 @@ export namespace Prisma {
     so_dt?: true
     mat_khau?: true
     loai_nguoi_dung?: true
+    ma_nhom?: true
   }
 
   export type NguoiDungMaxAggregateInputType = {
@@ -7702,6 +7829,7 @@ export namespace Prisma {
     so_dt?: true
     mat_khau?: true
     loai_nguoi_dung?: true
+    ma_nhom?: true
   }
 
   export type NguoiDungCountAggregateInputType = {
@@ -7711,6 +7839,7 @@ export namespace Prisma {
     so_dt?: true
     mat_khau?: true
     loai_nguoi_dung?: true
+    ma_nhom?: true
     _all?: true
   }
 
@@ -7793,6 +7922,7 @@ export namespace Prisma {
     so_dt: string | null
     mat_khau: string
     loai_nguoi_dung: string | null
+    ma_nhom: string
     _count: NguoiDungCountAggregateOutputType | null
     _min: NguoiDungMinAggregateOutputType | null
     _max: NguoiDungMaxAggregateOutputType | null
@@ -7819,7 +7949,9 @@ export namespace Prisma {
     so_dt?: boolean
     mat_khau?: boolean
     loai_nguoi_dung?: boolean
+    ma_nhom?: boolean
     DatVe?: boolean | NguoiDung$DatVeArgs<ExtArgs>
+    Nhom?: boolean | NhomDefaultArgs<ExtArgs>
     _count?: boolean | NguoiDungCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["nguoiDung"]>
 
@@ -7832,11 +7964,13 @@ export namespace Prisma {
     so_dt?: boolean
     mat_khau?: boolean
     loai_nguoi_dung?: boolean
+    ma_nhom?: boolean
   }
 
-  export type NguoiDungOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"tai_khoan" | "ho_ten" | "email" | "so_dt" | "mat_khau" | "loai_nguoi_dung", ExtArgs["result"]["nguoiDung"]>
+  export type NguoiDungOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"tai_khoan" | "ho_ten" | "email" | "so_dt" | "mat_khau" | "loai_nguoi_dung" | "ma_nhom", ExtArgs["result"]["nguoiDung"]>
   export type NguoiDungInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     DatVe?: boolean | NguoiDung$DatVeArgs<ExtArgs>
+    Nhom?: boolean | NhomDefaultArgs<ExtArgs>
     _count?: boolean | NguoiDungCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -7844,6 +7978,7 @@ export namespace Prisma {
     name: "NguoiDung"
     objects: {
       DatVe: Prisma.$DatVePayload<ExtArgs>[]
+      Nhom: Prisma.$NhomPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       tai_khoan: string
@@ -7852,6 +7987,7 @@ export namespace Prisma {
       so_dt: string | null
       mat_khau: string
       loai_nguoi_dung: string | null
+      ma_nhom: string
     }, ExtArgs["result"]["nguoiDung"]>
     composites: {}
   }
@@ -8193,6 +8329,7 @@ export namespace Prisma {
   export interface Prisma__NguoiDungClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     DatVe<T extends NguoiDung$DatVeArgs<ExtArgs> = {}>(args?: Subset<T, NguoiDung$DatVeArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DatVePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Nhom<T extends NhomDefaultArgs<ExtArgs> = {}>(args?: Subset<T, NhomDefaultArgs<ExtArgs>>): Prisma__NhomClient<$Result.GetResult<Prisma.$NhomPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8228,6 +8365,7 @@ export namespace Prisma {
     readonly so_dt: FieldRef<"NguoiDung", 'String'>
     readonly mat_khau: FieldRef<"NguoiDung", 'String'>
     readonly loai_nguoi_dung: FieldRef<"NguoiDung", 'String'>
+    readonly ma_nhom: FieldRef<"NguoiDung", 'String'>
   }
     
 
@@ -8651,6 +8789,7 @@ export namespace Prisma {
     hot: boolean | null
     dang_chieu: boolean | null
     sap_chieu: boolean | null
+    ma_nhom: string | null
   }
 
   export type PhimMaxAggregateOutputType = {
@@ -8664,6 +8803,7 @@ export namespace Prisma {
     hot: boolean | null
     dang_chieu: boolean | null
     sap_chieu: boolean | null
+    ma_nhom: string | null
   }
 
   export type PhimCountAggregateOutputType = {
@@ -8677,6 +8817,7 @@ export namespace Prisma {
     hot: number
     dang_chieu: number
     sap_chieu: number
+    ma_nhom: number
     _all: number
   }
 
@@ -8702,6 +8843,7 @@ export namespace Prisma {
     hot?: true
     dang_chieu?: true
     sap_chieu?: true
+    ma_nhom?: true
   }
 
   export type PhimMaxAggregateInputType = {
@@ -8715,6 +8857,7 @@ export namespace Prisma {
     hot?: true
     dang_chieu?: true
     sap_chieu?: true
+    ma_nhom?: true
   }
 
   export type PhimCountAggregateInputType = {
@@ -8728,6 +8871,7 @@ export namespace Prisma {
     hot?: true
     dang_chieu?: true
     sap_chieu?: true
+    ma_nhom?: true
     _all?: true
   }
 
@@ -8828,6 +8972,7 @@ export namespace Prisma {
     hot: boolean | null
     dang_chieu: boolean | null
     sap_chieu: boolean | null
+    ma_nhom: string
     _count: PhimCountAggregateOutputType | null
     _avg: PhimAvgAggregateOutputType | null
     _sum: PhimSumAggregateOutputType | null
@@ -8860,8 +9005,10 @@ export namespace Prisma {
     hot?: boolean
     dang_chieu?: boolean
     sap_chieu?: boolean
+    ma_nhom?: boolean
     Banner?: boolean | Phim$BannerArgs<ExtArgs>
     LichChieu?: boolean | Phim$LichChieuArgs<ExtArgs>
+    Nhom?: boolean | NhomDefaultArgs<ExtArgs>
     _count?: boolean | PhimCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["phim"]>
 
@@ -8878,12 +9025,14 @@ export namespace Prisma {
     hot?: boolean
     dang_chieu?: boolean
     sap_chieu?: boolean
+    ma_nhom?: boolean
   }
 
-  export type PhimOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"ma_phim" | "ten_phim" | "trailer" | "hinh_anh" | "mo_ta" | "ngay_khoi_chieu" | "danh_gia" | "hot" | "dang_chieu" | "sap_chieu", ExtArgs["result"]["phim"]>
+  export type PhimOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"ma_phim" | "ten_phim" | "trailer" | "hinh_anh" | "mo_ta" | "ngay_khoi_chieu" | "danh_gia" | "hot" | "dang_chieu" | "sap_chieu" | "ma_nhom", ExtArgs["result"]["phim"]>
   export type PhimInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Banner?: boolean | Phim$BannerArgs<ExtArgs>
     LichChieu?: boolean | Phim$LichChieuArgs<ExtArgs>
+    Nhom?: boolean | NhomDefaultArgs<ExtArgs>
     _count?: boolean | PhimCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -8892,6 +9041,7 @@ export namespace Prisma {
     objects: {
       Banner: Prisma.$BannerPayload<ExtArgs>[]
       LichChieu: Prisma.$LichChieuPayload<ExtArgs>[]
+      Nhom: Prisma.$NhomPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       ma_phim: number
@@ -8904,6 +9054,7 @@ export namespace Prisma {
       hot: boolean | null
       dang_chieu: boolean | null
       sap_chieu: boolean | null
+      ma_nhom: string
     }, ExtArgs["result"]["phim"]>
     composites: {}
   }
@@ -9246,6 +9397,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     Banner<T extends Phim$BannerArgs<ExtArgs> = {}>(args?: Subset<T, Phim$BannerArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BannerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     LichChieu<T extends Phim$LichChieuArgs<ExtArgs> = {}>(args?: Subset<T, Phim$LichChieuArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LichChieuPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Nhom<T extends NhomDefaultArgs<ExtArgs> = {}>(args?: Subset<T, NhomDefaultArgs<ExtArgs>>): Prisma__NhomClient<$Result.GetResult<Prisma.$NhomPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9285,6 +9437,7 @@ export namespace Prisma {
     readonly hot: FieldRef<"Phim", 'Boolean'>
     readonly dang_chieu: FieldRef<"Phim", 'Boolean'>
     readonly sap_chieu: FieldRef<"Phim", 'Boolean'>
+    readonly ma_nhom: FieldRef<"Phim", 'String'>
   }
     
 
@@ -10708,6 +10861,961 @@ export namespace Prisma {
 
 
   /**
+   * Model Nhom
+   */
+
+  export type AggregateNhom = {
+    _count: NhomCountAggregateOutputType | null
+    _min: NhomMinAggregateOutputType | null
+    _max: NhomMaxAggregateOutputType | null
+  }
+
+  export type NhomMinAggregateOutputType = {
+    ma_nhom: string | null
+    ten_nhom: string | null
+  }
+
+  export type NhomMaxAggregateOutputType = {
+    ma_nhom: string | null
+    ten_nhom: string | null
+  }
+
+  export type NhomCountAggregateOutputType = {
+    ma_nhom: number
+    ten_nhom: number
+    _all: number
+  }
+
+
+  export type NhomMinAggregateInputType = {
+    ma_nhom?: true
+    ten_nhom?: true
+  }
+
+  export type NhomMaxAggregateInputType = {
+    ma_nhom?: true
+    ten_nhom?: true
+  }
+
+  export type NhomCountAggregateInputType = {
+    ma_nhom?: true
+    ten_nhom?: true
+    _all?: true
+  }
+
+  export type NhomAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Nhom to aggregate.
+     */
+    where?: NhomWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Nhoms to fetch.
+     */
+    orderBy?: NhomOrderByWithRelationInput | NhomOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: NhomWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Nhoms from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Nhoms.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Nhoms
+    **/
+    _count?: true | NhomCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: NhomMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: NhomMaxAggregateInputType
+  }
+
+  export type GetNhomAggregateType<T extends NhomAggregateArgs> = {
+        [P in keyof T & keyof AggregateNhom]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateNhom[P]>
+      : GetScalarType<T[P], AggregateNhom[P]>
+  }
+
+
+
+
+  export type NhomGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NhomWhereInput
+    orderBy?: NhomOrderByWithAggregationInput | NhomOrderByWithAggregationInput[]
+    by: NhomScalarFieldEnum[] | NhomScalarFieldEnum
+    having?: NhomScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: NhomCountAggregateInputType | true
+    _min?: NhomMinAggregateInputType
+    _max?: NhomMaxAggregateInputType
+  }
+
+  export type NhomGroupByOutputType = {
+    ma_nhom: string
+    ten_nhom: string | null
+    _count: NhomCountAggregateOutputType | null
+    _min: NhomMinAggregateOutputType | null
+    _max: NhomMaxAggregateOutputType | null
+  }
+
+  type GetNhomGroupByPayload<T extends NhomGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<NhomGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof NhomGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], NhomGroupByOutputType[P]>
+            : GetScalarType<T[P], NhomGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type NhomSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    ma_nhom?: boolean
+    ten_nhom?: boolean
+    NguoiDung?: boolean | Nhom$NguoiDungArgs<ExtArgs>
+    Phim?: boolean | Nhom$PhimArgs<ExtArgs>
+    _count?: boolean | NhomCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["nhom"]>
+
+
+
+  export type NhomSelectScalar = {
+    ma_nhom?: boolean
+    ten_nhom?: boolean
+  }
+
+  export type NhomOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"ma_nhom" | "ten_nhom", ExtArgs["result"]["nhom"]>
+  export type NhomInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    NguoiDung?: boolean | Nhom$NguoiDungArgs<ExtArgs>
+    Phim?: boolean | Nhom$PhimArgs<ExtArgs>
+    _count?: boolean | NhomCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+  export type $NhomPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Nhom"
+    objects: {
+      NguoiDung: Prisma.$NguoiDungPayload<ExtArgs>[]
+      Phim: Prisma.$PhimPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      ma_nhom: string
+      ten_nhom: string | null
+    }, ExtArgs["result"]["nhom"]>
+    composites: {}
+  }
+
+  type NhomGetPayload<S extends boolean | null | undefined | NhomDefaultArgs> = $Result.GetResult<Prisma.$NhomPayload, S>
+
+  type NhomCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<NhomFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: NhomCountAggregateInputType | true
+    }
+
+  export interface NhomDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Nhom'], meta: { name: 'Nhom' } }
+    /**
+     * Find zero or one Nhom that matches the filter.
+     * @param {NhomFindUniqueArgs} args - Arguments to find a Nhom
+     * @example
+     * // Get one Nhom
+     * const nhom = await prisma.nhom.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends NhomFindUniqueArgs>(args: SelectSubset<T, NhomFindUniqueArgs<ExtArgs>>): Prisma__NhomClient<$Result.GetResult<Prisma.$NhomPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Nhom that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {NhomFindUniqueOrThrowArgs} args - Arguments to find a Nhom
+     * @example
+     * // Get one Nhom
+     * const nhom = await prisma.nhom.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends NhomFindUniqueOrThrowArgs>(args: SelectSubset<T, NhomFindUniqueOrThrowArgs<ExtArgs>>): Prisma__NhomClient<$Result.GetResult<Prisma.$NhomPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Nhom that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NhomFindFirstArgs} args - Arguments to find a Nhom
+     * @example
+     * // Get one Nhom
+     * const nhom = await prisma.nhom.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends NhomFindFirstArgs>(args?: SelectSubset<T, NhomFindFirstArgs<ExtArgs>>): Prisma__NhomClient<$Result.GetResult<Prisma.$NhomPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Nhom that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NhomFindFirstOrThrowArgs} args - Arguments to find a Nhom
+     * @example
+     * // Get one Nhom
+     * const nhom = await prisma.nhom.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends NhomFindFirstOrThrowArgs>(args?: SelectSubset<T, NhomFindFirstOrThrowArgs<ExtArgs>>): Prisma__NhomClient<$Result.GetResult<Prisma.$NhomPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Nhoms that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NhomFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Nhoms
+     * const nhoms = await prisma.nhom.findMany()
+     * 
+     * // Get first 10 Nhoms
+     * const nhoms = await prisma.nhom.findMany({ take: 10 })
+     * 
+     * // Only select the `ma_nhom`
+     * const nhomWithMa_nhomOnly = await prisma.nhom.findMany({ select: { ma_nhom: true } })
+     * 
+     */
+    findMany<T extends NhomFindManyArgs>(args?: SelectSubset<T, NhomFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NhomPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Nhom.
+     * @param {NhomCreateArgs} args - Arguments to create a Nhom.
+     * @example
+     * // Create one Nhom
+     * const Nhom = await prisma.nhom.create({
+     *   data: {
+     *     // ... data to create a Nhom
+     *   }
+     * })
+     * 
+     */
+    create<T extends NhomCreateArgs>(args: SelectSubset<T, NhomCreateArgs<ExtArgs>>): Prisma__NhomClient<$Result.GetResult<Prisma.$NhomPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Nhoms.
+     * @param {NhomCreateManyArgs} args - Arguments to create many Nhoms.
+     * @example
+     * // Create many Nhoms
+     * const nhom = await prisma.nhom.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends NhomCreateManyArgs>(args?: SelectSubset<T, NhomCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Nhom.
+     * @param {NhomDeleteArgs} args - Arguments to delete one Nhom.
+     * @example
+     * // Delete one Nhom
+     * const Nhom = await prisma.nhom.delete({
+     *   where: {
+     *     // ... filter to delete one Nhom
+     *   }
+     * })
+     * 
+     */
+    delete<T extends NhomDeleteArgs>(args: SelectSubset<T, NhomDeleteArgs<ExtArgs>>): Prisma__NhomClient<$Result.GetResult<Prisma.$NhomPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Nhom.
+     * @param {NhomUpdateArgs} args - Arguments to update one Nhom.
+     * @example
+     * // Update one Nhom
+     * const nhom = await prisma.nhom.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends NhomUpdateArgs>(args: SelectSubset<T, NhomUpdateArgs<ExtArgs>>): Prisma__NhomClient<$Result.GetResult<Prisma.$NhomPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Nhoms.
+     * @param {NhomDeleteManyArgs} args - Arguments to filter Nhoms to delete.
+     * @example
+     * // Delete a few Nhoms
+     * const { count } = await prisma.nhom.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends NhomDeleteManyArgs>(args?: SelectSubset<T, NhomDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Nhoms.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NhomUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Nhoms
+     * const nhom = await prisma.nhom.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends NhomUpdateManyArgs>(args: SelectSubset<T, NhomUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Nhom.
+     * @param {NhomUpsertArgs} args - Arguments to update or create a Nhom.
+     * @example
+     * // Update or create a Nhom
+     * const nhom = await prisma.nhom.upsert({
+     *   create: {
+     *     // ... data to create a Nhom
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Nhom we want to update
+     *   }
+     * })
+     */
+    upsert<T extends NhomUpsertArgs>(args: SelectSubset<T, NhomUpsertArgs<ExtArgs>>): Prisma__NhomClient<$Result.GetResult<Prisma.$NhomPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Nhoms.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NhomCountArgs} args - Arguments to filter Nhoms to count.
+     * @example
+     * // Count the number of Nhoms
+     * const count = await prisma.nhom.count({
+     *   where: {
+     *     // ... the filter for the Nhoms we want to count
+     *   }
+     * })
+    **/
+    count<T extends NhomCountArgs>(
+      args?: Subset<T, NhomCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], NhomCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Nhom.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NhomAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends NhomAggregateArgs>(args: Subset<T, NhomAggregateArgs>): Prisma.PrismaPromise<GetNhomAggregateType<T>>
+
+    /**
+     * Group by Nhom.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NhomGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends NhomGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: NhomGroupByArgs['orderBy'] }
+        : { orderBy?: NhomGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, NhomGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNhomGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Nhom model
+   */
+  readonly fields: NhomFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Nhom.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__NhomClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    NguoiDung<T extends Nhom$NguoiDungArgs<ExtArgs> = {}>(args?: Subset<T, Nhom$NguoiDungArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NguoiDungPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Phim<T extends Nhom$PhimArgs<ExtArgs> = {}>(args?: Subset<T, Nhom$PhimArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PhimPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Nhom model
+   */
+  interface NhomFieldRefs {
+    readonly ma_nhom: FieldRef<"Nhom", 'String'>
+    readonly ten_nhom: FieldRef<"Nhom", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Nhom findUnique
+   */
+  export type NhomFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Nhom
+     */
+    select?: NhomSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Nhom
+     */
+    omit?: NhomOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NhomInclude<ExtArgs> | null
+    /**
+     * Filter, which Nhom to fetch.
+     */
+    where: NhomWhereUniqueInput
+  }
+
+  /**
+   * Nhom findUniqueOrThrow
+   */
+  export type NhomFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Nhom
+     */
+    select?: NhomSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Nhom
+     */
+    omit?: NhomOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NhomInclude<ExtArgs> | null
+    /**
+     * Filter, which Nhom to fetch.
+     */
+    where: NhomWhereUniqueInput
+  }
+
+  /**
+   * Nhom findFirst
+   */
+  export type NhomFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Nhom
+     */
+    select?: NhomSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Nhom
+     */
+    omit?: NhomOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NhomInclude<ExtArgs> | null
+    /**
+     * Filter, which Nhom to fetch.
+     */
+    where?: NhomWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Nhoms to fetch.
+     */
+    orderBy?: NhomOrderByWithRelationInput | NhomOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Nhoms.
+     */
+    cursor?: NhomWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Nhoms from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Nhoms.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Nhoms.
+     */
+    distinct?: NhomScalarFieldEnum | NhomScalarFieldEnum[]
+  }
+
+  /**
+   * Nhom findFirstOrThrow
+   */
+  export type NhomFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Nhom
+     */
+    select?: NhomSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Nhom
+     */
+    omit?: NhomOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NhomInclude<ExtArgs> | null
+    /**
+     * Filter, which Nhom to fetch.
+     */
+    where?: NhomWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Nhoms to fetch.
+     */
+    orderBy?: NhomOrderByWithRelationInput | NhomOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Nhoms.
+     */
+    cursor?: NhomWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Nhoms from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Nhoms.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Nhoms.
+     */
+    distinct?: NhomScalarFieldEnum | NhomScalarFieldEnum[]
+  }
+
+  /**
+   * Nhom findMany
+   */
+  export type NhomFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Nhom
+     */
+    select?: NhomSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Nhom
+     */
+    omit?: NhomOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NhomInclude<ExtArgs> | null
+    /**
+     * Filter, which Nhoms to fetch.
+     */
+    where?: NhomWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Nhoms to fetch.
+     */
+    orderBy?: NhomOrderByWithRelationInput | NhomOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Nhoms.
+     */
+    cursor?: NhomWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Nhoms from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Nhoms.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Nhoms.
+     */
+    distinct?: NhomScalarFieldEnum | NhomScalarFieldEnum[]
+  }
+
+  /**
+   * Nhom create
+   */
+  export type NhomCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Nhom
+     */
+    select?: NhomSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Nhom
+     */
+    omit?: NhomOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NhomInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Nhom.
+     */
+    data: XOR<NhomCreateInput, NhomUncheckedCreateInput>
+  }
+
+  /**
+   * Nhom createMany
+   */
+  export type NhomCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Nhoms.
+     */
+    data: NhomCreateManyInput | NhomCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Nhom update
+   */
+  export type NhomUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Nhom
+     */
+    select?: NhomSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Nhom
+     */
+    omit?: NhomOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NhomInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Nhom.
+     */
+    data: XOR<NhomUpdateInput, NhomUncheckedUpdateInput>
+    /**
+     * Choose, which Nhom to update.
+     */
+    where: NhomWhereUniqueInput
+  }
+
+  /**
+   * Nhom updateMany
+   */
+  export type NhomUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Nhoms.
+     */
+    data: XOR<NhomUpdateManyMutationInput, NhomUncheckedUpdateManyInput>
+    /**
+     * Filter which Nhoms to update
+     */
+    where?: NhomWhereInput
+    /**
+     * Limit how many Nhoms to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Nhom upsert
+   */
+  export type NhomUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Nhom
+     */
+    select?: NhomSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Nhom
+     */
+    omit?: NhomOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NhomInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Nhom to update in case it exists.
+     */
+    where: NhomWhereUniqueInput
+    /**
+     * In case the Nhom found by the `where` argument doesn't exist, create a new Nhom with this data.
+     */
+    create: XOR<NhomCreateInput, NhomUncheckedCreateInput>
+    /**
+     * In case the Nhom was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<NhomUpdateInput, NhomUncheckedUpdateInput>
+  }
+
+  /**
+   * Nhom delete
+   */
+  export type NhomDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Nhom
+     */
+    select?: NhomSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Nhom
+     */
+    omit?: NhomOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NhomInclude<ExtArgs> | null
+    /**
+     * Filter which Nhom to delete.
+     */
+    where: NhomWhereUniqueInput
+  }
+
+  /**
+   * Nhom deleteMany
+   */
+  export type NhomDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Nhoms to delete
+     */
+    where?: NhomWhereInput
+    /**
+     * Limit how many Nhoms to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Nhom.NguoiDung
+   */
+  export type Nhom$NguoiDungArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NguoiDung
+     */
+    select?: NguoiDungSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NguoiDung
+     */
+    omit?: NguoiDungOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NguoiDungInclude<ExtArgs> | null
+    where?: NguoiDungWhereInput
+    orderBy?: NguoiDungOrderByWithRelationInput | NguoiDungOrderByWithRelationInput[]
+    cursor?: NguoiDungWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: NguoiDungScalarFieldEnum | NguoiDungScalarFieldEnum[]
+  }
+
+  /**
+   * Nhom.Phim
+   */
+  export type Nhom$PhimArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Phim
+     */
+    select?: PhimSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Phim
+     */
+    omit?: PhimOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PhimInclude<ExtArgs> | null
+    where?: PhimWhereInput
+    orderBy?: PhimOrderByWithRelationInput | PhimOrderByWithRelationInput[]
+    cursor?: PhimWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PhimScalarFieldEnum | PhimScalarFieldEnum[]
+  }
+
+  /**
+   * Nhom without action
+   */
+  export type NhomDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Nhom
+     */
+    select?: NhomSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Nhom
+     */
+    omit?: NhomOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NhomInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -10786,7 +11894,8 @@ export namespace Prisma {
     email: 'email',
     so_dt: 'so_dt',
     mat_khau: 'mat_khau',
-    loai_nguoi_dung: 'loai_nguoi_dung'
+    loai_nguoi_dung: 'loai_nguoi_dung',
+    ma_nhom: 'ma_nhom'
   };
 
   export type NguoiDungScalarFieldEnum = (typeof NguoiDungScalarFieldEnum)[keyof typeof NguoiDungScalarFieldEnum]
@@ -10802,7 +11911,8 @@ export namespace Prisma {
     danh_gia: 'danh_gia',
     hot: 'hot',
     dang_chieu: 'dang_chieu',
-    sap_chieu: 'sap_chieu'
+    sap_chieu: 'sap_chieu',
+    ma_nhom: 'ma_nhom'
   };
 
   export type PhimScalarFieldEnum = (typeof PhimScalarFieldEnum)[keyof typeof PhimScalarFieldEnum]
@@ -10815,6 +11925,14 @@ export namespace Prisma {
   };
 
   export type RapPhimScalarFieldEnum = (typeof RapPhimScalarFieldEnum)[keyof typeof RapPhimScalarFieldEnum]
+
+
+  export const NhomScalarFieldEnum: {
+    ma_nhom: 'ma_nhom',
+    ten_nhom: 'ten_nhom'
+  };
+
+  export type NhomScalarFieldEnum = (typeof NhomScalarFieldEnum)[keyof typeof NhomScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -10877,7 +11995,8 @@ export namespace Prisma {
     email: 'email',
     so_dt: 'so_dt',
     mat_khau: 'mat_khau',
-    loai_nguoi_dung: 'loai_nguoi_dung'
+    loai_nguoi_dung: 'loai_nguoi_dung',
+    ma_nhom: 'ma_nhom'
   };
 
   export type NguoiDungOrderByRelevanceFieldEnum = (typeof NguoiDungOrderByRelevanceFieldEnum)[keyof typeof NguoiDungOrderByRelevanceFieldEnum]
@@ -10887,7 +12006,8 @@ export namespace Prisma {
     ten_phim: 'ten_phim',
     trailer: 'trailer',
     hinh_anh: 'hinh_anh',
-    mo_ta: 'mo_ta'
+    mo_ta: 'mo_ta',
+    ma_nhom: 'ma_nhom'
   };
 
   export type PhimOrderByRelevanceFieldEnum = (typeof PhimOrderByRelevanceFieldEnum)[keyof typeof PhimOrderByRelevanceFieldEnum]
@@ -10898,6 +12018,14 @@ export namespace Prisma {
   };
 
   export type RapPhimOrderByRelevanceFieldEnum = (typeof RapPhimOrderByRelevanceFieldEnum)[keyof typeof RapPhimOrderByRelevanceFieldEnum]
+
+
+  export const NhomOrderByRelevanceFieldEnum: {
+    ma_nhom: 'ma_nhom',
+    ten_nhom: 'ten_nhom'
+  };
+
+  export type NhomOrderByRelevanceFieldEnum = (typeof NhomOrderByRelevanceFieldEnum)[keyof typeof NhomOrderByRelevanceFieldEnum]
 
 
   /**
@@ -11285,7 +12413,9 @@ export namespace Prisma {
     so_dt?: StringNullableFilter<"NguoiDung"> | string | null
     mat_khau?: StringFilter<"NguoiDung"> | string
     loai_nguoi_dung?: StringNullableFilter<"NguoiDung"> | string | null
+    ma_nhom?: StringFilter<"NguoiDung"> | string
     DatVe?: DatVeListRelationFilter
+    Nhom?: XOR<NhomScalarRelationFilter, NhomWhereInput>
   }
 
   export type NguoiDungOrderByWithRelationInput = {
@@ -11295,7 +12425,9 @@ export namespace Prisma {
     so_dt?: SortOrderInput | SortOrder
     mat_khau?: SortOrder
     loai_nguoi_dung?: SortOrderInput | SortOrder
+    ma_nhom?: SortOrder
     DatVe?: DatVeOrderByRelationAggregateInput
+    Nhom?: NhomOrderByWithRelationInput
     _relevance?: NguoiDungOrderByRelevanceInput
   }
 
@@ -11309,7 +12441,9 @@ export namespace Prisma {
     so_dt?: StringNullableFilter<"NguoiDung"> | string | null
     mat_khau?: StringFilter<"NguoiDung"> | string
     loai_nguoi_dung?: StringNullableFilter<"NguoiDung"> | string | null
+    ma_nhom?: StringFilter<"NguoiDung"> | string
     DatVe?: DatVeListRelationFilter
+    Nhom?: XOR<NhomScalarRelationFilter, NhomWhereInput>
   }, "tai_khoan" | "email">
 
   export type NguoiDungOrderByWithAggregationInput = {
@@ -11319,6 +12453,7 @@ export namespace Prisma {
     so_dt?: SortOrderInput | SortOrder
     mat_khau?: SortOrder
     loai_nguoi_dung?: SortOrderInput | SortOrder
+    ma_nhom?: SortOrder
     _count?: NguoiDungCountOrderByAggregateInput
     _max?: NguoiDungMaxOrderByAggregateInput
     _min?: NguoiDungMinOrderByAggregateInput
@@ -11334,6 +12469,7 @@ export namespace Prisma {
     so_dt?: StringNullableWithAggregatesFilter<"NguoiDung"> | string | null
     mat_khau?: StringWithAggregatesFilter<"NguoiDung"> | string
     loai_nguoi_dung?: StringNullableWithAggregatesFilter<"NguoiDung"> | string | null
+    ma_nhom?: StringWithAggregatesFilter<"NguoiDung"> | string
   }
 
   export type PhimWhereInput = {
@@ -11350,8 +12486,10 @@ export namespace Prisma {
     hot?: BoolNullableFilter<"Phim"> | boolean | null
     dang_chieu?: BoolNullableFilter<"Phim"> | boolean | null
     sap_chieu?: BoolNullableFilter<"Phim"> | boolean | null
+    ma_nhom?: StringFilter<"Phim"> | string
     Banner?: BannerListRelationFilter
     LichChieu?: LichChieuListRelationFilter
+    Nhom?: XOR<NhomScalarRelationFilter, NhomWhereInput>
   }
 
   export type PhimOrderByWithRelationInput = {
@@ -11365,8 +12503,10 @@ export namespace Prisma {
     hot?: SortOrderInput | SortOrder
     dang_chieu?: SortOrderInput | SortOrder
     sap_chieu?: SortOrderInput | SortOrder
+    ma_nhom?: SortOrder
     Banner?: BannerOrderByRelationAggregateInput
     LichChieu?: LichChieuOrderByRelationAggregateInput
+    Nhom?: NhomOrderByWithRelationInput
     _relevance?: PhimOrderByRelevanceInput
   }
 
@@ -11384,8 +12524,10 @@ export namespace Prisma {
     hot?: BoolNullableFilter<"Phim"> | boolean | null
     dang_chieu?: BoolNullableFilter<"Phim"> | boolean | null
     sap_chieu?: BoolNullableFilter<"Phim"> | boolean | null
+    ma_nhom?: StringFilter<"Phim"> | string
     Banner?: BannerListRelationFilter
     LichChieu?: LichChieuListRelationFilter
+    Nhom?: XOR<NhomScalarRelationFilter, NhomWhereInput>
   }, "ma_phim">
 
   export type PhimOrderByWithAggregationInput = {
@@ -11399,6 +12541,7 @@ export namespace Prisma {
     hot?: SortOrderInput | SortOrder
     dang_chieu?: SortOrderInput | SortOrder
     sap_chieu?: SortOrderInput | SortOrder
+    ma_nhom?: SortOrder
     _count?: PhimCountOrderByAggregateInput
     _avg?: PhimAvgOrderByAggregateInput
     _max?: PhimMaxOrderByAggregateInput
@@ -11420,6 +12563,7 @@ export namespace Prisma {
     hot?: BoolNullableWithAggregatesFilter<"Phim"> | boolean | null
     dang_chieu?: BoolNullableWithAggregatesFilter<"Phim"> | boolean | null
     sap_chieu?: BoolNullableWithAggregatesFilter<"Phim"> | boolean | null
+    ma_nhom?: StringWithAggregatesFilter<"Phim"> | string
   }
 
   export type RapPhimWhereInput = {
@@ -11474,6 +12618,50 @@ export namespace Prisma {
     ma_rap?: IntWithAggregatesFilter<"RapPhim"> | number
     ten_rap?: StringWithAggregatesFilter<"RapPhim"> | string
     ma_cum_rap?: IntWithAggregatesFilter<"RapPhim"> | number
+  }
+
+  export type NhomWhereInput = {
+    AND?: NhomWhereInput | NhomWhereInput[]
+    OR?: NhomWhereInput[]
+    NOT?: NhomWhereInput | NhomWhereInput[]
+    ma_nhom?: StringFilter<"Nhom"> | string
+    ten_nhom?: StringNullableFilter<"Nhom"> | string | null
+    NguoiDung?: NguoiDungListRelationFilter
+    Phim?: PhimListRelationFilter
+  }
+
+  export type NhomOrderByWithRelationInput = {
+    ma_nhom?: SortOrder
+    ten_nhom?: SortOrderInput | SortOrder
+    NguoiDung?: NguoiDungOrderByRelationAggregateInput
+    Phim?: PhimOrderByRelationAggregateInput
+    _relevance?: NhomOrderByRelevanceInput
+  }
+
+  export type NhomWhereUniqueInput = Prisma.AtLeast<{
+    ma_nhom?: string
+    AND?: NhomWhereInput | NhomWhereInput[]
+    OR?: NhomWhereInput[]
+    NOT?: NhomWhereInput | NhomWhereInput[]
+    ten_nhom?: StringNullableFilter<"Nhom"> | string | null
+    NguoiDung?: NguoiDungListRelationFilter
+    Phim?: PhimListRelationFilter
+  }, "ma_nhom">
+
+  export type NhomOrderByWithAggregationInput = {
+    ma_nhom?: SortOrder
+    ten_nhom?: SortOrderInput | SortOrder
+    _count?: NhomCountOrderByAggregateInput
+    _max?: NhomMaxOrderByAggregateInput
+    _min?: NhomMinOrderByAggregateInput
+  }
+
+  export type NhomScalarWhereWithAggregatesInput = {
+    AND?: NhomScalarWhereWithAggregatesInput | NhomScalarWhereWithAggregatesInput[]
+    OR?: NhomScalarWhereWithAggregatesInput[]
+    NOT?: NhomScalarWhereWithAggregatesInput | NhomScalarWhereWithAggregatesInput[]
+    ma_nhom?: StringWithAggregatesFilter<"Nhom"> | string
+    ten_nhom?: StringNullableWithAggregatesFilter<"Nhom"> | string | null
   }
 
   export type BannerCreateInput = {
@@ -11762,6 +12950,7 @@ export namespace Prisma {
     mat_khau: string
     loai_nguoi_dung?: string | null
     DatVe?: DatVeCreateNestedManyWithoutNguoiDungInput
+    Nhom?: NhomCreateNestedOneWithoutNguoiDungInput
   }
 
   export type NguoiDungUncheckedCreateInput = {
@@ -11771,6 +12960,7 @@ export namespace Prisma {
     so_dt?: string | null
     mat_khau: string
     loai_nguoi_dung?: string | null
+    ma_nhom?: string
     DatVe?: DatVeUncheckedCreateNestedManyWithoutNguoiDungInput
   }
 
@@ -11782,6 +12972,7 @@ export namespace Prisma {
     mat_khau?: StringFieldUpdateOperationsInput | string
     loai_nguoi_dung?: NullableStringFieldUpdateOperationsInput | string | null
     DatVe?: DatVeUpdateManyWithoutNguoiDungNestedInput
+    Nhom?: NhomUpdateOneRequiredWithoutNguoiDungNestedInput
   }
 
   export type NguoiDungUncheckedUpdateInput = {
@@ -11791,6 +12982,7 @@ export namespace Prisma {
     so_dt?: NullableStringFieldUpdateOperationsInput | string | null
     mat_khau?: StringFieldUpdateOperationsInput | string
     loai_nguoi_dung?: NullableStringFieldUpdateOperationsInput | string | null
+    ma_nhom?: StringFieldUpdateOperationsInput | string
     DatVe?: DatVeUncheckedUpdateManyWithoutNguoiDungNestedInput
   }
 
@@ -11801,6 +12993,7 @@ export namespace Prisma {
     so_dt?: string | null
     mat_khau: string
     loai_nguoi_dung?: string | null
+    ma_nhom?: string
   }
 
   export type NguoiDungUpdateManyMutationInput = {
@@ -11819,6 +13012,7 @@ export namespace Prisma {
     so_dt?: NullableStringFieldUpdateOperationsInput | string | null
     mat_khau?: StringFieldUpdateOperationsInput | string
     loai_nguoi_dung?: NullableStringFieldUpdateOperationsInput | string | null
+    ma_nhom?: StringFieldUpdateOperationsInput | string
   }
 
   export type PhimCreateInput = {
@@ -11833,6 +13027,7 @@ export namespace Prisma {
     sap_chieu?: boolean | null
     Banner?: BannerCreateNestedManyWithoutPhimInput
     LichChieu?: LichChieuCreateNestedManyWithoutPhimInput
+    Nhom?: NhomCreateNestedOneWithoutPhimInput
   }
 
   export type PhimUncheckedCreateInput = {
@@ -11846,6 +13041,7 @@ export namespace Prisma {
     hot?: boolean | null
     dang_chieu?: boolean | null
     sap_chieu?: boolean | null
+    ma_nhom?: string
     Banner?: BannerUncheckedCreateNestedManyWithoutPhimInput
     LichChieu?: LichChieuUncheckedCreateNestedManyWithoutPhimInput
   }
@@ -11862,6 +13058,7 @@ export namespace Prisma {
     sap_chieu?: NullableBoolFieldUpdateOperationsInput | boolean | null
     Banner?: BannerUpdateManyWithoutPhimNestedInput
     LichChieu?: LichChieuUpdateManyWithoutPhimNestedInput
+    Nhom?: NhomUpdateOneRequiredWithoutPhimNestedInput
   }
 
   export type PhimUncheckedUpdateInput = {
@@ -11875,6 +13072,7 @@ export namespace Prisma {
     hot?: NullableBoolFieldUpdateOperationsInput | boolean | null
     dang_chieu?: NullableBoolFieldUpdateOperationsInput | boolean | null
     sap_chieu?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    ma_nhom?: StringFieldUpdateOperationsInput | string
     Banner?: BannerUncheckedUpdateManyWithoutPhimNestedInput
     LichChieu?: LichChieuUncheckedUpdateManyWithoutPhimNestedInput
   }
@@ -11890,6 +13088,7 @@ export namespace Prisma {
     hot?: boolean | null
     dang_chieu?: boolean | null
     sap_chieu?: boolean | null
+    ma_nhom?: string
   }
 
   export type PhimUpdateManyMutationInput = {
@@ -11915,6 +13114,7 @@ export namespace Prisma {
     hot?: NullableBoolFieldUpdateOperationsInput | boolean | null
     dang_chieu?: NullableBoolFieldUpdateOperationsInput | boolean | null
     sap_chieu?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    ma_nhom?: StringFieldUpdateOperationsInput | string
   }
 
   export type RapPhimCreateInput = {
@@ -11961,6 +13161,49 @@ export namespace Prisma {
     ma_rap?: IntFieldUpdateOperationsInput | number
     ten_rap?: StringFieldUpdateOperationsInput | string
     ma_cum_rap?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type NhomCreateInput = {
+    ma_nhom: string
+    ten_nhom?: string | null
+    NguoiDung?: NguoiDungCreateNestedManyWithoutNhomInput
+    Phim?: PhimCreateNestedManyWithoutNhomInput
+  }
+
+  export type NhomUncheckedCreateInput = {
+    ma_nhom: string
+    ten_nhom?: string | null
+    NguoiDung?: NguoiDungUncheckedCreateNestedManyWithoutNhomInput
+    Phim?: PhimUncheckedCreateNestedManyWithoutNhomInput
+  }
+
+  export type NhomUpdateInput = {
+    ma_nhom?: StringFieldUpdateOperationsInput | string
+    ten_nhom?: NullableStringFieldUpdateOperationsInput | string | null
+    NguoiDung?: NguoiDungUpdateManyWithoutNhomNestedInput
+    Phim?: PhimUpdateManyWithoutNhomNestedInput
+  }
+
+  export type NhomUncheckedUpdateInput = {
+    ma_nhom?: StringFieldUpdateOperationsInput | string
+    ten_nhom?: NullableStringFieldUpdateOperationsInput | string | null
+    NguoiDung?: NguoiDungUncheckedUpdateManyWithoutNhomNestedInput
+    Phim?: PhimUncheckedUpdateManyWithoutNhomNestedInput
+  }
+
+  export type NhomCreateManyInput = {
+    ma_nhom: string
+    ten_nhom?: string | null
+  }
+
+  export type NhomUpdateManyMutationInput = {
+    ma_nhom?: StringFieldUpdateOperationsInput | string
+    ten_nhom?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type NhomUncheckedUpdateManyInput = {
+    ma_nhom?: StringFieldUpdateOperationsInput | string
+    ten_nhom?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -12373,6 +13616,11 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NhomScalarRelationFilter = {
+    is?: NhomWhereInput
+    isNot?: NhomWhereInput
+  }
+
   export type NguoiDungOrderByRelevanceInput = {
     fields: NguoiDungOrderByRelevanceFieldEnum | NguoiDungOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -12386,6 +13634,7 @@ export namespace Prisma {
     so_dt?: SortOrder
     mat_khau?: SortOrder
     loai_nguoi_dung?: SortOrder
+    ma_nhom?: SortOrder
   }
 
   export type NguoiDungMaxOrderByAggregateInput = {
@@ -12395,6 +13644,7 @@ export namespace Prisma {
     so_dt?: SortOrder
     mat_khau?: SortOrder
     loai_nguoi_dung?: SortOrder
+    ma_nhom?: SortOrder
   }
 
   export type NguoiDungMinOrderByAggregateInput = {
@@ -12404,6 +13654,7 @@ export namespace Prisma {
     so_dt?: SortOrder
     mat_khau?: SortOrder
     loai_nguoi_dung?: SortOrder
+    ma_nhom?: SortOrder
   }
 
   export type DateTimeNullableFilter<$PrismaModel = never> = {
@@ -12470,6 +13721,7 @@ export namespace Prisma {
     hot?: SortOrder
     dang_chieu?: SortOrder
     sap_chieu?: SortOrder
+    ma_nhom?: SortOrder
   }
 
   export type PhimAvgOrderByAggregateInput = {
@@ -12488,6 +13740,7 @@ export namespace Prisma {
     hot?: SortOrder
     dang_chieu?: SortOrder
     sap_chieu?: SortOrder
+    ma_nhom?: SortOrder
   }
 
   export type PhimMinOrderByAggregateInput = {
@@ -12501,6 +13754,7 @@ export namespace Prisma {
     hot?: SortOrder
     dang_chieu?: SortOrder
     sap_chieu?: SortOrder
+    ma_nhom?: SortOrder
   }
 
   export type PhimSumOrderByAggregateInput = {
@@ -12593,6 +13847,47 @@ export namespace Prisma {
   export type RapPhimSumOrderByAggregateInput = {
     ma_rap?: SortOrder
     ma_cum_rap?: SortOrder
+  }
+
+  export type NguoiDungListRelationFilter = {
+    every?: NguoiDungWhereInput
+    some?: NguoiDungWhereInput
+    none?: NguoiDungWhereInput
+  }
+
+  export type PhimListRelationFilter = {
+    every?: PhimWhereInput
+    some?: PhimWhereInput
+    none?: PhimWhereInput
+  }
+
+  export type NguoiDungOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PhimOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type NhomOrderByRelevanceInput = {
+    fields: NhomOrderByRelevanceFieldEnum | NhomOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type NhomCountOrderByAggregateInput = {
+    ma_nhom?: SortOrder
+    ten_nhom?: SortOrder
+  }
+
+  export type NhomMaxOrderByAggregateInput = {
+    ma_nhom?: SortOrder
+    ten_nhom?: SortOrder
+  }
+
+  export type NhomMinOrderByAggregateInput = {
+    ma_nhom?: SortOrder
+    ten_nhom?: SortOrder
   }
 
   export type PhimCreateNestedOneWithoutBannerInput = {
@@ -12902,6 +14197,12 @@ export namespace Prisma {
     connect?: DatVeWhereUniqueInput | DatVeWhereUniqueInput[]
   }
 
+  export type NhomCreateNestedOneWithoutNguoiDungInput = {
+    create?: XOR<NhomCreateWithoutNguoiDungInput, NhomUncheckedCreateWithoutNguoiDungInput>
+    connectOrCreate?: NhomCreateOrConnectWithoutNguoiDungInput
+    connect?: NhomWhereUniqueInput
+  }
+
   export type DatVeUncheckedCreateNestedManyWithoutNguoiDungInput = {
     create?: XOR<DatVeCreateWithoutNguoiDungInput, DatVeUncheckedCreateWithoutNguoiDungInput> | DatVeCreateWithoutNguoiDungInput[] | DatVeUncheckedCreateWithoutNguoiDungInput[]
     connectOrCreate?: DatVeCreateOrConnectWithoutNguoiDungInput | DatVeCreateOrConnectWithoutNguoiDungInput[]
@@ -12921,6 +14222,14 @@ export namespace Prisma {
     update?: DatVeUpdateWithWhereUniqueWithoutNguoiDungInput | DatVeUpdateWithWhereUniqueWithoutNguoiDungInput[]
     updateMany?: DatVeUpdateManyWithWhereWithoutNguoiDungInput | DatVeUpdateManyWithWhereWithoutNguoiDungInput[]
     deleteMany?: DatVeScalarWhereInput | DatVeScalarWhereInput[]
+  }
+
+  export type NhomUpdateOneRequiredWithoutNguoiDungNestedInput = {
+    create?: XOR<NhomCreateWithoutNguoiDungInput, NhomUncheckedCreateWithoutNguoiDungInput>
+    connectOrCreate?: NhomCreateOrConnectWithoutNguoiDungInput
+    upsert?: NhomUpsertWithoutNguoiDungInput
+    connect?: NhomWhereUniqueInput
+    update?: XOR<XOR<NhomUpdateToOneWithWhereWithoutNguoiDungInput, NhomUpdateWithoutNguoiDungInput>, NhomUncheckedUpdateWithoutNguoiDungInput>
   }
 
   export type DatVeUncheckedUpdateManyWithoutNguoiDungNestedInput = {
@@ -12949,6 +14258,12 @@ export namespace Prisma {
     connectOrCreate?: LichChieuCreateOrConnectWithoutPhimInput | LichChieuCreateOrConnectWithoutPhimInput[]
     createMany?: LichChieuCreateManyPhimInputEnvelope
     connect?: LichChieuWhereUniqueInput | LichChieuWhereUniqueInput[]
+  }
+
+  export type NhomCreateNestedOneWithoutPhimInput = {
+    create?: XOR<NhomCreateWithoutPhimInput, NhomUncheckedCreateWithoutPhimInput>
+    connectOrCreate?: NhomCreateOrConnectWithoutPhimInput
+    connect?: NhomWhereUniqueInput
   }
 
   export type BannerUncheckedCreateNestedManyWithoutPhimInput = {
@@ -13007,6 +14322,14 @@ export namespace Prisma {
     update?: LichChieuUpdateWithWhereUniqueWithoutPhimInput | LichChieuUpdateWithWhereUniqueWithoutPhimInput[]
     updateMany?: LichChieuUpdateManyWithWhereWithoutPhimInput | LichChieuUpdateManyWithWhereWithoutPhimInput[]
     deleteMany?: LichChieuScalarWhereInput | LichChieuScalarWhereInput[]
+  }
+
+  export type NhomUpdateOneRequiredWithoutPhimNestedInput = {
+    create?: XOR<NhomCreateWithoutPhimInput, NhomUncheckedCreateWithoutPhimInput>
+    connectOrCreate?: NhomCreateOrConnectWithoutPhimInput
+    upsert?: NhomUpsertWithoutPhimInput
+    connect?: NhomWhereUniqueInput
+    update?: XOR<XOR<NhomUpdateToOneWithWhereWithoutPhimInput, NhomUpdateWithoutPhimInput>, NhomUncheckedUpdateWithoutPhimInput>
   }
 
   export type BannerUncheckedUpdateManyWithoutPhimNestedInput = {
@@ -13133,6 +14456,90 @@ export namespace Prisma {
     update?: LichChieuUpdateWithWhereUniqueWithoutRapPhimInput | LichChieuUpdateWithWhereUniqueWithoutRapPhimInput[]
     updateMany?: LichChieuUpdateManyWithWhereWithoutRapPhimInput | LichChieuUpdateManyWithWhereWithoutRapPhimInput[]
     deleteMany?: LichChieuScalarWhereInput | LichChieuScalarWhereInput[]
+  }
+
+  export type NguoiDungCreateNestedManyWithoutNhomInput = {
+    create?: XOR<NguoiDungCreateWithoutNhomInput, NguoiDungUncheckedCreateWithoutNhomInput> | NguoiDungCreateWithoutNhomInput[] | NguoiDungUncheckedCreateWithoutNhomInput[]
+    connectOrCreate?: NguoiDungCreateOrConnectWithoutNhomInput | NguoiDungCreateOrConnectWithoutNhomInput[]
+    createMany?: NguoiDungCreateManyNhomInputEnvelope
+    connect?: NguoiDungWhereUniqueInput | NguoiDungWhereUniqueInput[]
+  }
+
+  export type PhimCreateNestedManyWithoutNhomInput = {
+    create?: XOR<PhimCreateWithoutNhomInput, PhimUncheckedCreateWithoutNhomInput> | PhimCreateWithoutNhomInput[] | PhimUncheckedCreateWithoutNhomInput[]
+    connectOrCreate?: PhimCreateOrConnectWithoutNhomInput | PhimCreateOrConnectWithoutNhomInput[]
+    createMany?: PhimCreateManyNhomInputEnvelope
+    connect?: PhimWhereUniqueInput | PhimWhereUniqueInput[]
+  }
+
+  export type NguoiDungUncheckedCreateNestedManyWithoutNhomInput = {
+    create?: XOR<NguoiDungCreateWithoutNhomInput, NguoiDungUncheckedCreateWithoutNhomInput> | NguoiDungCreateWithoutNhomInput[] | NguoiDungUncheckedCreateWithoutNhomInput[]
+    connectOrCreate?: NguoiDungCreateOrConnectWithoutNhomInput | NguoiDungCreateOrConnectWithoutNhomInput[]
+    createMany?: NguoiDungCreateManyNhomInputEnvelope
+    connect?: NguoiDungWhereUniqueInput | NguoiDungWhereUniqueInput[]
+  }
+
+  export type PhimUncheckedCreateNestedManyWithoutNhomInput = {
+    create?: XOR<PhimCreateWithoutNhomInput, PhimUncheckedCreateWithoutNhomInput> | PhimCreateWithoutNhomInput[] | PhimUncheckedCreateWithoutNhomInput[]
+    connectOrCreate?: PhimCreateOrConnectWithoutNhomInput | PhimCreateOrConnectWithoutNhomInput[]
+    createMany?: PhimCreateManyNhomInputEnvelope
+    connect?: PhimWhereUniqueInput | PhimWhereUniqueInput[]
+  }
+
+  export type NguoiDungUpdateManyWithoutNhomNestedInput = {
+    create?: XOR<NguoiDungCreateWithoutNhomInput, NguoiDungUncheckedCreateWithoutNhomInput> | NguoiDungCreateWithoutNhomInput[] | NguoiDungUncheckedCreateWithoutNhomInput[]
+    connectOrCreate?: NguoiDungCreateOrConnectWithoutNhomInput | NguoiDungCreateOrConnectWithoutNhomInput[]
+    upsert?: NguoiDungUpsertWithWhereUniqueWithoutNhomInput | NguoiDungUpsertWithWhereUniqueWithoutNhomInput[]
+    createMany?: NguoiDungCreateManyNhomInputEnvelope
+    set?: NguoiDungWhereUniqueInput | NguoiDungWhereUniqueInput[]
+    disconnect?: NguoiDungWhereUniqueInput | NguoiDungWhereUniqueInput[]
+    delete?: NguoiDungWhereUniqueInput | NguoiDungWhereUniqueInput[]
+    connect?: NguoiDungWhereUniqueInput | NguoiDungWhereUniqueInput[]
+    update?: NguoiDungUpdateWithWhereUniqueWithoutNhomInput | NguoiDungUpdateWithWhereUniqueWithoutNhomInput[]
+    updateMany?: NguoiDungUpdateManyWithWhereWithoutNhomInput | NguoiDungUpdateManyWithWhereWithoutNhomInput[]
+    deleteMany?: NguoiDungScalarWhereInput | NguoiDungScalarWhereInput[]
+  }
+
+  export type PhimUpdateManyWithoutNhomNestedInput = {
+    create?: XOR<PhimCreateWithoutNhomInput, PhimUncheckedCreateWithoutNhomInput> | PhimCreateWithoutNhomInput[] | PhimUncheckedCreateWithoutNhomInput[]
+    connectOrCreate?: PhimCreateOrConnectWithoutNhomInput | PhimCreateOrConnectWithoutNhomInput[]
+    upsert?: PhimUpsertWithWhereUniqueWithoutNhomInput | PhimUpsertWithWhereUniqueWithoutNhomInput[]
+    createMany?: PhimCreateManyNhomInputEnvelope
+    set?: PhimWhereUniqueInput | PhimWhereUniqueInput[]
+    disconnect?: PhimWhereUniqueInput | PhimWhereUniqueInput[]
+    delete?: PhimWhereUniqueInput | PhimWhereUniqueInput[]
+    connect?: PhimWhereUniqueInput | PhimWhereUniqueInput[]
+    update?: PhimUpdateWithWhereUniqueWithoutNhomInput | PhimUpdateWithWhereUniqueWithoutNhomInput[]
+    updateMany?: PhimUpdateManyWithWhereWithoutNhomInput | PhimUpdateManyWithWhereWithoutNhomInput[]
+    deleteMany?: PhimScalarWhereInput | PhimScalarWhereInput[]
+  }
+
+  export type NguoiDungUncheckedUpdateManyWithoutNhomNestedInput = {
+    create?: XOR<NguoiDungCreateWithoutNhomInput, NguoiDungUncheckedCreateWithoutNhomInput> | NguoiDungCreateWithoutNhomInput[] | NguoiDungUncheckedCreateWithoutNhomInput[]
+    connectOrCreate?: NguoiDungCreateOrConnectWithoutNhomInput | NguoiDungCreateOrConnectWithoutNhomInput[]
+    upsert?: NguoiDungUpsertWithWhereUniqueWithoutNhomInput | NguoiDungUpsertWithWhereUniqueWithoutNhomInput[]
+    createMany?: NguoiDungCreateManyNhomInputEnvelope
+    set?: NguoiDungWhereUniqueInput | NguoiDungWhereUniqueInput[]
+    disconnect?: NguoiDungWhereUniqueInput | NguoiDungWhereUniqueInput[]
+    delete?: NguoiDungWhereUniqueInput | NguoiDungWhereUniqueInput[]
+    connect?: NguoiDungWhereUniqueInput | NguoiDungWhereUniqueInput[]
+    update?: NguoiDungUpdateWithWhereUniqueWithoutNhomInput | NguoiDungUpdateWithWhereUniqueWithoutNhomInput[]
+    updateMany?: NguoiDungUpdateManyWithWhereWithoutNhomInput | NguoiDungUpdateManyWithWhereWithoutNhomInput[]
+    deleteMany?: NguoiDungScalarWhereInput | NguoiDungScalarWhereInput[]
+  }
+
+  export type PhimUncheckedUpdateManyWithoutNhomNestedInput = {
+    create?: XOR<PhimCreateWithoutNhomInput, PhimUncheckedCreateWithoutNhomInput> | PhimCreateWithoutNhomInput[] | PhimUncheckedCreateWithoutNhomInput[]
+    connectOrCreate?: PhimCreateOrConnectWithoutNhomInput | PhimCreateOrConnectWithoutNhomInput[]
+    upsert?: PhimUpsertWithWhereUniqueWithoutNhomInput | PhimUpsertWithWhereUniqueWithoutNhomInput[]
+    createMany?: PhimCreateManyNhomInputEnvelope
+    set?: PhimWhereUniqueInput | PhimWhereUniqueInput[]
+    disconnect?: PhimWhereUniqueInput | PhimWhereUniqueInput[]
+    delete?: PhimWhereUniqueInput | PhimWhereUniqueInput[]
+    connect?: PhimWhereUniqueInput | PhimWhereUniqueInput[]
+    update?: PhimUpdateWithWhereUniqueWithoutNhomInput | PhimUpdateWithWhereUniqueWithoutNhomInput[]
+    updateMany?: PhimUpdateManyWithWhereWithoutNhomInput | PhimUpdateManyWithWhereWithoutNhomInput[]
+    deleteMany?: PhimScalarWhereInput | PhimScalarWhereInput[]
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -13351,6 +14758,7 @@ export namespace Prisma {
     dang_chieu?: boolean | null
     sap_chieu?: boolean | null
     LichChieu?: LichChieuCreateNestedManyWithoutPhimInput
+    Nhom?: NhomCreateNestedOneWithoutPhimInput
   }
 
   export type PhimUncheckedCreateWithoutBannerInput = {
@@ -13364,6 +14772,7 @@ export namespace Prisma {
     hot?: boolean | null
     dang_chieu?: boolean | null
     sap_chieu?: boolean | null
+    ma_nhom?: string
     LichChieu?: LichChieuUncheckedCreateNestedManyWithoutPhimInput
   }
 
@@ -13394,6 +14803,7 @@ export namespace Prisma {
     dang_chieu?: NullableBoolFieldUpdateOperationsInput | boolean | null
     sap_chieu?: NullableBoolFieldUpdateOperationsInput | boolean | null
     LichChieu?: LichChieuUpdateManyWithoutPhimNestedInput
+    Nhom?: NhomUpdateOneRequiredWithoutPhimNestedInput
   }
 
   export type PhimUncheckedUpdateWithoutBannerInput = {
@@ -13407,6 +14817,7 @@ export namespace Prisma {
     hot?: NullableBoolFieldUpdateOperationsInput | boolean | null
     dang_chieu?: NullableBoolFieldUpdateOperationsInput | boolean | null
     sap_chieu?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    ma_nhom?: StringFieldUpdateOperationsInput | string
     LichChieu?: LichChieuUncheckedUpdateManyWithoutPhimNestedInput
   }
 
@@ -13541,6 +14952,7 @@ export namespace Prisma {
     so_dt?: string | null
     mat_khau: string
     loai_nguoi_dung?: string | null
+    Nhom?: NhomCreateNestedOneWithoutNguoiDungInput
   }
 
   export type NguoiDungUncheckedCreateWithoutDatVeInput = {
@@ -13550,6 +14962,7 @@ export namespace Prisma {
     so_dt?: string | null
     mat_khau: string
     loai_nguoi_dung?: string | null
+    ma_nhom?: string
   }
 
   export type NguoiDungCreateOrConnectWithoutDatVeInput = {
@@ -13625,6 +15038,7 @@ export namespace Prisma {
     so_dt?: NullableStringFieldUpdateOperationsInput | string | null
     mat_khau?: StringFieldUpdateOperationsInput | string
     loai_nguoi_dung?: NullableStringFieldUpdateOperationsInput | string | null
+    Nhom?: NhomUpdateOneRequiredWithoutNguoiDungNestedInput
   }
 
   export type NguoiDungUncheckedUpdateWithoutDatVeInput = {
@@ -13634,6 +15048,7 @@ export namespace Prisma {
     so_dt?: NullableStringFieldUpdateOperationsInput | string | null
     mat_khau?: StringFieldUpdateOperationsInput | string
     loai_nguoi_dung?: NullableStringFieldUpdateOperationsInput | string | null
+    ma_nhom?: StringFieldUpdateOperationsInput | string
   }
 
   export type DatVeCreateWithoutGheInput = {
@@ -13806,6 +15221,7 @@ export namespace Prisma {
     dang_chieu?: boolean | null
     sap_chieu?: boolean | null
     Banner?: BannerCreateNestedManyWithoutPhimInput
+    Nhom?: NhomCreateNestedOneWithoutPhimInput
   }
 
   export type PhimUncheckedCreateWithoutLichChieuInput = {
@@ -13819,6 +15235,7 @@ export namespace Prisma {
     hot?: boolean | null
     dang_chieu?: boolean | null
     sap_chieu?: boolean | null
+    ma_nhom?: string
     Banner?: BannerUncheckedCreateNestedManyWithoutPhimInput
   }
 
@@ -13883,6 +15300,7 @@ export namespace Prisma {
     dang_chieu?: NullableBoolFieldUpdateOperationsInput | boolean | null
     sap_chieu?: NullableBoolFieldUpdateOperationsInput | boolean | null
     Banner?: BannerUpdateManyWithoutPhimNestedInput
+    Nhom?: NhomUpdateOneRequiredWithoutPhimNestedInput
   }
 
   export type PhimUncheckedUpdateWithoutLichChieuInput = {
@@ -13896,6 +15314,7 @@ export namespace Prisma {
     hot?: NullableBoolFieldUpdateOperationsInput | boolean | null
     dang_chieu?: NullableBoolFieldUpdateOperationsInput | boolean | null
     sap_chieu?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    ma_nhom?: StringFieldUpdateOperationsInput | string
     Banner?: BannerUncheckedUpdateManyWithoutPhimNestedInput
   }
 
@@ -13944,6 +15363,23 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type NhomCreateWithoutNguoiDungInput = {
+    ma_nhom: string
+    ten_nhom?: string | null
+    Phim?: PhimCreateNestedManyWithoutNhomInput
+  }
+
+  export type NhomUncheckedCreateWithoutNguoiDungInput = {
+    ma_nhom: string
+    ten_nhom?: string | null
+    Phim?: PhimUncheckedCreateNestedManyWithoutNhomInput
+  }
+
+  export type NhomCreateOrConnectWithoutNguoiDungInput = {
+    where: NhomWhereUniqueInput
+    create: XOR<NhomCreateWithoutNguoiDungInput, NhomUncheckedCreateWithoutNguoiDungInput>
+  }
+
   export type DatVeUpsertWithWhereUniqueWithoutNguoiDungInput = {
     where: DatVeWhereUniqueInput
     update: XOR<DatVeUpdateWithoutNguoiDungInput, DatVeUncheckedUpdateWithoutNguoiDungInput>
@@ -13958,6 +15394,29 @@ export namespace Prisma {
   export type DatVeUpdateManyWithWhereWithoutNguoiDungInput = {
     where: DatVeScalarWhereInput
     data: XOR<DatVeUpdateManyMutationInput, DatVeUncheckedUpdateManyWithoutNguoiDungInput>
+  }
+
+  export type NhomUpsertWithoutNguoiDungInput = {
+    update: XOR<NhomUpdateWithoutNguoiDungInput, NhomUncheckedUpdateWithoutNguoiDungInput>
+    create: XOR<NhomCreateWithoutNguoiDungInput, NhomUncheckedCreateWithoutNguoiDungInput>
+    where?: NhomWhereInput
+  }
+
+  export type NhomUpdateToOneWithWhereWithoutNguoiDungInput = {
+    where?: NhomWhereInput
+    data: XOR<NhomUpdateWithoutNguoiDungInput, NhomUncheckedUpdateWithoutNguoiDungInput>
+  }
+
+  export type NhomUpdateWithoutNguoiDungInput = {
+    ma_nhom?: StringFieldUpdateOperationsInput | string
+    ten_nhom?: NullableStringFieldUpdateOperationsInput | string | null
+    Phim?: PhimUpdateManyWithoutNhomNestedInput
+  }
+
+  export type NhomUncheckedUpdateWithoutNguoiDungInput = {
+    ma_nhom?: StringFieldUpdateOperationsInput | string
+    ten_nhom?: NullableStringFieldUpdateOperationsInput | string | null
+    Phim?: PhimUncheckedUpdateManyWithoutNhomNestedInput
   }
 
   export type BannerCreateWithoutPhimInput = {
@@ -14002,6 +15461,23 @@ export namespace Prisma {
   export type LichChieuCreateManyPhimInputEnvelope = {
     data: LichChieuCreateManyPhimInput | LichChieuCreateManyPhimInput[]
     skipDuplicates?: boolean
+  }
+
+  export type NhomCreateWithoutPhimInput = {
+    ma_nhom: string
+    ten_nhom?: string | null
+    NguoiDung?: NguoiDungCreateNestedManyWithoutNhomInput
+  }
+
+  export type NhomUncheckedCreateWithoutPhimInput = {
+    ma_nhom: string
+    ten_nhom?: string | null
+    NguoiDung?: NguoiDungUncheckedCreateNestedManyWithoutNhomInput
+  }
+
+  export type NhomCreateOrConnectWithoutPhimInput = {
+    where: NhomWhereUniqueInput
+    create: XOR<NhomCreateWithoutPhimInput, NhomUncheckedCreateWithoutPhimInput>
   }
 
   export type BannerUpsertWithWhereUniqueWithoutPhimInput = {
@@ -14054,6 +15530,29 @@ export namespace Prisma {
     ma_phim?: IntFilter<"LichChieu"> | number
     ngay_gio_chieu?: DateTimeFilter<"LichChieu"> | Date | string
     gia_ve?: IntFilter<"LichChieu"> | number
+  }
+
+  export type NhomUpsertWithoutPhimInput = {
+    update: XOR<NhomUpdateWithoutPhimInput, NhomUncheckedUpdateWithoutPhimInput>
+    create: XOR<NhomCreateWithoutPhimInput, NhomUncheckedCreateWithoutPhimInput>
+    where?: NhomWhereInput
+  }
+
+  export type NhomUpdateToOneWithWhereWithoutPhimInput = {
+    where?: NhomWhereInput
+    data: XOR<NhomUpdateWithoutPhimInput, NhomUncheckedUpdateWithoutPhimInput>
+  }
+
+  export type NhomUpdateWithoutPhimInput = {
+    ma_nhom?: StringFieldUpdateOperationsInput | string
+    ten_nhom?: NullableStringFieldUpdateOperationsInput | string | null
+    NguoiDung?: NguoiDungUpdateManyWithoutNhomNestedInput
+  }
+
+  export type NhomUncheckedUpdateWithoutPhimInput = {
+    ma_nhom?: StringFieldUpdateOperationsInput | string
+    ten_nhom?: NullableStringFieldUpdateOperationsInput | string | null
+    NguoiDung?: NguoiDungUncheckedUpdateManyWithoutNhomNestedInput
   }
 
   export type GheCreateWithoutRapPhimInput = {
@@ -14186,6 +15685,137 @@ export namespace Prisma {
     ten_cum_rap?: StringFieldUpdateOperationsInput | string
     dia_chi?: NullableStringFieldUpdateOperationsInput | string | null
     ma_he_thong_rap?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type NguoiDungCreateWithoutNhomInput = {
+    tai_khoan: string
+    ho_ten: string
+    email: string
+    so_dt?: string | null
+    mat_khau: string
+    loai_nguoi_dung?: string | null
+    DatVe?: DatVeCreateNestedManyWithoutNguoiDungInput
+  }
+
+  export type NguoiDungUncheckedCreateWithoutNhomInput = {
+    tai_khoan: string
+    ho_ten: string
+    email: string
+    so_dt?: string | null
+    mat_khau: string
+    loai_nguoi_dung?: string | null
+    DatVe?: DatVeUncheckedCreateNestedManyWithoutNguoiDungInput
+  }
+
+  export type NguoiDungCreateOrConnectWithoutNhomInput = {
+    where: NguoiDungWhereUniqueInput
+    create: XOR<NguoiDungCreateWithoutNhomInput, NguoiDungUncheckedCreateWithoutNhomInput>
+  }
+
+  export type NguoiDungCreateManyNhomInputEnvelope = {
+    data: NguoiDungCreateManyNhomInput | NguoiDungCreateManyNhomInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PhimCreateWithoutNhomInput = {
+    ten_phim: string
+    trailer?: string | null
+    hinh_anh?: string | null
+    mo_ta?: string | null
+    ngay_khoi_chieu?: Date | string | null
+    danh_gia?: number | null
+    hot?: boolean | null
+    dang_chieu?: boolean | null
+    sap_chieu?: boolean | null
+    Banner?: BannerCreateNestedManyWithoutPhimInput
+    LichChieu?: LichChieuCreateNestedManyWithoutPhimInput
+  }
+
+  export type PhimUncheckedCreateWithoutNhomInput = {
+    ma_phim?: number
+    ten_phim: string
+    trailer?: string | null
+    hinh_anh?: string | null
+    mo_ta?: string | null
+    ngay_khoi_chieu?: Date | string | null
+    danh_gia?: number | null
+    hot?: boolean | null
+    dang_chieu?: boolean | null
+    sap_chieu?: boolean | null
+    Banner?: BannerUncheckedCreateNestedManyWithoutPhimInput
+    LichChieu?: LichChieuUncheckedCreateNestedManyWithoutPhimInput
+  }
+
+  export type PhimCreateOrConnectWithoutNhomInput = {
+    where: PhimWhereUniqueInput
+    create: XOR<PhimCreateWithoutNhomInput, PhimUncheckedCreateWithoutNhomInput>
+  }
+
+  export type PhimCreateManyNhomInputEnvelope = {
+    data: PhimCreateManyNhomInput | PhimCreateManyNhomInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type NguoiDungUpsertWithWhereUniqueWithoutNhomInput = {
+    where: NguoiDungWhereUniqueInput
+    update: XOR<NguoiDungUpdateWithoutNhomInput, NguoiDungUncheckedUpdateWithoutNhomInput>
+    create: XOR<NguoiDungCreateWithoutNhomInput, NguoiDungUncheckedCreateWithoutNhomInput>
+  }
+
+  export type NguoiDungUpdateWithWhereUniqueWithoutNhomInput = {
+    where: NguoiDungWhereUniqueInput
+    data: XOR<NguoiDungUpdateWithoutNhomInput, NguoiDungUncheckedUpdateWithoutNhomInput>
+  }
+
+  export type NguoiDungUpdateManyWithWhereWithoutNhomInput = {
+    where: NguoiDungScalarWhereInput
+    data: XOR<NguoiDungUpdateManyMutationInput, NguoiDungUncheckedUpdateManyWithoutNhomInput>
+  }
+
+  export type NguoiDungScalarWhereInput = {
+    AND?: NguoiDungScalarWhereInput | NguoiDungScalarWhereInput[]
+    OR?: NguoiDungScalarWhereInput[]
+    NOT?: NguoiDungScalarWhereInput | NguoiDungScalarWhereInput[]
+    tai_khoan?: StringFilter<"NguoiDung"> | string
+    ho_ten?: StringFilter<"NguoiDung"> | string
+    email?: StringFilter<"NguoiDung"> | string
+    so_dt?: StringNullableFilter<"NguoiDung"> | string | null
+    mat_khau?: StringFilter<"NguoiDung"> | string
+    loai_nguoi_dung?: StringNullableFilter<"NguoiDung"> | string | null
+    ma_nhom?: StringFilter<"NguoiDung"> | string
+  }
+
+  export type PhimUpsertWithWhereUniqueWithoutNhomInput = {
+    where: PhimWhereUniqueInput
+    update: XOR<PhimUpdateWithoutNhomInput, PhimUncheckedUpdateWithoutNhomInput>
+    create: XOR<PhimCreateWithoutNhomInput, PhimUncheckedCreateWithoutNhomInput>
+  }
+
+  export type PhimUpdateWithWhereUniqueWithoutNhomInput = {
+    where: PhimWhereUniqueInput
+    data: XOR<PhimUpdateWithoutNhomInput, PhimUncheckedUpdateWithoutNhomInput>
+  }
+
+  export type PhimUpdateManyWithWhereWithoutNhomInput = {
+    where: PhimScalarWhereInput
+    data: XOR<PhimUpdateManyMutationInput, PhimUncheckedUpdateManyWithoutNhomInput>
+  }
+
+  export type PhimScalarWhereInput = {
+    AND?: PhimScalarWhereInput | PhimScalarWhereInput[]
+    OR?: PhimScalarWhereInput[]
+    NOT?: PhimScalarWhereInput | PhimScalarWhereInput[]
+    ma_phim?: IntFilter<"Phim"> | number
+    ten_phim?: StringFilter<"Phim"> | string
+    trailer?: StringNullableFilter<"Phim"> | string | null
+    hinh_anh?: StringNullableFilter<"Phim"> | string | null
+    mo_ta?: StringNullableFilter<"Phim"> | string | null
+    ngay_khoi_chieu?: DateTimeNullableFilter<"Phim"> | Date | string | null
+    danh_gia?: IntNullableFilter<"Phim"> | number | null
+    hot?: BoolNullableFilter<"Phim"> | boolean | null
+    dang_chieu?: BoolNullableFilter<"Phim"> | boolean | null
+    sap_chieu?: BoolNullableFilter<"Phim"> | boolean | null
+    ma_nhom?: StringFilter<"Phim"> | string
   }
 
   export type RapPhimCreateManyCumRapInput = {
@@ -14405,6 +16035,99 @@ export namespace Prisma {
     ma_phim?: IntFieldUpdateOperationsInput | number
     ngay_gio_chieu?: DateTimeFieldUpdateOperationsInput | Date | string
     gia_ve?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type NguoiDungCreateManyNhomInput = {
+    tai_khoan: string
+    ho_ten: string
+    email: string
+    so_dt?: string | null
+    mat_khau: string
+    loai_nguoi_dung?: string | null
+  }
+
+  export type PhimCreateManyNhomInput = {
+    ma_phim?: number
+    ten_phim: string
+    trailer?: string | null
+    hinh_anh?: string | null
+    mo_ta?: string | null
+    ngay_khoi_chieu?: Date | string | null
+    danh_gia?: number | null
+    hot?: boolean | null
+    dang_chieu?: boolean | null
+    sap_chieu?: boolean | null
+  }
+
+  export type NguoiDungUpdateWithoutNhomInput = {
+    tai_khoan?: StringFieldUpdateOperationsInput | string
+    ho_ten?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    so_dt?: NullableStringFieldUpdateOperationsInput | string | null
+    mat_khau?: StringFieldUpdateOperationsInput | string
+    loai_nguoi_dung?: NullableStringFieldUpdateOperationsInput | string | null
+    DatVe?: DatVeUpdateManyWithoutNguoiDungNestedInput
+  }
+
+  export type NguoiDungUncheckedUpdateWithoutNhomInput = {
+    tai_khoan?: StringFieldUpdateOperationsInput | string
+    ho_ten?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    so_dt?: NullableStringFieldUpdateOperationsInput | string | null
+    mat_khau?: StringFieldUpdateOperationsInput | string
+    loai_nguoi_dung?: NullableStringFieldUpdateOperationsInput | string | null
+    DatVe?: DatVeUncheckedUpdateManyWithoutNguoiDungNestedInput
+  }
+
+  export type NguoiDungUncheckedUpdateManyWithoutNhomInput = {
+    tai_khoan?: StringFieldUpdateOperationsInput | string
+    ho_ten?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    so_dt?: NullableStringFieldUpdateOperationsInput | string | null
+    mat_khau?: StringFieldUpdateOperationsInput | string
+    loai_nguoi_dung?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type PhimUpdateWithoutNhomInput = {
+    ten_phim?: StringFieldUpdateOperationsInput | string
+    trailer?: NullableStringFieldUpdateOperationsInput | string | null
+    hinh_anh?: NullableStringFieldUpdateOperationsInput | string | null
+    mo_ta?: NullableStringFieldUpdateOperationsInput | string | null
+    ngay_khoi_chieu?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    danh_gia?: NullableIntFieldUpdateOperationsInput | number | null
+    hot?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    dang_chieu?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    sap_chieu?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    Banner?: BannerUpdateManyWithoutPhimNestedInput
+    LichChieu?: LichChieuUpdateManyWithoutPhimNestedInput
+  }
+
+  export type PhimUncheckedUpdateWithoutNhomInput = {
+    ma_phim?: IntFieldUpdateOperationsInput | number
+    ten_phim?: StringFieldUpdateOperationsInput | string
+    trailer?: NullableStringFieldUpdateOperationsInput | string | null
+    hinh_anh?: NullableStringFieldUpdateOperationsInput | string | null
+    mo_ta?: NullableStringFieldUpdateOperationsInput | string | null
+    ngay_khoi_chieu?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    danh_gia?: NullableIntFieldUpdateOperationsInput | number | null
+    hot?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    dang_chieu?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    sap_chieu?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    Banner?: BannerUncheckedUpdateManyWithoutPhimNestedInput
+    LichChieu?: LichChieuUncheckedUpdateManyWithoutPhimNestedInput
+  }
+
+  export type PhimUncheckedUpdateManyWithoutNhomInput = {
+    ma_phim?: IntFieldUpdateOperationsInput | number
+    ten_phim?: StringFieldUpdateOperationsInput | string
+    trailer?: NullableStringFieldUpdateOperationsInput | string | null
+    hinh_anh?: NullableStringFieldUpdateOperationsInput | string | null
+    mo_ta?: NullableStringFieldUpdateOperationsInput | string | null
+    ngay_khoi_chieu?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    danh_gia?: NullableIntFieldUpdateOperationsInput | number | null
+    hot?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    dang_chieu?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    sap_chieu?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
 

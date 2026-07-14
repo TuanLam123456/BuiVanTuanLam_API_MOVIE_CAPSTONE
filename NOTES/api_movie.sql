@@ -84,8 +84,18 @@ CREATE TABLE `NguoiDung` (
   `so_dt` varchar(20) DEFAULT NULL,
   `mat_khau` varchar(255) NOT NULL,
   `loai_nguoi_dung` varchar(100) DEFAULT NULL,
+  `ma_nhom` varchar(4) NOT NULL DEFAULT 'GP01',
   PRIMARY KEY (`tai_khoan`),
-  UNIQUE KEY `email` (`email`)
+  UNIQUE KEY `email` (`email`),
+  KEY `fk_nguoidung_nhom` (`ma_nhom`),
+  CONSTRAINT `fk_nguoidung_nhom` FOREIGN KEY (`ma_nhom`) REFERENCES `Nhom` (`ma_nhom`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+DROP TABLE IF EXISTS `Nhom`;
+CREATE TABLE `Nhom` (
+  `ma_nhom` varchar(4) NOT NULL,
+  `ten_nhom` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`ma_nhom`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 DROP TABLE IF EXISTS `Phim`;
@@ -100,7 +110,10 @@ CREATE TABLE `Phim` (
   `hot` tinyint(1) DEFAULT '0',
   `dang_chieu` tinyint(1) DEFAULT '0',
   `sap_chieu` tinyint(1) DEFAULT '0',
-  PRIMARY KEY (`ma_phim`)
+  `ma_nhom` varchar(4) NOT NULL DEFAULT 'GP01',
+  PRIMARY KEY (`ma_phim`),
+  KEY `fk_phim_nhom` (`ma_nhom`),
+  CONSTRAINT `fk_phim_nhom` FOREIGN KEY (`ma_nhom`) REFERENCES `Nhom` (`ma_nhom`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 DROP TABLE IF EXISTS `RapPhim`;
@@ -362,26 +375,42 @@ INSERT INTO `LichChieu` (`ma_lich_chieu`, `ma_rap`, `ma_phim`, `ngay_gio_chieu`,
 (34, 3, 7, '2026-07-25 20:30:00', 110000),
 (35, 5, 8, '2026-08-01 18:00:00', 90000),
 (36, 9, 8, '2026-08-01 20:30:00', 100000);
-INSERT INTO `NguoiDung` (`tai_khoan`, `ho_ten`, `email`, `so_dt`, `mat_khau`, `loai_nguoi_dung`) VALUES
-('admin', 'Quản Trị Viên', 'admin@movie.com', '0900000001', '123456', 'QuanTri'),
-('buituanlam', 'Bùi Tuấn Lâm', 'buituanlam@gmail.com', '0907777777', '123456', 'KhachHang'),
-('hoangminhduc', 'Hoàng Minh Đức', 'hoangminhduc@gmail.com', '0905555555', '123456', 'KhachHang'),
-('levancuong', 'Lê Văn Cường', 'levancuong@gmail.com', '0903333333', '123456', 'KhachHang'),
-('nguyenvana', 'Nguyễn Văn An', 'nguyenvana@gmail.com', '0901111111', '123456', 'KhachHang'),
-('phamthiduyen', 'Phạm Thị Duyên', 'phamthiduyen@gmail.com', '0904444444', '123456', 'KhachHang'),
-('tranthibich', 'Trần Thị Bích', 'tranthibich@gmail.com', '0902222222', '123456', 'KhachHang'),
-('vothihuong', 'Võ Thị Hương', 'vothihuong@gmail.com', '0906666666', '123456', 'KhachHang');
-INSERT INTO `Phim` (`ma_phim`, `ten_phim`, `trailer`, `hinh_anh`, `mo_ta`, `ngay_khoi_chieu`, `danh_gia`, `hot`, `dang_chieu`, `sap_chieu`) VALUES
-(1, 'Avengers: Endgame', 'https://www.youtube.com/watch?v=TcMBFSGVi1c', 'https://example.com/images/avengers-endgame.jpg', 'Các siêu anh hùng còn sống sót tập hợp để đảo ngược hậu quả do Thanos gây ra.', '2019-04-26', 10, 1, 1, 0),
-(2, 'Spider-Man: No Way Home', 'https://www.youtube.com/watch?v=JfVOs4VSpmA', 'https://example.com/images/spiderman-no-way-home.jpg', 'Peter Parker phải đối mặt với những kẻ thù đến từ nhiều vũ trụ khác nhau.', '2021-12-17', 9, 1, 1, 0),
-(3, 'Dune: Part Two', 'https://www.youtube.com/watch?v=Way9Dexny3w', 'https://example.com/images/dune-part-two.jpg', 'Paul Atreides tiếp tục hành trình cùng Chani và người Fremen.', '2024-03-01', 9, 1, 1, 0),
-(4, 'Godzilla x Kong: The New Empire', 'https://www.youtube.com/watch?v=lV1OOlGwExM', 'https://example.com/images/godzilla-kong.jpg', 'Godzilla và Kong hợp sức chống lại một mối đe dọa bí ẩn.', '2024-03-29', 8, 0, 1, 0),
-(5, 'Kung Fu Panda 4', 'https://www.youtube.com/watch?v=_inKs4eeHiI', 'https://example.com/images/kung-fu-panda-4.jpg', 'Po chuẩn bị trở thành thủ lĩnh tinh thần của Thung lũng Bình Yên.', '2024-03-08', 8, 1, 1, 0),
-(6, 'Inside Out 2', 'https://www.youtube.com/watch?v=LEjhY15eCx0', 'https://example.com/images/inside-out-2.jpg', 'Riley bước vào tuổi thiếu niên và xuất hiện thêm nhiều cảm xúc mới.', '2024-06-14', 9, 1, 1, 0),
-(7, 'Deadpool & Wolverine', 'https://www.youtube.com/watch?v=73_1biulkYk', 'https://example.com/images/deadpool-wolverine.jpg', 'Deadpool hợp tác cùng Wolverine trong một nhiệm vụ xuyên đa vũ trụ.', '2024-07-26', 9, 1, 0, 1),
-(8, 'Moana 2', 'https://www.youtube.com/watch?v=hDZ7y8RP5HE', 'https://example.com/images/moana-2.jpg', 'Moana tiếp tục cuộc phiêu lưu mới trên đại dương.', '2024-11-27', 8, 0, 0, 1),
-(9, 'The Batman', 'https://www.youtube.com/watch?v=mqqft2x_Aa4', 'https://example.com/images/the-batman.jpg', 'Batman điều tra một chuỗi án mạng bí ẩn tại thành phố Gotham.', '2022-03-04', 9, 0, 1, 0),
-(10, 'Avatar: The Way of Water', 'https://www.youtube.com/watch?v=d9MyW72ELq0', 'https://example.com/images/avatar-the-way-of-water.jpg', 'Gia đình Jake Sully phải chiến đấu để bảo vệ Pandora.', '2022-12-16', 9, 1, 1, 0);
+INSERT INTO `NguoiDung` (`tai_khoan`, `ho_ten`, `email`, `so_dt`, `mat_khau`, `loai_nguoi_dung`, `ma_nhom`) VALUES
+('admin', 'Quản Trị Viên', 'admin@movie.com', '0900000001', '123456', 'QuanTri', 'GP01'),
+('buituanlam', 'Bùi Tuấn Lâm', 'buituanlam@gmail.com', '0907777777', '123456', 'KhachHang', 'GP01'),
+('hoangminhduc', 'Hoàng Minh Đức', 'hoangminhduc@gmail.com', '0905555555', '123456', 'KhachHang', 'GP01'),
+('levancuong', 'Lê Văn Cường', 'levancuong@gmail.com', '0903333333', '123456', 'KhachHang', 'GP01'),
+('nguyenvana', 'Nguyễn Văn An', 'nguyenvana@gmail.com', '0901111111', '123456', 'KhachHang', 'GP01'),
+('phamthiduyen', 'Phạm Thị Duyên', 'phamthiduyen@gmail.com', '0904444444', '123456', 'KhachHang', 'GP01'),
+('tranthibich', 'Trần Thị Bích', 'tranthibich@gmail.com', '0902222222', '123456', 'KhachHang', 'GP01'),
+('vothihuong', 'Võ Thị Hương', 'vothihuong@gmail.com', '0906666666', '123456', 'KhachHang', 'GP01');
+INSERT INTO `Nhom` (`ma_nhom`, `ten_nhom`) VALUES
+('GP01', 'Nhóm GP01'),
+('GP02', 'Nhóm GP02'),
+('GP03', 'Nhóm GP03'),
+('GP04', 'Nhóm GP04'),
+('GP05', 'Nhóm GP05'),
+('GP06', 'Nhóm GP06'),
+('GP07', 'Nhóm GP07'),
+('GP08', 'Nhóm GP08'),
+('GP09', 'Nhóm GP09'),
+('GP10', 'Nhóm GP10'),
+('GP11', 'Nhóm GP11'),
+('GP12', 'Nhóm GP12'),
+('GP13', 'Nhóm GP13'),
+('GP14', 'Nhóm GP14'),
+('GP15', 'Nhóm GP15');
+INSERT INTO `Phim` (`ma_phim`, `ten_phim`, `trailer`, `hinh_anh`, `mo_ta`, `ngay_khoi_chieu`, `danh_gia`, `hot`, `dang_chieu`, `sap_chieu`, `ma_nhom`) VALUES
+(1, 'Avengers: Endgame', 'https://www.youtube.com/watch?v=TcMBFSGVi1c', 'https://example.com/images/avengers-endgame.jpg', 'Các siêu anh hùng còn sống sót tập hợp để đảo ngược hậu quả do Thanos gây ra.', '2019-04-26', 10, 1, 1, 0, 'GP01'),
+(2, 'Spider-Man: No Way Home', 'https://www.youtube.com/watch?v=JfVOs4VSpmA', 'https://example.com/images/spiderman-no-way-home.jpg', 'Peter Parker phải đối mặt với những kẻ thù đến từ nhiều vũ trụ khác nhau.', '2021-12-17', 9, 1, 1, 0, 'GP01'),
+(3, 'Dune: Part Two', 'https://www.youtube.com/watch?v=Way9Dexny3w', 'https://example.com/images/dune-part-two.jpg', 'Paul Atreides tiếp tục hành trình cùng Chani và người Fremen.', '2024-03-01', 9, 1, 1, 0, 'GP01'),
+(4, 'Godzilla x Kong: The New Empire', 'https://www.youtube.com/watch?v=lV1OOlGwExM', 'https://example.com/images/godzilla-kong.jpg', 'Godzilla và Kong hợp sức chống lại một mối đe dọa bí ẩn.', '2024-03-29', 8, 0, 1, 0, 'GP01'),
+(5, 'Kung Fu Panda 4', 'https://www.youtube.com/watch?v=_inKs4eeHiI', 'https://example.com/images/kung-fu-panda-4.jpg', 'Po chuẩn bị trở thành thủ lĩnh tinh thần của Thung lũng Bình Yên.', '2024-03-08', 8, 1, 1, 0, 'GP01'),
+(6, 'Inside Out 2', 'https://www.youtube.com/watch?v=LEjhY15eCx0', 'https://example.com/images/inside-out-2.jpg', 'Riley bước vào tuổi thiếu niên và xuất hiện thêm nhiều cảm xúc mới.', '2024-06-14', 9, 1, 1, 0, 'GP01'),
+(7, 'Deadpool & Wolverine', 'https://www.youtube.com/watch?v=73_1biulkYk', 'https://example.com/images/deadpool-wolverine.jpg', 'Deadpool hợp tác cùng Wolverine trong một nhiệm vụ xuyên đa vũ trụ.', '2024-07-26', 9, 1, 0, 1, 'GP01'),
+(8, 'Moana 2', 'https://www.youtube.com/watch?v=hDZ7y8RP5HE', 'https://example.com/images/moana-2.jpg', 'Moana tiếp tục cuộc phiêu lưu mới trên đại dương.', '2024-11-27', 8, 0, 0, 1, 'GP01'),
+(9, 'The Batman', 'https://www.youtube.com/watch?v=mqqft2x_Aa4', 'https://example.com/images/the-batman.jpg', 'Batman điều tra một chuỗi án mạng bí ẩn tại thành phố Gotham.', '2022-03-04', 9, 0, 1, 0, 'GP01'),
+(10, 'Avatar: The Way of Water', 'https://www.youtube.com/watch?v=d9MyW72ELq0', 'https://example.com/images/avatar-the-way-of-water.jpg', 'Gia đình Jake Sully phải chiến đấu để bảo vệ Pandora.', '2022-12-16', 9, 1, 1, 0, 'GP01');
 INSERT INTO `RapPhim` (`ma_rap`, `ten_rap`, `ma_cum_rap`) VALUES
 (1, 'Rạp 1', 1),
 (2, 'Rạp 2', 1),

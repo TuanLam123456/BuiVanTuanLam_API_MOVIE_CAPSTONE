@@ -167,7 +167,8 @@ exports.Prisma.NguoiDungScalarFieldEnum = {
   email: 'email',
   so_dt: 'so_dt',
   mat_khau: 'mat_khau',
-  loai_nguoi_dung: 'loai_nguoi_dung'
+  loai_nguoi_dung: 'loai_nguoi_dung',
+  ma_nhom: 'ma_nhom'
 };
 
 exports.Prisma.PhimScalarFieldEnum = {
@@ -180,13 +181,19 @@ exports.Prisma.PhimScalarFieldEnum = {
   danh_gia: 'danh_gia',
   hot: 'hot',
   dang_chieu: 'dang_chieu',
-  sap_chieu: 'sap_chieu'
+  sap_chieu: 'sap_chieu',
+  ma_nhom: 'ma_nhom'
 };
 
 exports.Prisma.RapPhimScalarFieldEnum = {
   ma_rap: 'ma_rap',
   ten_rap: 'ten_rap',
   ma_cum_rap: 'ma_cum_rap'
+};
+
+exports.Prisma.NhomScalarFieldEnum = {
+  ma_nhom: 'ma_nhom',
+  ten_nhom: 'ten_nhom'
 };
 
 exports.Prisma.SortOrder = {
@@ -228,18 +235,25 @@ exports.Prisma.NguoiDungOrderByRelevanceFieldEnum = {
   email: 'email',
   so_dt: 'so_dt',
   mat_khau: 'mat_khau',
-  loai_nguoi_dung: 'loai_nguoi_dung'
+  loai_nguoi_dung: 'loai_nguoi_dung',
+  ma_nhom: 'ma_nhom'
 };
 
 exports.Prisma.PhimOrderByRelevanceFieldEnum = {
   ten_phim: 'ten_phim',
   trailer: 'trailer',
   hinh_anh: 'hinh_anh',
-  mo_ta: 'mo_ta'
+  mo_ta: 'mo_ta',
+  ma_nhom: 'ma_nhom'
 };
 
 exports.Prisma.RapPhimOrderByRelevanceFieldEnum = {
   ten_rap: 'ten_rap'
+};
+
+exports.Prisma.NhomOrderByRelevanceFieldEnum = {
+  ma_nhom: 'ma_nhom',
+  ten_nhom: 'ten_nhom'
 };
 
 
@@ -252,7 +266,8 @@ exports.Prisma.ModelName = {
   LichChieu: 'LichChieu',
   NguoiDung: 'NguoiDung',
   Phim: 'Phim',
-  RapPhim: 'RapPhim'
+  RapPhim: 'RapPhim',
+  Nhom: 'Nhom'
 };
 
 /**
