@@ -16,6 +16,7 @@ export const nguoiDungController = {
     const response = responseSuccess(result, `Đăng ký người dùng thành công`);
     res.status(response.statusCode).json(response);
   },
+
   // Đăng nhập controller
   async login(req, res, next) {
     const { accessToken, refreshToken, nguoiDung } =
@@ -30,6 +31,7 @@ export const nguoiDungController = {
     );
     res.status(response.statusCode).json(response);
   },
+
   // Lấy danh sách người dùng controller
   async getUsers(req, res, next) {
     const result = await nguoiDungService.getUsers(req);
@@ -41,6 +43,7 @@ export const nguoiDungController = {
 
     res.status(response.statusCode).json(response);
   },
+
   // Lấy danh sách người dùng phân trang controller
   async getUsersPagination(req, res, next) {
     const result = await nguoiDungService.getUsersPagination(req);
@@ -52,12 +55,25 @@ export const nguoiDungController = {
 
     res.status(response.statusCode).json(response);
   },
+
   // Tìm kiếm người dùng bằng từ khóa controller
   async searchUsers(req, res, next) {
     const result = await nguoiDungService.searchUsers(req);
 
     const response = responseSuccess(result, "Tìm kiếm người dùng thành công");
-    
+
     res.status(response.statusCode).json(response);
   },
+
+  // Tìm kiếm phân trang người dùng bằng từ khóa controller
+  async searchUsersPagination(req, res, next) {
+  const result = await nguoiDungService.searchUsersPagination(req);
+
+  const response = responseSuccess(
+    result,
+    "Tìm kiếm người dùng phân trang thành công",
+  );
+
+  res.status(response.statusCode).json(response);
+},
 };

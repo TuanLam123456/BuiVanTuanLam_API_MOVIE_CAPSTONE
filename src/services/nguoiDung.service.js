@@ -239,4 +239,84 @@ export const nguoiDungService = {
 
     return danhSachNguoiDung;
   },
+
+  // Tìm kiếm phân trang người dùng bằng từ khóa service
+  async searchUsersPagination(req) {
+    let { keyword } = req.query;
+
+    if (!keyword || !keyword.trim()) {
+      throw new BadRequestError("Vui lòng nhập từ khóa tìm kiếm");
+    }
+
+    keyword = keyword.trim();
+
+    // Dùng helper để xử lý page, pageSize và index
+    const { page, pageSize, index } = buildQueryPrismaHelper(req);
+
+    // Chuyển keyword sang số để tìm theo tài khoản
+    const taiKhoan = Number(keyword);
+
+    // Điều kiện tìm kiếm chung
+    const searchConditions = [
+      {
+        ho_ten: {
+          contains: keyword,
+        },
+      },
+      {
+        email: {
+          contains: keyword,
+        },
+      },
+      {
+        so_dt: {
+          contains: keyword,
+        },
+      },
+    ];
+
+    // Nếu keyword là số thì tìm thêm theo tài khoản
+    if (!Number.isNaN(taiKhoan)) {
+      searchConditions.push({
+        tai_khoan: taiKhoan,
+      });
+    }
+
+    const whereCondition = {
+      OR: searchConditions,
+    };
+
+    const [danhSachNguoiDung, totalItem] = await prisma.$transaction([
+      prisma.nguoiDung.findMany({
+        where: whereCondition,
+        skip: index,
+        take: pageSize,
+        select: {
+          tai_khoan: true,
+          ho_ten: true,
+          email: true,
+          so_dt: true,
+          loai_nguoi_dung: true,
+        },
+        orderBy: {
+          tai_khoan: "desc",
+        },
+      }),
+
+      prisma.nguoiDung.count({
+        where: whereCondition,
+      }),
+    ]);
+
+    const totalPage = Math.ceil(totalItem / pageSize);
+
+    return {
+      keyword,
+      page,
+      pageSize,
+      totalItem,
+      totalPage,
+      items: danhSachNguoiDung,
+    };
+  },
 };
