@@ -10,7 +10,7 @@ import {
 } from "./../common/helpers/jwt.helper.js";
 import { buildQueryPrismaHelper } from "./../common/helpers/build-query-prisma.helper.js";
 export const nguoiDungService = {
-  // đăng ký Service
+  // Đăng ký Service
   async dangKy(req) {
     const { tai_khoan, mat_khau, email, so_dt, ma_nhom, ho_ten } = req.body;
 
@@ -60,7 +60,7 @@ export const nguoiDungService = {
 
     return nguoiDungMoi;
   },
-  // đăng nhập Service
+  // Đăng ký Service
   async dangNhap(req) {
     const { tai_khoan, mat_khau } = req.body;
 
@@ -105,7 +105,60 @@ export const nguoiDungService = {
     return {
       accessToken,
       refreshToken,
-      nguoiDung
+      nguoiDung,
+    };
+  },
+  // Lấy danh sách người dùng Service
+  async layDanhSachNguoiDung(req) {
+    const { ma_nhom, tu_khoa } = req.query;
+
+    if (!ma_nhom?.trim()) {
+      throw new BadRequestError("Mã nhóm không được để trống");
     }
+
+    const keyword = tu_khoa?.trim();
+
+    const danhSachNguoiDung = await prisma.nguoiDung.findMany({
+      where: {
+        ma_nhom: ma_nhom.trim(),
+        ...(keyword && {
+          OR: [
+            {
+              tai_khoan: {
+                contains: keyword,
+              },
+            },
+            {
+              email: {
+                contains: keyword,
+              },
+            },
+            {
+              so_dt: {
+                contains: keyword,
+              },
+            },
+            {
+              ho_ten: {
+                contains: keyword,
+              },
+            },
+          ],
+        }),
+      },
+      select: {
+        tai_khoan: true,
+        ho_ten: true,
+        email: true,
+        so_dt: true,
+        loai_nguoi_dung: true,
+        ma_nhom: true,
+      },
+      orderBy: {
+        tai_khoan: "asc",
+      },
+    });
+
+    return danhSachNguoiDung;
   },
 };

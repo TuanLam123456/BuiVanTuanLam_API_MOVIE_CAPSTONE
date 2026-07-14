@@ -10,4 +10,11 @@ nguoiDungRouter.post("/dangKy", nguoiDungController.dangKy);
 // Đăng nhập Router
 nguoiDungRouter.post("/dangNhap", nguoiDungController.dangNhap);
 
+// Lấy danh sách người dùng Router
+nguoiDungRouter.get(
+  "/layDanhSachNguoiDung",
+  authCookie,
+  nguoiDungController.layDanhSachNguoiDung,
+);
+
 export default nguoiDungRouter;

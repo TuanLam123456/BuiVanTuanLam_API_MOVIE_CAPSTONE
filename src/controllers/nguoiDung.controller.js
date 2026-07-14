@@ -32,4 +32,15 @@ export const nguoiDungController = {
     );
     res.status(response.statusCode).json(response);
   },
+  // Lấy danh sách người dùng Controller
+  async layDanhSachNguoiDung(req, res, next) {
+    const result = await nguoiDungService.layDanhSachNguoiDung(req);
+
+    const response = responseSuccess(
+      result,
+      "Lấy danh sách người dùng thành công",
+    );
+
+    res.status(response.statusCode).json(response);
+  },
 };
