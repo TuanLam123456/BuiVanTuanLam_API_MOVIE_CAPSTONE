@@ -4,6 +4,7 @@ import { authCookie } from "../common/middleware/authCookie.middleware.js";
 
 const nguoiDungRouter = express.Router();
 
-
+// Đăng ký Router
+nguoiDungRouter.post("/dangKy", nguoiDungController.dangKy);
 
 export default nguoiDungRouter;
