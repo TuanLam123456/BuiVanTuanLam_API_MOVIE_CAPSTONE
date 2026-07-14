@@ -30,7 +30,7 @@ model CumRap {
 
 model DatVe {
   ma_dat_ve     Int       @id @default(autoincrement())
-  tai_khoan     Int
+  tai_khoan     String    @db.VarChar(100)
   ma_lich_chieu Int
   ma_ghe        Int
   Ghe           Ghe       @relation(fields: [ma_ghe], references: [ma_ghe], onDelete: Cascade, map: "fk_datve_ghe")
@@ -50,7 +50,7 @@ model Ghe {
   DatVe    DatVe[]
   RapPhim  RapPhim @relation(fields: [ma_rap], references: [ma_rap], onDelete: Cascade, map: "fk_ghe_rapphim")
 
-  @@index([ma_rap], map: "fk_ghe_rapphim")
+  @@unique([ma_rap, ten_ghe], map: "unique_ghe_trong_rap")
 }
 
 model HeThongRap {
@@ -75,7 +75,7 @@ model LichChieu {
 }
 
 model NguoiDung {
-  tai_khoan       Int     @id @default(autoincrement())
+  tai_khoan       String  @id @db.VarChar(100)
   ho_ten          String  @db.VarChar(255)
   email           String  @unique(map: "email") @db.VarChar(255)
   so_dt           String? @db.VarChar(20)

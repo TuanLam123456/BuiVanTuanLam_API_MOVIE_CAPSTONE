@@ -1,625 +1,410 @@
-CREATE DATABASE IF NOT EXISTS api_movie
-CHARACTER SET utf8mb4
-COLLATE utf8mb4_unicode_ci;
+﻿/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-USE api_movie;
+DROP TABLE IF EXISTS `Banner`;
+CREATE TABLE `Banner` (
+  `ma_banner` int NOT NULL AUTO_INCREMENT,
+  `ma_phim` int NOT NULL,
+  `hinh_anh` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ma_banner`),
+  KEY `fk_banner_phim` (`ma_phim`),
+  CONSTRAINT `fk_banner_phim` FOREIGN KEY (`ma_phim`) REFERENCES `Phim` (`ma_phim`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- =========================
--- Bảng Phim
--- =========================
-CREATE TABLE Phim (
-    ma_phim INT AUTO_INCREMENT PRIMARY KEY,
-    ten_phim VARCHAR(255) NOT NULL,
-    trailer VARCHAR(255),
-    hinh_anh VARCHAR(255),
-    mo_ta TEXT,
-    ngay_khoi_chieu DATE,
-    danh_gia INT,
-    hot BOOLEAN DEFAULT FALSE,
-    dang_chieu BOOLEAN DEFAULT FALSE,
-    sap_chieu BOOLEAN DEFAULT FALSE
-);
+DROP TABLE IF EXISTS `CumRap`;
+CREATE TABLE `CumRap` (
+  `ma_cum_rap` int NOT NULL AUTO_INCREMENT,
+  `ten_cum_rap` varchar(255) NOT NULL,
+  `dia_chi` varchar(255) DEFAULT NULL,
+  `ma_he_thong_rap` int NOT NULL,
+  PRIMARY KEY (`ma_cum_rap`),
+  KEY `fk_cumrap_hethongrap` (`ma_he_thong_rap`),
+  CONSTRAINT `fk_cumrap_hethongrap` FOREIGN KEY (`ma_he_thong_rap`) REFERENCES `HeThongRap` (`ma_he_thong_rap`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- =========================
--- Bảng Banner
--- =========================
-CREATE TABLE Banner (
-    ma_banner INT AUTO_INCREMENT PRIMARY KEY,
-    ma_phim INT NOT NULL,
-    hinh_anh VARCHAR(255),
+DROP TABLE IF EXISTS `DatVe`;
+CREATE TABLE `DatVe` (
+  `ma_dat_ve` int NOT NULL AUTO_INCREMENT,
+  `tai_khoan` varchar(100) NOT NULL,
+  `ma_lich_chieu` int NOT NULL,
+  `ma_ghe` int NOT NULL,
+  PRIMARY KEY (`ma_dat_ve`),
+  UNIQUE KEY `unique_ghe_trong_lich_chieu` (`ma_lich_chieu`,`ma_ghe`),
+  KEY `fk_datve_nguoidung` (`tai_khoan`),
+  KEY `fk_datve_ghe` (`ma_ghe`),
+  CONSTRAINT `fk_datve_ghe` FOREIGN KEY (`ma_ghe`) REFERENCES `Ghe` (`ma_ghe`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_datve_lichchieu` FOREIGN KEY (`ma_lich_chieu`) REFERENCES `LichChieu` (`ma_lich_chieu`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_datve_nguoidung` FOREIGN KEY (`tai_khoan`) REFERENCES `NguoiDung` (`tai_khoan`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-    CONSTRAINT fk_banner_phim
-        FOREIGN KEY (ma_phim)
-        REFERENCES Phim(ma_phim)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
-);
+DROP TABLE IF EXISTS `Ghe`;
+CREATE TABLE `Ghe` (
+  `ma_ghe` int NOT NULL AUTO_INCREMENT,
+  `ten_ghe` varchar(100) NOT NULL,
+  `loai_ghe` varchar(100) DEFAULT NULL,
+  `ma_rap` int NOT NULL,
+  PRIMARY KEY (`ma_ghe`),
+  UNIQUE KEY `unique_ghe_trong_rap` (`ma_rap`,`ten_ghe`),
+  CONSTRAINT `fk_ghe_rapphim` FOREIGN KEY (`ma_rap`) REFERENCES `RapPhim` (`ma_rap`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=161 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- =========================
--- Bảng Hệ Thống Rạp
--- =========================
-CREATE TABLE HeThongRap (
-    ma_he_thong_rap INT AUTO_INCREMENT PRIMARY KEY,
-    ten_he_thong_rap VARCHAR(255) NOT NULL,
-    logo VARCHAR(255)
-);
+DROP TABLE IF EXISTS `HeThongRap`;
+CREATE TABLE `HeThongRap` (
+  `ma_he_thong_rap` int NOT NULL AUTO_INCREMENT,
+  `ten_he_thong_rap` varchar(255) NOT NULL,
+  `logo` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ma_he_thong_rap`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- =========================
--- Bảng Cụm Rạp
--- =========================
-CREATE TABLE CumRap (
-    ma_cum_rap INT AUTO_INCREMENT PRIMARY KEY,
-    ten_cum_rap VARCHAR(255) NOT NULL,
-    dia_chi VARCHAR(255),
-    ma_he_thong_rap INT NOT NULL,
+DROP TABLE IF EXISTS `LichChieu`;
+CREATE TABLE `LichChieu` (
+  `ma_lich_chieu` int NOT NULL AUTO_INCREMENT,
+  `ma_rap` int NOT NULL,
+  `ma_phim` int NOT NULL,
+  `ngay_gio_chieu` datetime NOT NULL,
+  `gia_ve` int NOT NULL,
+  PRIMARY KEY (`ma_lich_chieu`),
+  KEY `fk_lichchieu_rapphim` (`ma_rap`),
+  KEY `fk_lichchieu_phim` (`ma_phim`),
+  CONSTRAINT `fk_lichchieu_phim` FOREIGN KEY (`ma_phim`) REFERENCES `Phim` (`ma_phim`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_lichchieu_rapphim` FOREIGN KEY (`ma_rap`) REFERENCES `RapPhim` (`ma_rap`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-    CONSTRAINT fk_cumrap_hethongrap
-        FOREIGN KEY (ma_he_thong_rap)
-        REFERENCES HeThongRap(ma_he_thong_rap)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
-);
+DROP TABLE IF EXISTS `NguoiDung`;
+CREATE TABLE `NguoiDung` (
+  `tai_khoan` varchar(100) NOT NULL,
+  `ho_ten` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `so_dt` varchar(20) DEFAULT NULL,
+  `mat_khau` varchar(255) NOT NULL,
+  `loai_nguoi_dung` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`tai_khoan`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- =========================
--- Bảng Rạp Phim
--- =========================
-CREATE TABLE RapPhim (
-    ma_rap INT AUTO_INCREMENT PRIMARY KEY,
-    ten_rap VARCHAR(255) NOT NULL,
-    ma_cum_rap INT NOT NULL,
+DROP TABLE IF EXISTS `Phim`;
+CREATE TABLE `Phim` (
+  `ma_phim` int NOT NULL AUTO_INCREMENT,
+  `ten_phim` varchar(255) NOT NULL,
+  `trailer` varchar(255) DEFAULT NULL,
+  `hinh_anh` varchar(255) DEFAULT NULL,
+  `mo_ta` text,
+  `ngay_khoi_chieu` date DEFAULT NULL,
+  `danh_gia` int DEFAULT NULL,
+  `hot` tinyint(1) DEFAULT '0',
+  `dang_chieu` tinyint(1) DEFAULT '0',
+  `sap_chieu` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`ma_phim`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-    CONSTRAINT fk_rapphim_cumrap
-        FOREIGN KEY (ma_cum_rap)
-        REFERENCES CumRap(ma_cum_rap)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
-);
+DROP TABLE IF EXISTS `RapPhim`;
+CREATE TABLE `RapPhim` (
+  `ma_rap` int NOT NULL AUTO_INCREMENT,
+  `ten_rap` varchar(255) NOT NULL,
+  `ma_cum_rap` int NOT NULL,
+  PRIMARY KEY (`ma_rap`),
+  KEY `fk_rapphim_cumrap` (`ma_cum_rap`),
+  CONSTRAINT `fk_rapphim_cumrap` FOREIGN KEY (`ma_cum_rap`) REFERENCES `CumRap` (`ma_cum_rap`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- =========================
--- Bảng Ghế
--- =========================
-CREATE TABLE Ghe (
-    ma_ghe INT AUTO_INCREMENT PRIMARY KEY,
-    ten_ghe VARCHAR(100) NOT NULL,
-    loai_ghe VARCHAR(100),
-    ma_rap INT NOT NULL,
+INSERT INTO `Banner` (`ma_banner`, `ma_phim`, `hinh_anh`) VALUES
+(1, 1, 'https://example.com/banners/avengers-endgame-banner.jpg'),
+(2, 2, 'https://example.com/banners/spiderman-banner.jpg'),
+(3, 3, 'https://example.com/banners/dune-part-two-banner.jpg'),
+(4, 5, 'https://example.com/banners/kung-fu-panda-4-banner.jpg'),
+(5, 6, 'https://example.com/banners/inside-out-2-banner.jpg'),
+(6, 7, 'https://example.com/banners/deadpool-wolverine-banner.jpg'),
+(7, 10, 'https://example.com/banners/avatar-banner.jpg');
+INSERT INTO `CumRap` (`ma_cum_rap`, `ten_cum_rap`, `dia_chi`, `ma_he_thong_rap`) VALUES
+(1, 'CGV Vincom Đồng Khởi', '72 Lê Thánh Tôn, Quận 1, TP. Hồ Chí Minh', 1),
+(2, 'CGV Aeon Tân Phú', '30 Bờ Bao Tân Thắng, Quận Tân Phú, TP. Hồ Chí Minh', 1),
+(3, 'Lotte Cinema Gò Vấp', '242 Nguyễn Văn Lượng, Quận Gò Vấp, TP. Hồ Chí Minh', 2),
+(4, 'Lotte Cinema Nam Sài Gòn', '469 Nguyễn Hữu Thọ, Quận 7, TP. Hồ Chí Minh', 2),
+(5, 'Galaxy Nguyễn Du', '116 Nguyễn Du, Quận 1, TP. Hồ Chí Minh', 3),
+(6, 'Galaxy Kinh Dương Vương', '718bis Kinh Dương Vương, Quận 6, TP. Hồ Chí Minh', 3),
+(7, 'BHD Star Bitexco', '2 Hải Triều, Quận 1, TP. Hồ Chí Minh', 4),
+(8, 'BHD Star Phạm Hùng', 'C4 Phạm Hùng, Quận 8, TP. Hồ Chí Minh', 4);
+INSERT INTO `DatVe` (`ma_dat_ve`, `tai_khoan`, `ma_lich_chieu`, `ma_ghe`) VALUES
+(1, 'nguyenvana', 1, 1),
+(2, 'nguyenvana', 1, 2),
+(3, 'tranthibich', 1, 3),
+(4, 'levancuong', 2, 5),
+(5, 'levancuong', 2, 6),
+(6, 'phamthiduyen', 2, 9),
+(7, 'hoangminhduc', 3, 11),
+(8, 'hoangminhduc', 3, 12),
+(9, 'vothihuong', 3, 19),
+(10, 'buituanlam', 5, 21),
+(11, 'buituanlam', 5, 22),
+(12, 'nguyenvana', 5, 29),
+(13, 'tranthibich', 7, 31),
+(14, 'tranthibich', 7, 32),
+(15, 'levancuong', 7, 39),
+(16, 'phamthiduyen', 9, 41),
+(17, 'phamthiduyen', 9, 42),
+(18, 'hoangminhduc', 12, 51),
+(19, 'vothihuong', 12, 52),
+(20, 'buituanlam', 12, 59),
+(21, 'nguyenvana', 17, 81),
+(22, 'tranthibich', 17, 82),
+(23, 'levancuong', 23, 111),
+(24, 'levancuong', 23, 112),
+(25, 'phamthiduyen', 23, 119),
+(26, 'hoangminhduc', 29, 141),
+(27, 'vothihuong', 29, 142),
+(28, 'buituanlam', 29, 149);
+INSERT INTO `Ghe` (`ma_ghe`, `ten_ghe`, `loai_ghe`, `ma_rap`) VALUES
+(1, 'A01', 'Thuong', 1),
+(2, 'A02', 'Thuong', 1),
+(3, 'A03', 'Thuong', 1),
+(4, 'A04', 'Thuong', 1),
+(5, 'A05', 'Thuong', 1),
+(6, 'A06', 'Thuong', 1),
+(7, 'A07', 'Thuong', 1),
+(8, 'A08', 'Thuong', 1),
+(9, 'A09', 'Vip', 1),
+(10, 'A10', 'Vip', 1),
+(11, 'A01', 'Thuong', 2),
+(12, 'A02', 'Thuong', 2),
+(13, 'A03', 'Thuong', 2),
+(14, 'A04', 'Thuong', 2),
+(15, 'A05', 'Thuong', 2),
+(16, 'A06', 'Thuong', 2),
+(17, 'A07', 'Thuong', 2),
+(18, 'A08', 'Thuong', 2),
+(19, 'A09', 'Vip', 2),
+(20, 'A10', 'Vip', 2),
+(21, 'A01', 'Thuong', 3),
+(22, 'A02', 'Thuong', 3),
+(23, 'A03', 'Thuong', 3),
+(24, 'A04', 'Thuong', 3),
+(25, 'A05', 'Thuong', 3),
+(26, 'A06', 'Thuong', 3),
+(27, 'A07', 'Thuong', 3),
+(28, 'A08', 'Thuong', 3),
+(29, 'A09', 'Vip', 3),
+(30, 'A10', 'Vip', 3),
+(31, 'A01', 'Thuong', 4),
+(32, 'A02', 'Thuong', 4),
+(33, 'A03', 'Thuong', 4),
+(34, 'A04', 'Thuong', 4),
+(35, 'A05', 'Thuong', 4),
+(36, 'A06', 'Thuong', 4),
+(37, 'A07', 'Thuong', 4),
+(38, 'A08', 'Thuong', 4),
+(39, 'A09', 'Vip', 4),
+(40, 'A10', 'Vip', 4),
+(41, 'A01', 'Thuong', 5),
+(42, 'A02', 'Thuong', 5),
+(43, 'A03', 'Thuong', 5),
+(44, 'A04', 'Thuong', 5),
+(45, 'A05', 'Thuong', 5),
+(46, 'A06', 'Thuong', 5),
+(47, 'A07', 'Thuong', 5),
+(48, 'A08', 'Thuong', 5),
+(49, 'A09', 'Vip', 5),
+(50, 'A10', 'Vip', 5),
+(51, 'A01', 'Thuong', 6),
+(52, 'A02', 'Thuong', 6),
+(53, 'A03', 'Thuong', 6),
+(54, 'A04', 'Thuong', 6),
+(55, 'A05', 'Thuong', 6),
+(56, 'A06', 'Thuong', 6),
+(57, 'A07', 'Thuong', 6),
+(58, 'A08', 'Thuong', 6),
+(59, 'A09', 'Vip', 6),
+(60, 'A10', 'Vip', 6),
+(61, 'A01', 'Thuong', 7),
+(62, 'A02', 'Thuong', 7),
+(63, 'A03', 'Thuong', 7),
+(64, 'A04', 'Thuong', 7),
+(65, 'A05', 'Thuong', 7),
+(66, 'A06', 'Thuong', 7),
+(67, 'A07', 'Thuong', 7),
+(68, 'A08', 'Thuong', 7),
+(69, 'A09', 'Vip', 7),
+(70, 'A10', 'Vip', 7),
+(71, 'A01', 'Thuong', 8),
+(72, 'A02', 'Thuong', 8),
+(73, 'A03', 'Thuong', 8),
+(74, 'A04', 'Thuong', 8),
+(75, 'A05', 'Thuong', 8),
+(76, 'A06', 'Thuong', 8),
+(77, 'A07', 'Thuong', 8),
+(78, 'A08', 'Thuong', 8),
+(79, 'A09', 'Vip', 8),
+(80, 'A10', 'Vip', 8),
+(81, 'A01', 'Thuong', 9),
+(82, 'A02', 'Thuong', 9),
+(83, 'A03', 'Thuong', 9),
+(84, 'A04', 'Thuong', 9),
+(85, 'A05', 'Thuong', 9),
+(86, 'A06', 'Thuong', 9),
+(87, 'A07', 'Thuong', 9),
+(88, 'A08', 'Thuong', 9),
+(89, 'A09', 'Vip', 9),
+(90, 'A10', 'Vip', 9),
+(91, 'A01', 'Thuong', 10),
+(92, 'A02', 'Thuong', 10),
+(93, 'A03', 'Thuong', 10),
+(94, 'A04', 'Thuong', 10),
+(95, 'A05', 'Thuong', 10),
+(96, 'A06', 'Thuong', 10),
+(97, 'A07', 'Thuong', 10),
+(98, 'A08', 'Thuong', 10),
+(99, 'A09', 'Vip', 10),
+(100, 'A10', 'Vip', 10),
+(101, 'A01', 'Thuong', 11),
+(102, 'A02', 'Thuong', 11),
+(103, 'A03', 'Thuong', 11),
+(104, 'A04', 'Thuong', 11),
+(105, 'A05', 'Thuong', 11),
+(106, 'A06', 'Thuong', 11),
+(107, 'A07', 'Thuong', 11),
+(108, 'A08', 'Thuong', 11),
+(109, 'A09', 'Vip', 11),
+(110, 'A10', 'Vip', 11),
+(111, 'A01', 'Thuong', 12),
+(112, 'A02', 'Thuong', 12),
+(113, 'A03', 'Thuong', 12),
+(114, 'A04', 'Thuong', 12),
+(115, 'A05', 'Thuong', 12),
+(116, 'A06', 'Thuong', 12),
+(117, 'A07', 'Thuong', 12),
+(118, 'A08', 'Thuong', 12),
+(119, 'A09', 'Vip', 12),
+(120, 'A10', 'Vip', 12),
+(121, 'A01', 'Thuong', 13),
+(122, 'A02', 'Thuong', 13),
+(123, 'A03', 'Thuong', 13),
+(124, 'A04', 'Thuong', 13),
+(125, 'A05', 'Thuong', 13),
+(126, 'A06', 'Thuong', 13),
+(127, 'A07', 'Thuong', 13),
+(128, 'A08', 'Thuong', 13),
+(129, 'A09', 'Vip', 13),
+(130, 'A10', 'Vip', 13),
+(131, 'A01', 'Thuong', 14),
+(132, 'A02', 'Thuong', 14),
+(133, 'A03', 'Thuong', 14),
+(134, 'A04', 'Thuong', 14),
+(135, 'A05', 'Thuong', 14),
+(136, 'A06', 'Thuong', 14),
+(137, 'A07', 'Thuong', 14),
+(138, 'A08', 'Thuong', 14),
+(139, 'A09', 'Vip', 14),
+(140, 'A10', 'Vip', 14),
+(141, 'A01', 'Thuong', 15),
+(142, 'A02', 'Thuong', 15),
+(143, 'A03', 'Thuong', 15),
+(144, 'A04', 'Thuong', 15),
+(145, 'A05', 'Thuong', 15),
+(146, 'A06', 'Thuong', 15),
+(147, 'A07', 'Thuong', 15),
+(148, 'A08', 'Thuong', 15),
+(149, 'A09', 'Vip', 15),
+(150, 'A10', 'Vip', 15),
+(151, 'A01', 'Thuong', 16),
+(152, 'A02', 'Thuong', 16),
+(153, 'A03', 'Thuong', 16),
+(154, 'A04', 'Thuong', 16),
+(155, 'A05', 'Thuong', 16),
+(156, 'A06', 'Thuong', 16),
+(157, 'A07', 'Thuong', 16),
+(158, 'A08', 'Thuong', 16),
+(159, 'A09', 'Vip', 16),
+(160, 'A10', 'Vip', 16);
+INSERT INTO `HeThongRap` (`ma_he_thong_rap`, `ten_he_thong_rap`, `logo`) VALUES
+(1, 'CGV', 'https://example.com/logos/cgv.png'),
+(2, 'Lotte Cinema', 'https://example.com/logos/lotte-cinema.png'),
+(3, 'Galaxy Cinema', 'https://example.com/logos/galaxy-cinema.png'),
+(4, 'BHD Star Cineplex', 'https://example.com/logos/bhd-star.png');
+INSERT INTO `LichChieu` (`ma_lich_chieu`, `ma_rap`, `ma_phim`, `ngay_gio_chieu`, `gia_ve`) VALUES
+(1, 1, 1, '2026-07-15 09:00:00', 75000),
+(2, 1, 2, '2026-07-15 12:00:00', 80000),
+(3, 2, 3, '2026-07-15 15:00:00', 90000),
+(4, 2, 4, '2026-07-15 18:00:00', 90000),
+(5, 3, 5, '2026-07-15 09:30:00', 70000),
+(6, 3, 6, '2026-07-15 12:30:00', 80000),
+(7, 4, 9, '2026-07-15 16:00:00', 85000),
+(8, 4, 10, '2026-07-15 19:30:00', 95000),
+(9, 5, 2, '2026-07-16 09:00:00', 75000),
+(10, 5, 3, '2026-07-16 12:00:00', 85000),
+(11, 6, 4, '2026-07-16 15:00:00', 85000),
+(12, 6, 5, '2026-07-16 18:00:00', 80000),
+(13, 7, 6, '2026-07-16 10:00:00', 80000),
+(14, 7, 9, '2026-07-16 13:00:00', 85000),
+(15, 8, 10, '2026-07-16 16:00:00', 95000),
+(16, 8, 1, '2026-07-16 19:00:00', 90000),
+(17, 9, 3, '2026-07-17 09:00:00', 80000),
+(18, 9, 4, '2026-07-17 12:00:00', 85000),
+(19, 10, 5, '2026-07-17 15:00:00', 75000),
+(20, 10, 6, '2026-07-17 18:00:00', 85000),
+(21, 11, 9, '2026-07-17 09:30:00', 80000),
+(22, 11, 10, '2026-07-17 12:30:00', 90000),
+(23, 12, 1, '2026-07-17 15:30:00', 85000),
+(24, 12, 2, '2026-07-17 19:00:00', 90000),
+(25, 13, 4, '2026-07-18 09:00:00', 80000),
+(26, 13, 5, '2026-07-18 12:00:00', 75000),
+(27, 14, 6, '2026-07-18 15:00:00', 85000),
+(28, 14, 9, '2026-07-18 18:00:00', 90000),
+(29, 15, 10, '2026-07-18 10:00:00', 95000),
+(30, 15, 1, '2026-07-18 13:00:00', 85000),
+(31, 16, 2, '2026-07-18 16:00:00', 90000),
+(32, 16, 3, '2026-07-18 19:00:00', 95000),
+(33, 1, 7, '2026-07-25 18:00:00', 100000),
+(34, 3, 7, '2026-07-25 20:30:00', 110000),
+(35, 5, 8, '2026-08-01 18:00:00', 90000),
+(36, 9, 8, '2026-08-01 20:30:00', 100000);
+INSERT INTO `NguoiDung` (`tai_khoan`, `ho_ten`, `email`, `so_dt`, `mat_khau`, `loai_nguoi_dung`) VALUES
+('admin', 'Quản Trị Viên', 'admin@movie.com', '0900000001', '123456', 'QuanTri'),
+('buituanlam', 'Bùi Tuấn Lâm', 'buituanlam@gmail.com', '0907777777', '123456', 'KhachHang'),
+('hoangminhduc', 'Hoàng Minh Đức', 'hoangminhduc@gmail.com', '0905555555', '123456', 'KhachHang'),
+('levancuong', 'Lê Văn Cường', 'levancuong@gmail.com', '0903333333', '123456', 'KhachHang'),
+('nguyenvana', 'Nguyễn Văn An', 'nguyenvana@gmail.com', '0901111111', '123456', 'KhachHang'),
+('phamthiduyen', 'Phạm Thị Duyên', 'phamthiduyen@gmail.com', '0904444444', '123456', 'KhachHang'),
+('tranthibich', 'Trần Thị Bích', 'tranthibich@gmail.com', '0902222222', '123456', 'KhachHang'),
+('vothihuong', 'Võ Thị Hương', 'vothihuong@gmail.com', '0906666666', '123456', 'KhachHang');
+INSERT INTO `Phim` (`ma_phim`, `ten_phim`, `trailer`, `hinh_anh`, `mo_ta`, `ngay_khoi_chieu`, `danh_gia`, `hot`, `dang_chieu`, `sap_chieu`) VALUES
+(1, 'Avengers: Endgame', 'https://www.youtube.com/watch?v=TcMBFSGVi1c', 'https://example.com/images/avengers-endgame.jpg', 'Các siêu anh hùng còn sống sót tập hợp để đảo ngược hậu quả do Thanos gây ra.', '2019-04-26', 10, 1, 1, 0),
+(2, 'Spider-Man: No Way Home', 'https://www.youtube.com/watch?v=JfVOs4VSpmA', 'https://example.com/images/spiderman-no-way-home.jpg', 'Peter Parker phải đối mặt với những kẻ thù đến từ nhiều vũ trụ khác nhau.', '2021-12-17', 9, 1, 1, 0),
+(3, 'Dune: Part Two', 'https://www.youtube.com/watch?v=Way9Dexny3w', 'https://example.com/images/dune-part-two.jpg', 'Paul Atreides tiếp tục hành trình cùng Chani và người Fremen.', '2024-03-01', 9, 1, 1, 0),
+(4, 'Godzilla x Kong: The New Empire', 'https://www.youtube.com/watch?v=lV1OOlGwExM', 'https://example.com/images/godzilla-kong.jpg', 'Godzilla và Kong hợp sức chống lại một mối đe dọa bí ẩn.', '2024-03-29', 8, 0, 1, 0),
+(5, 'Kung Fu Panda 4', 'https://www.youtube.com/watch?v=_inKs4eeHiI', 'https://example.com/images/kung-fu-panda-4.jpg', 'Po chuẩn bị trở thành thủ lĩnh tinh thần của Thung lũng Bình Yên.', '2024-03-08', 8, 1, 1, 0),
+(6, 'Inside Out 2', 'https://www.youtube.com/watch?v=LEjhY15eCx0', 'https://example.com/images/inside-out-2.jpg', 'Riley bước vào tuổi thiếu niên và xuất hiện thêm nhiều cảm xúc mới.', '2024-06-14', 9, 1, 1, 0),
+(7, 'Deadpool & Wolverine', 'https://www.youtube.com/watch?v=73_1biulkYk', 'https://example.com/images/deadpool-wolverine.jpg', 'Deadpool hợp tác cùng Wolverine trong một nhiệm vụ xuyên đa vũ trụ.', '2024-07-26', 9, 1, 0, 1),
+(8, 'Moana 2', 'https://www.youtube.com/watch?v=hDZ7y8RP5HE', 'https://example.com/images/moana-2.jpg', 'Moana tiếp tục cuộc phiêu lưu mới trên đại dương.', '2024-11-27', 8, 0, 0, 1),
+(9, 'The Batman', 'https://www.youtube.com/watch?v=mqqft2x_Aa4', 'https://example.com/images/the-batman.jpg', 'Batman điều tra một chuỗi án mạng bí ẩn tại thành phố Gotham.', '2022-03-04', 9, 0, 1, 0),
+(10, 'Avatar: The Way of Water', 'https://www.youtube.com/watch?v=d9MyW72ELq0', 'https://example.com/images/avatar-the-way-of-water.jpg', 'Gia đình Jake Sully phải chiến đấu để bảo vệ Pandora.', '2022-12-16', 9, 1, 1, 0);
+INSERT INTO `RapPhim` (`ma_rap`, `ten_rap`, `ma_cum_rap`) VALUES
+(1, 'Rạp 1', 1),
+(2, 'Rạp 2', 1),
+(3, 'Rạp 1', 2),
+(4, 'Rạp 2', 2),
+(5, 'Rạp 1', 3),
+(6, 'Rạp 2', 3),
+(7, 'Rạp 1', 4),
+(8, 'Rạp 2', 4),
+(9, 'Rạp 1', 5),
+(10, 'Rạp 2', 5),
+(11, 'Rạp 1', 6),
+(12, 'Rạp 2', 6),
+(13, 'Rạp 1', 7),
+(14, 'Rạp 2', 7),
+(15, 'Rạp 1', 8),
+(16, 'Rạp 2', 8);
 
-    CONSTRAINT fk_ghe_rapphim
-        FOREIGN KEY (ma_rap)
-        REFERENCES RapPhim(ma_rap)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
-);
 
--- =========================
--- Bảng Người Dùng
--- =========================
-CREATE TABLE NguoiDung (
-    tai_khoan INT AUTO_INCREMENT PRIMARY KEY,
-    ho_ten VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL UNIQUE,
-    so_dt VARCHAR(20),
-    mat_khau VARCHAR(255) NOT NULL,
-    loai_nguoi_dung VARCHAR(100)
-);
-
--- =========================
--- Bảng Lịch Chiếu
--- =========================
-CREATE TABLE LichChieu (
-    ma_lich_chieu INT AUTO_INCREMENT PRIMARY KEY,
-    ma_rap INT NOT NULL,
-    ma_phim INT NOT NULL,
-    ngay_gio_chieu DATETIME NOT NULL,
-    gia_ve INT NOT NULL,
-
-    CONSTRAINT fk_lichchieu_rapphim
-        FOREIGN KEY (ma_rap)
-        REFERENCES RapPhim(ma_rap)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
-
-    CONSTRAINT fk_lichchieu_phim
-        FOREIGN KEY (ma_phim)
-        REFERENCES Phim(ma_phim)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
-);
-
--- =========================
--- Bảng Đặt Vé
--- =========================
-CREATE TABLE DatVe (
-    ma_dat_ve INT AUTO_INCREMENT PRIMARY KEY,
-    tai_khoan INT NOT NULL,
-    ma_lich_chieu INT NOT NULL,
-    ma_ghe INT NOT NULL,
-
-    CONSTRAINT fk_datve_nguoidung
-        FOREIGN KEY (tai_khoan)
-        REFERENCES NguoiDung(tai_khoan)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
-
-    CONSTRAINT fk_datve_lichchieu
-        FOREIGN KEY (ma_lich_chieu)
-        REFERENCES LichChieu(ma_lich_chieu)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
-
-    CONSTRAINT fk_datve_ghe
-        FOREIGN KEY (ma_ghe)
-        REFERENCES Ghe(ma_ghe)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
-
-    CONSTRAINT unique_ghe_trong_lich_chieu
-        UNIQUE (ma_lich_chieu, ma_ghe)
-);
-
--- =====================================================
--- 1. DỮ LIỆU PHIM
--- =====================================================
-INSERT INTO Phim
-    (ten_phim, trailer, hinh_anh, mo_ta, ngay_khoi_chieu, danh_gia, hot, dang_chieu, sap_chieu)
-VALUES
-(
-    'Avengers: Endgame',
-    'https://www.youtube.com/watch?v=TcMBFSGVi1c',
-    'https://example.com/images/avengers-endgame.jpg',
-    'Các siêu anh hùng còn sống sót tập hợp để đảo ngược hậu quả do Thanos gây ra.',
-    '2026-06-01',
-    10,
-    TRUE,
-    TRUE,
-    FALSE
-),
-(
-    'Spider-Man: No Way Home',
-    'https://www.youtube.com/watch?v=JfVOs4VSpmA',
-    'https://example.com/images/spiderman-no-way-home.jpg',
-    'Danh tính của Peter Parker bị tiết lộ, khiến cuộc sống của anh bị đảo lộn.',
-    '2026-06-05',
-    9,
-    TRUE,
-    TRUE,
-    FALSE
-),
-(
-    'The Batman',
-    'https://www.youtube.com/watch?v=mqqft2x_Aa4',
-    'https://example.com/images/the-batman.jpg',
-    'Batman điều tra một loạt vụ án bí ẩn tại thành phố Gotham.',
-    '2026-06-10',
-    9,
-    TRUE,
-    TRUE,
-    FALSE
-),
-(
-    'Dune: Part Two',
-    'https://www.youtube.com/watch?v=Way9Dexny3w',
-    'https://example.com/images/dune-part-two.jpg',
-    'Paul Atreides hợp lực với Chani và người Fremen để trả thù cho gia đình.',
-    '2026-06-15',
-    9,
-    TRUE,
-    TRUE,
-    FALSE
-),
-(
-    'Inside Out 2',
-    'https://www.youtube.com/watch?v=LEjhY15eCx0',
-    'https://example.com/images/inside-out-2.jpg',
-    'Riley bước vào tuổi thiếu niên và phải đối mặt với những cảm xúc mới.',
-    '2026-06-20',
-    8,
-    FALSE,
-    TRUE,
-    FALSE
-),
-(
-    'Kung Fu Panda 4',
-    'https://www.youtube.com/watch?v=_inKs4eeHiI',
-    'https://example.com/images/kung-fu-panda-4.jpg',
-    'Po chuẩn bị trở thành thủ lĩnh tinh thần của Thung lũng Bình Yên.',
-    '2026-06-25',
-    8,
-    FALSE,
-    TRUE,
-    FALSE
-),
-(
-    'Deadpool & Wolverine',
-    'https://www.youtube.com/watch?v=73_1biulkYk',
-    'https://example.com/images/deadpool-wolverine.jpg',
-    'Deadpool và Wolverine cùng tham gia một nhiệm vụ xuyên đa vũ trụ.',
-    '2026-07-20',
-    9,
-    TRUE,
-    FALSE,
-    TRUE
-),
-(
-    'Avatar 3',
-    'https://www.youtube.com/watch?v=avatar3',
-    'https://example.com/images/avatar-3.jpg',
-    'Cuộc phiêu lưu mới trên hành tinh Pandora tiếp tục với gia đình Sully.',
-    '2026-08-15',
-    8,
-    TRUE,
-    FALSE,
-    TRUE
-),
-(
-    'Mission: Impossible 8',
-    'https://www.youtube.com/watch?v=mission-impossible-8',
-    'https://example.com/images/mission-impossible-8.jpg',
-    'Ethan Hunt thực hiện nhiệm vụ nguy hiểm nhất trong sự nghiệp.',
-    '2026-09-05',
-    8,
-    FALSE,
-    FALSE,
-    TRUE
-),
-(
-    'Minecraft Movie',
-    'https://www.youtube.com/watch?v=minecraft-movie',
-    'https://example.com/images/minecraft-movie.jpg',
-    'Một nhóm nhân vật khám phá thế giới Minecraft kỳ thú.',
-    '2026-10-10',
-    7,
-    FALSE,
-    FALSE,
-    TRUE
-);
-
--- =====================================================
--- 2. DỮ LIỆU BANNER
--- =====================================================
-INSERT INTO Banner (ma_phim, hinh_anh)
-VALUES
-(1, 'https://example.com/banners/avengers-banner.jpg'),
-(2, 'https://example.com/banners/spiderman-banner.jpg'),
-(3, 'https://example.com/banners/the-batman-banner.jpg'),
-(4, 'https://example.com/banners/dune-banner.jpg'),
-(7, 'https://example.com/banners/deadpool-wolverine-banner.jpg'),
-(8, 'https://example.com/banners/avatar-3-banner.jpg');
-
--- =====================================================
--- 3. DỮ LIỆU HỆ THỐNG RẠP
--- =====================================================
-INSERT INTO HeThongRap (ten_he_thong_rap, logo)
-VALUES
-(
-    'CGV',
-    'https://example.com/logos/cgv.png'
-),
-(
-    'Lotte Cinema',
-    'https://example.com/logos/lotte-cinema.png'
-),
-(
-    'Galaxy Cinema',
-    'https://example.com/logos/galaxy-cinema.png'
-),
-(
-    'BHD Star Cineplex',
-    'https://example.com/logos/bhd-star.png'
-);
-
--- =====================================================
--- 4. DỮ LIỆU CỤM RẠP
--- =====================================================
-INSERT INTO CumRap (ten_cum_rap, dia_chi, ma_he_thong_rap)
-VALUES
-(
-    'CGV Vincom Đồng Khởi',
-    '72 Lê Thánh Tôn, Quận 1, TP. Hồ Chí Minh',
-    1
-),
-(
-    'CGV Aeon Tân Phú',
-    '30 Bờ Bao Tân Thắng, Quận Tân Phú, TP. Hồ Chí Minh',
-    1
-),
-(
-    'Lotte Cinema Gò Vấp',
-    '242 Nguyễn Văn Lượng, Quận Gò Vấp, TP. Hồ Chí Minh',
-    2
-),
-(
-    'Lotte Cinema Nowzone',
-    '235 Nguyễn Văn Cừ, Quận 1, TP. Hồ Chí Minh',
-    2
-),
-(
-    'Galaxy Nguyễn Du',
-    '116 Nguyễn Du, Quận 1, TP. Hồ Chí Minh',
-    3
-),
-(
-    'Galaxy Kinh Dương Vương',
-    '718bis Kinh Dương Vương, Quận 6, TP. Hồ Chí Minh',
-    3
-),
-(
-    'BHD Star Bitexco',
-    '2 Hải Triều, Quận 1, TP. Hồ Chí Minh',
-    4
-),
-(
-    'BHD Star Phạm Hùng',
-    'Tầng 4, TTTM Satra Phạm Hùng, Bình Chánh, TP. Hồ Chí Minh',
-    4
-);
-
--- =====================================================
--- 5. DỮ LIỆU RẠP PHIM / PHÒNG CHIẾU
--- =====================================================
-INSERT INTO RapPhim (ten_rap, ma_cum_rap)
-VALUES
-('Rạp 01', 1),
-('Rạp 02', 1),
-('Rạp IMAX', 1),
-
-('Rạp 01', 2),
-('Rạp 02', 2),
-
-('Rạp 01', 3),
-('Rạp 02', 3),
-
-('Rạp 01', 4),
-('Rạp 02', 4),
-
-('Rạp 01', 5),
-('Rạp 02', 5),
-
-('Rạp 01', 6),
-('Rạp 02', 6),
-
-('Rạp 01', 7),
-('Rạp 02', 7),
-
-('Rạp 01', 8),
-('Rạp 02', 8);
-
--- =====================================================
--- 6. DỮ LIỆU GHẾ
--- Mỗi rạp có 20 ghế:
--- A01-A08: Thường
--- B01-B08: Thường
--- C01-C04: VIP
--- =====================================================
-
-INSERT INTO Ghe (ten_ghe, loai_ghe, ma_rap)
-SELECT ten_ghe, loai_ghe, ma_rap
-FROM (
-    SELECT 'A01' AS ten_ghe, 'Thuong' AS loai_ghe
-    UNION ALL SELECT 'A02', 'Thuong'
-    UNION ALL SELECT 'A03', 'Thuong'
-    UNION ALL SELECT 'A04', 'Thuong'
-    UNION ALL SELECT 'A05', 'Thuong'
-    UNION ALL SELECT 'A06', 'Thuong'
-    UNION ALL SELECT 'A07', 'Thuong'
-    UNION ALL SELECT 'A08', 'Thuong'
-
-    UNION ALL SELECT 'B01', 'Thuong'
-    UNION ALL SELECT 'B02', 'Thuong'
-    UNION ALL SELECT 'B03', 'Thuong'
-    UNION ALL SELECT 'B04', 'Thuong'
-    UNION ALL SELECT 'B05', 'Thuong'
-    UNION ALL SELECT 'B06', 'Thuong'
-    UNION ALL SELECT 'B07', 'Thuong'
-    UNION ALL SELECT 'B08', 'Thuong'
-
-    UNION ALL SELECT 'C01', 'VIP'
-    UNION ALL SELECT 'C02', 'VIP'
-    UNION ALL SELECT 'C03', 'VIP'
-    UNION ALL SELECT 'C04', 'VIP'
-) AS danh_sach_ghe
-CROSS JOIN RapPhim;
-
--- =====================================================
--- 7. DỮ LIỆU NGƯỜI DÙNG
--- Mật khẩu bên dưới chỉ dùng làm dữ liệu mẫu.
--- Khi xây dựng API thật cần mã hóa bằng bcrypt/argon2.
--- =====================================================
-INSERT INTO NguoiDung
-    (ho_ten, email, so_dt, mat_khau, loai_nguoi_dung)
-VALUES
-(
-    'Quản trị viên',
-    'admin@movie.com',
-    '0900000001',
-    '$2b$10$abcdefghijklmnopqrstuv123456789012345678901234567890',
-    'QuanTri'
-),
-(
-    'Nguyễn Văn An',
-    'an.nguyen@example.com',
-    '0901000001',
-    '$2b$10$abcdefghijklmnopqrstuv123456789012345678901234567891',
-    'KhachHang'
-),
-(
-    'Trần Thị Bình',
-    'binh.tran@example.com',
-    '0901000002',
-    '$2b$10$abcdefghijklmnopqrstuv123456789012345678901234567892',
-    'KhachHang'
-),
-(
-    'Lê Hoàng Cường',
-    'cuong.le@example.com',
-    '0901000003',
-    '$2b$10$abcdefghijklmnopqrstuv123456789012345678901234567893',
-    'KhachHang'
-),
-(
-    'Phạm Minh Duy',
-    'duy.pham@example.com',
-    '0901000004',
-    '$2b$10$abcdefghijklmnopqrstuv123456789012345678901234567894',
-    'KhachHang'
-),
-(
-    'Hoàng Thu Hà',
-    'ha.hoang@example.com',
-    '0901000005',
-    '$2b$10$abcdefghijklmnopqrstuv123456789012345678901234567895',
-    'KhachHang'
-),
-(
-    'Võ Quốc Huy',
-    'huy.vo@example.com',
-    '0901000006',
-    '$2b$10$abcdefghijklmnopqrstuv123456789012345678901234567896',
-    'KhachHang'
-),
-(
-    'Đặng Ngọc Lan',
-    'lan.dang@example.com',
-    '0901000007',
-    '$2b$10$abcdefghijklmnopqrstuv123456789012345678901234567897',
-    'KhachHang'
-);
-
--- =====================================================
--- 8. DỮ LIỆU LỊCH CHIẾU
--- =====================================================
-INSERT INTO LichChieu
-    (ma_rap, ma_phim, ngay_gio_chieu, gia_ve)
-VALUES
--- Ngày 13/07/2026
-(1, 1, '2026-07-13 09:00:00', 75000),
-(1, 2, '2026-07-13 12:00:00', 80000),
-(1, 3, '2026-07-13 15:00:00', 85000),
-(2, 4, '2026-07-13 10:00:00', 85000),
-(2, 5, '2026-07-13 13:00:00', 75000),
-(3, 1, '2026-07-13 18:00:00', 150000),
-(3, 4, '2026-07-13 21:00:00', 160000),
-
-(4, 2, '2026-07-13 09:30:00', 75000),
-(4, 6, '2026-07-13 12:30:00', 70000),
-(5, 3, '2026-07-13 16:00:00', 85000),
-(5, 5, '2026-07-13 19:00:00', 80000),
-
-(6, 1, '2026-07-13 10:30:00', 70000),
-(6, 4, '2026-07-13 14:00:00', 80000),
-(7, 2, '2026-07-13 17:00:00', 80000),
-(7, 6, '2026-07-13 20:00:00', 75000),
-
--- Ngày 14/07/2026
-(8, 3, '2026-07-14 09:00:00', 75000),
-(8, 5, '2026-07-14 12:00:00', 70000),
-(9, 1, '2026-07-14 15:00:00', 85000),
-(9, 4, '2026-07-14 18:30:00', 90000),
-
-(10, 2, '2026-07-14 09:30:00', 75000),
-(10, 6, '2026-07-14 12:30:00', 70000),
-(11, 3, '2026-07-14 16:00:00', 80000),
-(11, 5, '2026-07-14 19:00:00', 75000),
-
-(12, 1, '2026-07-14 10:00:00', 70000),
-(12, 4, '2026-07-14 13:30:00', 80000),
-(13, 2, '2026-07-14 17:00:00', 80000),
-(13, 6, '2026-07-14 20:00:00', 75000),
-
--- Ngày 15/07/2026
-(14, 3, '2026-07-15 09:00:00', 75000),
-(14, 5, '2026-07-15 12:00:00', 70000),
-(15, 1, '2026-07-15 15:00:00', 85000),
-(15, 4, '2026-07-15 18:30:00', 90000),
-
-(16, 2, '2026-07-15 10:00:00', 75000),
-(16, 6, '2026-07-15 13:00:00', 70000),
-(17, 3, '2026-07-15 17:00:00', 80000),
-(17, 5, '2026-07-15 20:00:00', 75000);
-
--- =====================================================
--- 9. DỮ LIỆU ĐẶT VÉ
---
--- Ghế được lấy bằng truy vấn con để bảo đảm ghế thuộc
--- đúng rạp của lịch chiếu.
--- =====================================================
-
--- Người dùng 2 đặt ghế A01, A02 cho lịch chiếu 1
-INSERT INTO DatVe (tai_khoan, ma_lich_chieu, ma_ghe)
-SELECT 2, 1, g.ma_ghe
-FROM Ghe g
-JOIN LichChieu lc ON lc.ma_rap = g.ma_rap
-WHERE lc.ma_lich_chieu = 1
-  AND g.ten_ghe IN ('A01', 'A02');
-
--- Người dùng 3 đặt ghế A03 cho lịch chiếu 1
-INSERT INTO DatVe (tai_khoan, ma_lich_chieu, ma_ghe)
-SELECT 3, 1, g.ma_ghe
-FROM Ghe g
-JOIN LichChieu lc ON lc.ma_rap = g.ma_rap
-WHERE lc.ma_lich_chieu = 1
-  AND g.ten_ghe = 'A03';
-
--- Người dùng 4 đặt ghế VIP C01, C02 cho lịch chiếu 2
-INSERT INTO DatVe (tai_khoan, ma_lich_chieu, ma_ghe)
-SELECT 4, 2, g.ma_ghe
-FROM Ghe g
-JOIN LichChieu lc ON lc.ma_rap = g.ma_rap
-WHERE lc.ma_lich_chieu = 2
-  AND g.ten_ghe IN ('C01', 'C02');
-
--- Người dùng 5 đặt ghế B04 cho lịch chiếu 3
-INSERT INTO DatVe (tai_khoan, ma_lich_chieu, ma_ghe)
-SELECT 5, 3, g.ma_ghe
-FROM Ghe g
-JOIN LichChieu lc ON lc.ma_rap = g.ma_rap
-WHERE lc.ma_lich_chieu = 3
-  AND g.ten_ghe = 'B04';
-
--- Người dùng 6 đặt ghế A05, A06 cho lịch chiếu 4
-INSERT INTO DatVe (tai_khoan, ma_lich_chieu, ma_ghe)
-SELECT 6, 4, g.ma_ghe
-FROM Ghe g
-JOIN LichChieu lc ON lc.ma_rap = g.ma_rap
-WHERE lc.ma_lich_chieu = 4
-  AND g.ten_ghe IN ('A05', 'A06');
-
--- Người dùng 7 đặt ghế C03 cho lịch chiếu 6
-INSERT INTO DatVe (tai_khoan, ma_lich_chieu, ma_ghe)
-SELECT 7, 6, g.ma_ghe
-FROM Ghe g
-JOIN LichChieu lc ON lc.ma_rap = g.ma_rap
-WHERE lc.ma_lich_chieu = 6
-  AND g.ten_ghe = 'C03';
-
--- Người dùng 8 đặt ghế B01, B02 cho lịch chiếu 8
-INSERT INTO DatVe (tai_khoan, ma_lich_chieu, ma_ghe)
-SELECT 8, 8, g.ma_ghe
-FROM Ghe g
-JOIN LichChieu lc ON lc.ma_rap = g.ma_rap
-WHERE lc.ma_lich_chieu = 8
-  AND g.ten_ghe IN ('B01', 'B02');
-
--- Người dùng 2 đặt ghế C04 cho lịch chiếu 10
-INSERT INTO DatVe (tai_khoan, ma_lich_chieu, ma_ghe)
-SELECT 2, 10, g.ma_ghe
-FROM Ghe g
-JOIN LichChieu lc ON lc.ma_rap = g.ma_rap
-WHERE lc.ma_lich_chieu = 10
-  AND g.ten_ghe = 'C04';
-
--- Người dùng 3 đặt ghế A07, A08 cho lịch chiếu 12
-INSERT INTO DatVe (tai_khoan, ma_lich_chieu, ma_ghe)
-SELECT 3, 12, g.ma_ghe
-FROM Ghe g
-JOIN LichChieu lc ON lc.ma_rap = g.ma_rap
-WHERE lc.ma_lich_chieu = 12
-  AND g.ten_ghe IN ('A07', 'A08');
-
--- Người dùng 4 đặt ghế B05 cho lịch chiếu 16
-INSERT INTO DatVe (tai_khoan, ma_lich_chieu, ma_ghe)
-SELECT 4, 16, g.ma_ghe
-FROM Ghe g
-JOIN LichChieu lc ON lc.ma_rap = g.ma_rap
-WHERE lc.ma_lich_chieu = 16
-  AND g.ten_ghe = 'B05';
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;

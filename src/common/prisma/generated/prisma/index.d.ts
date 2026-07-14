@@ -3711,28 +3711,26 @@ export namespace Prisma {
 
   export type DatVeAvgAggregateOutputType = {
     ma_dat_ve: number | null
-    tai_khoan: number | null
     ma_lich_chieu: number | null
     ma_ghe: number | null
   }
 
   export type DatVeSumAggregateOutputType = {
     ma_dat_ve: number | null
-    tai_khoan: number | null
     ma_lich_chieu: number | null
     ma_ghe: number | null
   }
 
   export type DatVeMinAggregateOutputType = {
     ma_dat_ve: number | null
-    tai_khoan: number | null
+    tai_khoan: string | null
     ma_lich_chieu: number | null
     ma_ghe: number | null
   }
 
   export type DatVeMaxAggregateOutputType = {
     ma_dat_ve: number | null
-    tai_khoan: number | null
+    tai_khoan: string | null
     ma_lich_chieu: number | null
     ma_ghe: number | null
   }
@@ -3748,14 +3746,12 @@ export namespace Prisma {
 
   export type DatVeAvgAggregateInputType = {
     ma_dat_ve?: true
-    tai_khoan?: true
     ma_lich_chieu?: true
     ma_ghe?: true
   }
 
   export type DatVeSumAggregateInputType = {
     ma_dat_ve?: true
-    tai_khoan?: true
     ma_lich_chieu?: true
     ma_ghe?: true
   }
@@ -3870,7 +3866,7 @@ export namespace Prisma {
 
   export type DatVeGroupByOutputType = {
     ma_dat_ve: number
-    tai_khoan: number
+    tai_khoan: string
     ma_lich_chieu: number
     ma_ghe: number
     _count: DatVeCountAggregateOutputType | null
@@ -3929,7 +3925,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       ma_dat_ve: number
-      tai_khoan: number
+      tai_khoan: string
       ma_lich_chieu: number
       ma_ghe: number
     }, ExtArgs["result"]["datVe"]>
@@ -4305,7 +4301,7 @@ export namespace Prisma {
    */
   interface DatVeFieldRefs {
     readonly ma_dat_ve: FieldRef<"DatVe", 'Int'>
-    readonly tai_khoan: FieldRef<"DatVe", 'Int'>
+    readonly tai_khoan: FieldRef<"DatVe", 'String'>
     readonly ma_lich_chieu: FieldRef<"DatVe", 'Int'>
     readonly ma_ghe: FieldRef<"DatVe", 'Int'>
   }
@@ -7657,22 +7653,12 @@ export namespace Prisma {
 
   export type AggregateNguoiDung = {
     _count: NguoiDungCountAggregateOutputType | null
-    _avg: NguoiDungAvgAggregateOutputType | null
-    _sum: NguoiDungSumAggregateOutputType | null
     _min: NguoiDungMinAggregateOutputType | null
     _max: NguoiDungMaxAggregateOutputType | null
   }
 
-  export type NguoiDungAvgAggregateOutputType = {
-    tai_khoan: number | null
-  }
-
-  export type NguoiDungSumAggregateOutputType = {
-    tai_khoan: number | null
-  }
-
   export type NguoiDungMinAggregateOutputType = {
-    tai_khoan: number | null
+    tai_khoan: string | null
     ho_ten: string | null
     email: string | null
     so_dt: string | null
@@ -7681,7 +7667,7 @@ export namespace Prisma {
   }
 
   export type NguoiDungMaxAggregateOutputType = {
-    tai_khoan: number | null
+    tai_khoan: string | null
     ho_ten: string | null
     email: string | null
     so_dt: string | null
@@ -7699,14 +7685,6 @@ export namespace Prisma {
     _all: number
   }
 
-
-  export type NguoiDungAvgAggregateInputType = {
-    tai_khoan?: true
-  }
-
-  export type NguoiDungSumAggregateInputType = {
-    tai_khoan?: true
-  }
 
   export type NguoiDungMinAggregateInputType = {
     tai_khoan?: true
@@ -7774,18 +7752,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: NguoiDungAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: NguoiDungSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: NguoiDungMinAggregateInputType
@@ -7816,22 +7782,18 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: NguoiDungCountAggregateInputType | true
-    _avg?: NguoiDungAvgAggregateInputType
-    _sum?: NguoiDungSumAggregateInputType
     _min?: NguoiDungMinAggregateInputType
     _max?: NguoiDungMaxAggregateInputType
   }
 
   export type NguoiDungGroupByOutputType = {
-    tai_khoan: number
+    tai_khoan: string
     ho_ten: string
     email: string
     so_dt: string | null
     mat_khau: string
     loai_nguoi_dung: string | null
     _count: NguoiDungCountAggregateOutputType | null
-    _avg: NguoiDungAvgAggregateOutputType | null
-    _sum: NguoiDungSumAggregateOutputType | null
     _min: NguoiDungMinAggregateOutputType | null
     _max: NguoiDungMaxAggregateOutputType | null
   }
@@ -7884,7 +7846,7 @@ export namespace Prisma {
       DatVe: Prisma.$DatVePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
-      tai_khoan: number
+      tai_khoan: string
       ho_ten: string
       email: string
       so_dt: string | null
@@ -8260,7 +8222,7 @@ export namespace Prisma {
    * Fields of the NguoiDung model
    */
   interface NguoiDungFieldRefs {
-    readonly tai_khoan: FieldRef<"NguoiDung", 'Int'>
+    readonly tai_khoan: FieldRef<"NguoiDung", 'String'>
     readonly ho_ten: FieldRef<"NguoiDung", 'String'>
     readonly email: FieldRef<"NguoiDung", 'String'>
     readonly so_dt: FieldRef<"NguoiDung", 'String'>
@@ -10886,6 +10848,13 @@ export namespace Prisma {
   export type CumRapOrderByRelevanceFieldEnum = (typeof CumRapOrderByRelevanceFieldEnum)[keyof typeof CumRapOrderByRelevanceFieldEnum]
 
 
+  export const DatVeOrderByRelevanceFieldEnum: {
+    tai_khoan: 'tai_khoan'
+  };
+
+  export type DatVeOrderByRelevanceFieldEnum = (typeof DatVeOrderByRelevanceFieldEnum)[keyof typeof DatVeOrderByRelevanceFieldEnum]
+
+
   export const GheOrderByRelevanceFieldEnum: {
     ten_ghe: 'ten_ghe',
     loai_ghe: 'loai_ghe'
@@ -10903,6 +10872,7 @@ export namespace Prisma {
 
 
   export const NguoiDungOrderByRelevanceFieldEnum: {
+    tai_khoan: 'tai_khoan',
     ho_ten: 'ho_ten',
     email: 'email',
     so_dt: 'so_dt',
@@ -11082,7 +11052,7 @@ export namespace Prisma {
     OR?: DatVeWhereInput[]
     NOT?: DatVeWhereInput | DatVeWhereInput[]
     ma_dat_ve?: IntFilter<"DatVe"> | number
-    tai_khoan?: IntFilter<"DatVe"> | number
+    tai_khoan?: StringFilter<"DatVe"> | string
     ma_lich_chieu?: IntFilter<"DatVe"> | number
     ma_ghe?: IntFilter<"DatVe"> | number
     Ghe?: XOR<GheScalarRelationFilter, GheWhereInput>
@@ -11098,6 +11068,7 @@ export namespace Prisma {
     Ghe?: GheOrderByWithRelationInput
     LichChieu?: LichChieuOrderByWithRelationInput
     NguoiDung?: NguoiDungOrderByWithRelationInput
+    _relevance?: DatVeOrderByRelevanceInput
   }
 
   export type DatVeWhereUniqueInput = Prisma.AtLeast<{
@@ -11106,7 +11077,7 @@ export namespace Prisma {
     AND?: DatVeWhereInput | DatVeWhereInput[]
     OR?: DatVeWhereInput[]
     NOT?: DatVeWhereInput | DatVeWhereInput[]
-    tai_khoan?: IntFilter<"DatVe"> | number
+    tai_khoan?: StringFilter<"DatVe"> | string
     ma_lich_chieu?: IntFilter<"DatVe"> | number
     ma_ghe?: IntFilter<"DatVe"> | number
     Ghe?: XOR<GheScalarRelationFilter, GheWhereInput>
@@ -11131,7 +11102,7 @@ export namespace Prisma {
     OR?: DatVeScalarWhereWithAggregatesInput[]
     NOT?: DatVeScalarWhereWithAggregatesInput | DatVeScalarWhereWithAggregatesInput[]
     ma_dat_ve?: IntWithAggregatesFilter<"DatVe"> | number
-    tai_khoan?: IntWithAggregatesFilter<"DatVe"> | number
+    tai_khoan?: StringWithAggregatesFilter<"DatVe"> | string
     ma_lich_chieu?: IntWithAggregatesFilter<"DatVe"> | number
     ma_ghe?: IntWithAggregatesFilter<"DatVe"> | number
   }
@@ -11160,6 +11131,7 @@ export namespace Prisma {
 
   export type GheWhereUniqueInput = Prisma.AtLeast<{
     ma_ghe?: number
+    ma_rap_ten_ghe?: GheMa_rapTen_gheCompoundUniqueInput
     AND?: GheWhereInput | GheWhereInput[]
     OR?: GheWhereInput[]
     NOT?: GheWhereInput | GheWhereInput[]
@@ -11168,7 +11140,7 @@ export namespace Prisma {
     ma_rap?: IntFilter<"Ghe"> | number
     DatVe?: DatVeListRelationFilter
     RapPhim?: XOR<RapPhimScalarRelationFilter, RapPhimWhereInput>
-  }, "ma_ghe">
+  }, "ma_ghe" | "ma_rap_ten_ghe">
 
   export type GheOrderByWithAggregationInput = {
     ma_ghe?: SortOrder
@@ -11307,7 +11279,7 @@ export namespace Prisma {
     AND?: NguoiDungWhereInput | NguoiDungWhereInput[]
     OR?: NguoiDungWhereInput[]
     NOT?: NguoiDungWhereInput | NguoiDungWhereInput[]
-    tai_khoan?: IntFilter<"NguoiDung"> | number
+    tai_khoan?: StringFilter<"NguoiDung"> | string
     ho_ten?: StringFilter<"NguoiDung"> | string
     email?: StringFilter<"NguoiDung"> | string
     so_dt?: StringNullableFilter<"NguoiDung"> | string | null
@@ -11328,7 +11300,7 @@ export namespace Prisma {
   }
 
   export type NguoiDungWhereUniqueInput = Prisma.AtLeast<{
-    tai_khoan?: number
+    tai_khoan?: string
     email?: string
     AND?: NguoiDungWhereInput | NguoiDungWhereInput[]
     OR?: NguoiDungWhereInput[]
@@ -11348,17 +11320,15 @@ export namespace Prisma {
     mat_khau?: SortOrder
     loai_nguoi_dung?: SortOrderInput | SortOrder
     _count?: NguoiDungCountOrderByAggregateInput
-    _avg?: NguoiDungAvgOrderByAggregateInput
     _max?: NguoiDungMaxOrderByAggregateInput
     _min?: NguoiDungMinOrderByAggregateInput
-    _sum?: NguoiDungSumOrderByAggregateInput
   }
 
   export type NguoiDungScalarWhereWithAggregatesInput = {
     AND?: NguoiDungScalarWhereWithAggregatesInput | NguoiDungScalarWhereWithAggregatesInput[]
     OR?: NguoiDungScalarWhereWithAggregatesInput[]
     NOT?: NguoiDungScalarWhereWithAggregatesInput | NguoiDungScalarWhereWithAggregatesInput[]
-    tai_khoan?: IntWithAggregatesFilter<"NguoiDung"> | number
+    tai_khoan?: StringWithAggregatesFilter<"NguoiDung"> | string
     ho_ten?: StringWithAggregatesFilter<"NguoiDung"> | string
     email?: StringWithAggregatesFilter<"NguoiDung"> | string
     so_dt?: StringNullableWithAggregatesFilter<"NguoiDung"> | string | null
@@ -11601,7 +11571,7 @@ export namespace Prisma {
 
   export type DatVeUncheckedCreateInput = {
     ma_dat_ve?: number
-    tai_khoan: number
+    tai_khoan: string
     ma_lich_chieu: number
     ma_ghe: number
   }
@@ -11614,14 +11584,14 @@ export namespace Prisma {
 
   export type DatVeUncheckedUpdateInput = {
     ma_dat_ve?: IntFieldUpdateOperationsInput | number
-    tai_khoan?: IntFieldUpdateOperationsInput | number
+    tai_khoan?: StringFieldUpdateOperationsInput | string
     ma_lich_chieu?: IntFieldUpdateOperationsInput | number
     ma_ghe?: IntFieldUpdateOperationsInput | number
   }
 
   export type DatVeCreateManyInput = {
     ma_dat_ve?: number
-    tai_khoan: number
+    tai_khoan: string
     ma_lich_chieu: number
     ma_ghe: number
   }
@@ -11632,7 +11602,7 @@ export namespace Prisma {
 
   export type DatVeUncheckedUpdateManyInput = {
     ma_dat_ve?: IntFieldUpdateOperationsInput | number
-    tai_khoan?: IntFieldUpdateOperationsInput | number
+    tai_khoan?: StringFieldUpdateOperationsInput | string
     ma_lich_chieu?: IntFieldUpdateOperationsInput | number
     ma_ghe?: IntFieldUpdateOperationsInput | number
   }
@@ -11785,6 +11755,7 @@ export namespace Prisma {
   }
 
   export type NguoiDungCreateInput = {
+    tai_khoan: string
     ho_ten: string
     email: string
     so_dt?: string | null
@@ -11794,7 +11765,7 @@ export namespace Prisma {
   }
 
   export type NguoiDungUncheckedCreateInput = {
-    tai_khoan?: number
+    tai_khoan: string
     ho_ten: string
     email: string
     so_dt?: string | null
@@ -11804,6 +11775,7 @@ export namespace Prisma {
   }
 
   export type NguoiDungUpdateInput = {
+    tai_khoan?: StringFieldUpdateOperationsInput | string
     ho_ten?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     so_dt?: NullableStringFieldUpdateOperationsInput | string | null
@@ -11813,7 +11785,7 @@ export namespace Prisma {
   }
 
   export type NguoiDungUncheckedUpdateInput = {
-    tai_khoan?: IntFieldUpdateOperationsInput | number
+    tai_khoan?: StringFieldUpdateOperationsInput | string
     ho_ten?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     so_dt?: NullableStringFieldUpdateOperationsInput | string | null
@@ -11823,7 +11795,7 @@ export namespace Prisma {
   }
 
   export type NguoiDungCreateManyInput = {
-    tai_khoan?: number
+    tai_khoan: string
     ho_ten: string
     email: string
     so_dt?: string | null
@@ -11832,6 +11804,7 @@ export namespace Prisma {
   }
 
   export type NguoiDungUpdateManyMutationInput = {
+    tai_khoan?: StringFieldUpdateOperationsInput | string
     ho_ten?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     so_dt?: NullableStringFieldUpdateOperationsInput | string | null
@@ -11840,7 +11813,7 @@ export namespace Prisma {
   }
 
   export type NguoiDungUncheckedUpdateManyInput = {
-    tai_khoan?: IntFieldUpdateOperationsInput | number
+    tai_khoan?: StringFieldUpdateOperationsInput | string
     ho_ten?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     so_dt?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12194,6 +12167,12 @@ export namespace Prisma {
     isNot?: NguoiDungWhereInput
   }
 
+  export type DatVeOrderByRelevanceInput = {
+    fields: DatVeOrderByRelevanceFieldEnum | DatVeOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
   export type DatVeMa_lich_chieuMa_gheCompoundUniqueInput = {
     ma_lich_chieu: number
     ma_ghe: number
@@ -12208,7 +12187,6 @@ export namespace Prisma {
 
   export type DatVeAvgOrderByAggregateInput = {
     ma_dat_ve?: SortOrder
-    tai_khoan?: SortOrder
     ma_lich_chieu?: SortOrder
     ma_ghe?: SortOrder
   }
@@ -12229,7 +12207,6 @@ export namespace Prisma {
 
   export type DatVeSumOrderByAggregateInput = {
     ma_dat_ve?: SortOrder
-    tai_khoan?: SortOrder
     ma_lich_chieu?: SortOrder
     ma_ghe?: SortOrder
   }
@@ -12253,6 +12230,11 @@ export namespace Prisma {
     fields: GheOrderByRelevanceFieldEnum | GheOrderByRelevanceFieldEnum[]
     sort: SortOrder
     search: string
+  }
+
+  export type GheMa_rapTen_gheCompoundUniqueInput = {
+    ma_rap: number
+    ten_ghe: string
   }
 
   export type GheCountOrderByAggregateInput = {
@@ -12406,10 +12388,6 @@ export namespace Prisma {
     loai_nguoi_dung?: SortOrder
   }
 
-  export type NguoiDungAvgOrderByAggregateInput = {
-    tai_khoan?: SortOrder
-  }
-
   export type NguoiDungMaxOrderByAggregateInput = {
     tai_khoan?: SortOrder
     ho_ten?: SortOrder
@@ -12426,10 +12404,6 @@ export namespace Prisma {
     so_dt?: SortOrder
     mat_khau?: SortOrder
     loai_nguoi_dung?: SortOrder
-  }
-
-  export type NguoiDungSumOrderByAggregateInput = {
-    tai_khoan?: SortOrder
   }
 
   export type DateTimeNullableFilter<$PrismaModel = never> = {
@@ -13561,6 +13535,7 @@ export namespace Prisma {
   }
 
   export type NguoiDungCreateWithoutDatVeInput = {
+    tai_khoan: string
     ho_ten: string
     email: string
     so_dt?: string | null
@@ -13569,7 +13544,7 @@ export namespace Prisma {
   }
 
   export type NguoiDungUncheckedCreateWithoutDatVeInput = {
-    tai_khoan?: number
+    tai_khoan: string
     ho_ten: string
     email: string
     so_dt?: string | null
@@ -13644,6 +13619,7 @@ export namespace Prisma {
   }
 
   export type NguoiDungUpdateWithoutDatVeInput = {
+    tai_khoan?: StringFieldUpdateOperationsInput | string
     ho_ten?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     so_dt?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13652,7 +13628,7 @@ export namespace Prisma {
   }
 
   export type NguoiDungUncheckedUpdateWithoutDatVeInput = {
-    tai_khoan?: IntFieldUpdateOperationsInput | number
+    tai_khoan?: StringFieldUpdateOperationsInput | string
     ho_ten?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     so_dt?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13667,7 +13643,7 @@ export namespace Prisma {
 
   export type DatVeUncheckedCreateWithoutGheInput = {
     ma_dat_ve?: number
-    tai_khoan: number
+    tai_khoan: string
     ma_lich_chieu: number
   }
 
@@ -13720,7 +13696,7 @@ export namespace Prisma {
     OR?: DatVeScalarWhereInput[]
     NOT?: DatVeScalarWhereInput | DatVeScalarWhereInput[]
     ma_dat_ve?: IntFilter<"DatVe"> | number
-    tai_khoan?: IntFilter<"DatVe"> | number
+    tai_khoan?: StringFilter<"DatVe"> | string
     ma_lich_chieu?: IntFilter<"DatVe"> | number
     ma_ghe?: IntFilter<"DatVe"> | number
   }
@@ -13805,7 +13781,7 @@ export namespace Prisma {
 
   export type DatVeUncheckedCreateWithoutLichChieuInput = {
     ma_dat_ve?: number
-    tai_khoan: number
+    tai_khoan: string
     ma_ghe: number
   }
 
@@ -14237,7 +14213,7 @@ export namespace Prisma {
 
   export type DatVeCreateManyGheInput = {
     ma_dat_ve?: number
-    tai_khoan: number
+    tai_khoan: string
     ma_lich_chieu: number
   }
 
@@ -14248,13 +14224,13 @@ export namespace Prisma {
 
   export type DatVeUncheckedUpdateWithoutGheInput = {
     ma_dat_ve?: IntFieldUpdateOperationsInput | number
-    tai_khoan?: IntFieldUpdateOperationsInput | number
+    tai_khoan?: StringFieldUpdateOperationsInput | string
     ma_lich_chieu?: IntFieldUpdateOperationsInput | number
   }
 
   export type DatVeUncheckedUpdateManyWithoutGheInput = {
     ma_dat_ve?: IntFieldUpdateOperationsInput | number
-    tai_khoan?: IntFieldUpdateOperationsInput | number
+    tai_khoan?: StringFieldUpdateOperationsInput | string
     ma_lich_chieu?: IntFieldUpdateOperationsInput | number
   }
 
@@ -14285,7 +14261,7 @@ export namespace Prisma {
 
   export type DatVeCreateManyLichChieuInput = {
     ma_dat_ve?: number
-    tai_khoan: number
+    tai_khoan: string
     ma_ghe: number
   }
 
@@ -14296,13 +14272,13 @@ export namespace Prisma {
 
   export type DatVeUncheckedUpdateWithoutLichChieuInput = {
     ma_dat_ve?: IntFieldUpdateOperationsInput | number
-    tai_khoan?: IntFieldUpdateOperationsInput | number
+    tai_khoan?: StringFieldUpdateOperationsInput | string
     ma_ghe?: IntFieldUpdateOperationsInput | number
   }
 
   export type DatVeUncheckedUpdateManyWithoutLichChieuInput = {
     ma_dat_ve?: IntFieldUpdateOperationsInput | number
-    tai_khoan?: IntFieldUpdateOperationsInput | number
+    tai_khoan?: StringFieldUpdateOperationsInput | string
     ma_ghe?: IntFieldUpdateOperationsInput | number
   }
 

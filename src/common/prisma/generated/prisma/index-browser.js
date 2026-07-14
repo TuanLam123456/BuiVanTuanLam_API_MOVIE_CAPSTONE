@@ -208,6 +208,10 @@ exports.Prisma.CumRapOrderByRelevanceFieldEnum = {
   dia_chi: 'dia_chi'
 };
 
+exports.Prisma.DatVeOrderByRelevanceFieldEnum = {
+  tai_khoan: 'tai_khoan'
+};
+
 exports.Prisma.GheOrderByRelevanceFieldEnum = {
   ten_ghe: 'ten_ghe',
   loai_ghe: 'loai_ghe'
@@ -219,6 +223,7 @@ exports.Prisma.HeThongRapOrderByRelevanceFieldEnum = {
 };
 
 exports.Prisma.NguoiDungOrderByRelevanceFieldEnum = {
+  tai_khoan: 'tai_khoan',
   ho_ten: 'ho_ten',
   email: 'email',
   so_dt: 'so_dt',
