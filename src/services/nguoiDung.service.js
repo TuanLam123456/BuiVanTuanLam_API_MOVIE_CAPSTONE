@@ -161,4 +161,91 @@ export const nguoiDungService = {
 
     return danhSachNguoiDung;
   },
+  // Lấy danh sách người dùng Service
+  async layDanhSachNguoiDungPhanTrang(req) {
+    const { ma_nhom, tu_khoa, page = "1", pageSize = "10" } = req.query;
+
+    if (!ma_nhom?.trim()) {
+      throw new BadRequestError("Mã nhóm không được để trống");
+    }
+
+    const currentPage = Number(page);
+    const currentPageSize = Number(pageSize);
+
+    if (
+      !Number.isInteger(currentPage) ||
+      currentPage < 1 ||
+      !Number.isInteger(currentPageSize) ||
+      currentPageSize < 1
+    ) {
+      throw new BadRequestError("page và pageSize phải là số nguyên lớn hơn 0");
+    }
+
+    const keyword = tu_khoa?.trim();
+
+    const whereCondition = {
+      ma_nhom: ma_nhom.trim(),
+
+      ...(keyword && {
+        OR: [
+          {
+            tai_khoan: {
+              contains: keyword,
+            },
+          },
+          {
+            email: {
+              contains: keyword,
+            },
+          },
+          {
+            so_dt: {
+              contains: keyword,
+            },
+          },
+          {
+            ho_ten: {
+              contains: keyword,
+            },
+          },
+        ],
+      }),
+    };
+
+    const [danhSachNguoiDung, tongSoNguoiDung] = await prisma.$transaction([
+      prisma.nguoiDung.findMany({
+        where: whereCondition,
+
+        select: {
+          tai_khoan: true,
+          ho_ten: true,
+          email: true,
+          so_dt: true,
+          loai_nguoi_dung: true,
+          ma_nhom: true,
+        },
+
+        orderBy: {
+          tai_khoan: "asc",
+        },
+
+        skip: (currentPage - 1) * currentPageSize,
+        take: currentPageSize,
+      }),
+
+      prisma.nguoiDung.count({
+        where: whereCondition,
+      }),
+    ]);
+
+    const tongSoTrang = Math.ceil(tongSoNguoiDung / currentPageSize);
+
+    return {
+      page: currentPage,
+      pageSize: currentPageSize,
+      totalItem: tongSoNguoiDung,
+      totalPage: tongSoTrang,
+      items: danhSachNguoiDung,
+    };
+  },
 };

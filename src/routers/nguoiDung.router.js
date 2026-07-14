@@ -17,4 +17,11 @@ nguoiDungRouter.get(
   nguoiDungController.layDanhSachNguoiDung,
 );
 
+// Lấy danh sách người dùng phân trang Router
+nguoiDungRouter.get(
+  "/layDanhSachNguoiDungPhanTrang",
+  authCookie,
+  nguoiDungController.layDanhSachNguoiDungPhanTrang,
+);
+
 export default nguoiDungRouter;
