@@ -16,6 +16,7 @@ export const nguoiDungController = {
     const response = responseSuccess(result, "Đăng ký thành công");
     res.status(response.statusCode).json(response);
   },
+
   // Đăng nhập Controller
   async dangNhap(req, res, next) {
     const { accessToken, refreshToken, nguoiDung } =
@@ -32,6 +33,7 @@ export const nguoiDungController = {
     );
     res.status(response.statusCode).json(response);
   },
+
   // Lấy danh sách người dùng Controller
   async layDanhSachNguoiDung(req, res, next) {
     const result = await nguoiDungService.layDanhSachNguoiDung(req);
@@ -43,6 +45,7 @@ export const nguoiDungController = {
 
     res.status(response.statusCode).json(response);
   },
+
   // Lấy danh sách người dùng phân trang Controller
   async layDanhSachNguoiDungPhanTrang(req, res, next) {
     const result = await nguoiDungService.layDanhSachNguoiDungPhanTrang(req);
@@ -50,6 +53,18 @@ export const nguoiDungController = {
     const response = responseSuccess(
       result,
       "Lấy danh sách người dùng phân trang thành công",
+    );
+
+    res.status(response.statusCode).json(response);
+  },
+
+  // Lấy thông tin tài khoản đăng nhập Controller
+  async thongTinTaiKhoan(req, res, next) {
+    const result = await nguoiDungService.thongTinTaiKhoan(req);
+
+    const response = responseSuccess(
+      result,
+      "Lấy thông tin tài khoản thành công",
     );
 
     res.status(response.statusCode).json(response);

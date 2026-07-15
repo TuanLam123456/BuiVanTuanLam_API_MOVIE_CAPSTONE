@@ -27,5 +27,11 @@ nguoiDungRouter.get(
   nguoiDungController.layDanhSachNguoiDungPhanTrang,
 );
 
+// Lấy thông tin tài khoản đăng nhập Router
+nguoiDungRouter.get(
+  "/thongTinTaiKhoan",
+  authCookie,
+  nguoiDungController.thongTinTaiKhoan,
+);
 
 export default nguoiDungRouter;

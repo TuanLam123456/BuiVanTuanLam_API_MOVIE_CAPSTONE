@@ -55,12 +55,13 @@ export const nguoiDungService = {
         so_dt: so_dt,
         ma_nhom: ma_nhom || "GP01",
         ho_ten: ho_ten,
-        loai_nguoi_dung: 'KhachHang'
+        loai_nguoi_dung: "KhachHang",
       },
     });
 
     return nguoiDungMoi;
   },
+
   // Đăng ký Service
   async dangNhap(req) {
     const { tai_khoan, mat_khau } = req.body;
@@ -109,6 +110,7 @@ export const nguoiDungService = {
       nguoiDung,
     };
   },
+
   // Lấy danh sách người dùng Service
   async layDanhSachNguoiDung(req) {
     const { ma_nhom, tu_khoa } = req.query;
@@ -162,6 +164,7 @@ export const nguoiDungService = {
 
     return danhSachNguoiDung;
   },
+
   // Lấy danh sách người dùng Service
   async layDanhSachNguoiDungPhanTrang(req) {
     const { ma_nhom, tu_khoa, page = "1", pageSize = "10" } = req.query;
@@ -248,5 +251,34 @@ export const nguoiDungService = {
       totalPage: tongSoTrang,
       items: danhSachNguoiDung,
     };
+  },
+
+  // Lấy thông tin tài khoản đăng nhập Service
+  async thongTinTaiKhoan(req) {
+    const taiKhoan = req.nguoiDung?.tai_khoan;
+
+    if (!taiKhoan) {
+      throw new UnauthorizedError("Không tìm thấ tài khoản đăng nhập");
+    }
+
+    const nguoiDung = await prisma.nguoiDung.findUnique({
+      where: {
+        tai_khoan: taiKhoan,
+      },
+      select: {
+        tai_khoan: true,
+        ho_ten: true,
+        email: true,
+        so_dt: true,
+        loai_nguoi_dung: true,
+        ma_nhom: true,
+      },
+    });
+
+    if (!nguoiDung) {
+      throw new UnauthorizedError("Người dùng không tồn tại");
+    }
+
+    return nguoiDung;
   },
 };
