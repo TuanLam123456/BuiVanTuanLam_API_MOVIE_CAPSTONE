@@ -4,11 +4,7 @@ import { authCookie } from "../common/middleware/authCookie.middleware.js";
 
 const phimRouter = express.Router();
 
-// Tạo route CRUD
-phimRouter.post("/", phimController.create);
-phimRouter.get("/", authCookie, phimController.findAll);
-phimRouter.get("/:id", phimController.findOne);
-phimRouter.patch("/:id", phimController.update);
-phimRouter.delete("/:id", phimController.remove);
+// Lấy danh sách phim Router
+phimRouter.get("/", phimController.danhSachPhim);
 
 export default phimRouter;
