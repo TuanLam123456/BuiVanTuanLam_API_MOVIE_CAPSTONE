@@ -63,6 +63,11 @@ export type RapPhim = $Result.DefaultSelection<Prisma.$RapPhimPayload>
  * 
  */
 export type Nhom = $Result.DefaultSelection<Prisma.$NhomPayload>
+/**
+ * Model LoaiNguoiDung
+ * 
+ */
+export type LoaiNguoiDung = $Result.DefaultSelection<Prisma.$LoaiNguoiDungPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -284,6 +289,16 @@ export class PrismaClient<
     * ```
     */
   get nhom(): Prisma.NhomDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.loaiNguoiDung`: Exposes CRUD operations for the **LoaiNguoiDung** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more LoaiNguoiDungs
+    * const loaiNguoiDungs = await prisma.loaiNguoiDung.findMany()
+    * ```
+    */
+  get loaiNguoiDung(): Prisma.LoaiNguoiDungDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -727,7 +742,8 @@ export namespace Prisma {
     NguoiDung: 'NguoiDung',
     Phim: 'Phim',
     RapPhim: 'RapPhim',
-    Nhom: 'Nhom'
+    Nhom: 'Nhom',
+    LoaiNguoiDung: 'LoaiNguoiDung'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -743,7 +759,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "banner" | "cumRap" | "datVe" | "ghe" | "heThongRap" | "lichChieu" | "nguoiDung" | "phim" | "rapPhim" | "nhom"
+      modelProps: "banner" | "cumRap" | "datVe" | "ghe" | "heThongRap" | "lichChieu" | "nguoiDung" | "phim" | "rapPhim" | "nhom" | "loaiNguoiDung"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1407,6 +1423,72 @@ export namespace Prisma {
           }
         }
       }
+      LoaiNguoiDung: {
+        payload: Prisma.$LoaiNguoiDungPayload<ExtArgs>
+        fields: Prisma.LoaiNguoiDungFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.LoaiNguoiDungFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LoaiNguoiDungPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.LoaiNguoiDungFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LoaiNguoiDungPayload>
+          }
+          findFirst: {
+            args: Prisma.LoaiNguoiDungFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LoaiNguoiDungPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.LoaiNguoiDungFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LoaiNguoiDungPayload>
+          }
+          findMany: {
+            args: Prisma.LoaiNguoiDungFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LoaiNguoiDungPayload>[]
+          }
+          create: {
+            args: Prisma.LoaiNguoiDungCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LoaiNguoiDungPayload>
+          }
+          createMany: {
+            args: Prisma.LoaiNguoiDungCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.LoaiNguoiDungDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LoaiNguoiDungPayload>
+          }
+          update: {
+            args: Prisma.LoaiNguoiDungUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LoaiNguoiDungPayload>
+          }
+          deleteMany: {
+            args: Prisma.LoaiNguoiDungDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.LoaiNguoiDungUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.LoaiNguoiDungUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LoaiNguoiDungPayload>
+          }
+          aggregate: {
+            args: Prisma.LoaiNguoiDungAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateLoaiNguoiDung>
+          }
+          groupBy: {
+            args: Prisma.LoaiNguoiDungGroupByArgs<ExtArgs>
+            result: $Utils.Optional<LoaiNguoiDungGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.LoaiNguoiDungCountArgs<ExtArgs>
+            result: $Utils.Optional<LoaiNguoiDungCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1525,6 +1607,7 @@ export namespace Prisma {
     phim?: PhimOmit
     rapPhim?: RapPhimOmit
     nhom?: NhomOmit
+    loaiNguoiDung?: LoaiNguoiDungOmit
   }
 
   /* Types for Logging */
@@ -1872,6 +1955,37 @@ export namespace Prisma {
    */
   export type NhomCountOutputTypeCountPhimArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PhimWhereInput
+  }
+
+
+  /**
+   * Count Type LoaiNguoiDungCountOutputType
+   */
+
+  export type LoaiNguoiDungCountOutputType = {
+    NguoiDung: number
+  }
+
+  export type LoaiNguoiDungCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    NguoiDung?: boolean | LoaiNguoiDungCountOutputTypeCountNguoiDungArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * LoaiNguoiDungCountOutputType without action
+   */
+  export type LoaiNguoiDungCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LoaiNguoiDungCountOutputType
+     */
+    select?: LoaiNguoiDungCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * LoaiNguoiDungCountOutputType without action
+   */
+  export type LoaiNguoiDungCountOutputTypeCountNguoiDungArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NguoiDungWhereInput
   }
 
 
@@ -7921,7 +8035,7 @@ export namespace Prisma {
     email: string
     so_dt: string | null
     mat_khau: string
-    loai_nguoi_dung: string | null
+    loai_nguoi_dung: string
     ma_nhom: string
     _count: NguoiDungCountAggregateOutputType | null
     _min: NguoiDungMinAggregateOutputType | null
@@ -7951,6 +8065,7 @@ export namespace Prisma {
     loai_nguoi_dung?: boolean
     ma_nhom?: boolean
     DatVe?: boolean | NguoiDung$DatVeArgs<ExtArgs>
+    LoaiNguoiDung?: boolean | LoaiNguoiDungDefaultArgs<ExtArgs>
     Nhom?: boolean | NhomDefaultArgs<ExtArgs>
     _count?: boolean | NguoiDungCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["nguoiDung"]>
@@ -7970,6 +8085,7 @@ export namespace Prisma {
   export type NguoiDungOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"tai_khoan" | "ho_ten" | "email" | "so_dt" | "mat_khau" | "loai_nguoi_dung" | "ma_nhom", ExtArgs["result"]["nguoiDung"]>
   export type NguoiDungInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     DatVe?: boolean | NguoiDung$DatVeArgs<ExtArgs>
+    LoaiNguoiDung?: boolean | LoaiNguoiDungDefaultArgs<ExtArgs>
     Nhom?: boolean | NhomDefaultArgs<ExtArgs>
     _count?: boolean | NguoiDungCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -7978,6 +8094,7 @@ export namespace Prisma {
     name: "NguoiDung"
     objects: {
       DatVe: Prisma.$DatVePayload<ExtArgs>[]
+      LoaiNguoiDung: Prisma.$LoaiNguoiDungPayload<ExtArgs>
       Nhom: Prisma.$NhomPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -7986,7 +8103,7 @@ export namespace Prisma {
       email: string
       so_dt: string | null
       mat_khau: string
-      loai_nguoi_dung: string | null
+      loai_nguoi_dung: string
       ma_nhom: string
     }, ExtArgs["result"]["nguoiDung"]>
     composites: {}
@@ -8329,6 +8446,7 @@ export namespace Prisma {
   export interface Prisma__NguoiDungClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     DatVe<T extends NguoiDung$DatVeArgs<ExtArgs> = {}>(args?: Subset<T, NguoiDung$DatVeArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DatVePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    LoaiNguoiDung<T extends LoaiNguoiDungDefaultArgs<ExtArgs> = {}>(args?: Subset<T, LoaiNguoiDungDefaultArgs<ExtArgs>>): Prisma__LoaiNguoiDungClient<$Result.GetResult<Prisma.$LoaiNguoiDungPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     Nhom<T extends NhomDefaultArgs<ExtArgs> = {}>(args?: Subset<T, NhomDefaultArgs<ExtArgs>>): Prisma__NhomClient<$Result.GetResult<Prisma.$NhomPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -11816,6 +11934,933 @@ export namespace Prisma {
 
 
   /**
+   * Model LoaiNguoiDung
+   */
+
+  export type AggregateLoaiNguoiDung = {
+    _count: LoaiNguoiDungCountAggregateOutputType | null
+    _min: LoaiNguoiDungMinAggregateOutputType | null
+    _max: LoaiNguoiDungMaxAggregateOutputType | null
+  }
+
+  export type LoaiNguoiDungMinAggregateOutputType = {
+    ma_loai_nguoi_dung: string | null
+    ten_loai_nguoi_dung: string | null
+  }
+
+  export type LoaiNguoiDungMaxAggregateOutputType = {
+    ma_loai_nguoi_dung: string | null
+    ten_loai_nguoi_dung: string | null
+  }
+
+  export type LoaiNguoiDungCountAggregateOutputType = {
+    ma_loai_nguoi_dung: number
+    ten_loai_nguoi_dung: number
+    _all: number
+  }
+
+
+  export type LoaiNguoiDungMinAggregateInputType = {
+    ma_loai_nguoi_dung?: true
+    ten_loai_nguoi_dung?: true
+  }
+
+  export type LoaiNguoiDungMaxAggregateInputType = {
+    ma_loai_nguoi_dung?: true
+    ten_loai_nguoi_dung?: true
+  }
+
+  export type LoaiNguoiDungCountAggregateInputType = {
+    ma_loai_nguoi_dung?: true
+    ten_loai_nguoi_dung?: true
+    _all?: true
+  }
+
+  export type LoaiNguoiDungAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LoaiNguoiDung to aggregate.
+     */
+    where?: LoaiNguoiDungWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LoaiNguoiDungs to fetch.
+     */
+    orderBy?: LoaiNguoiDungOrderByWithRelationInput | LoaiNguoiDungOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: LoaiNguoiDungWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LoaiNguoiDungs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LoaiNguoiDungs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned LoaiNguoiDungs
+    **/
+    _count?: true | LoaiNguoiDungCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: LoaiNguoiDungMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: LoaiNguoiDungMaxAggregateInputType
+  }
+
+  export type GetLoaiNguoiDungAggregateType<T extends LoaiNguoiDungAggregateArgs> = {
+        [P in keyof T & keyof AggregateLoaiNguoiDung]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateLoaiNguoiDung[P]>
+      : GetScalarType<T[P], AggregateLoaiNguoiDung[P]>
+  }
+
+
+
+
+  export type LoaiNguoiDungGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LoaiNguoiDungWhereInput
+    orderBy?: LoaiNguoiDungOrderByWithAggregationInput | LoaiNguoiDungOrderByWithAggregationInput[]
+    by: LoaiNguoiDungScalarFieldEnum[] | LoaiNguoiDungScalarFieldEnum
+    having?: LoaiNguoiDungScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: LoaiNguoiDungCountAggregateInputType | true
+    _min?: LoaiNguoiDungMinAggregateInputType
+    _max?: LoaiNguoiDungMaxAggregateInputType
+  }
+
+  export type LoaiNguoiDungGroupByOutputType = {
+    ma_loai_nguoi_dung: string
+    ten_loai_nguoi_dung: string
+    _count: LoaiNguoiDungCountAggregateOutputType | null
+    _min: LoaiNguoiDungMinAggregateOutputType | null
+    _max: LoaiNguoiDungMaxAggregateOutputType | null
+  }
+
+  type GetLoaiNguoiDungGroupByPayload<T extends LoaiNguoiDungGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<LoaiNguoiDungGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof LoaiNguoiDungGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], LoaiNguoiDungGroupByOutputType[P]>
+            : GetScalarType<T[P], LoaiNguoiDungGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type LoaiNguoiDungSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    ma_loai_nguoi_dung?: boolean
+    ten_loai_nguoi_dung?: boolean
+    NguoiDung?: boolean | LoaiNguoiDung$NguoiDungArgs<ExtArgs>
+    _count?: boolean | LoaiNguoiDungCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["loaiNguoiDung"]>
+
+
+
+  export type LoaiNguoiDungSelectScalar = {
+    ma_loai_nguoi_dung?: boolean
+    ten_loai_nguoi_dung?: boolean
+  }
+
+  export type LoaiNguoiDungOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"ma_loai_nguoi_dung" | "ten_loai_nguoi_dung", ExtArgs["result"]["loaiNguoiDung"]>
+  export type LoaiNguoiDungInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    NguoiDung?: boolean | LoaiNguoiDung$NguoiDungArgs<ExtArgs>
+    _count?: boolean | LoaiNguoiDungCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+  export type $LoaiNguoiDungPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "LoaiNguoiDung"
+    objects: {
+      NguoiDung: Prisma.$NguoiDungPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      ma_loai_nguoi_dung: string
+      ten_loai_nguoi_dung: string
+    }, ExtArgs["result"]["loaiNguoiDung"]>
+    composites: {}
+  }
+
+  type LoaiNguoiDungGetPayload<S extends boolean | null | undefined | LoaiNguoiDungDefaultArgs> = $Result.GetResult<Prisma.$LoaiNguoiDungPayload, S>
+
+  type LoaiNguoiDungCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<LoaiNguoiDungFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: LoaiNguoiDungCountAggregateInputType | true
+    }
+
+  export interface LoaiNguoiDungDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['LoaiNguoiDung'], meta: { name: 'LoaiNguoiDung' } }
+    /**
+     * Find zero or one LoaiNguoiDung that matches the filter.
+     * @param {LoaiNguoiDungFindUniqueArgs} args - Arguments to find a LoaiNguoiDung
+     * @example
+     * // Get one LoaiNguoiDung
+     * const loaiNguoiDung = await prisma.loaiNguoiDung.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends LoaiNguoiDungFindUniqueArgs>(args: SelectSubset<T, LoaiNguoiDungFindUniqueArgs<ExtArgs>>): Prisma__LoaiNguoiDungClient<$Result.GetResult<Prisma.$LoaiNguoiDungPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one LoaiNguoiDung that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {LoaiNguoiDungFindUniqueOrThrowArgs} args - Arguments to find a LoaiNguoiDung
+     * @example
+     * // Get one LoaiNguoiDung
+     * const loaiNguoiDung = await prisma.loaiNguoiDung.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends LoaiNguoiDungFindUniqueOrThrowArgs>(args: SelectSubset<T, LoaiNguoiDungFindUniqueOrThrowArgs<ExtArgs>>): Prisma__LoaiNguoiDungClient<$Result.GetResult<Prisma.$LoaiNguoiDungPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first LoaiNguoiDung that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LoaiNguoiDungFindFirstArgs} args - Arguments to find a LoaiNguoiDung
+     * @example
+     * // Get one LoaiNguoiDung
+     * const loaiNguoiDung = await prisma.loaiNguoiDung.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends LoaiNguoiDungFindFirstArgs>(args?: SelectSubset<T, LoaiNguoiDungFindFirstArgs<ExtArgs>>): Prisma__LoaiNguoiDungClient<$Result.GetResult<Prisma.$LoaiNguoiDungPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first LoaiNguoiDung that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LoaiNguoiDungFindFirstOrThrowArgs} args - Arguments to find a LoaiNguoiDung
+     * @example
+     * // Get one LoaiNguoiDung
+     * const loaiNguoiDung = await prisma.loaiNguoiDung.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends LoaiNguoiDungFindFirstOrThrowArgs>(args?: SelectSubset<T, LoaiNguoiDungFindFirstOrThrowArgs<ExtArgs>>): Prisma__LoaiNguoiDungClient<$Result.GetResult<Prisma.$LoaiNguoiDungPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more LoaiNguoiDungs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LoaiNguoiDungFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all LoaiNguoiDungs
+     * const loaiNguoiDungs = await prisma.loaiNguoiDung.findMany()
+     * 
+     * // Get first 10 LoaiNguoiDungs
+     * const loaiNguoiDungs = await prisma.loaiNguoiDung.findMany({ take: 10 })
+     * 
+     * // Only select the `ma_loai_nguoi_dung`
+     * const loaiNguoiDungWithMa_loai_nguoi_dungOnly = await prisma.loaiNguoiDung.findMany({ select: { ma_loai_nguoi_dung: true } })
+     * 
+     */
+    findMany<T extends LoaiNguoiDungFindManyArgs>(args?: SelectSubset<T, LoaiNguoiDungFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LoaiNguoiDungPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a LoaiNguoiDung.
+     * @param {LoaiNguoiDungCreateArgs} args - Arguments to create a LoaiNguoiDung.
+     * @example
+     * // Create one LoaiNguoiDung
+     * const LoaiNguoiDung = await prisma.loaiNguoiDung.create({
+     *   data: {
+     *     // ... data to create a LoaiNguoiDung
+     *   }
+     * })
+     * 
+     */
+    create<T extends LoaiNguoiDungCreateArgs>(args: SelectSubset<T, LoaiNguoiDungCreateArgs<ExtArgs>>): Prisma__LoaiNguoiDungClient<$Result.GetResult<Prisma.$LoaiNguoiDungPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many LoaiNguoiDungs.
+     * @param {LoaiNguoiDungCreateManyArgs} args - Arguments to create many LoaiNguoiDungs.
+     * @example
+     * // Create many LoaiNguoiDungs
+     * const loaiNguoiDung = await prisma.loaiNguoiDung.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends LoaiNguoiDungCreateManyArgs>(args?: SelectSubset<T, LoaiNguoiDungCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a LoaiNguoiDung.
+     * @param {LoaiNguoiDungDeleteArgs} args - Arguments to delete one LoaiNguoiDung.
+     * @example
+     * // Delete one LoaiNguoiDung
+     * const LoaiNguoiDung = await prisma.loaiNguoiDung.delete({
+     *   where: {
+     *     // ... filter to delete one LoaiNguoiDung
+     *   }
+     * })
+     * 
+     */
+    delete<T extends LoaiNguoiDungDeleteArgs>(args: SelectSubset<T, LoaiNguoiDungDeleteArgs<ExtArgs>>): Prisma__LoaiNguoiDungClient<$Result.GetResult<Prisma.$LoaiNguoiDungPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one LoaiNguoiDung.
+     * @param {LoaiNguoiDungUpdateArgs} args - Arguments to update one LoaiNguoiDung.
+     * @example
+     * // Update one LoaiNguoiDung
+     * const loaiNguoiDung = await prisma.loaiNguoiDung.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends LoaiNguoiDungUpdateArgs>(args: SelectSubset<T, LoaiNguoiDungUpdateArgs<ExtArgs>>): Prisma__LoaiNguoiDungClient<$Result.GetResult<Prisma.$LoaiNguoiDungPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more LoaiNguoiDungs.
+     * @param {LoaiNguoiDungDeleteManyArgs} args - Arguments to filter LoaiNguoiDungs to delete.
+     * @example
+     * // Delete a few LoaiNguoiDungs
+     * const { count } = await prisma.loaiNguoiDung.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends LoaiNguoiDungDeleteManyArgs>(args?: SelectSubset<T, LoaiNguoiDungDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more LoaiNguoiDungs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LoaiNguoiDungUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many LoaiNguoiDungs
+     * const loaiNguoiDung = await prisma.loaiNguoiDung.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends LoaiNguoiDungUpdateManyArgs>(args: SelectSubset<T, LoaiNguoiDungUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one LoaiNguoiDung.
+     * @param {LoaiNguoiDungUpsertArgs} args - Arguments to update or create a LoaiNguoiDung.
+     * @example
+     * // Update or create a LoaiNguoiDung
+     * const loaiNguoiDung = await prisma.loaiNguoiDung.upsert({
+     *   create: {
+     *     // ... data to create a LoaiNguoiDung
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the LoaiNguoiDung we want to update
+     *   }
+     * })
+     */
+    upsert<T extends LoaiNguoiDungUpsertArgs>(args: SelectSubset<T, LoaiNguoiDungUpsertArgs<ExtArgs>>): Prisma__LoaiNguoiDungClient<$Result.GetResult<Prisma.$LoaiNguoiDungPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of LoaiNguoiDungs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LoaiNguoiDungCountArgs} args - Arguments to filter LoaiNguoiDungs to count.
+     * @example
+     * // Count the number of LoaiNguoiDungs
+     * const count = await prisma.loaiNguoiDung.count({
+     *   where: {
+     *     // ... the filter for the LoaiNguoiDungs we want to count
+     *   }
+     * })
+    **/
+    count<T extends LoaiNguoiDungCountArgs>(
+      args?: Subset<T, LoaiNguoiDungCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], LoaiNguoiDungCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a LoaiNguoiDung.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LoaiNguoiDungAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends LoaiNguoiDungAggregateArgs>(args: Subset<T, LoaiNguoiDungAggregateArgs>): Prisma.PrismaPromise<GetLoaiNguoiDungAggregateType<T>>
+
+    /**
+     * Group by LoaiNguoiDung.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LoaiNguoiDungGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends LoaiNguoiDungGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: LoaiNguoiDungGroupByArgs['orderBy'] }
+        : { orderBy?: LoaiNguoiDungGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, LoaiNguoiDungGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetLoaiNguoiDungGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the LoaiNguoiDung model
+   */
+  readonly fields: LoaiNguoiDungFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for LoaiNguoiDung.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__LoaiNguoiDungClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    NguoiDung<T extends LoaiNguoiDung$NguoiDungArgs<ExtArgs> = {}>(args?: Subset<T, LoaiNguoiDung$NguoiDungArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NguoiDungPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the LoaiNguoiDung model
+   */
+  interface LoaiNguoiDungFieldRefs {
+    readonly ma_loai_nguoi_dung: FieldRef<"LoaiNguoiDung", 'String'>
+    readonly ten_loai_nguoi_dung: FieldRef<"LoaiNguoiDung", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * LoaiNguoiDung findUnique
+   */
+  export type LoaiNguoiDungFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LoaiNguoiDung
+     */
+    select?: LoaiNguoiDungSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LoaiNguoiDung
+     */
+    omit?: LoaiNguoiDungOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LoaiNguoiDungInclude<ExtArgs> | null
+    /**
+     * Filter, which LoaiNguoiDung to fetch.
+     */
+    where: LoaiNguoiDungWhereUniqueInput
+  }
+
+  /**
+   * LoaiNguoiDung findUniqueOrThrow
+   */
+  export type LoaiNguoiDungFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LoaiNguoiDung
+     */
+    select?: LoaiNguoiDungSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LoaiNguoiDung
+     */
+    omit?: LoaiNguoiDungOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LoaiNguoiDungInclude<ExtArgs> | null
+    /**
+     * Filter, which LoaiNguoiDung to fetch.
+     */
+    where: LoaiNguoiDungWhereUniqueInput
+  }
+
+  /**
+   * LoaiNguoiDung findFirst
+   */
+  export type LoaiNguoiDungFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LoaiNguoiDung
+     */
+    select?: LoaiNguoiDungSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LoaiNguoiDung
+     */
+    omit?: LoaiNguoiDungOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LoaiNguoiDungInclude<ExtArgs> | null
+    /**
+     * Filter, which LoaiNguoiDung to fetch.
+     */
+    where?: LoaiNguoiDungWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LoaiNguoiDungs to fetch.
+     */
+    orderBy?: LoaiNguoiDungOrderByWithRelationInput | LoaiNguoiDungOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LoaiNguoiDungs.
+     */
+    cursor?: LoaiNguoiDungWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LoaiNguoiDungs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LoaiNguoiDungs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LoaiNguoiDungs.
+     */
+    distinct?: LoaiNguoiDungScalarFieldEnum | LoaiNguoiDungScalarFieldEnum[]
+  }
+
+  /**
+   * LoaiNguoiDung findFirstOrThrow
+   */
+  export type LoaiNguoiDungFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LoaiNguoiDung
+     */
+    select?: LoaiNguoiDungSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LoaiNguoiDung
+     */
+    omit?: LoaiNguoiDungOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LoaiNguoiDungInclude<ExtArgs> | null
+    /**
+     * Filter, which LoaiNguoiDung to fetch.
+     */
+    where?: LoaiNguoiDungWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LoaiNguoiDungs to fetch.
+     */
+    orderBy?: LoaiNguoiDungOrderByWithRelationInput | LoaiNguoiDungOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LoaiNguoiDungs.
+     */
+    cursor?: LoaiNguoiDungWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LoaiNguoiDungs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LoaiNguoiDungs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LoaiNguoiDungs.
+     */
+    distinct?: LoaiNguoiDungScalarFieldEnum | LoaiNguoiDungScalarFieldEnum[]
+  }
+
+  /**
+   * LoaiNguoiDung findMany
+   */
+  export type LoaiNguoiDungFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LoaiNguoiDung
+     */
+    select?: LoaiNguoiDungSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LoaiNguoiDung
+     */
+    omit?: LoaiNguoiDungOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LoaiNguoiDungInclude<ExtArgs> | null
+    /**
+     * Filter, which LoaiNguoiDungs to fetch.
+     */
+    where?: LoaiNguoiDungWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LoaiNguoiDungs to fetch.
+     */
+    orderBy?: LoaiNguoiDungOrderByWithRelationInput | LoaiNguoiDungOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing LoaiNguoiDungs.
+     */
+    cursor?: LoaiNguoiDungWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LoaiNguoiDungs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LoaiNguoiDungs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LoaiNguoiDungs.
+     */
+    distinct?: LoaiNguoiDungScalarFieldEnum | LoaiNguoiDungScalarFieldEnum[]
+  }
+
+  /**
+   * LoaiNguoiDung create
+   */
+  export type LoaiNguoiDungCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LoaiNguoiDung
+     */
+    select?: LoaiNguoiDungSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LoaiNguoiDung
+     */
+    omit?: LoaiNguoiDungOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LoaiNguoiDungInclude<ExtArgs> | null
+    /**
+     * The data needed to create a LoaiNguoiDung.
+     */
+    data: XOR<LoaiNguoiDungCreateInput, LoaiNguoiDungUncheckedCreateInput>
+  }
+
+  /**
+   * LoaiNguoiDung createMany
+   */
+  export type LoaiNguoiDungCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many LoaiNguoiDungs.
+     */
+    data: LoaiNguoiDungCreateManyInput | LoaiNguoiDungCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * LoaiNguoiDung update
+   */
+  export type LoaiNguoiDungUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LoaiNguoiDung
+     */
+    select?: LoaiNguoiDungSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LoaiNguoiDung
+     */
+    omit?: LoaiNguoiDungOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LoaiNguoiDungInclude<ExtArgs> | null
+    /**
+     * The data needed to update a LoaiNguoiDung.
+     */
+    data: XOR<LoaiNguoiDungUpdateInput, LoaiNguoiDungUncheckedUpdateInput>
+    /**
+     * Choose, which LoaiNguoiDung to update.
+     */
+    where: LoaiNguoiDungWhereUniqueInput
+  }
+
+  /**
+   * LoaiNguoiDung updateMany
+   */
+  export type LoaiNguoiDungUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update LoaiNguoiDungs.
+     */
+    data: XOR<LoaiNguoiDungUpdateManyMutationInput, LoaiNguoiDungUncheckedUpdateManyInput>
+    /**
+     * Filter which LoaiNguoiDungs to update
+     */
+    where?: LoaiNguoiDungWhereInput
+    /**
+     * Limit how many LoaiNguoiDungs to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * LoaiNguoiDung upsert
+   */
+  export type LoaiNguoiDungUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LoaiNguoiDung
+     */
+    select?: LoaiNguoiDungSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LoaiNguoiDung
+     */
+    omit?: LoaiNguoiDungOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LoaiNguoiDungInclude<ExtArgs> | null
+    /**
+     * The filter to search for the LoaiNguoiDung to update in case it exists.
+     */
+    where: LoaiNguoiDungWhereUniqueInput
+    /**
+     * In case the LoaiNguoiDung found by the `where` argument doesn't exist, create a new LoaiNguoiDung with this data.
+     */
+    create: XOR<LoaiNguoiDungCreateInput, LoaiNguoiDungUncheckedCreateInput>
+    /**
+     * In case the LoaiNguoiDung was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<LoaiNguoiDungUpdateInput, LoaiNguoiDungUncheckedUpdateInput>
+  }
+
+  /**
+   * LoaiNguoiDung delete
+   */
+  export type LoaiNguoiDungDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LoaiNguoiDung
+     */
+    select?: LoaiNguoiDungSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LoaiNguoiDung
+     */
+    omit?: LoaiNguoiDungOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LoaiNguoiDungInclude<ExtArgs> | null
+    /**
+     * Filter which LoaiNguoiDung to delete.
+     */
+    where: LoaiNguoiDungWhereUniqueInput
+  }
+
+  /**
+   * LoaiNguoiDung deleteMany
+   */
+  export type LoaiNguoiDungDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LoaiNguoiDungs to delete
+     */
+    where?: LoaiNguoiDungWhereInput
+    /**
+     * Limit how many LoaiNguoiDungs to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * LoaiNguoiDung.NguoiDung
+   */
+  export type LoaiNguoiDung$NguoiDungArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NguoiDung
+     */
+    select?: NguoiDungSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NguoiDung
+     */
+    omit?: NguoiDungOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NguoiDungInclude<ExtArgs> | null
+    where?: NguoiDungWhereInput
+    orderBy?: NguoiDungOrderByWithRelationInput | NguoiDungOrderByWithRelationInput[]
+    cursor?: NguoiDungWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: NguoiDungScalarFieldEnum | NguoiDungScalarFieldEnum[]
+  }
+
+  /**
+   * LoaiNguoiDung without action
+   */
+  export type LoaiNguoiDungDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LoaiNguoiDung
+     */
+    select?: LoaiNguoiDungSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LoaiNguoiDung
+     */
+    omit?: LoaiNguoiDungOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LoaiNguoiDungInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -11935,6 +12980,14 @@ export namespace Prisma {
   export type NhomScalarFieldEnum = (typeof NhomScalarFieldEnum)[keyof typeof NhomScalarFieldEnum]
 
 
+  export const LoaiNguoiDungScalarFieldEnum: {
+    ma_loai_nguoi_dung: 'ma_loai_nguoi_dung',
+    ten_loai_nguoi_dung: 'ten_loai_nguoi_dung'
+  };
+
+  export type LoaiNguoiDungScalarFieldEnum = (typeof LoaiNguoiDungScalarFieldEnum)[keyof typeof LoaiNguoiDungScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -12026,6 +13079,14 @@ export namespace Prisma {
   };
 
   export type NhomOrderByRelevanceFieldEnum = (typeof NhomOrderByRelevanceFieldEnum)[keyof typeof NhomOrderByRelevanceFieldEnum]
+
+
+  export const LoaiNguoiDungOrderByRelevanceFieldEnum: {
+    ma_loai_nguoi_dung: 'ma_loai_nguoi_dung',
+    ten_loai_nguoi_dung: 'ten_loai_nguoi_dung'
+  };
+
+  export type LoaiNguoiDungOrderByRelevanceFieldEnum = (typeof LoaiNguoiDungOrderByRelevanceFieldEnum)[keyof typeof LoaiNguoiDungOrderByRelevanceFieldEnum]
 
 
   /**
@@ -12412,9 +13473,10 @@ export namespace Prisma {
     email?: StringFilter<"NguoiDung"> | string
     so_dt?: StringNullableFilter<"NguoiDung"> | string | null
     mat_khau?: StringFilter<"NguoiDung"> | string
-    loai_nguoi_dung?: StringNullableFilter<"NguoiDung"> | string | null
+    loai_nguoi_dung?: StringFilter<"NguoiDung"> | string
     ma_nhom?: StringFilter<"NguoiDung"> | string
     DatVe?: DatVeListRelationFilter
+    LoaiNguoiDung?: XOR<LoaiNguoiDungScalarRelationFilter, LoaiNguoiDungWhereInput>
     Nhom?: XOR<NhomScalarRelationFilter, NhomWhereInput>
   }
 
@@ -12424,9 +13486,10 @@ export namespace Prisma {
     email?: SortOrder
     so_dt?: SortOrderInput | SortOrder
     mat_khau?: SortOrder
-    loai_nguoi_dung?: SortOrderInput | SortOrder
+    loai_nguoi_dung?: SortOrder
     ma_nhom?: SortOrder
     DatVe?: DatVeOrderByRelationAggregateInput
+    LoaiNguoiDung?: LoaiNguoiDungOrderByWithRelationInput
     Nhom?: NhomOrderByWithRelationInput
     _relevance?: NguoiDungOrderByRelevanceInput
   }
@@ -12440,9 +13503,10 @@ export namespace Prisma {
     ho_ten?: StringFilter<"NguoiDung"> | string
     so_dt?: StringNullableFilter<"NguoiDung"> | string | null
     mat_khau?: StringFilter<"NguoiDung"> | string
-    loai_nguoi_dung?: StringNullableFilter<"NguoiDung"> | string | null
+    loai_nguoi_dung?: StringFilter<"NguoiDung"> | string
     ma_nhom?: StringFilter<"NguoiDung"> | string
     DatVe?: DatVeListRelationFilter
+    LoaiNguoiDung?: XOR<LoaiNguoiDungScalarRelationFilter, LoaiNguoiDungWhereInput>
     Nhom?: XOR<NhomScalarRelationFilter, NhomWhereInput>
   }, "tai_khoan" | "email">
 
@@ -12452,7 +13516,7 @@ export namespace Prisma {
     email?: SortOrder
     so_dt?: SortOrderInput | SortOrder
     mat_khau?: SortOrder
-    loai_nguoi_dung?: SortOrderInput | SortOrder
+    loai_nguoi_dung?: SortOrder
     ma_nhom?: SortOrder
     _count?: NguoiDungCountOrderByAggregateInput
     _max?: NguoiDungMaxOrderByAggregateInput
@@ -12468,7 +13532,7 @@ export namespace Prisma {
     email?: StringWithAggregatesFilter<"NguoiDung"> | string
     so_dt?: StringNullableWithAggregatesFilter<"NguoiDung"> | string | null
     mat_khau?: StringWithAggregatesFilter<"NguoiDung"> | string
-    loai_nguoi_dung?: StringNullableWithAggregatesFilter<"NguoiDung"> | string | null
+    loai_nguoi_dung?: StringWithAggregatesFilter<"NguoiDung"> | string
     ma_nhom?: StringWithAggregatesFilter<"NguoiDung"> | string
   }
 
@@ -12662,6 +13726,47 @@ export namespace Prisma {
     NOT?: NhomScalarWhereWithAggregatesInput | NhomScalarWhereWithAggregatesInput[]
     ma_nhom?: StringWithAggregatesFilter<"Nhom"> | string
     ten_nhom?: StringNullableWithAggregatesFilter<"Nhom"> | string | null
+  }
+
+  export type LoaiNguoiDungWhereInput = {
+    AND?: LoaiNguoiDungWhereInput | LoaiNguoiDungWhereInput[]
+    OR?: LoaiNguoiDungWhereInput[]
+    NOT?: LoaiNguoiDungWhereInput | LoaiNguoiDungWhereInput[]
+    ma_loai_nguoi_dung?: StringFilter<"LoaiNguoiDung"> | string
+    ten_loai_nguoi_dung?: StringFilter<"LoaiNguoiDung"> | string
+    NguoiDung?: NguoiDungListRelationFilter
+  }
+
+  export type LoaiNguoiDungOrderByWithRelationInput = {
+    ma_loai_nguoi_dung?: SortOrder
+    ten_loai_nguoi_dung?: SortOrder
+    NguoiDung?: NguoiDungOrderByRelationAggregateInput
+    _relevance?: LoaiNguoiDungOrderByRelevanceInput
+  }
+
+  export type LoaiNguoiDungWhereUniqueInput = Prisma.AtLeast<{
+    ma_loai_nguoi_dung?: string
+    AND?: LoaiNguoiDungWhereInput | LoaiNguoiDungWhereInput[]
+    OR?: LoaiNguoiDungWhereInput[]
+    NOT?: LoaiNguoiDungWhereInput | LoaiNguoiDungWhereInput[]
+    ten_loai_nguoi_dung?: StringFilter<"LoaiNguoiDung"> | string
+    NguoiDung?: NguoiDungListRelationFilter
+  }, "ma_loai_nguoi_dung">
+
+  export type LoaiNguoiDungOrderByWithAggregationInput = {
+    ma_loai_nguoi_dung?: SortOrder
+    ten_loai_nguoi_dung?: SortOrder
+    _count?: LoaiNguoiDungCountOrderByAggregateInput
+    _max?: LoaiNguoiDungMaxOrderByAggregateInput
+    _min?: LoaiNguoiDungMinOrderByAggregateInput
+  }
+
+  export type LoaiNguoiDungScalarWhereWithAggregatesInput = {
+    AND?: LoaiNguoiDungScalarWhereWithAggregatesInput | LoaiNguoiDungScalarWhereWithAggregatesInput[]
+    OR?: LoaiNguoiDungScalarWhereWithAggregatesInput[]
+    NOT?: LoaiNguoiDungScalarWhereWithAggregatesInput | LoaiNguoiDungScalarWhereWithAggregatesInput[]
+    ma_loai_nguoi_dung?: StringWithAggregatesFilter<"LoaiNguoiDung"> | string
+    ten_loai_nguoi_dung?: StringWithAggregatesFilter<"LoaiNguoiDung"> | string
   }
 
   export type BannerCreateInput = {
@@ -12948,8 +14053,8 @@ export namespace Prisma {
     email: string
     so_dt?: string | null
     mat_khau: string
-    loai_nguoi_dung?: string | null
     DatVe?: DatVeCreateNestedManyWithoutNguoiDungInput
+    LoaiNguoiDung: LoaiNguoiDungCreateNestedOneWithoutNguoiDungInput
     Nhom?: NhomCreateNestedOneWithoutNguoiDungInput
   }
 
@@ -12959,7 +14064,7 @@ export namespace Prisma {
     email: string
     so_dt?: string | null
     mat_khau: string
-    loai_nguoi_dung?: string | null
+    loai_nguoi_dung: string
     ma_nhom?: string
     DatVe?: DatVeUncheckedCreateNestedManyWithoutNguoiDungInput
   }
@@ -12970,8 +14075,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     so_dt?: NullableStringFieldUpdateOperationsInput | string | null
     mat_khau?: StringFieldUpdateOperationsInput | string
-    loai_nguoi_dung?: NullableStringFieldUpdateOperationsInput | string | null
     DatVe?: DatVeUpdateManyWithoutNguoiDungNestedInput
+    LoaiNguoiDung?: LoaiNguoiDungUpdateOneRequiredWithoutNguoiDungNestedInput
     Nhom?: NhomUpdateOneRequiredWithoutNguoiDungNestedInput
   }
 
@@ -12981,7 +14086,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     so_dt?: NullableStringFieldUpdateOperationsInput | string | null
     mat_khau?: StringFieldUpdateOperationsInput | string
-    loai_nguoi_dung?: NullableStringFieldUpdateOperationsInput | string | null
+    loai_nguoi_dung?: StringFieldUpdateOperationsInput | string
     ma_nhom?: StringFieldUpdateOperationsInput | string
     DatVe?: DatVeUncheckedUpdateManyWithoutNguoiDungNestedInput
   }
@@ -12992,7 +14097,7 @@ export namespace Prisma {
     email: string
     so_dt?: string | null
     mat_khau: string
-    loai_nguoi_dung?: string | null
+    loai_nguoi_dung: string
     ma_nhom?: string
   }
 
@@ -13002,7 +14107,6 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     so_dt?: NullableStringFieldUpdateOperationsInput | string | null
     mat_khau?: StringFieldUpdateOperationsInput | string
-    loai_nguoi_dung?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type NguoiDungUncheckedUpdateManyInput = {
@@ -13011,7 +14115,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     so_dt?: NullableStringFieldUpdateOperationsInput | string | null
     mat_khau?: StringFieldUpdateOperationsInput | string
-    loai_nguoi_dung?: NullableStringFieldUpdateOperationsInput | string | null
+    loai_nguoi_dung?: StringFieldUpdateOperationsInput | string
     ma_nhom?: StringFieldUpdateOperationsInput | string
   }
 
@@ -13204,6 +14308,45 @@ export namespace Prisma {
   export type NhomUncheckedUpdateManyInput = {
     ma_nhom?: StringFieldUpdateOperationsInput | string
     ten_nhom?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type LoaiNguoiDungCreateInput = {
+    ma_loai_nguoi_dung: string
+    ten_loai_nguoi_dung: string
+    NguoiDung?: NguoiDungCreateNestedManyWithoutLoaiNguoiDungInput
+  }
+
+  export type LoaiNguoiDungUncheckedCreateInput = {
+    ma_loai_nguoi_dung: string
+    ten_loai_nguoi_dung: string
+    NguoiDung?: NguoiDungUncheckedCreateNestedManyWithoutLoaiNguoiDungInput
+  }
+
+  export type LoaiNguoiDungUpdateInput = {
+    ma_loai_nguoi_dung?: StringFieldUpdateOperationsInput | string
+    ten_loai_nguoi_dung?: StringFieldUpdateOperationsInput | string
+    NguoiDung?: NguoiDungUpdateManyWithoutLoaiNguoiDungNestedInput
+  }
+
+  export type LoaiNguoiDungUncheckedUpdateInput = {
+    ma_loai_nguoi_dung?: StringFieldUpdateOperationsInput | string
+    ten_loai_nguoi_dung?: StringFieldUpdateOperationsInput | string
+    NguoiDung?: NguoiDungUncheckedUpdateManyWithoutLoaiNguoiDungNestedInput
+  }
+
+  export type LoaiNguoiDungCreateManyInput = {
+    ma_loai_nguoi_dung: string
+    ten_loai_nguoi_dung: string
+  }
+
+  export type LoaiNguoiDungUpdateManyMutationInput = {
+    ma_loai_nguoi_dung?: StringFieldUpdateOperationsInput | string
+    ten_loai_nguoi_dung?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type LoaiNguoiDungUncheckedUpdateManyInput = {
+    ma_loai_nguoi_dung?: StringFieldUpdateOperationsInput | string
+    ten_loai_nguoi_dung?: StringFieldUpdateOperationsInput | string
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -13616,6 +14759,11 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type LoaiNguoiDungScalarRelationFilter = {
+    is?: LoaiNguoiDungWhereInput
+    isNot?: LoaiNguoiDungWhereInput
+  }
+
   export type NhomScalarRelationFilter = {
     is?: NhomWhereInput
     isNot?: NhomWhereInput
@@ -13888,6 +15036,27 @@ export namespace Prisma {
   export type NhomMinOrderByAggregateInput = {
     ma_nhom?: SortOrder
     ten_nhom?: SortOrder
+  }
+
+  export type LoaiNguoiDungOrderByRelevanceInput = {
+    fields: LoaiNguoiDungOrderByRelevanceFieldEnum | LoaiNguoiDungOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type LoaiNguoiDungCountOrderByAggregateInput = {
+    ma_loai_nguoi_dung?: SortOrder
+    ten_loai_nguoi_dung?: SortOrder
+  }
+
+  export type LoaiNguoiDungMaxOrderByAggregateInput = {
+    ma_loai_nguoi_dung?: SortOrder
+    ten_loai_nguoi_dung?: SortOrder
+  }
+
+  export type LoaiNguoiDungMinOrderByAggregateInput = {
+    ma_loai_nguoi_dung?: SortOrder
+    ten_loai_nguoi_dung?: SortOrder
   }
 
   export type PhimCreateNestedOneWithoutBannerInput = {
@@ -14197,6 +15366,12 @@ export namespace Prisma {
     connect?: DatVeWhereUniqueInput | DatVeWhereUniqueInput[]
   }
 
+  export type LoaiNguoiDungCreateNestedOneWithoutNguoiDungInput = {
+    create?: XOR<LoaiNguoiDungCreateWithoutNguoiDungInput, LoaiNguoiDungUncheckedCreateWithoutNguoiDungInput>
+    connectOrCreate?: LoaiNguoiDungCreateOrConnectWithoutNguoiDungInput
+    connect?: LoaiNguoiDungWhereUniqueInput
+  }
+
   export type NhomCreateNestedOneWithoutNguoiDungInput = {
     create?: XOR<NhomCreateWithoutNguoiDungInput, NhomUncheckedCreateWithoutNguoiDungInput>
     connectOrCreate?: NhomCreateOrConnectWithoutNguoiDungInput
@@ -14222,6 +15397,14 @@ export namespace Prisma {
     update?: DatVeUpdateWithWhereUniqueWithoutNguoiDungInput | DatVeUpdateWithWhereUniqueWithoutNguoiDungInput[]
     updateMany?: DatVeUpdateManyWithWhereWithoutNguoiDungInput | DatVeUpdateManyWithWhereWithoutNguoiDungInput[]
     deleteMany?: DatVeScalarWhereInput | DatVeScalarWhereInput[]
+  }
+
+  export type LoaiNguoiDungUpdateOneRequiredWithoutNguoiDungNestedInput = {
+    create?: XOR<LoaiNguoiDungCreateWithoutNguoiDungInput, LoaiNguoiDungUncheckedCreateWithoutNguoiDungInput>
+    connectOrCreate?: LoaiNguoiDungCreateOrConnectWithoutNguoiDungInput
+    upsert?: LoaiNguoiDungUpsertWithoutNguoiDungInput
+    connect?: LoaiNguoiDungWhereUniqueInput
+    update?: XOR<XOR<LoaiNguoiDungUpdateToOneWithWhereWithoutNguoiDungInput, LoaiNguoiDungUpdateWithoutNguoiDungInput>, LoaiNguoiDungUncheckedUpdateWithoutNguoiDungInput>
   }
 
   export type NhomUpdateOneRequiredWithoutNguoiDungNestedInput = {
@@ -14540,6 +15723,48 @@ export namespace Prisma {
     update?: PhimUpdateWithWhereUniqueWithoutNhomInput | PhimUpdateWithWhereUniqueWithoutNhomInput[]
     updateMany?: PhimUpdateManyWithWhereWithoutNhomInput | PhimUpdateManyWithWhereWithoutNhomInput[]
     deleteMany?: PhimScalarWhereInput | PhimScalarWhereInput[]
+  }
+
+  export type NguoiDungCreateNestedManyWithoutLoaiNguoiDungInput = {
+    create?: XOR<NguoiDungCreateWithoutLoaiNguoiDungInput, NguoiDungUncheckedCreateWithoutLoaiNguoiDungInput> | NguoiDungCreateWithoutLoaiNguoiDungInput[] | NguoiDungUncheckedCreateWithoutLoaiNguoiDungInput[]
+    connectOrCreate?: NguoiDungCreateOrConnectWithoutLoaiNguoiDungInput | NguoiDungCreateOrConnectWithoutLoaiNguoiDungInput[]
+    createMany?: NguoiDungCreateManyLoaiNguoiDungInputEnvelope
+    connect?: NguoiDungWhereUniqueInput | NguoiDungWhereUniqueInput[]
+  }
+
+  export type NguoiDungUncheckedCreateNestedManyWithoutLoaiNguoiDungInput = {
+    create?: XOR<NguoiDungCreateWithoutLoaiNguoiDungInput, NguoiDungUncheckedCreateWithoutLoaiNguoiDungInput> | NguoiDungCreateWithoutLoaiNguoiDungInput[] | NguoiDungUncheckedCreateWithoutLoaiNguoiDungInput[]
+    connectOrCreate?: NguoiDungCreateOrConnectWithoutLoaiNguoiDungInput | NguoiDungCreateOrConnectWithoutLoaiNguoiDungInput[]
+    createMany?: NguoiDungCreateManyLoaiNguoiDungInputEnvelope
+    connect?: NguoiDungWhereUniqueInput | NguoiDungWhereUniqueInput[]
+  }
+
+  export type NguoiDungUpdateManyWithoutLoaiNguoiDungNestedInput = {
+    create?: XOR<NguoiDungCreateWithoutLoaiNguoiDungInput, NguoiDungUncheckedCreateWithoutLoaiNguoiDungInput> | NguoiDungCreateWithoutLoaiNguoiDungInput[] | NguoiDungUncheckedCreateWithoutLoaiNguoiDungInput[]
+    connectOrCreate?: NguoiDungCreateOrConnectWithoutLoaiNguoiDungInput | NguoiDungCreateOrConnectWithoutLoaiNguoiDungInput[]
+    upsert?: NguoiDungUpsertWithWhereUniqueWithoutLoaiNguoiDungInput | NguoiDungUpsertWithWhereUniqueWithoutLoaiNguoiDungInput[]
+    createMany?: NguoiDungCreateManyLoaiNguoiDungInputEnvelope
+    set?: NguoiDungWhereUniqueInput | NguoiDungWhereUniqueInput[]
+    disconnect?: NguoiDungWhereUniqueInput | NguoiDungWhereUniqueInput[]
+    delete?: NguoiDungWhereUniqueInput | NguoiDungWhereUniqueInput[]
+    connect?: NguoiDungWhereUniqueInput | NguoiDungWhereUniqueInput[]
+    update?: NguoiDungUpdateWithWhereUniqueWithoutLoaiNguoiDungInput | NguoiDungUpdateWithWhereUniqueWithoutLoaiNguoiDungInput[]
+    updateMany?: NguoiDungUpdateManyWithWhereWithoutLoaiNguoiDungInput | NguoiDungUpdateManyWithWhereWithoutLoaiNguoiDungInput[]
+    deleteMany?: NguoiDungScalarWhereInput | NguoiDungScalarWhereInput[]
+  }
+
+  export type NguoiDungUncheckedUpdateManyWithoutLoaiNguoiDungNestedInput = {
+    create?: XOR<NguoiDungCreateWithoutLoaiNguoiDungInput, NguoiDungUncheckedCreateWithoutLoaiNguoiDungInput> | NguoiDungCreateWithoutLoaiNguoiDungInput[] | NguoiDungUncheckedCreateWithoutLoaiNguoiDungInput[]
+    connectOrCreate?: NguoiDungCreateOrConnectWithoutLoaiNguoiDungInput | NguoiDungCreateOrConnectWithoutLoaiNguoiDungInput[]
+    upsert?: NguoiDungUpsertWithWhereUniqueWithoutLoaiNguoiDungInput | NguoiDungUpsertWithWhereUniqueWithoutLoaiNguoiDungInput[]
+    createMany?: NguoiDungCreateManyLoaiNguoiDungInputEnvelope
+    set?: NguoiDungWhereUniqueInput | NguoiDungWhereUniqueInput[]
+    disconnect?: NguoiDungWhereUniqueInput | NguoiDungWhereUniqueInput[]
+    delete?: NguoiDungWhereUniqueInput | NguoiDungWhereUniqueInput[]
+    connect?: NguoiDungWhereUniqueInput | NguoiDungWhereUniqueInput[]
+    update?: NguoiDungUpdateWithWhereUniqueWithoutLoaiNguoiDungInput | NguoiDungUpdateWithWhereUniqueWithoutLoaiNguoiDungInput[]
+    updateMany?: NguoiDungUpdateManyWithWhereWithoutLoaiNguoiDungInput | NguoiDungUpdateManyWithWhereWithoutLoaiNguoiDungInput[]
+    deleteMany?: NguoiDungScalarWhereInput | NguoiDungScalarWhereInput[]
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -14951,7 +16176,7 @@ export namespace Prisma {
     email: string
     so_dt?: string | null
     mat_khau: string
-    loai_nguoi_dung?: string | null
+    LoaiNguoiDung: LoaiNguoiDungCreateNestedOneWithoutNguoiDungInput
     Nhom?: NhomCreateNestedOneWithoutNguoiDungInput
   }
 
@@ -14961,7 +16186,7 @@ export namespace Prisma {
     email: string
     so_dt?: string | null
     mat_khau: string
-    loai_nguoi_dung?: string | null
+    loai_nguoi_dung: string
     ma_nhom?: string
   }
 
@@ -15037,7 +16262,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     so_dt?: NullableStringFieldUpdateOperationsInput | string | null
     mat_khau?: StringFieldUpdateOperationsInput | string
-    loai_nguoi_dung?: NullableStringFieldUpdateOperationsInput | string | null
+    LoaiNguoiDung?: LoaiNguoiDungUpdateOneRequiredWithoutNguoiDungNestedInput
     Nhom?: NhomUpdateOneRequiredWithoutNguoiDungNestedInput
   }
 
@@ -15047,7 +16272,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     so_dt?: NullableStringFieldUpdateOperationsInput | string | null
     mat_khau?: StringFieldUpdateOperationsInput | string
-    loai_nguoi_dung?: NullableStringFieldUpdateOperationsInput | string | null
+    loai_nguoi_dung?: StringFieldUpdateOperationsInput | string
     ma_nhom?: StringFieldUpdateOperationsInput | string
   }
 
@@ -15363,6 +16588,21 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type LoaiNguoiDungCreateWithoutNguoiDungInput = {
+    ma_loai_nguoi_dung: string
+    ten_loai_nguoi_dung: string
+  }
+
+  export type LoaiNguoiDungUncheckedCreateWithoutNguoiDungInput = {
+    ma_loai_nguoi_dung: string
+    ten_loai_nguoi_dung: string
+  }
+
+  export type LoaiNguoiDungCreateOrConnectWithoutNguoiDungInput = {
+    where: LoaiNguoiDungWhereUniqueInput
+    create: XOR<LoaiNguoiDungCreateWithoutNguoiDungInput, LoaiNguoiDungUncheckedCreateWithoutNguoiDungInput>
+  }
+
   export type NhomCreateWithoutNguoiDungInput = {
     ma_nhom: string
     ten_nhom?: string | null
@@ -15394,6 +16634,27 @@ export namespace Prisma {
   export type DatVeUpdateManyWithWhereWithoutNguoiDungInput = {
     where: DatVeScalarWhereInput
     data: XOR<DatVeUpdateManyMutationInput, DatVeUncheckedUpdateManyWithoutNguoiDungInput>
+  }
+
+  export type LoaiNguoiDungUpsertWithoutNguoiDungInput = {
+    update: XOR<LoaiNguoiDungUpdateWithoutNguoiDungInput, LoaiNguoiDungUncheckedUpdateWithoutNguoiDungInput>
+    create: XOR<LoaiNguoiDungCreateWithoutNguoiDungInput, LoaiNguoiDungUncheckedCreateWithoutNguoiDungInput>
+    where?: LoaiNguoiDungWhereInput
+  }
+
+  export type LoaiNguoiDungUpdateToOneWithWhereWithoutNguoiDungInput = {
+    where?: LoaiNguoiDungWhereInput
+    data: XOR<LoaiNguoiDungUpdateWithoutNguoiDungInput, LoaiNguoiDungUncheckedUpdateWithoutNguoiDungInput>
+  }
+
+  export type LoaiNguoiDungUpdateWithoutNguoiDungInput = {
+    ma_loai_nguoi_dung?: StringFieldUpdateOperationsInput | string
+    ten_loai_nguoi_dung?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type LoaiNguoiDungUncheckedUpdateWithoutNguoiDungInput = {
+    ma_loai_nguoi_dung?: StringFieldUpdateOperationsInput | string
+    ten_loai_nguoi_dung?: StringFieldUpdateOperationsInput | string
   }
 
   export type NhomUpsertWithoutNguoiDungInput = {
@@ -15693,8 +16954,8 @@ export namespace Prisma {
     email: string
     so_dt?: string | null
     mat_khau: string
-    loai_nguoi_dung?: string | null
     DatVe?: DatVeCreateNestedManyWithoutNguoiDungInput
+    LoaiNguoiDung: LoaiNguoiDungCreateNestedOneWithoutNguoiDungInput
   }
 
   export type NguoiDungUncheckedCreateWithoutNhomInput = {
@@ -15703,7 +16964,7 @@ export namespace Prisma {
     email: string
     so_dt?: string | null
     mat_khau: string
-    loai_nguoi_dung?: string | null
+    loai_nguoi_dung: string
     DatVe?: DatVeUncheckedCreateNestedManyWithoutNguoiDungInput
   }
 
@@ -15781,7 +17042,7 @@ export namespace Prisma {
     email?: StringFilter<"NguoiDung"> | string
     so_dt?: StringNullableFilter<"NguoiDung"> | string | null
     mat_khau?: StringFilter<"NguoiDung"> | string
-    loai_nguoi_dung?: StringNullableFilter<"NguoiDung"> | string | null
+    loai_nguoi_dung?: StringFilter<"NguoiDung"> | string
     ma_nhom?: StringFilter<"NguoiDung"> | string
   }
 
@@ -15816,6 +17077,52 @@ export namespace Prisma {
     dang_chieu?: BoolNullableFilter<"Phim"> | boolean | null
     sap_chieu?: BoolNullableFilter<"Phim"> | boolean | null
     ma_nhom?: StringFilter<"Phim"> | string
+  }
+
+  export type NguoiDungCreateWithoutLoaiNguoiDungInput = {
+    tai_khoan: string
+    ho_ten: string
+    email: string
+    so_dt?: string | null
+    mat_khau: string
+    DatVe?: DatVeCreateNestedManyWithoutNguoiDungInput
+    Nhom?: NhomCreateNestedOneWithoutNguoiDungInput
+  }
+
+  export type NguoiDungUncheckedCreateWithoutLoaiNguoiDungInput = {
+    tai_khoan: string
+    ho_ten: string
+    email: string
+    so_dt?: string | null
+    mat_khau: string
+    ma_nhom?: string
+    DatVe?: DatVeUncheckedCreateNestedManyWithoutNguoiDungInput
+  }
+
+  export type NguoiDungCreateOrConnectWithoutLoaiNguoiDungInput = {
+    where: NguoiDungWhereUniqueInput
+    create: XOR<NguoiDungCreateWithoutLoaiNguoiDungInput, NguoiDungUncheckedCreateWithoutLoaiNguoiDungInput>
+  }
+
+  export type NguoiDungCreateManyLoaiNguoiDungInputEnvelope = {
+    data: NguoiDungCreateManyLoaiNguoiDungInput | NguoiDungCreateManyLoaiNguoiDungInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type NguoiDungUpsertWithWhereUniqueWithoutLoaiNguoiDungInput = {
+    where: NguoiDungWhereUniqueInput
+    update: XOR<NguoiDungUpdateWithoutLoaiNguoiDungInput, NguoiDungUncheckedUpdateWithoutLoaiNguoiDungInput>
+    create: XOR<NguoiDungCreateWithoutLoaiNguoiDungInput, NguoiDungUncheckedCreateWithoutLoaiNguoiDungInput>
+  }
+
+  export type NguoiDungUpdateWithWhereUniqueWithoutLoaiNguoiDungInput = {
+    where: NguoiDungWhereUniqueInput
+    data: XOR<NguoiDungUpdateWithoutLoaiNguoiDungInput, NguoiDungUncheckedUpdateWithoutLoaiNguoiDungInput>
+  }
+
+  export type NguoiDungUpdateManyWithWhereWithoutLoaiNguoiDungInput = {
+    where: NguoiDungScalarWhereInput
+    data: XOR<NguoiDungUpdateManyMutationInput, NguoiDungUncheckedUpdateManyWithoutLoaiNguoiDungInput>
   }
 
   export type RapPhimCreateManyCumRapInput = {
@@ -16043,7 +17350,7 @@ export namespace Prisma {
     email: string
     so_dt?: string | null
     mat_khau: string
-    loai_nguoi_dung?: string | null
+    loai_nguoi_dung: string
   }
 
   export type PhimCreateManyNhomInput = {
@@ -16065,8 +17372,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     so_dt?: NullableStringFieldUpdateOperationsInput | string | null
     mat_khau?: StringFieldUpdateOperationsInput | string
-    loai_nguoi_dung?: NullableStringFieldUpdateOperationsInput | string | null
     DatVe?: DatVeUpdateManyWithoutNguoiDungNestedInput
+    LoaiNguoiDung?: LoaiNguoiDungUpdateOneRequiredWithoutNguoiDungNestedInput
   }
 
   export type NguoiDungUncheckedUpdateWithoutNhomInput = {
@@ -16075,7 +17382,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     so_dt?: NullableStringFieldUpdateOperationsInput | string | null
     mat_khau?: StringFieldUpdateOperationsInput | string
-    loai_nguoi_dung?: NullableStringFieldUpdateOperationsInput | string | null
+    loai_nguoi_dung?: StringFieldUpdateOperationsInput | string
     DatVe?: DatVeUncheckedUpdateManyWithoutNguoiDungNestedInput
   }
 
@@ -16085,7 +17392,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     so_dt?: NullableStringFieldUpdateOperationsInput | string | null
     mat_khau?: StringFieldUpdateOperationsInput | string
-    loai_nguoi_dung?: NullableStringFieldUpdateOperationsInput | string | null
+    loai_nguoi_dung?: StringFieldUpdateOperationsInput | string
   }
 
   export type PhimUpdateWithoutNhomInput = {
@@ -16128,6 +17435,44 @@ export namespace Prisma {
     hot?: NullableBoolFieldUpdateOperationsInput | boolean | null
     dang_chieu?: NullableBoolFieldUpdateOperationsInput | boolean | null
     sap_chieu?: NullableBoolFieldUpdateOperationsInput | boolean | null
+  }
+
+  export type NguoiDungCreateManyLoaiNguoiDungInput = {
+    tai_khoan: string
+    ho_ten: string
+    email: string
+    so_dt?: string | null
+    mat_khau: string
+    ma_nhom?: string
+  }
+
+  export type NguoiDungUpdateWithoutLoaiNguoiDungInput = {
+    tai_khoan?: StringFieldUpdateOperationsInput | string
+    ho_ten?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    so_dt?: NullableStringFieldUpdateOperationsInput | string | null
+    mat_khau?: StringFieldUpdateOperationsInput | string
+    DatVe?: DatVeUpdateManyWithoutNguoiDungNestedInput
+    Nhom?: NhomUpdateOneRequiredWithoutNguoiDungNestedInput
+  }
+
+  export type NguoiDungUncheckedUpdateWithoutLoaiNguoiDungInput = {
+    tai_khoan?: StringFieldUpdateOperationsInput | string
+    ho_ten?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    so_dt?: NullableStringFieldUpdateOperationsInput | string | null
+    mat_khau?: StringFieldUpdateOperationsInput | string
+    ma_nhom?: StringFieldUpdateOperationsInput | string
+    DatVe?: DatVeUncheckedUpdateManyWithoutNguoiDungNestedInput
+  }
+
+  export type NguoiDungUncheckedUpdateManyWithoutLoaiNguoiDungInput = {
+    tai_khoan?: StringFieldUpdateOperationsInput | string
+    ho_ten?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    so_dt?: NullableStringFieldUpdateOperationsInput | string | null
+    mat_khau?: StringFieldUpdateOperationsInput | string
+    ma_nhom?: StringFieldUpdateOperationsInput | string
   }
 
 

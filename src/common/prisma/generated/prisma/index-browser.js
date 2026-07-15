@@ -196,6 +196,11 @@ exports.Prisma.NhomScalarFieldEnum = {
   ten_nhom: 'ten_nhom'
 };
 
+exports.Prisma.LoaiNguoiDungScalarFieldEnum = {
+  ma_loai_nguoi_dung: 'ma_loai_nguoi_dung',
+  ten_loai_nguoi_dung: 'ten_loai_nguoi_dung'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -256,6 +261,11 @@ exports.Prisma.NhomOrderByRelevanceFieldEnum = {
   ten_nhom: 'ten_nhom'
 };
 
+exports.Prisma.LoaiNguoiDungOrderByRelevanceFieldEnum = {
+  ma_loai_nguoi_dung: 'ma_loai_nguoi_dung',
+  ten_loai_nguoi_dung: 'ten_loai_nguoi_dung'
+};
+
 
 exports.Prisma.ModelName = {
   Banner: 'Banner',
@@ -267,7 +277,8 @@ exports.Prisma.ModelName = {
   NguoiDung: 'NguoiDung',
   Phim: 'Phim',
   RapPhim: 'RapPhim',
-  Nhom: 'Nhom'
+  Nhom: 'Nhom',
+  LoaiNguoiDung: 'LoaiNguoiDung'
 };
 
 /**

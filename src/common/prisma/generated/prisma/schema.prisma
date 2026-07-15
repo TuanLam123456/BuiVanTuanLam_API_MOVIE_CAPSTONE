@@ -75,17 +75,19 @@ model LichChieu {
 }
 
 model NguoiDung {
-  tai_khoan       String  @id @db.VarChar(100)
-  ho_ten          String  @db.VarChar(255)
-  email           String  @unique(map: "email") @db.VarChar(255)
-  so_dt           String? @db.VarChar(20)
-  mat_khau        String  @db.VarChar(255)
-  loai_nguoi_dung String? @db.VarChar(100)
-  ma_nhom         String  @default("GP01") @db.VarChar(4)
+  tai_khoan       String        @id @db.VarChar(100)
+  ho_ten          String        @db.VarChar(255)
+  email           String        @unique(map: "email") @db.VarChar(255)
+  so_dt           String?       @db.VarChar(20)
+  mat_khau        String        @db.VarChar(255)
+  loai_nguoi_dung String        @db.VarChar(20)
+  ma_nhom         String        @default("GP01") @db.VarChar(4)
   DatVe           DatVe[]
-  Nhom            Nhom    @relation(fields: [ma_nhom], references: [ma_nhom], map: "fk_nguoidung_nhom")
+  LoaiNguoiDung   LoaiNguoiDung @relation(fields: [loai_nguoi_dung], references: [ma_loai_nguoi_dung], onDelete: NoAction, onUpdate: NoAction, map: "fk_nguoidung_loainguoidung")
+  Nhom            Nhom          @relation(fields: [ma_nhom], references: [ma_nhom], map: "fk_nguoidung_nhom")
 
   @@index([ma_nhom], map: "fk_nguoidung_nhom")
+  @@index([loai_nguoi_dung], map: "fk_nguoidung_loainguoidung")
 }
 
 model Phim {
@@ -123,4 +125,10 @@ model Nhom {
   ten_nhom  String?     @db.VarChar(100)
   NguoiDung NguoiDung[]
   Phim      Phim[]
+}
+
+model LoaiNguoiDung {
+  ma_loai_nguoi_dung  String      @id @db.VarChar(20)
+  ten_loai_nguoi_dung String      @db.VarChar(100)
+  NguoiDung           NguoiDung[]
 }
