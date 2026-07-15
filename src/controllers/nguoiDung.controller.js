@@ -71,11 +71,14 @@ export const nguoiDungController = {
   },
 
   // Lấy danh sách loại người dùng Controller
-  async layDanhSachLoaiNguoiDung(req,res,next){
-    const result = await nguoiDungService.layDanhSachLoaiNguoiDung(req)
+  async layDanhSachLoaiNguoiDung(req, res, next) {
+    const result = await nguoiDungService.layDanhSachLoaiNguoiDung(req);
 
-    const response = responseSuccess(result,'Lấy danh sách loại người dùng thành công')
+    const response = responseSuccess(
+      result,
+      "Lấy danh sách loại người dùng thành công",
+    );
 
-    res.status(response.statusCode).json(response)
-  }
+    res.status(response.statusCode).json(response);
+  },
 };
