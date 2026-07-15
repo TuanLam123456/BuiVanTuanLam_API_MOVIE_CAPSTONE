@@ -13,4 +13,15 @@ export const rapController = {
 
     res.status(response.statusCode).json(response);
   },
+  // Lấy thông tin cụm rạp theo hệ thống Controller
+  async layThongTinCumRapTheoHeThong(req, res, next) {
+    const result = await rapService.layThongTinCumRapTheoHeThong(req);
+
+    const response = responseSuccess(
+      result,
+      "Lấy thông tin cụm rạp theo hệ thống thành công",
+    );
+
+    res.status(response.statusCode).json(response);
+  },
 };
