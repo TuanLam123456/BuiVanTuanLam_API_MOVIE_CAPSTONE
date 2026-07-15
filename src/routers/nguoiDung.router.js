@@ -1,6 +1,7 @@
 import express from "express";
 import { nguoiDungController } from "../controllers/nguoiDung.controller.js";
 import { authCookie } from "../common/middleware/authCookie.middleware.js";
+import { authAdmin } from "../common/middleware/authAdmin.middleware.js";
 
 const nguoiDungRouter = express.Router();
 
@@ -14,6 +15,7 @@ nguoiDungRouter.post("/dangNhap", nguoiDungController.dangNhap);
 nguoiDungRouter.get(
   "/layDanhSachNguoiDung",
   authCookie,
+  authAdmin,
   nguoiDungController.layDanhSachNguoiDung,
 );
 
@@ -21,7 +23,9 @@ nguoiDungRouter.get(
 nguoiDungRouter.get(
   "/layDanhSachNguoiDungPhanTrang",
   authCookie,
+  authAdmin,
   nguoiDungController.layDanhSachNguoiDungPhanTrang,
 );
+
 
 export default nguoiDungRouter;

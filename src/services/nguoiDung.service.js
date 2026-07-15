@@ -53,8 +53,9 @@ export const nguoiDungService = {
         mat_khau: hashPassword,
         email: email,
         so_dt: so_dt,
-        ma_nhom: ma_nhom,
+        ma_nhom: ma_nhom || "GP01",
         ho_ten: ho_ten,
+        loai_nguoi_dung: 'KhachHang'
       },
     });
 

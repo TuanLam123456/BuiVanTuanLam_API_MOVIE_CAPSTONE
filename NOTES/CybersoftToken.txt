@@ -8,3 +8,9 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJOb2RlanMgNTUiLCJIZXRIYW5TdHJ
   "maNhom": "GP01",
   "hoTen": "Tuấn Lâm"
 }
+
+POSTMAN:
+{ 
+    "tai_khoan": "TL",
+    "mat_khau":"Lam@12345"
+}
