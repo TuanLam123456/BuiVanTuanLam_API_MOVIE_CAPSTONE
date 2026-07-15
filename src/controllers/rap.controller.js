@@ -13,6 +13,7 @@ export const rapController = {
 
     res.status(response.statusCode).json(response);
   },
+
   // Lấy thông tin cụm rạp theo hệ thống Controller
   async layThongTinCumRapTheoHeThong(req, res, next) {
     const result = await rapService.layThongTinCumRapTheoHeThong(req);
@@ -20,6 +21,30 @@ export const rapController = {
     const response = responseSuccess(
       result,
       "Lấy thông tin cụm rạp theo hệ thống thành công",
+    );
+
+    res.status(response.statusCode).json(response);
+  },
+
+  // Lấy thông tin lịch chiếu hệ thống rạp Controller
+  async layThongTinLichChieuHeThongRap(req, res, next) {
+    const result = await rapService.layThongTinLichChieuHeThongRap(req);
+
+    const response = responseSuccess(
+      result,
+      "Lấy thông tin lịch chiếu hệ thống rạp thành công",
+    );
+
+    res.status(response.statusCode).json(response);
+  },
+
+  // Lấy thông tin lịch chiếu phim theo mã phim Controller
+  async layThongTinLichChieuPhim(req, res, next) {
+    const result = await rapService.layThongTinLichChieuPhim(req);
+
+    const response = responseSuccess(
+      result,
+      "Lấy thông tin lịch chiếu phim thành công",
     );
 
     res.status(response.statusCode).json(response);

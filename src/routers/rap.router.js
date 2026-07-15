@@ -12,4 +12,16 @@ rapRouter.get(
   rapController.layThongTinCumRapTheoHeThong,
 );
 
+// Lấy thông tin lịch chiếu hệ thống rạp Router
+rapRouter.get(
+  "/layThongTinLichChieuHeThongRap",
+  rapController.layThongTinLichChieuHeThongRap,
+);
+
+// Lấy thông tin lịch chiếu phim theo mã phim Router
+rapRouter.get(
+  "/layThongTinLichChieuPhim",
+  rapController.layThongTinLichChieuPhim,
+);
+
 export default rapRouter;
