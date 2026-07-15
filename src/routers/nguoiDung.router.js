@@ -11,6 +11,14 @@ nguoiDungRouter.post("/dangKy", nguoiDungController.dangKy);
 // Đăng nhập Router
 nguoiDungRouter.post("/dangNhap", nguoiDungController.dangNhap);
 
+// Lấy danh sách loại người dùng Router
+nguoiDungRouter.get(
+  "/layDanhSachLoaiNguoiDung",
+  authCookie,
+  authAdmin,
+  nguoiDungController.layDanhSachLoaiNguoiDung,
+);
+
 // Lấy danh sách người dùng Router
 nguoiDungRouter.get(
   "/layDanhSachNguoiDung",

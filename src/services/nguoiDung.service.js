@@ -281,4 +281,18 @@ export const nguoiDungService = {
 
     return nguoiDung;
   },
+
+  // Lấy danh sách loại người dùng Service
+  async layDanhSachLoaiNguoiDung(req) {
+    const danhSachLoaiNguoiDung = await prisma.loaiNguoiDung.findMany({
+      select: {
+        ma_loai_nguoi_dung: true,
+        ten_loai_nguoi_dung: true,
+      },
+      orderBy: {
+        ma_loai_nguoi_dung: "asc",
+      },
+    });
+    return danhSachLoaiNguoiDung;
+  },
 };
