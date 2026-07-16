@@ -295,4 +295,147 @@ export const nguoiDungService = {
     });
     return danhSachLoaiNguoiDung;
   },
+
+  // Tìm kiếm người dùng Service
+  async timKiemNguoiDung(req) {
+    const { ma_nhom, tu_khoa } = req.query;
+
+    if (!ma_nhom?.trim()) {
+      throw new BadRequestError("Mã nhóm không được phép để trống");
+    }
+
+    if (!tu_khoa?.trim()) {
+      throw new BadRequestError("Từ khóa không được phép để trống");
+    }
+
+    const maNhom = ma_nhom.trim();
+    const keyword = tu_khoa.trim();
+
+    const danhSachNguoiDung = await prisma.nguoiDung.findMany({
+      where: {
+        ma_nhom: maNhom,
+        OR: [
+          {
+            tai_khoan: {
+              contains: keyword,
+            },
+          },
+          {
+            ho_ten: {
+              contains: keyword,
+            },
+          },
+          {
+            email: {
+              contains: keyword,
+            },
+          },
+          {
+            so_dt: {
+              contains: keyword,
+            },
+          },
+        ],
+      },
+      select: {
+        tai_khoan: true,
+        ho_ten: true,
+        email: true,
+        so_dt: true,
+        loai_nguoi_dung: true,
+        ma_nhom: true,
+      },
+      orderBy: {
+        tai_khoan: "asc",
+      },
+    });
+    return danhSachNguoiDung;
+  },
+
+  // Tìm kiếm người dùng phân trang Service
+  async timKiemNguoiDungPhanTrang(req) {
+    const { ma_nhom, tu_khoa, page = "1", pageSize = "10" } = req.query;
+
+    if (!ma_nhom?.trim()) {
+      throw new BadRequestError("Mã nhóm không được để trống");
+    }
+
+    if (!tu_khoa?.trim()) {
+      throw new BadRequestError("Từ khóa không được để trống");
+    }
+
+    const currentPage = Number(page);
+    const currentPageSize = Number(pageSize);
+
+    if (
+      !Number.isInteger(currentPage) ||
+      currentPage < 1 ||
+      !Number.isInteger(currentPageSize) ||
+      currentPageSize < 1
+    ) {
+      throw new BadRequestError("page và pageSize phải là số nguyên lớn hơn 0");
+    }
+
+    const maNhom = ma_nhom.trim();
+    const keyword = tu_khoa.trim();
+
+    const whereCondition = {
+      ma_nhom: maNhom,
+      OR: [
+        {
+          tai_khoan: {
+            contains: keyword,
+          },
+        },
+        {
+          ho_ten: {
+            contains: keyword,
+          },
+        },
+        {
+          email: {
+            contains: keyword,
+          },
+        },
+        {
+          so_dt: {
+            contains: keyword,
+          },
+        },
+      ],
+    };
+
+    const [danhSachNguoiDung, tongSoNguoiDung] = await prisma.$transaction([
+      prisma.nguoiDung.findMany({
+        where: whereCondition,
+        select: {
+          tai_khoan: true,
+          ho_ten: true,
+          email: true,
+          so_dt: true,
+          loai_nguoi_dung: true,
+          ma_nhom: true,
+        },
+        orderBy: {
+          tai_khoan: "asc",
+        },
+        skip: (currentPage - 1) * currentPageSize,
+        take: currentPageSize,
+      }),
+
+      prisma.nguoiDung.count({
+        where: whereCondition,
+      }),
+    ]);
+
+    const tongSoTrang = Math.ceil(tongSoNguoiDung / currentPageSize);
+
+    return {
+      page: currentPage,
+      pageSize: currentPageSize,
+      totalItem: tongSoNguoiDung,
+      totalPage: tongSoTrang,
+      items: danhSachNguoiDung,
+    };
+  },
 };

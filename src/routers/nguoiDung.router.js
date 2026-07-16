@@ -42,4 +42,20 @@ nguoiDungRouter.get(
   nguoiDungController.thongTinTaiKhoan,
 );
 
+// Tìm kiếm người dùng Router
+nguoiDungRouter.get(
+  "/timKiemNguoiDung",
+  authCookie,
+  authAdmin,
+  nguoiDungController.timKiemNguoiDung,
+);
+
+// Tìm kiếm người dùng phân trang Router
+nguoiDungRouter.get(
+  "/timKiemNguoiDungPhanTrang",
+  authCookie,
+  authAdmin,
+  nguoiDungController.timKiemNguoiDungPhanTrang,
+);
+
 export default nguoiDungRouter;

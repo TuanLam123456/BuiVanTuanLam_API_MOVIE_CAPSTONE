@@ -81,4 +81,25 @@ export const nguoiDungController = {
 
     res.status(response.statusCode).json(response);
   },
+
+  // Tìm kiếm người dùng Controller
+  async timKiemNguoiDung(req, res, next) {
+    const result = await nguoiDungService.timKiemNguoiDung(req);
+
+    const response = responseSuccess(result, "Tìm kiếm người dùng thành công");
+
+    res.status(response.statusCode).json(response);
+  },
+
+  // Tìm kiếm người dùng phân trang Controller
+  async timKiemNguoiDungPhanTrang(req, res, next) {
+    const result = await nguoiDungService.timKiemNguoiDungPhanTrang(req);
+
+    const response = responseSuccess(
+      result,
+      "Tìm kiếm người dùng phân trang thành công",
+    );
+
+    res.status(response.statusCode).json(response);
+  },
 };
