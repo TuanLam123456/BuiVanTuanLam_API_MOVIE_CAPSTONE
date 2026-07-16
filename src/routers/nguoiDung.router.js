@@ -66,4 +66,12 @@ nguoiDungRouter.post(
   nguoiDungController.themNguoiDung,
 );
 
+// Cập nhật thông tin người dùng Router
+nguoiDungRouter.put(
+  "/capNhatThongTinNguoiDung",
+  authCookie,
+  authAdmin,
+  nguoiDungController.capNhatThongTinNguoiDung,
+);
+
 export default nguoiDungRouter;

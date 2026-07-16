@@ -111,4 +111,16 @@ export const nguoiDungController = {
 
     res.status(response.statusCode).json(response);
   },
+
+  // Cập nhật thông tin người dùng Controller
+  async capNhatThongTinNguoiDung(req, res, next) {
+    const result = await nguoiDungService.capNhatThongTinNguoiDung(req);
+
+    const response = responseSuccess(
+      result,
+      "Cập nhật thông tin người dùng thành công",
+    );
+
+    res.status(response.statusCode).json(response);
+  },
 };

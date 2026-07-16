@@ -538,4 +538,143 @@ export const nguoiDungService = {
 
     return nguoiDungMoi;
   },
+
+  // Cập nhật thông tin người dùng Service
+  async capNhatThongTinNguoiDung(req) {
+    const {
+      tai_khoan,
+      mat_khau,
+      email,
+      so_dt,
+      ma_nhom,
+      ho_ten,
+      loai_nguoi_dung,
+    } = req.body;
+
+    if (!tai_khoan?.trim()) {
+      throw new BadRequestError("Tài khoản không được để trống");
+    }
+
+    const taiKhoan = tai_khoan.trim();
+
+    // Kiểm tra người dùng cần cập nhật có tồn tại
+    const nguoiDungExisting = await prisma.nguoiDung.findUnique({
+      where: {
+        tai_khoan: taiKhoan,
+      },
+    });
+
+    if (!nguoiDungExisting) {
+      throw new BadRequestError(`Tài khoản ${taiKhoan} không tồn tại`);
+    }
+
+    // Kiểm tra email nếu Admin muốn cập nhật email
+    if (email !== undefined) {
+      if (!email?.trim()) {
+        throw new BadRequestError("Email không được để trống");
+      }
+
+      const emailExisting = await prisma.nguoiDung.findFirst({
+        where: {
+          email: email.trim(),
+          NOT: {
+            tai_khoan: taiKhoan,
+          },
+        },
+      });
+
+      if (emailExisting) {
+        throw new BadRequestError(`Email ${email.trim()} đã tồn tại`);
+      }
+    }
+
+    // Kiểm tra họ tên nếu được gửi lên
+    if (ho_ten !== undefined && !ho_ten?.trim()) {
+      throw new BadRequestError("Họ tên không được để trống");
+    }
+
+    // Kiểm tra mật khẩu nếu được gửi lên
+    if (mat_khau !== undefined && !mat_khau?.trim()) {
+      throw new BadRequestError("Mật khẩu không được để trống");
+    }
+
+    // Kiểm tra loại người dùng nếu được gửi lên
+    if (loai_nguoi_dung !== undefined) {
+      if (!loai_nguoi_dung?.trim()) {
+        throw new BadRequestError("Loại người dùng không được để trống");
+      }
+
+      const loaiNguoiDungExisting = await prisma.loaiNguoiDung.findUnique({
+        where: {
+          ma_loai_nguoi_dung: loai_nguoi_dung.trim(),
+        },
+      });
+
+      if (!loaiNguoiDungExisting) {
+        throw new BadRequestError(
+          `Loại người dùng ${loai_nguoi_dung.trim()} không tồn tại`,
+        );
+      }
+    }
+
+    // Kiểm tra mã nhóm nếu được gửi lên
+    if (ma_nhom !== undefined) {
+      if (!ma_nhom?.trim()) {
+        throw new BadRequestError("Mã nhóm không được để trống");
+      }
+
+      const nhomExisting = await prisma.nhom.findUnique({
+        where: {
+          ma_nhom: ma_nhom.trim(),
+        },
+      });
+
+      if (!nhomExisting) {
+        throw new BadRequestError(`Mã nhóm ${ma_nhom.trim()} không tồn tại`);
+      }
+    }
+
+    const nguoiDungCapNhat = await prisma.nguoiDung.update({
+      where: {
+        tai_khoan: taiKhoan,
+      },
+
+      data: {
+        ...(mat_khau !== undefined && {
+          mat_khau: bcrypt.hashSync(mat_khau.trim(), 10),
+        }),
+
+        ...(email !== undefined && {
+          email: email.trim(),
+        }),
+
+        ...(so_dt !== undefined && {
+          so_dt: so_dt?.trim() || null,
+        }),
+
+        ...(ma_nhom !== undefined && {
+          ma_nhom: ma_nhom.trim(),
+        }),
+
+        ...(ho_ten !== undefined && {
+          ho_ten: ho_ten.trim(),
+        }),
+
+        ...(loai_nguoi_dung !== undefined && {
+          loai_nguoi_dung: loai_nguoi_dung.trim(),
+        }),
+      },
+
+      select: {
+        tai_khoan: true,
+        ho_ten: true,
+        email: true,
+        so_dt: true,
+        loai_nguoi_dung: true,
+        ma_nhom: true,
+      },
+    });
+
+    return nguoiDungCapNhat;
+  },
 };
