@@ -102,4 +102,13 @@ export const nguoiDungController = {
 
     res.status(response.statusCode).json(response);
   },
+
+  // Thêm người dùng Controller
+  async themNguoiDung(req, res, next) {
+    const result = await nguoiDungService.themNguoiDung(req);
+
+    const response = responseSuccess(result, "Thêm người dùng thành công");
+
+    res.status(response.statusCode).json(response);
+  },
 };

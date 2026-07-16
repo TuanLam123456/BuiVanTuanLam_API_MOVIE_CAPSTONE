@@ -438,4 +438,104 @@ export const nguoiDungService = {
       items: danhSachNguoiDung,
     };
   },
+
+  // Thêm người dùng Service
+  async themNguoiDung(req) {
+    const {
+      tai_khoan,
+      mat_khau,
+      email,
+      so_dt,
+      ma_nhom,
+      ho_ten,
+      loai_nguoi_dung,
+    } = req.body;
+
+    if (
+      !tai_khoan?.trim() ||
+      !mat_khau.trim() ||
+      !email?.trim() ||
+      !ho_ten?.trim() ||
+      !loai_nguoi_dung?.trim()
+    ) {
+      throw new BadRequestError("Các trường bắt buộc không được để trống");
+    }
+
+    const taiKhoan = tai_khoan.trim();
+    const emailNguoiDung = email.trim();
+    const hoTen = ho_ten.trim();
+    const maNhom = ma_nhom?.trim() || "GP01";
+    const loaiNguoiDung = loai_nguoi_dung.trim();
+
+    // Kiểm tra tài khoản đã tồn tại
+    const taiKhoanExisting = await prisma.nguoiDung.findUnique({
+      where: {
+        tai_khoan: taiKhoan,
+      },
+    });
+
+    if (taiKhoanExisting) {
+      throw new BadRequestError(`Tài khoản ${taiKhoan} đã tồn tại`);
+    }
+
+    // Kiểm tra email đã tồn tại
+    const emailExisting = await prisma.nguoiDung.findUnique({
+      where: {
+        email: emailNguoiDung,
+      },
+    });
+
+    if (emailExisting) {
+      throw new BadRequestError(`Email ${emailNguoiDung} đã tồn tại`);
+    }
+
+    // Kiểm tra loại người dùng có tồn tại
+    const loaiNguoiDungExisting = await prisma.loaiNguoiDung.findUnique({
+      where: {
+        ma_loai_nguoi_dung: loaiNguoiDung,
+      },
+    });
+
+    if (!loaiNguoiDungExisting) {
+      throw new BadRequestError(
+        `Loại người dùng ${loaiNguoiDung} không tồn tại`,
+      );
+    }
+
+    // Kiểm tra mã nhóm có tồn tại
+    const nhomExisting = await prisma.nhom.findUnique({
+      where: {
+        ma_nhom: maNhom,
+      },
+    });
+
+    if (!nhomExisting) {
+      throw new BadRequestError(`Mã nhóm ${maNhom} không tồn tại`);
+    }
+
+    const hashPassword = bcrypt.hashSync(mat_khau, 10);
+
+    const nguoiDungMoi = await prisma.nguoiDung.create({
+      data: {
+        tai_khoan: taiKhoan,
+        mat_khau: hashPassword,
+        email: emailNguoiDung,
+        so_dt: so_dt?.trim() || null,
+        ma_nhom: maNhom,
+        ho_ten: hoTen,
+        loai_nguoi_dung: loaiNguoiDung,
+      },
+
+      select: {
+        tai_khoan: true,
+        ho_ten: true,
+        email: true,
+        so_dt: true,
+        loai_nguoi_dung: true,
+        ma_nhom: true,
+      },
+    });
+
+    return nguoiDungMoi;
+  },
 };

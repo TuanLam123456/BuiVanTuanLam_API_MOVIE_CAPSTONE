@@ -58,4 +58,12 @@ nguoiDungRouter.get(
   nguoiDungController.timKiemNguoiDungPhanTrang,
 );
 
+// Thêm người dùng Router
+nguoiDungRouter.post(
+  "/themNguoiDung",
+  authCookie,
+  authAdmin,
+  nguoiDungController.themNguoiDung,
+);
+
 export default nguoiDungRouter;
