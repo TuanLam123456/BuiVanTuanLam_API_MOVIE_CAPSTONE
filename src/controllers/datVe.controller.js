@@ -6,10 +6,28 @@ export const datVeController = {
   async datVe(req, res, next) {
     const result = await datVeService.datVe(req);
 
+    const response = responseSuccess(result, "Đặt vé thành công");
+
+    res.status(response.statusCode).json(response);
+  },
+
+  // Lấy danh sách phòng vé Controller
+  async layDanhSachPhongVe(req, res, next) {
+    const result = await datVeService.layDanhSachPhongVe(req);
+
     const response = responseSuccess(
       result,
-      "Đặt vé thành công",
+      "Lấy danh sách phòng vé thành công",
     );
+
+    res.status(response.statusCode).json(response);
+  },
+
+  // Tạo lịch chiếu Controller - Admin
+  async taoLichChieu(req, res, next) {
+    const result = await datVeService.taoLichChieu(req);
+
+    const response = responseSuccess(result, "Tạo lịch chiếu thành công");
 
     res.status(response.statusCode).json(response);
   },

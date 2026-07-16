@@ -18,19 +18,12 @@ export const datVeService = {
 
     const maLichChieuNumber = Number(maLichChieu);
 
-    if (
-      !Number.isInteger(maLichChieuNumber) ||
-      maLichChieuNumber < 1
-    ) {
-      throw new BadRequestError(
-        "Mã lịch chiếu phải là số nguyên lớn hơn 0",
-      );
+    if (!Number.isInteger(maLichChieuNumber) || maLichChieuNumber < 1) {
+      throw new BadRequestError("Mã lịch chiếu phải là số nguyên lớn hơn 0");
     }
 
     if (!Array.isArray(danhSachVe) || danhSachVe.length === 0) {
-      throw new BadRequestError(
-        "Danh sách vé phải có ít nhất một ghế",
-      );
+      throw new BadRequestError("Danh sách vé phải có ít nhất một ghế");
     }
 
     const danhSachVeDaXuLy = danhSachVe.map((ve, index) => {
@@ -43,10 +36,7 @@ export const datVeService = {
         );
       }
 
-      if (
-        !Number.isInteger(giaVe) ||
-        giaVe < 0
-      ) {
+      if (!Number.isInteger(giaVe) || giaVe < 0) {
         throw new BadRequestError(
           `Giá vé tại vị trí ${index + 1} không hợp lệ`,
         );
@@ -63,9 +53,7 @@ export const datVeService = {
     const danhSachMaGheKhongTrung = [...new Set(danhSachMaGhe)];
 
     if (danhSachMaGheKhongTrung.length !== danhSachMaGhe.length) {
-      throw new BadRequestError(
-        "Danh sách vé có ghế bị trùng lặp",
-      );
+      throw new BadRequestError("Danh sách vé có ghế bị trùng lặp");
     }
 
     const ketQuaDatVe = await prisma.$transaction(async (tx) => {
@@ -147,14 +135,11 @@ export const datVeService = {
       });
 
       if (danhSachGhe.length !== danhSachMaGheKhongTrung.length) {
-        const danhSachGheHopLe = new Set(
-          danhSachGhe.map((ghe) => ghe.ma_ghe),
-        );
+        const danhSachGheHopLe = new Set(danhSachGhe.map((ghe) => ghe.ma_ghe));
 
-        const danhSachGheKhongHopLe =
-          danhSachMaGheKhongTrung.filter(
-            (maGhe) => !danhSachGheHopLe.has(maGhe),
-          );
+        const danhSachGheKhongHopLe = danhSachMaGheKhongTrung.filter(
+          (maGhe) => !danhSachGheHopLe.has(maGhe),
+        );
 
         throw new BadRequestError(
           `Các ghế sau không tồn tại hoặc không thuộc rạp của lịch chiếu: ${danhSachGheKhongHopLe.join(", ")}`,
@@ -184,9 +169,7 @@ export const datVeService = {
           .map((datVe) => datVe.Ghe.ten_ghe)
           .join(", ");
 
-        throw new BadRequestError(
-          `Ghế ${tenGheDaDat} đã được đặt`,
-        );
+        throw new BadRequestError(`Ghế ${tenGheDaDat} đã được đặt`);
       }
 
       // Tạo các bản ghi đặt vé
@@ -204,14 +187,10 @@ export const datVeService = {
         tenPhim: lichChieuExisting.Phim.ten_phim,
         ngayGioChieu: lichChieuExisting.ngay_gio_chieu,
         tenRap: lichChieuExisting.RapPhim.ten_rap,
-        tenCumRap:
-          lichChieuExisting.RapPhim.CumRap.ten_cum_rap,
-        diaChi:
-          lichChieuExisting.RapPhim.CumRap.dia_chi,
+        tenCumRap: lichChieuExisting.RapPhim.CumRap.ten_cum_rap,
+        diaChi: lichChieuExisting.RapPhim.CumRap.dia_chi,
         giaVe: lichChieuExisting.gia_ve,
-        tongTien:
-          lichChieuExisting.gia_ve *
-          danhSachMaGheKhongTrung.length,
+        tongTien: lichChieuExisting.gia_ve * danhSachMaGheKhongTrung.length,
         danhSachGhe: danhSachGhe.map((ghe) => ({
           maGhe: ghe.ma_ghe,
           tenGhe: ghe.ten_ghe,
@@ -221,5 +200,276 @@ export const datVeService = {
     });
 
     return ketQuaDatVe;
+  },
+
+  // Lấy danh sách phòng vé Service
+  async layDanhSachPhongVe(req) {
+    const { ma_lich_chieu } = req.query;
+
+    if (!ma_lich_chieu?.trim()) {
+      throw new BadRequestError("Mã lịch chiếu không được để trống");
+    }
+
+    const maLichChieu = Number(ma_lich_chieu);
+
+    if (!Number.isInteger(maLichChieu) || maLichChieu < 1) {
+      throw new BadRequestError("Mã lịch chiếu phải là số nguyên lớn hơn 0");
+    }
+
+    const lichChieu = await prisma.lichChieu.findUnique({
+      where: {
+        ma_lich_chieu: maLichChieu,
+      },
+
+      select: {
+        ma_lich_chieu: true,
+        ngay_gio_chieu: true,
+        gia_ve: true,
+
+        Phim: {
+          select: {
+            ma_phim: true,
+            ten_phim: true,
+            hinh_anh: true,
+          },
+        },
+
+        RapPhim: {
+          select: {
+            ma_rap: true,
+            ten_rap: true,
+
+            CumRap: {
+              select: {
+                ma_cum_rap: true,
+                ten_cum_rap: true,
+                dia_chi: true,
+
+                HeThongRap: {
+                  select: {
+                    ma_he_thong_rap: true,
+                    ten_he_thong_rap: true,
+                    logo: true,
+                  },
+                },
+              },
+            },
+
+            Ghe: {
+              select: {
+                ma_ghe: true,
+                ten_ghe: true,
+                loai_ghe: true,
+              },
+
+              orderBy: {
+                ma_ghe: "asc",
+              },
+            },
+          },
+        },
+
+        DatVe: {
+          select: {
+            ma_ghe: true,
+            tai_khoan: true,
+
+            NguoiDung: {
+              select: {
+                tai_khoan: true,
+                ho_ten: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    if (!lichChieu) {
+      throw new BadRequestError(`Lịch chiếu ${maLichChieu} không tồn tại`);
+    }
+
+    const danhSachGheDaDat = new Map(
+      lichChieu.DatVe.map((datVe) => [
+        datVe.ma_ghe,
+        {
+          taiKhoan: datVe.tai_khoan,
+          hoTen: datVe.NguoiDung.ho_ten,
+        },
+      ]),
+    );
+
+    const danhSachGhe = lichChieu.RapPhim.Ghe.map((ghe) => {
+      const thongTinDatVe = danhSachGheDaDat.get(ghe.ma_ghe);
+
+      return {
+        maGhe: ghe.ma_ghe,
+        tenGhe: ghe.ten_ghe,
+        loaiGhe: ghe.loai_ghe,
+        giaVe: lichChieu.gia_ve,
+        daDat: Boolean(thongTinDatVe),
+        taiKhoanNguoiDat: thongTinDatVe?.taiKhoan || null,
+        hoTenNguoiDat: thongTinDatVe?.hoTen || null,
+      };
+    });
+
+    return {
+      thongTinPhim: {
+        maLichChieu: lichChieu.ma_lich_chieu,
+        maPhim: lichChieu.Phim.ma_phim,
+        tenPhim: lichChieu.Phim.ten_phim,
+        hinhAnh: lichChieu.Phim.hinh_anh,
+        ngayGioChieu: lichChieu.ngay_gio_chieu,
+        giaVe: lichChieu.gia_ve,
+
+        thongTinRap: {
+          maRap: lichChieu.RapPhim.ma_rap,
+          tenRap: lichChieu.RapPhim.ten_rap,
+          maCumRap: lichChieu.RapPhim.CumRap.ma_cum_rap,
+          tenCumRap: lichChieu.RapPhim.CumRap.ten_cum_rap,
+          diaChi: lichChieu.RapPhim.CumRap.dia_chi,
+          maHeThongRap: lichChieu.RapPhim.CumRap.HeThongRap.ma_he_thong_rap,
+          tenHeThongRap: lichChieu.RapPhim.CumRap.HeThongRap.ten_he_thong_rap,
+          logo: lichChieu.RapPhim.CumRap.HeThongRap.logo,
+        },
+      },
+
+      danhSachGhe,
+    };
+  },
+
+  // Tạo lịch chiếu Service - Admin
+  async taoLichChieu(req) {
+    const { maPhim, ngayChieuGioChieu, maRap, giaVe } = req.body || {};
+
+    if (
+      maPhim === undefined ||
+      !ngayChieuGioChieu?.trim() ||
+      maRap === undefined ||
+      giaVe === undefined
+    ) {
+      throw new BadRequestError(
+        "Mã phim, ngày chiếu giờ chiếu, mã rạp và giá vé không được để trống",
+      );
+    }
+
+    const maPhimNumber = Number(maPhim);
+    const maRapNumber = Number(maRap);
+    const giaVeNumber = Number(giaVe);
+
+    if (!Number.isInteger(maPhimNumber) || maPhimNumber < 1) {
+      throw new BadRequestError("Mã phim phải là số nguyên lớn hơn 0");
+    }
+
+    if (!Number.isInteger(maRapNumber) || maRapNumber < 1) {
+      throw new BadRequestError("Mã rạp phải là số nguyên lớn hơn 0");
+    }
+
+    if (!Number.isInteger(giaVeNumber) || giaVeNumber < 1) {
+      throw new BadRequestError("Giá vé phải là số nguyên lớn hơn 0");
+    }
+
+    const ngayGioChieu = new Date(ngayChieuGioChieu);
+
+    if (Number.isNaN(ngayGioChieu.getTime())) {
+      throw new BadRequestError("Ngày chiếu giờ chiếu không đúng định dạng");
+    }
+
+    if (ngayGioChieu <= new Date()) {
+      throw new BadRequestError(
+        "Ngày giờ chiếu phải lớn hơn thời gian hiện tại",
+      );
+    }
+
+    const [phimExisting, rapExisting] = await prisma.$transaction([
+      prisma.phim.findUnique({
+        where: {
+          ma_phim: maPhimNumber,
+        },
+
+        select: {
+          ma_phim: true,
+          ten_phim: true,
+        },
+      }),
+
+      prisma.rapPhim.findUnique({
+        where: {
+          ma_rap: maRapNumber,
+        },
+
+        select: {
+          ma_rap: true,
+          ten_rap: true,
+          ma_cum_rap: true,
+        },
+      }),
+    ]);
+
+    if (!phimExisting) {
+      throw new BadRequestError(`Phim có mã ${maPhimNumber} không tồn tại`);
+    }
+
+    if (!rapExisting) {
+      throw new BadRequestError(`Rạp có mã ${maRapNumber} không tồn tại`);
+    }
+
+    // Kiểm tra rạp đã có lịch chiếu đúng thời điểm đó chưa
+    const lichChieuTrung = await prisma.lichChieu.findFirst({
+      where: {
+        ma_rap: maRapNumber,
+        ngay_gio_chieu: ngayGioChieu,
+      },
+    });
+
+    if (lichChieuTrung) {
+      throw new BadRequestError("Rạp đã có lịch chiếu vào thời gian này");
+    }
+
+    const lichChieuMoi = await prisma.lichChieu.create({
+      data: {
+        ma_phim: maPhimNumber,
+        ma_rap: maRapNumber,
+        ngay_gio_chieu: ngayGioChieu,
+        gia_ve: giaVeNumber,
+      },
+
+      select: {
+        ma_lich_chieu: true,
+        ma_phim: true,
+        ma_rap: true,
+        ngay_gio_chieu: true,
+        gia_ve: true,
+
+        Phim: {
+          select: {
+            ten_phim: true,
+          },
+        },
+
+        RapPhim: {
+          select: {
+            ten_rap: true,
+
+            CumRap: {
+              select: {
+                ten_cum_rap: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    return {
+      maLichChieu: lichChieuMoi.ma_lich_chieu,
+      maPhim: lichChieuMoi.ma_phim,
+      tenPhim: lichChieuMoi.Phim.ten_phim,
+      maRap: lichChieuMoi.ma_rap,
+      tenRap: lichChieuMoi.RapPhim.ten_rap,
+      tenCumRap: lichChieuMoi.RapPhim.CumRap.ten_cum_rap,
+      ngayChieuGioChieu: lichChieuMoi.ngay_gio_chieu,
+      giaVe: lichChieuMoi.gia_ve,
+    };
   },
 };
