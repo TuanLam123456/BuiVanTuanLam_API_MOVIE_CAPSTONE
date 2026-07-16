@@ -14,3 +14,8 @@ POSTMAN:
     "tai_khoan": "TL",
     "mat_khau":"Lam@12345"
 }
+
+{ 
+    "tai_khoan": "admin",
+    "mat_khau":"123456"
+}
