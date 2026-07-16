@@ -74,4 +74,12 @@ nguoiDungRouter.put(
   nguoiDungController.capNhatThongTinNguoiDung,
 );
 
+// Xóa người dùng Router
+nguoiDungRouter.delete(
+  "/xoaNguoiDung",
+  authCookie,
+  authAdmin,
+  nguoiDungController.xoaNguoiDung,
+);
+
 export default nguoiDungRouter;

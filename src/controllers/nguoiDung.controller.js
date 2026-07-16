@@ -123,4 +123,13 @@ export const nguoiDungController = {
 
     res.status(response.statusCode).json(response);
   },
+
+  // Xóa người dùng Controller
+  async xoaNguoiDung(req, res, next) {
+    const result = await nguoiDungService.xoaNguoiDung(req);
+
+    const response = responseSuccess(result, "Xóa người dùng thành công");
+
+    res.status(response.statusCode).json(response);
+  },
 };

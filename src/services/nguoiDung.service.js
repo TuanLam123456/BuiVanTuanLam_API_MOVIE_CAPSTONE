@@ -677,4 +677,41 @@ export const nguoiDungService = {
 
     return nguoiDungCapNhat;
   },
+
+  // Xóa người dùng Service
+  async xoaNguoiDung(req) {
+    const { tai_khoan } = req.query;
+
+    if (!tai_khoan?.trim()) {
+      throw new BadRequestError("Tài khoản không được để trống");
+    }
+
+    const taiKhoan = tai_khoan.trim();
+
+    const nguoiDungExisting = await prisma.nguoiDung.findUnique({
+      where: {
+        tai_khoan: taiKhoan,
+      },
+    });
+
+    if (!nguoiDungExisting) {
+      throw new BadRequestError(`Tài khoản ${taiKhoan} không tồn tại`);
+    }
+
+    const nguoiDungDaXoa = await prisma.nguoiDung.delete({
+      where: {
+        tai_khoan: taiKhoan,
+      },
+      select: {
+        tai_khoan: true,
+        ho_ten: true,
+        email: true,
+        so_dt: true,
+        loai_nguoi_dung: true,
+        ma_nhom: true,
+      },
+    });
+
+    return nguoiDungDaXoa;
+  },
 };
