@@ -57,4 +57,46 @@ export const phimController = {
 
     res.status(response.statusCode).json(response);
   },
+
+  // Lấy thông tin phim Controller
+  async layThongTinPhim(req, res, next) {
+    try {
+      const result = await phimService.layThongTinPhim(req);
+
+      const response = responseSuccess(result, "Lấy thông tin phim thành công");
+
+      res.status(response.statusCode).json(response);
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  // Cập nhật phim Upload Hình Controller
+  async capNhatPhimUpload(req, res, next) {
+    try {
+      const result = await phimService.capNhatPhimUpload(req);
+
+      const response = responseSuccess(
+        result,
+        "Cập nhật phim upload hình thành công",
+      );
+
+      res.status(response.statusCode).json(response);
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  // Xóa phim Controller
+  async xoaPhim(req, res, next) {
+    try {
+      const result = await phimService.xoaPhim(req);
+
+      const response = responseSuccess(result, "Xóa phim thành công");
+
+      res.status(response.statusCode).json(response);
+    } catch (error) {
+      next(error);
+    }
+  },
 };

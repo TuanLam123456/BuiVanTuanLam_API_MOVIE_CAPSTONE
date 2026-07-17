@@ -486,4 +486,266 @@ export const phimService = {
       sapChieu: phimMoi.sap_chieu,
     };
   },
+
+  // Lấy thông tin phim theo mã phim Service
+  async layThongTinPhim(req) {
+    const { maPhim } = req.params;
+
+    const maPhimValue = Number(maPhim);
+
+    if (!Number.isInteger(maPhimValue) || maPhimValue < 1) {
+      throw new BadRequestError("Mã phim phải là số nguyên lớn hơn 0");
+    }
+
+    const phim = await prisma.phim.findUnique({
+      where: {
+        ma_phim: maPhimValue,
+      },
+
+      select: {
+        ma_phim: true,
+        ten_phim: true,
+        trailer: true,
+        hinh_anh: true,
+        mo_ta: true,
+        ngay_khoi_chieu: true,
+        danh_gia: true,
+        hot: true,
+        dang_chieu: true,
+        sap_chieu: true,
+
+        Nhom: {
+          select: {
+            ma_nhom: true,
+          },
+        },
+      },
+    });
+
+    if (!phim) {
+      throw new BadRequestError(`Phim có mã ${maPhimValue} không tồn tại`);
+    }
+
+    return {
+      maPhim: phim.ma_phim,
+      tenPhim: phim.ten_phim,
+      trailer: phim.trailer,
+      hinhAnh: phim.hinh_anh,
+      moTa: phim.mo_ta,
+      maNhom: phim.Nhom.ma_nhom,
+      ngayKhoiChieu: phim.ngay_khoi_chieu,
+      danhGia: phim.danh_gia,
+      hot: phim.hot,
+      dangChieu: phim.dang_chieu,
+      sapChieu: phim.sap_chieu,
+    };
+  },
+
+  // Cập nhật phim Upload Hình Service
+  async capNhatPhimUpload(req) {
+    const { maPhim } = req.params;
+    const { frm } = req.body;
+
+    const maPhimValue = Number(maPhim);
+
+    if (!Number.isInteger(maPhimValue) || maPhimValue < 1) {
+      throw new BadRequestError("Mã phim phải là số nguyên lớn hơn 0");
+    }
+
+    if (!frm?.trim()) {
+      throw new BadRequestError("Thông tin phim frm không được để trống");
+    }
+
+    let thongTinPhim;
+
+    try {
+      thongTinPhim = JSON.parse(frm);
+    } catch {
+      throw new BadRequestError("Dữ liệu frm phải là JSON hợp lệ");
+    }
+
+    const phimTonTai = await prisma.phim.findUnique({
+      where: {
+        ma_phim: maPhimValue,
+      },
+
+      select: {
+        ma_phim: true,
+        hinh_anh: true,
+        ma_nhom: true,
+      },
+    });
+
+    if (!phimTonTai) {
+      throw new BadRequestError(`Phim có mã ${maPhimValue} không tồn tại`);
+    }
+
+    const {
+      tenPhim,
+      trailer,
+      moTa,
+      maNhom,
+      ngayKhoiChieu,
+      danhGia,
+      hot,
+      dangChieu,
+      sapChieu,
+    } = thongTinPhim;
+
+    if (!tenPhim?.trim()) {
+      throw new BadRequestError("Tên phim không được để trống");
+    }
+
+    if (!maNhom?.trim()) {
+      throw new BadRequestError("Mã nhóm không được để trống");
+    }
+
+    if (!ngayKhoiChieu?.trim()) {
+      throw new BadRequestError("Ngày khởi chiếu không được để trống");
+    }
+
+    const ngayKhoiChieuValue = new Date(ngayKhoiChieu);
+
+    if (Number.isNaN(ngayKhoiChieuValue.getTime())) {
+      throw new BadRequestError("Ngày khởi chiếu không hợp lệ");
+    }
+
+    const danhGiaValue = Number(danhGia);
+
+    if (
+      !Number.isInteger(danhGiaValue) ||
+      danhGiaValue < 0 ||
+      danhGiaValue > 10
+    ) {
+      throw new BadRequestError("Đánh giá phải là số nguyên từ 0 đến 10");
+    }
+
+    if (typeof hot !== "boolean") {
+      throw new BadRequestError("Hot phải có giá trị true hoặc false");
+    }
+
+    if (typeof dangChieu !== "boolean") {
+      throw new BadRequestError("Đang chiếu phải có giá trị true hoặc false");
+    }
+
+    if (typeof sapChieu !== "boolean") {
+      throw new BadRequestError("Sắp chiếu phải có giá trị true hoặc false");
+    }
+
+    const maNhomValue = maNhom.trim();
+
+    const nhomTonTai = await prisma.nhom.findUnique({
+      where: {
+        ma_nhom: maNhomValue,
+      },
+
+      select: {
+        ma_nhom: true,
+      },
+    });
+
+    if (!nhomTonTai) {
+      throw new BadRequestError(`Nhóm có mã ${maNhomValue} không tồn tại`);
+    }
+
+    // Nếu có upload ảnh mới thì sử dụng ảnh mới.
+    // Nếu không có thì giữ lại ảnh cũ.
+    const hinhAnh = req.file
+      ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+      : phimTonTai.hinh_anh;
+
+    const phimCapNhat = await prisma.phim.update({
+      where: {
+        ma_phim: maPhimValue,
+      },
+
+      data: {
+        ten_phim: tenPhim.trim(),
+        trailer: trailer?.trim() || null,
+        hinh_anh: hinhAnh,
+        mo_ta: moTa?.trim() || "",
+        ngay_khoi_chieu: ngayKhoiChieuValue,
+        danh_gia: danhGiaValue,
+        hot,
+        dang_chieu: dangChieu,
+        sap_chieu: sapChieu,
+
+        Nhom: {
+          connect: {
+            ma_nhom: maNhomValue,
+          },
+        },
+      },
+
+      select: {
+        ma_phim: true,
+        ten_phim: true,
+        trailer: true,
+        hinh_anh: true,
+        mo_ta: true,
+        ngay_khoi_chieu: true,
+        danh_gia: true,
+        hot: true,
+        dang_chieu: true,
+        sap_chieu: true,
+
+        Nhom: {
+          select: {
+            ma_nhom: true,
+          },
+        },
+      },
+    });
+
+    return {
+      maPhim: phimCapNhat.ma_phim,
+      tenPhim: phimCapNhat.ten_phim,
+      trailer: phimCapNhat.trailer,
+      hinhAnh: phimCapNhat.hinh_anh,
+      moTa: phimCapNhat.mo_ta,
+      maNhom: phimCapNhat.Nhom.ma_nhom,
+      ngayKhoiChieu: phimCapNhat.ngay_khoi_chieu,
+      danhGia: phimCapNhat.danh_gia,
+      hot: phimCapNhat.hot,
+      dangChieu: phimCapNhat.dang_chieu,
+      sapChieu: phimCapNhat.sap_chieu,
+    };
+  },
+
+  // Xóa phim Service
+  async xoaPhim(req) {
+    const { maPhim } = req.params;
+
+    const maPhimValue = Number(maPhim);
+
+    if (!Number.isInteger(maPhimValue) || maPhimValue < 1) {
+      throw new BadRequestError("Mã phim phải là số nguyên lớn hơn 0");
+    }
+
+    const phimTonTai = await prisma.phim.findUnique({
+      where: {
+        ma_phim: maPhimValue,
+      },
+
+      select: {
+        ma_phim: true,
+        ten_phim: true,
+      },
+    });
+
+    if (!phimTonTai) {
+      throw new BadRequestError(`Phim có mã ${maPhimValue} không tồn tại`);
+    }
+
+    await prisma.phim.delete({
+      where: {
+        ma_phim: maPhimValue,
+      },
+    });
+
+    return {
+      maPhim: phimTonTai.ma_phim,
+      tenPhim: phimTonTai.ten_phim,
+    };
+  },
 };

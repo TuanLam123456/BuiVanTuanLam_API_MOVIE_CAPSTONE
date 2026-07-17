@@ -1,8 +1,8 @@
 import express from "express";
 import { phimController } from "./../controllers/phim.controller.js";
 import { authCookie } from "../common/middleware/authCookie.middleware.js";
-import { authAdmin } from './../common/middleware/authAdmin.middleware.js';
-import { uploadDiskStorage } from './../common/multer/disk-storage.multer.js';
+import { authAdmin } from "./../common/middleware/authAdmin.middleware.js";
+import { uploadDiskStorage } from "./../common/multer/disk-storage.multer.js";
 
 const phimRouter = express.Router();
 
@@ -31,6 +31,26 @@ phimRouter.post(
   authAdmin,
   uploadDiskStorage.single("hinhAnh"),
   phimController.themPhimUploadHinh,
+);
+
+// Lấy thông tin phim theo mã phim
+phimRouter.get("/layThongTinPhim/:maPhim", phimController.layThongTinPhim);
+
+// Cập nhật phim Upload Hình
+phimRouter.put(
+  "/capNhatPhimUpload/:maPhim",
+  authCookie,
+  authAdmin,
+  uploadDiskStorage.single("hinhAnh"),
+  phimController.capNhatPhimUpload,
+);
+
+// Xóa phim
+phimRouter.delete(
+  "/xoaPhim/:maPhim",
+  authCookie,
+  authAdmin,
+  phimController.xoaPhim,
 );
 
 export default phimRouter;
