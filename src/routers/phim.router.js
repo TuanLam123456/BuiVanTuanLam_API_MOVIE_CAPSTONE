@@ -8,9 +8,12 @@ const phimRouter = express.Router();
 phimRouter.get("/layDanhSachBanner", phimController.layDanhSachBanner);
 
 // Lấy danh sách phim Router
+phimRouter.get("/layDanhSachPhim", phimController.layDanhSachPhim);
+
+// Lấy danh sách phim phân trang Router
 phimRouter.get(
-  "/layDanhSachPhim",
-  phimController.layDanhSachPhim,
+  "/layDanhSachPhimPhanTrang",
+  phimController.layDanhSachPhimPhanTrang,
 );
 
 export default phimRouter;

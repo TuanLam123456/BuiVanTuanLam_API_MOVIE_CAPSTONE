@@ -21,4 +21,16 @@ export const phimController = {
       next(error);
     }
   },
+
+  // Lấy danh sách phim phân trang Controller
+  async layDanhSachPhimPhanTrang(req, res, next) {
+    const result = await phimService.layDanhSachPhimPhanTrang(req);
+
+    const response = responseSuccess(
+      result,
+      "Lấy danh sách phim phân trang thành công",
+    );
+
+    res.status(response.statusCode).json(response);
+  },
 };
