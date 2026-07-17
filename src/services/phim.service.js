@@ -1,8 +1,18 @@
 import { prisma } from "../common/prisma/connect.prisma.js";
 
 export const phimService = {
-  async findAll() {
-    const res = await prisma.phim.findMany();
-    return res;
+  // Lấy danh sách Banner Service
+  async layDanhSachBanner() {
+    const danhSachBanner = await prisma.banner.findMany({
+      select: {
+        ma_banner: true,
+        ma_phim: true,
+        hinh_anh: true,
+      },
+      orderBy: {
+        ma_banner: 'asc'
+      }
+    });
+    return danhSachBanner;
   },
 };

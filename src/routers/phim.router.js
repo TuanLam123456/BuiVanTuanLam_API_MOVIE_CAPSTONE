@@ -5,6 +5,6 @@ import { authCookie } from "../common/middleware/authCookie.middleware.js";
 const phimRouter = express.Router();
 
 // Lấy danh sách phim Router
-phimRouter.get("/", phimController.danhSachPhim);
+phimRouter.get("/layDanhSachBanner", phimController.layDanhSachBanner);
 
 export default phimRouter;
