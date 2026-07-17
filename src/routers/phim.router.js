@@ -16,4 +16,10 @@ phimRouter.get(
   phimController.layDanhSachPhimPhanTrang,
 );
 
+// Lấy danh sách phim phân trang theo ngày Router
+phimRouter.get(
+  "/layDanhSachPhimTheoNgay",
+  phimController.layDanhSachPhimTheoNgay,
+);
+
 export default phimRouter;

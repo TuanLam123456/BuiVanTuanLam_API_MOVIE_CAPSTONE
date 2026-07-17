@@ -185,4 +185,140 @@ export const phimService = {
   },
 
   // Lấy danh sách phim phân trang theo ngày Service
+  async layDanhSachPhimTheoNgay(req) {
+    const {
+      maNhom,
+      tenPhim,
+      tuNgay,
+      denNgay,
+      page = "1",
+      pageSize = "10",
+    } = req.query;
+
+    if (!maNhom?.trim()) {
+      throw new BadRequestError("Mã nhóm không được phép để trống");
+    }
+
+    if (!tuNgay?.trim()) {
+      throw new BadRequestError("Từ ngày không được phép để trống");
+    }
+
+    if (!denNgay?.trim()) {
+      throw new BadRequestError("Đến ngày không được phép để trống");
+    }
+
+    const maNhomValue = maNhom.trim();
+    const tenPhimValue = tenPhim?.trim();
+
+    const pageNumber = Number(page);
+    const pageSizeNumber = Number(pageSize);
+
+    if (!Number.isInteger(pageNumber) || pageNumber < 1) {
+      throw new BadRequestError("Page phải là số nguyên lớn hơn 0");
+    }
+
+    if (!Number.isInteger(pageSizeNumber) || pageSizeNumber < 1) {
+      throw new BadRequestError("PageSize phải là số nguyên lớn hơn 0");
+    }
+
+    if (pageSizeNumber > 100) {
+      throw new BadRequestError("PageSize không được lớn hơn 100");
+    }
+
+    const tuNgayValue = new Date(`${tuNgay.trim()}T00:00:00`);
+    const denNgayValue = new Date(`${denNgay.trim()}T23:59:59.999`);
+
+    if (Number.isNaN(tuNgayValue.getTime())) {
+      throw new BadRequestError("Từ ngày không đúng định dạng YYYY-MM-DD");
+    }
+
+    if (Number.isNaN(denNgayValue.getTime())) {
+      throw new BadRequestError("Đến ngày không đúng định dạng YYYY-MM-DD");
+    }
+
+    if (tuNgayValue > denNgayValue) {
+      throw new BadRequestError("Từ ngày không được lớn hơn đến ngày");
+    }
+
+    const nhomTonTai = await prisma.nhom.findUnique({
+      where: {
+        ma_nhom: maNhomValue,
+      },
+      select: {
+        ma_nhom: true,
+      },
+    });
+
+    if (!nhomTonTai) {
+      throw new BadRequestError(`Nhóm có mã ${maNhomValue} không tồn tại`);
+    }
+
+    const whereCondition = {
+      Nhom: {
+        is: {
+          ma_nhom: maNhomValue,
+        },
+      },
+
+      ngay_khoi_chieu: {
+        gte: tuNgayValue,
+        lte: denNgayValue,
+      },
+
+      ...(tenPhimValue && {
+        ten_phim: {
+          contains: tenPhimValue,
+        },
+      }),
+    };
+
+    const [danhSachPhim, tongSoPhim] = await prisma.$transaction([
+      prisma.phim.findMany({
+        where: whereCondition,
+
+        skip: (pageNumber - 1) * pageSizeNumber,
+        take: pageSizeNumber,
+
+        select: {
+          ma_phim: true,
+          ten_phim: true,
+          trailer: true,
+          hinh_anh: true,
+          mo_ta: true,
+          ngay_khoi_chieu: true,
+          danh_gia: true,
+          hot: true,
+          dang_chieu: true,
+          sap_chieu: true,
+        },
+
+        orderBy: {
+          ngay_khoi_chieu: "asc",
+        },
+      }),
+
+      prisma.phim.count({
+        where: whereCondition,
+      }),
+    ]);
+
+    return {
+      currentPage: pageNumber,
+      count: tongSoPhim,
+      totalPages: Math.ceil(tongSoPhim / pageSizeNumber),
+      items: danhSachPhim.map((phim) => ({
+        maPhim: phim.ma_phim,
+        tenPhim: phim.ten_phim,
+        trailer: phim.trailer,
+        hinhAnh: phim.hinh_anh,
+        moTa: phim.mo_ta,
+        maNhom: maNhomValue,
+        ngayKhoiChieu: phim.ngay_khoi_chieu,
+        danhGia: phim.danh_gia,
+        hot: phim.hot,
+        dangChieu: phim.dang_chieu,
+        sapChieu: phim.sap_chieu,
+      })),
+    };
+  },
 };

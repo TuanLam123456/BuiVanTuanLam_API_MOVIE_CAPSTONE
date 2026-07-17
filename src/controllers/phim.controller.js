@@ -33,4 +33,16 @@ export const phimController = {
 
     res.status(response.statusCode).json(response);
   },
+
+  // Lấy danh sách phim phân trang theo ngày Controller
+  async layDanhSachPhimTheoNgay(req, res, next) {
+    const result = await phimService.layDanhSachPhimTheoNgay(req);
+
+    const response = responseSuccess(
+      result,
+      "Lấy danh sách phim theo ngày thành công",
+    );
+
+    res.status(response.statusCode).json(response);
+  },
 };
