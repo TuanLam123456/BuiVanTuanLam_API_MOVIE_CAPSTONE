@@ -4,7 +4,13 @@ import { authCookie } from "../common/middleware/authCookie.middleware.js";
 
 const phimRouter = express.Router();
 
-// Lấy danh sách phim Router
+// Lấy danh sách banner Router
 phimRouter.get("/layDanhSachBanner", phimController.layDanhSachBanner);
+
+// Lấy danh sách phim Router
+phimRouter.get(
+  "/layDanhSachPhim",
+  phimController.layDanhSachPhim,
+);
 
 export default phimRouter;
