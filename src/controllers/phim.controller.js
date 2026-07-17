@@ -45,4 +45,16 @@ export const phimController = {
 
     res.status(response.statusCode).json(response);
   },
+
+  // Thêm phim Upload Hình Controller
+  async themPhimUploadHinh(req, res, next) {
+    const result = await phimService.themPhimUploadHinh(req);
+
+    const response = responseSuccess(
+      result,
+      "Thêm phim upload hình thành công",
+    );
+
+    res.status(response.statusCode).json(response);
+  },
 };

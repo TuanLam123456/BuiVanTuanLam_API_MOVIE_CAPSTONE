@@ -1,6 +1,8 @@
 import express from "express";
 import { phimController } from "./../controllers/phim.controller.js";
 import { authCookie } from "../common/middleware/authCookie.middleware.js";
+import { authAdmin } from './../common/middleware/authAdmin.middleware.js';
+import { uploadDiskStorage } from './../common/multer/disk-storage.multer.js';
 
 const phimRouter = express.Router();
 
@@ -20,6 +22,15 @@ phimRouter.get(
 phimRouter.get(
   "/layDanhSachPhimTheoNgay",
   phimController.layDanhSachPhimTheoNgay,
+);
+
+// Thêm phim Upload Hình Router
+phimRouter.post(
+  "/ThemPhimUploadHinh",
+  authCookie,
+  authAdmin,
+  uploadDiskStorage.single("hinhAnh"),
+  phimController.themPhimUploadHinh,
 );
 
 export default phimRouter;
