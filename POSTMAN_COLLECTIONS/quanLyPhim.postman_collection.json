@@ -1,0 +1,272 @@
+{
+  "info": {
+    "_postman_id": "d7495250-f38a-4f83-8f87-572647994fdc",
+    "name": "Quản lý Phim",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "32381291",
+    "_collection_link": "https://go.postman.co/collection/32381291-d7495250-f38a-4f83-8f87-572647994fdc?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Lấy danh sách Banner",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{Domain}}/phim/layDanhSachBanner",
+          "host": [
+            "{{Domain}}"
+          ],
+          "path": [
+            "phim",
+            "layDanhSachBanner"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Lấy danh sách Phim",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{Domain}}/phim/layDanhSachPhim?maNhom=GP01",
+          "host": [
+            "{{Domain}}"
+          ],
+          "path": [
+            "phim",
+            "layDanhSachPhim"
+          ],
+          "query": [
+            {
+              "key": "maNhom",
+              "value": "GP01",
+              "type": "text"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Lấy danh sách Phim phân trang",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{Domain}}/phim/layDanhSachPhimPhanTrang?maNhom=GP01&page=1&pageSize=10",
+          "host": [
+            "{{Domain}}"
+          ],
+          "path": [
+            "phim",
+            "layDanhSachPhimPhanTrang"
+          ],
+          "query": [
+            {
+              "key": "maNhom",
+              "value": "GP01"
+            },
+            {
+              "key": "page",
+              "value": "1"
+            },
+            {
+              "key": "pageSize",
+              "value": "10"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Lấy danh sách Phim phân trang theo ngày",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{Domain}}/phim/layDanhSachPhimTheoNgay?maNhom=GP01&page=1&pageSize=10&tuNgay=2024-01-01&denNgay=2024-12-31",
+          "host": [
+            "{{Domain}}"
+          ],
+          "path": [
+            "phim",
+            "layDanhSachPhimTheoNgay"
+          ],
+          "query": [
+            {
+              "key": "maNhom",
+              "value": "GP01"
+            },
+            {
+              "key": "page",
+              "value": "1"
+            },
+            {
+              "key": "pageSize",
+              "value": "10"
+            },
+            {
+              "key": "tuNgay",
+              "value": "2024-01-01"
+            },
+            {
+              "key": "denNgay",
+              "value": "2024-12-31"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Thêm phim Upload Hình",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "frm",
+              "value": "{\n  \"maPhim\": 11,\n  \"tenPhim\": \"Avatar 3\",\n  \"trailer\": \"https://youtube.com/watch?v=123\",\n  \"moTa\": \"Phần tiếp theo của Avatar\",\n  \"maNhom\": \"GP01\",\n  \"ngayKhoiChieu\": \"2026-12-20T00:00:00.000Z\",\n  \"danhGia\": 9,\n  \"hot\": true,\n  \"dangChieu\": false,\n  \"sapChieu\": true\n}",
+              "type": "text",
+              "uuid": "ade46491-502b-4dc6-87c5-c753cd35c20e"
+            },
+            {
+              "key": "hinhAnh",
+              "type": "file",
+              "uuid": "ae308d7c-891b-4b0f-a75f-02518632983d",
+              "src": "/C:/Users/dante/OneDrive/Pictures/PGR Wallpapers/1ubm62ssh8nv1mzf9y-1714123053819此岸与彼岸（动态）.jpg"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{Domain}}/phim/ThemPhimUploadHinh",
+          "host": [
+            "{{Domain}}"
+          ],
+          "path": [
+            "phim",
+            "ThemPhimUploadHinh"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Thêm phim Upload Hình Copy",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "frm",
+              "value": "{\n  \"tenPhim\": \"Avengers: Endgame cập nhật\",\n  \"trailer\": \"https://youtube.com/watch?v=example\",\n  \"moTa\": \"Nội dung phim đã cập nhật\",\n  \"maNhom\": \"GP01\",\n  \"ngayKhoiChieu\": \"2026-08-20\",\n  \"danhGia\": 9,\n  \"hot\": true,\n  \"dangChieu\": true,\n  \"sapChieu\": false\n}",
+              "type": "text",
+              "uuid": "ade46491-502b-4dc6-87c5-c753cd35c20e"
+            },
+            {
+              "key": "hinhAnh",
+              "type": "file",
+              "uuid": "ae308d7c-891b-4b0f-a75f-02518632983d",
+              "src": "/C:/Users/dante/OneDrive/Pictures/PGR Wallpapers/0tm5zw0cgwpc04m13l-1749091536542洛莎的信.jpg"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{Domain}}/phim/capNhatPhimUpload/1",
+          "host": [
+            "{{Domain}}"
+          ],
+          "path": [
+            "phim",
+            "capNhatPhimUpload",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Xóa phim",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "frm",
+              "value": "{\n  \"tenPhim\": \"Avengers: Endgame cập nhật\",\n  \"trailer\": \"https://youtube.com/watch?v=example\",\n  \"moTa\": \"Nội dung phim đã cập nhật\",\n  \"maNhom\": \"GP01\",\n  \"ngayKhoiChieu\": \"2026-08-20\",\n  \"danhGia\": 9,\n  \"hot\": true,\n  \"dangChieu\": true,\n  \"sapChieu\": false\n}",
+              "type": "text",
+              "uuid": "ade46491-502b-4dc6-87c5-c753cd35c20e"
+            },
+            {
+              "key": "hinhAnh",
+              "type": "file",
+              "uuid": "ae308d7c-891b-4b0f-a75f-02518632983d",
+              "src": "/C:/Users/dante/OneDrive/Pictures/PGR Wallpapers/0tm5zw0cgwpc04m13l-1749091536542洛莎的信.jpg"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{Domain}}/phim/xoaPhim/11",
+          "host": [
+            "{{Domain}}"
+          ],
+          "path": [
+            "phim",
+            "xoaPhim",
+            "11"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Lấy thông tin phim",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "frm",
+              "value": "{\n  \"tenPhim\": \"Avengers: Endgame cập nhật\",\n  \"trailer\": \"https://youtube.com/watch?v=example\",\n  \"moTa\": \"Nội dung phim đã cập nhật\",\n  \"maNhom\": \"GP01\",\n  \"ngayKhoiChieu\": \"2026-08-20\",\n  \"danhGia\": 9,\n  \"hot\": true,\n  \"dangChieu\": true,\n  \"sapChieu\": false\n}",
+              "type": "text",
+              "uuid": "ade46491-502b-4dc6-87c5-c753cd35c20e"
+            },
+            {
+              "key": "hinhAnh",
+              "type": "file",
+              "uuid": "ae308d7c-891b-4b0f-a75f-02518632983d",
+              "src": "/C:/Users/dante/OneDrive/Pictures/PGR Wallpapers/0tm5zw0cgwpc04m13l-1749091536542洛莎的信.jpg"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{Domain}}/phim/layThongTinPhim/1",
+          "host": [
+            "{{Domain}}"
+          ],
+          "path": [
+            "phim",
+            "layThongTinPhim",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

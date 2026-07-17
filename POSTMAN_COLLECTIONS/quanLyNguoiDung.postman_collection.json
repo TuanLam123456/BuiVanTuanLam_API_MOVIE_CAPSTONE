@@ -1,0 +1,363 @@
+{
+  "info": {
+    "_postman_id": "ab982c01-e896-459e-9518-5c9eb244d333",
+    "name": "Quản lý Người dùng",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "32381291",
+    "_collection_link": "https://go.postman.co/collection/32381291-ab982c01-e896-459e-9518-5c9eb244d333?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Đăng ký",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \r\n    \"tai_khoan\": \"TL\",\r\n    \"mat_khau\":\"Lam@12345\",\r\n    \"email\":\"dantethegodslayer2000@gmail.com\",\r\n    \"so_dt\":\"0367797348\",\r\n    \"ma_nhom\":\"GP01\",\r\n    \"ho_ten\":\"Bùi Văn Tuấn Lâm\" \r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{Domain}}/nguoiDung/dangKy",
+          "host": [
+            "{{Domain}}"
+          ],
+          "path": [
+            "nguoiDung",
+            "dangKy"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Đăng nhập",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \r\n    \"tai_khoan\": \"admin\",\r\n    \"mat_khau\":\"123456\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{Domain}}/nguoiDung/dangNhap",
+          "host": [
+            "{{Domain}}"
+          ],
+          "path": [
+            "nguoiDung",
+            "dangNhap"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Danh sách người dùng",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"Dantethegodslayer2000@gmail.com\",\r\n    \"mat_khau\": \"Lam@0367797348\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{Domain}}/nguoiDung/layDanhSachNguoiDung?ma_nhom=GP01",
+          "host": [
+            "{{Domain}}"
+          ],
+          "path": [
+            "nguoiDung",
+            "layDanhSachNguoiDung"
+          ],
+          "query": [
+            {
+              "key": "ma_nhom",
+              "value": "GP01"
+            },
+            {
+              "key": "",
+              "value": "",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Danh sách người dùng phân trang",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"Dantethegodslayer2000@gmail.com\",\r\n    \"mat_khau\": \"Lam@0367797348\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{Domain}}/nguoiDung/layDanhSachNguoiDungPhanTrang?ma_nhom=GP01&page=1&pageSize=3",
+          "host": [
+            "{{Domain}}"
+          ],
+          "path": [
+            "nguoiDung",
+            "layDanhSachNguoiDungPhanTrang"
+          ],
+          "query": [
+            {
+              "key": "ma_nhom",
+              "value": "GP01"
+            },
+            {
+              "key": "page",
+              "value": "1",
+              "type": "text"
+            },
+            {
+              "key": "pageSize",
+              "value": "3",
+              "type": "text"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Tìm kiếm người dùng",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"Dantethegodslayer2000@gmail.com\",\r\n    \"mat_khau\": \"Lam@0367797348\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{Domain}}/nguoiDung/timKiemNguoiDung?ma_nhom=GP01&tu_khoa=nguyen",
+          "host": [
+            "{{Domain}}"
+          ],
+          "path": [
+            "nguoiDung",
+            "timKiemNguoiDung"
+          ],
+          "query": [
+            {
+              "key": "ma_nhom",
+              "value": "GP01"
+            },
+            {
+              "key": "tu_khoa",
+              "value": "nguyen"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Tìm kiếm người dùng phân trang",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"Dantethegodslayer2000@gmail.com\",\r\n    \"mat_khau\": \"Lam@0367797348\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{Domain}}/nguoiDung/timKiemNguoiDungPhanTrang?ma_nhom=GP01&tu_khoa=la&page=1&pageSize=5",
+          "host": [
+            "{{Domain}}"
+          ],
+          "path": [
+            "nguoiDung",
+            "timKiemNguoiDungPhanTrang"
+          ],
+          "query": [
+            {
+              "key": "ma_nhom",
+              "value": "GP01"
+            },
+            {
+              "key": "tu_khoa",
+              "value": "la"
+            },
+            {
+              "key": "page",
+              "value": "1"
+            },
+            {
+              "key": "pageSize",
+              "value": "5"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Lấy thông tin tài khoản",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{Domain}}/nguoiDung/thongTinTaiKhoan",
+          "host": [
+            "{{Domain}}"
+          ],
+          "path": [
+            "nguoiDung",
+            "thongTinTaiKhoan"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Thêm tài khoản",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"tai_khoan\": \"admin02\",\r\n  \"mat_khau\": \"123456\",\r\n  \"email\": \"admin02@gmail.com\",\r\n  \"so_dt\": \"0901234567\",\r\n  \"ma_nhom\": \"GP01\",\r\n  \"ho_ten\": \"Nguyễn Văn Admin\",\r\n  \"loai_nguoi_dung\": \"QuanTri\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{Domain}}/nguoiDung/themNguoiDung",
+          "host": [
+            "{{Domain}}"
+          ],
+          "path": [
+            "nguoiDung",
+            "themNguoiDung"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Cập nhật thông tin người dùng",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"tai_khoan\": \"admin02\",\r\n  \"ho_ten\": \"Nguyễn Văn Admin Updated\",\r\n  \"so_dt\": \"0912345678\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{Domain}}/nguoiDung/capNhatThongTinNguoiDung",
+          "host": [
+            "{{Domain}}"
+          ],
+          "path": [
+            "nguoiDung",
+            "capNhatThongTinNguoiDung"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Cập nhật thông tin người dùng Copy",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"tai_khoan\": \"admin02\",\r\n  \"ho_ten\": \"Nguyễn Văn Admin Updated\",\r\n  \"so_dt\": \"0912345678\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{Domain}}/nguoiDung/xoaNguoiDung?tai_khoan=admin02",
+          "host": [
+            "{{Domain}}"
+          ],
+          "path": [
+            "nguoiDung",
+            "xoaNguoiDung"
+          ],
+          "query": [
+            {
+              "key": "tai_khoan",
+              "value": "admin02"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Danh sách loại người dùng",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{Domain}}/nguoiDung/layDanhSachLoaiNguoiDung",
+          "host": [
+            "{{Domain}}"
+          ],
+          "path": [
+            "nguoiDung",
+            "layDanhSachLoaiNguoiDung"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
