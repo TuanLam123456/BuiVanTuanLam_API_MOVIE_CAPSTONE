@@ -19,7 +19,7 @@ datVeRouter.get(
   datVeController.layDanhSachPhongVe,
 );
 
-// Tạo lịch chiếu Router - Admin
+// Tạo lịch chiếu Router
 datVeRouter.post(
   "/taoLichChieu",
   authCookie,

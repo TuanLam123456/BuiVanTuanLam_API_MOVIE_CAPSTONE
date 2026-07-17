@@ -23,7 +23,7 @@ export const datVeController = {
     res.status(response.statusCode).json(response);
   },
 
-  // Tạo lịch chiếu Controller - Admin
+  // Tạo lịch chiếu Controller
   async taoLichChieu(req, res, next) {
     const result = await datVeService.taoLichChieu(req);
 

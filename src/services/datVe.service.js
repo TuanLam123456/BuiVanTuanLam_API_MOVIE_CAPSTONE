@@ -338,7 +338,7 @@ export const datVeService = {
     };
   },
 
-  // Tạo lịch chiếu Service - Admin
+  // Tạo lịch chiếu Service
   async taoLichChieu(req) {
     const { maPhim, ngayChieuGioChieu, maRap, giaVe } = req.body || {};
 
