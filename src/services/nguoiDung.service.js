@@ -14,48 +14,90 @@ export const nguoiDungService = {
   async dangKy(req) {
     const { tai_khoan, mat_khau, email, so_dt, ma_nhom, ho_ten } = req.body;
 
-    if (
-      !tai_khoan?.trim() ||
-      !mat_khau?.trim() ||
-      !email?.trim() ||
-      !ho_ten?.trim()
-    ) {
+    const taiKhoan = tai_khoan?.trim();
+    const matKhau = mat_khau?.trim();
+    const emailNguoiDung = email?.trim().toLowerCase();
+    const hoTen = ho_ten?.trim();
+    const soDienThoai = so_dt?.trim() || null;
+    const maNhom = ma_nhom?.trim() || "GP01";
+
+    if (!taiKhoan || !matKhau || !emailNguoiDung || !hoTen) {
       throw new BadRequestError("Các trường bắt buộc không được để trống");
     }
 
-    // kiểm tra tài khoản đã tồn tại chưa, nếu đã tồn tại thì trả về lỗi, nếu chưa tồn tại thì tạo mới user
-    const taiKhoanExisting = await prisma.nguoiDung.findUnique({
+    // Kiểm tra đồng thời tài khoản và email
+    const nguoiDungExisting = await prisma.nguoiDung.findFirst({
       where: {
-        tai_khoan: tai_khoan,
+        OR: [
+          {
+            tai_khoan: taiKhoan,
+          },
+          {
+            email: emailNguoiDung,
+          },
+        ],
+      },
+      select: {
+        tai_khoan: true,
+        email: true,
       },
     });
-    if (taiKhoanExisting) {
-      throw new BadRequestError(`Tài khoản ${tai_khoan} đã tồn tại`);
+
+    if (nguoiDungExisting?.tai_khoan === taiKhoan) {
+      throw new BadRequestError(`Tài khoản ${taiKhoan} đã tồn tại`);
     }
 
-    // kiểm tra email đã tồn tại chưa, nếu đã tồn tại thì trả về lỗi, nếu chưa tồn tại thì tạo mới user
-    const emailExisting = await prisma.nguoiDung.findUnique({
+    if (nguoiDungExisting?.email === emailNguoiDung) {
+      throw new BadRequestError(`Email ${emailNguoiDung} đã tồn tại`);
+    }
+
+    // Kiểm tra mã nhóm có tồn tại
+    const nhomExisting = await prisma.nhom.findUnique({
       where: {
-        email: email,
+        ma_nhom: maNhom,
+      },
+      select: {
+        ma_nhom: true,
       },
     });
-    if (emailExisting) {
-      throw new BadRequestError(`Email ${email} đã tồn tại`);
+
+    if (!nhomExisting) {
+      throw new BadRequestError(`Mã nhóm ${maNhom} không tồn tại`);
     }
 
-    // encrypt: MÃ HÓA
-    // có thể dịch ngược để lấy dữ liệu
-    const hashPassword = bcrypt.hashSync(mat_khau, 10);
+    // Kiểm tra loại người dùng khách hàng có tồn tại
+    const loaiNguoiDungExisting = await prisma.loaiNguoiDung.findUnique({
+      where: {
+        ma_loai_nguoi_dung: "KHACH_HANG",
+      },
+      select: {
+        ma_loai_nguoi_dung: true,
+      },
+    });
+
+    if (!loaiNguoiDungExisting) {
+      throw new BadRequestError("Loại người dùng KHACH_HANG chưa tồn tại");
+    }
+
+    const hashPassword = await bcrypt.hash(matKhau, 10);
 
     const nguoiDungMoi = await prisma.nguoiDung.create({
       data: {
-        tai_khoan: tai_khoan,
+        tai_khoan: taiKhoan,
         mat_khau: hashPassword,
-        email: email,
-        so_dt: so_dt,
-        ma_nhom: ma_nhom || "GP01",
-        ho_ten: ho_ten,
-        loai_nguoi_dung: "KhachHang",
+        email: emailNguoiDung,
+        so_dt: soDienThoai,
+        ma_nhom: maNhom,
+        ho_ten: hoTen,
+        loai_nguoi_dung: "KHACH_HANG",
+      },
+      select: {
+        tai_khoan: true,
+        email: true,
+        so_dt: true,
+        ma_nhom: true,
+        ho_ten: true,
+        loai_nguoi_dung: true,
       },
     });
 
@@ -66,42 +108,58 @@ export const nguoiDungService = {
   async dangNhap(req) {
     const { tai_khoan, mat_khau } = req.body;
 
-    // Kiểm tra tài khoản có tồn tại hay không
-    // Nếu chưa tồn tại thì trả về lỗi, kêu người dùng đăng ký
-    // Nếu đã tồn tại thì so sánh password
+    if (!tai_khoan || !mat_khau) {
+      throw new BadRequestError("Vui lòng nhập đầy đủ tài khoản và mật khẩu");
+    }
+
+    // Tìm người dùng theo tài khoản
     const existingTaiKhoan = await prisma.nguoiDung.findUnique({
       where: {
-        tai_khoan: tai_khoan,
+        tai_khoan,
       },
-      omit: {
-        mat_khau: false,
+      select: {
+        tai_khoan: true,
+        ho_ten: true,
+        email: true,
+        so_dt: true,
+        mat_khau: true,
+        loai_nguoi_dung: true,
+        ma_nhom: true,
       },
     });
+
+    console.log(existingTaiKhoan);
+
+    // Phải kiểm tra null trước khi đọc mat_khau
+    if (!existingTaiKhoan) {
+      throw new BadRequestError(
+        "Thông tin người dùng không đúng, vui lòng thử lại",
+      );
+    }
 
     const isMatKhauValid = bcrypt.compareSync(
       mat_khau,
       existingTaiKhoan.mat_khau,
     );
 
-    if (!existingTaiKhoan && !isMatKhauValid) {
+    console.log(isMatKhauValid);
+
+    if (!isMatKhauValid) {
       throw new BadRequestError(
-        `Thông tin người dùng không đúng, vui lòng thử lại`,
+        "Thông tin người dùng không đúng, vui lòng thử lại",
       );
     }
 
-    // Tạo access token
-    // B1: tạo payload chứa thông tin: tai_khoan, email
     const nguoiDung = {
       tai_khoan: existingTaiKhoan.tai_khoan,
       email: existingTaiKhoan.email,
       so_dt: existingTaiKhoan.so_dt,
       ma_nhom: existingTaiKhoan.ma_nhom,
       ho_ten: existingTaiKhoan.ho_ten,
+      loai_nguoi_dung: existingTaiKhoan.loai_nguoi_dung,
     };
-    // B2: tạo access token từ payload
-    const accessToken = signAccessToken(nguoiDung);
 
-    // tạo refresh token từ payload
+    const accessToken = signAccessToken(nguoiDung);
     const refreshToken = signRefreshToken(nguoiDung);
 
     return {
