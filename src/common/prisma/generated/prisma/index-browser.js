@@ -212,26 +212,42 @@ exports.Prisma.NullsOrder = {
 };
 
 exports.Prisma.BannerOrderByRelevanceFieldEnum = {
+  ma_banner: 'ma_banner',
+  ma_phim: 'ma_phim',
   hinh_anh: 'hinh_anh'
 };
 
 exports.Prisma.CumRapOrderByRelevanceFieldEnum = {
+  ma_cum_rap: 'ma_cum_rap',
   ten_cum_rap: 'ten_cum_rap',
-  dia_chi: 'dia_chi'
+  dia_chi: 'dia_chi',
+  ma_he_thong_rap: 'ma_he_thong_rap'
 };
 
 exports.Prisma.DatVeOrderByRelevanceFieldEnum = {
-  tai_khoan: 'tai_khoan'
+  ma_dat_ve: 'ma_dat_ve',
+  tai_khoan: 'tai_khoan',
+  ma_lich_chieu: 'ma_lich_chieu',
+  ma_ghe: 'ma_ghe'
 };
 
 exports.Prisma.GheOrderByRelevanceFieldEnum = {
+  ma_ghe: 'ma_ghe',
   ten_ghe: 'ten_ghe',
-  loai_ghe: 'loai_ghe'
+  loai_ghe: 'loai_ghe',
+  ma_rap: 'ma_rap'
 };
 
 exports.Prisma.HeThongRapOrderByRelevanceFieldEnum = {
+  ma_he_thong_rap: 'ma_he_thong_rap',
   ten_he_thong_rap: 'ten_he_thong_rap',
   logo: 'logo'
+};
+
+exports.Prisma.LichChieuOrderByRelevanceFieldEnum = {
+  ma_lich_chieu: 'ma_lich_chieu',
+  ma_rap: 'ma_rap',
+  ma_phim: 'ma_phim'
 };
 
 exports.Prisma.NguoiDungOrderByRelevanceFieldEnum = {
@@ -245,6 +261,7 @@ exports.Prisma.NguoiDungOrderByRelevanceFieldEnum = {
 };
 
 exports.Prisma.PhimOrderByRelevanceFieldEnum = {
+  ma_phim: 'ma_phim',
   ten_phim: 'ten_phim',
   trailer: 'trailer',
   hinh_anh: 'hinh_anh',
@@ -253,7 +270,9 @@ exports.Prisma.PhimOrderByRelevanceFieldEnum = {
 };
 
 exports.Prisma.RapPhimOrderByRelevanceFieldEnum = {
-  ten_rap: 'ten_rap'
+  ma_rap: 'ma_rap',
+  ten_rap: 'ten_rap',
+  ma_cum_rap: 'ma_cum_rap'
 };
 
 exports.Prisma.NhomOrderByRelevanceFieldEnum = {

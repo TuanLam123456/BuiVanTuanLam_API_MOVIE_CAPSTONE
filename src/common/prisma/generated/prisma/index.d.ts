@@ -1999,31 +1999,19 @@ export namespace Prisma {
 
   export type AggregateBanner = {
     _count: BannerCountAggregateOutputType | null
-    _avg: BannerAvgAggregateOutputType | null
-    _sum: BannerSumAggregateOutputType | null
     _min: BannerMinAggregateOutputType | null
     _max: BannerMaxAggregateOutputType | null
   }
 
-  export type BannerAvgAggregateOutputType = {
-    ma_banner: number | null
-    ma_phim: number | null
-  }
-
-  export type BannerSumAggregateOutputType = {
-    ma_banner: number | null
-    ma_phim: number | null
-  }
-
   export type BannerMinAggregateOutputType = {
-    ma_banner: number | null
-    ma_phim: number | null
+    ma_banner: string | null
+    ma_phim: string | null
     hinh_anh: string | null
   }
 
   export type BannerMaxAggregateOutputType = {
-    ma_banner: number | null
-    ma_phim: number | null
+    ma_banner: string | null
+    ma_phim: string | null
     hinh_anh: string | null
   }
 
@@ -2034,16 +2022,6 @@ export namespace Prisma {
     _all: number
   }
 
-
-  export type BannerAvgAggregateInputType = {
-    ma_banner?: true
-    ma_phim?: true
-  }
-
-  export type BannerSumAggregateInputType = {
-    ma_banner?: true
-    ma_phim?: true
-  }
 
   export type BannerMinAggregateInputType = {
     ma_banner?: true
@@ -2102,18 +2080,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: BannerAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: BannerSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: BannerMinAggregateInputType
@@ -2144,19 +2110,15 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: BannerCountAggregateInputType | true
-    _avg?: BannerAvgAggregateInputType
-    _sum?: BannerSumAggregateInputType
     _min?: BannerMinAggregateInputType
     _max?: BannerMaxAggregateInputType
   }
 
   export type BannerGroupByOutputType = {
-    ma_banner: number
-    ma_phim: number
+    ma_banner: string
+    ma_phim: string
     hinh_anh: string | null
     _count: BannerCountAggregateOutputType | null
-    _avg: BannerAvgAggregateOutputType | null
-    _sum: BannerSumAggregateOutputType | null
     _min: BannerMinAggregateOutputType | null
     _max: BannerMaxAggregateOutputType | null
   }
@@ -2201,8 +2163,8 @@ export namespace Prisma {
       Phim: Prisma.$PhimPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      ma_banner: number
-      ma_phim: number
+      ma_banner: string
+      ma_phim: string
       hinh_anh: string | null
     }, ExtArgs["result"]["banner"]>
     composites: {}
@@ -2574,8 +2536,8 @@ export namespace Prisma {
    * Fields of the Banner model
    */
   interface BannerFieldRefs {
-    readonly ma_banner: FieldRef<"Banner", 'Int'>
-    readonly ma_phim: FieldRef<"Banner", 'Int'>
+    readonly ma_banner: FieldRef<"Banner", 'String'>
+    readonly ma_phim: FieldRef<"Banner", 'String'>
     readonly hinh_anh: FieldRef<"Banner", 'String'>
   }
     
@@ -2949,34 +2911,22 @@ export namespace Prisma {
 
   export type AggregateCumRap = {
     _count: CumRapCountAggregateOutputType | null
-    _avg: CumRapAvgAggregateOutputType | null
-    _sum: CumRapSumAggregateOutputType | null
     _min: CumRapMinAggregateOutputType | null
     _max: CumRapMaxAggregateOutputType | null
   }
 
-  export type CumRapAvgAggregateOutputType = {
-    ma_cum_rap: number | null
-    ma_he_thong_rap: number | null
-  }
-
-  export type CumRapSumAggregateOutputType = {
-    ma_cum_rap: number | null
-    ma_he_thong_rap: number | null
-  }
-
   export type CumRapMinAggregateOutputType = {
-    ma_cum_rap: number | null
+    ma_cum_rap: string | null
     ten_cum_rap: string | null
     dia_chi: string | null
-    ma_he_thong_rap: number | null
+    ma_he_thong_rap: string | null
   }
 
   export type CumRapMaxAggregateOutputType = {
-    ma_cum_rap: number | null
+    ma_cum_rap: string | null
     ten_cum_rap: string | null
     dia_chi: string | null
-    ma_he_thong_rap: number | null
+    ma_he_thong_rap: string | null
   }
 
   export type CumRapCountAggregateOutputType = {
@@ -2987,16 +2937,6 @@ export namespace Prisma {
     _all: number
   }
 
-
-  export type CumRapAvgAggregateInputType = {
-    ma_cum_rap?: true
-    ma_he_thong_rap?: true
-  }
-
-  export type CumRapSumAggregateInputType = {
-    ma_cum_rap?: true
-    ma_he_thong_rap?: true
-  }
 
   export type CumRapMinAggregateInputType = {
     ma_cum_rap?: true
@@ -3058,18 +2998,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: CumRapAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: CumRapSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: CumRapMinAggregateInputType
@@ -3100,20 +3028,16 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: CumRapCountAggregateInputType | true
-    _avg?: CumRapAvgAggregateInputType
-    _sum?: CumRapSumAggregateInputType
     _min?: CumRapMinAggregateInputType
     _max?: CumRapMaxAggregateInputType
   }
 
   export type CumRapGroupByOutputType = {
-    ma_cum_rap: number
+    ma_cum_rap: string
     ten_cum_rap: string
     dia_chi: string | null
-    ma_he_thong_rap: number
+    ma_he_thong_rap: string
     _count: CumRapCountAggregateOutputType | null
-    _avg: CumRapAvgAggregateOutputType | null
-    _sum: CumRapSumAggregateOutputType | null
     _min: CumRapMinAggregateOutputType | null
     _max: CumRapMaxAggregateOutputType | null
   }
@@ -3165,10 +3089,10 @@ export namespace Prisma {
       RapPhim: Prisma.$RapPhimPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
-      ma_cum_rap: number
+      ma_cum_rap: string
       ten_cum_rap: string
       dia_chi: string | null
-      ma_he_thong_rap: number
+      ma_he_thong_rap: string
     }, ExtArgs["result"]["cumRap"]>
     composites: {}
   }
@@ -3540,10 +3464,10 @@ export namespace Prisma {
    * Fields of the CumRap model
    */
   interface CumRapFieldRefs {
-    readonly ma_cum_rap: FieldRef<"CumRap", 'Int'>
+    readonly ma_cum_rap: FieldRef<"CumRap", 'String'>
     readonly ten_cum_rap: FieldRef<"CumRap", 'String'>
     readonly dia_chi: FieldRef<"CumRap", 'String'>
-    readonly ma_he_thong_rap: FieldRef<"CumRap", 'Int'>
+    readonly ma_he_thong_rap: FieldRef<"CumRap", 'String'>
   }
     
 
@@ -3940,36 +3864,22 @@ export namespace Prisma {
 
   export type AggregateDatVe = {
     _count: DatVeCountAggregateOutputType | null
-    _avg: DatVeAvgAggregateOutputType | null
-    _sum: DatVeSumAggregateOutputType | null
     _min: DatVeMinAggregateOutputType | null
     _max: DatVeMaxAggregateOutputType | null
   }
 
-  export type DatVeAvgAggregateOutputType = {
-    ma_dat_ve: number | null
-    ma_lich_chieu: number | null
-    ma_ghe: number | null
-  }
-
-  export type DatVeSumAggregateOutputType = {
-    ma_dat_ve: number | null
-    ma_lich_chieu: number | null
-    ma_ghe: number | null
-  }
-
   export type DatVeMinAggregateOutputType = {
-    ma_dat_ve: number | null
+    ma_dat_ve: string | null
     tai_khoan: string | null
-    ma_lich_chieu: number | null
-    ma_ghe: number | null
+    ma_lich_chieu: string | null
+    ma_ghe: string | null
   }
 
   export type DatVeMaxAggregateOutputType = {
-    ma_dat_ve: number | null
+    ma_dat_ve: string | null
     tai_khoan: string | null
-    ma_lich_chieu: number | null
-    ma_ghe: number | null
+    ma_lich_chieu: string | null
+    ma_ghe: string | null
   }
 
   export type DatVeCountAggregateOutputType = {
@@ -3980,18 +3890,6 @@ export namespace Prisma {
     _all: number
   }
 
-
-  export type DatVeAvgAggregateInputType = {
-    ma_dat_ve?: true
-    ma_lich_chieu?: true
-    ma_ghe?: true
-  }
-
-  export type DatVeSumAggregateInputType = {
-    ma_dat_ve?: true
-    ma_lich_chieu?: true
-    ma_ghe?: true
-  }
 
   export type DatVeMinAggregateInputType = {
     ma_dat_ve?: true
@@ -4053,18 +3951,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: DatVeAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: DatVeSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: DatVeMinAggregateInputType
@@ -4095,20 +3981,16 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: DatVeCountAggregateInputType | true
-    _avg?: DatVeAvgAggregateInputType
-    _sum?: DatVeSumAggregateInputType
     _min?: DatVeMinAggregateInputType
     _max?: DatVeMaxAggregateInputType
   }
 
   export type DatVeGroupByOutputType = {
-    ma_dat_ve: number
+    ma_dat_ve: string
     tai_khoan: string
-    ma_lich_chieu: number
-    ma_ghe: number
+    ma_lich_chieu: string
+    ma_ghe: string
     _count: DatVeCountAggregateOutputType | null
-    _avg: DatVeAvgAggregateOutputType | null
-    _sum: DatVeSumAggregateOutputType | null
     _min: DatVeMinAggregateOutputType | null
     _max: DatVeMaxAggregateOutputType | null
   }
@@ -4161,10 +4043,10 @@ export namespace Prisma {
       NguoiDung: Prisma.$NguoiDungPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      ma_dat_ve: number
+      ma_dat_ve: string
       tai_khoan: string
-      ma_lich_chieu: number
-      ma_ghe: number
+      ma_lich_chieu: string
+      ma_ghe: string
     }, ExtArgs["result"]["datVe"]>
     composites: {}
   }
@@ -4537,10 +4419,10 @@ export namespace Prisma {
    * Fields of the DatVe model
    */
   interface DatVeFieldRefs {
-    readonly ma_dat_ve: FieldRef<"DatVe", 'Int'>
+    readonly ma_dat_ve: FieldRef<"DatVe", 'String'>
     readonly tai_khoan: FieldRef<"DatVe", 'String'>
-    readonly ma_lich_chieu: FieldRef<"DatVe", 'Int'>
-    readonly ma_ghe: FieldRef<"DatVe", 'Int'>
+    readonly ma_lich_chieu: FieldRef<"DatVe", 'String'>
+    readonly ma_ghe: FieldRef<"DatVe", 'String'>
   }
     
 
@@ -4913,34 +4795,22 @@ export namespace Prisma {
 
   export type AggregateGhe = {
     _count: GheCountAggregateOutputType | null
-    _avg: GheAvgAggregateOutputType | null
-    _sum: GheSumAggregateOutputType | null
     _min: GheMinAggregateOutputType | null
     _max: GheMaxAggregateOutputType | null
   }
 
-  export type GheAvgAggregateOutputType = {
-    ma_ghe: number | null
-    ma_rap: number | null
-  }
-
-  export type GheSumAggregateOutputType = {
-    ma_ghe: number | null
-    ma_rap: number | null
-  }
-
   export type GheMinAggregateOutputType = {
-    ma_ghe: number | null
+    ma_ghe: string | null
     ten_ghe: string | null
     loai_ghe: string | null
-    ma_rap: number | null
+    ma_rap: string | null
   }
 
   export type GheMaxAggregateOutputType = {
-    ma_ghe: number | null
+    ma_ghe: string | null
     ten_ghe: string | null
     loai_ghe: string | null
-    ma_rap: number | null
+    ma_rap: string | null
   }
 
   export type GheCountAggregateOutputType = {
@@ -4951,16 +4821,6 @@ export namespace Prisma {
     _all: number
   }
 
-
-  export type GheAvgAggregateInputType = {
-    ma_ghe?: true
-    ma_rap?: true
-  }
-
-  export type GheSumAggregateInputType = {
-    ma_ghe?: true
-    ma_rap?: true
-  }
 
   export type GheMinAggregateInputType = {
     ma_ghe?: true
@@ -5022,18 +4882,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: GheAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: GheSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: GheMinAggregateInputType
@@ -5064,20 +4912,16 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: GheCountAggregateInputType | true
-    _avg?: GheAvgAggregateInputType
-    _sum?: GheSumAggregateInputType
     _min?: GheMinAggregateInputType
     _max?: GheMaxAggregateInputType
   }
 
   export type GheGroupByOutputType = {
-    ma_ghe: number
+    ma_ghe: string
     ten_ghe: string
     loai_ghe: string | null
-    ma_rap: number
+    ma_rap: string
     _count: GheCountAggregateOutputType | null
-    _avg: GheAvgAggregateOutputType | null
-    _sum: GheSumAggregateOutputType | null
     _min: GheMinAggregateOutputType | null
     _max: GheMaxAggregateOutputType | null
   }
@@ -5129,10 +4973,10 @@ export namespace Prisma {
       RapPhim: Prisma.$RapPhimPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      ma_ghe: number
+      ma_ghe: string
       ten_ghe: string
       loai_ghe: string | null
-      ma_rap: number
+      ma_rap: string
     }, ExtArgs["result"]["ghe"]>
     composites: {}
   }
@@ -5504,10 +5348,10 @@ export namespace Prisma {
    * Fields of the Ghe model
    */
   interface GheFieldRefs {
-    readonly ma_ghe: FieldRef<"Ghe", 'Int'>
+    readonly ma_ghe: FieldRef<"Ghe", 'String'>
     readonly ten_ghe: FieldRef<"Ghe", 'String'>
     readonly loai_ghe: FieldRef<"Ghe", 'String'>
-    readonly ma_rap: FieldRef<"Ghe", 'Int'>
+    readonly ma_rap: FieldRef<"Ghe", 'String'>
   }
     
 
@@ -5904,28 +5748,18 @@ export namespace Prisma {
 
   export type AggregateHeThongRap = {
     _count: HeThongRapCountAggregateOutputType | null
-    _avg: HeThongRapAvgAggregateOutputType | null
-    _sum: HeThongRapSumAggregateOutputType | null
     _min: HeThongRapMinAggregateOutputType | null
     _max: HeThongRapMaxAggregateOutputType | null
   }
 
-  export type HeThongRapAvgAggregateOutputType = {
-    ma_he_thong_rap: number | null
-  }
-
-  export type HeThongRapSumAggregateOutputType = {
-    ma_he_thong_rap: number | null
-  }
-
   export type HeThongRapMinAggregateOutputType = {
-    ma_he_thong_rap: number | null
+    ma_he_thong_rap: string | null
     ten_he_thong_rap: string | null
     logo: string | null
   }
 
   export type HeThongRapMaxAggregateOutputType = {
-    ma_he_thong_rap: number | null
+    ma_he_thong_rap: string | null
     ten_he_thong_rap: string | null
     logo: string | null
   }
@@ -5937,14 +5771,6 @@ export namespace Prisma {
     _all: number
   }
 
-
-  export type HeThongRapAvgAggregateInputType = {
-    ma_he_thong_rap?: true
-  }
-
-  export type HeThongRapSumAggregateInputType = {
-    ma_he_thong_rap?: true
-  }
 
   export type HeThongRapMinAggregateInputType = {
     ma_he_thong_rap?: true
@@ -6003,18 +5829,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: HeThongRapAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: HeThongRapSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: HeThongRapMinAggregateInputType
@@ -6045,19 +5859,15 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: HeThongRapCountAggregateInputType | true
-    _avg?: HeThongRapAvgAggregateInputType
-    _sum?: HeThongRapSumAggregateInputType
     _min?: HeThongRapMinAggregateInputType
     _max?: HeThongRapMaxAggregateInputType
   }
 
   export type HeThongRapGroupByOutputType = {
-    ma_he_thong_rap: number
+    ma_he_thong_rap: string
     ten_he_thong_rap: string
     logo: string | null
     _count: HeThongRapCountAggregateOutputType | null
-    _avg: HeThongRapAvgAggregateOutputType | null
-    _sum: HeThongRapSumAggregateOutputType | null
     _min: HeThongRapMinAggregateOutputType | null
     _max: HeThongRapMaxAggregateOutputType | null
   }
@@ -6104,7 +5914,7 @@ export namespace Prisma {
       CumRap: Prisma.$CumRapPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
-      ma_he_thong_rap: number
+      ma_he_thong_rap: string
       ten_he_thong_rap: string
       logo: string | null
     }, ExtArgs["result"]["heThongRap"]>
@@ -6477,7 +6287,7 @@ export namespace Prisma {
    * Fields of the HeThongRap model
    */
   interface HeThongRapFieldRefs {
-    readonly ma_he_thong_rap: FieldRef<"HeThongRap", 'Int'>
+    readonly ma_he_thong_rap: FieldRef<"HeThongRap", 'String'>
     readonly ten_he_thong_rap: FieldRef<"HeThongRap", 'String'>
     readonly logo: FieldRef<"HeThongRap", 'String'>
   }
@@ -6883,31 +6693,25 @@ export namespace Prisma {
   }
 
   export type LichChieuAvgAggregateOutputType = {
-    ma_lich_chieu: number | null
-    ma_rap: number | null
-    ma_phim: number | null
     gia_ve: number | null
   }
 
   export type LichChieuSumAggregateOutputType = {
-    ma_lich_chieu: number | null
-    ma_rap: number | null
-    ma_phim: number | null
     gia_ve: number | null
   }
 
   export type LichChieuMinAggregateOutputType = {
-    ma_lich_chieu: number | null
-    ma_rap: number | null
-    ma_phim: number | null
+    ma_lich_chieu: string | null
+    ma_rap: string | null
+    ma_phim: string | null
     ngay_gio_chieu: Date | null
     gia_ve: number | null
   }
 
   export type LichChieuMaxAggregateOutputType = {
-    ma_lich_chieu: number | null
-    ma_rap: number | null
-    ma_phim: number | null
+    ma_lich_chieu: string | null
+    ma_rap: string | null
+    ma_phim: string | null
     ngay_gio_chieu: Date | null
     gia_ve: number | null
   }
@@ -6923,16 +6727,10 @@ export namespace Prisma {
 
 
   export type LichChieuAvgAggregateInputType = {
-    ma_lich_chieu?: true
-    ma_rap?: true
-    ma_phim?: true
     gia_ve?: true
   }
 
   export type LichChieuSumAggregateInputType = {
-    ma_lich_chieu?: true
-    ma_rap?: true
-    ma_phim?: true
     gia_ve?: true
   }
 
@@ -7048,9 +6846,9 @@ export namespace Prisma {
   }
 
   export type LichChieuGroupByOutputType = {
-    ma_lich_chieu: number
-    ma_rap: number
-    ma_phim: number
+    ma_lich_chieu: string
+    ma_rap: string
+    ma_phim: string
     ngay_gio_chieu: Date
     gia_ve: number
     _count: LichChieuCountAggregateOutputType | null
@@ -7112,9 +6910,9 @@ export namespace Prisma {
       RapPhim: Prisma.$RapPhimPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      ma_lich_chieu: number
-      ma_rap: number
-      ma_phim: number
+      ma_lich_chieu: string
+      ma_rap: string
+      ma_phim: string
       ngay_gio_chieu: Date
       gia_ve: number
     }, ExtArgs["result"]["lichChieu"]>
@@ -7489,9 +7287,9 @@ export namespace Prisma {
    * Fields of the LichChieu model
    */
   interface LichChieuFieldRefs {
-    readonly ma_lich_chieu: FieldRef<"LichChieu", 'Int'>
-    readonly ma_rap: FieldRef<"LichChieu", 'Int'>
-    readonly ma_phim: FieldRef<"LichChieu", 'Int'>
+    readonly ma_lich_chieu: FieldRef<"LichChieu", 'String'>
+    readonly ma_rap: FieldRef<"LichChieu", 'String'>
+    readonly ma_phim: FieldRef<"LichChieu", 'String'>
     readonly ngay_gio_chieu: FieldRef<"LichChieu", 'DateTime'>
     readonly gia_ve: FieldRef<"LichChieu", 'Int'>
   }
@@ -8887,17 +8685,15 @@ export namespace Prisma {
   }
 
   export type PhimAvgAggregateOutputType = {
-    ma_phim: number | null
     danh_gia: number | null
   }
 
   export type PhimSumAggregateOutputType = {
-    ma_phim: number | null
     danh_gia: number | null
   }
 
   export type PhimMinAggregateOutputType = {
-    ma_phim: number | null
+    ma_phim: string | null
     ten_phim: string | null
     trailer: string | null
     hinh_anh: string | null
@@ -8911,7 +8707,7 @@ export namespace Prisma {
   }
 
   export type PhimMaxAggregateOutputType = {
-    ma_phim: number | null
+    ma_phim: string | null
     ten_phim: string | null
     trailer: string | null
     hinh_anh: string | null
@@ -8941,12 +8737,10 @@ export namespace Prisma {
 
 
   export type PhimAvgAggregateInputType = {
-    ma_phim?: true
     danh_gia?: true
   }
 
   export type PhimSumAggregateInputType = {
-    ma_phim?: true
     danh_gia?: true
   }
 
@@ -9080,7 +8874,7 @@ export namespace Prisma {
   }
 
   export type PhimGroupByOutputType = {
-    ma_phim: number
+    ma_phim: string
     ten_phim: string
     trailer: string | null
     hinh_anh: string | null
@@ -9162,7 +8956,7 @@ export namespace Prisma {
       Nhom: Prisma.$NhomPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      ma_phim: number
+      ma_phim: string
       ten_phim: string
       trailer: string | null
       hinh_anh: string | null
@@ -9545,7 +9339,7 @@ export namespace Prisma {
    * Fields of the Phim model
    */
   interface PhimFieldRefs {
-    readonly ma_phim: FieldRef<"Phim", 'Int'>
+    readonly ma_phim: FieldRef<"Phim", 'String'>
     readonly ten_phim: FieldRef<"Phim", 'String'>
     readonly trailer: FieldRef<"Phim", 'String'>
     readonly hinh_anh: FieldRef<"Phim", 'String'>
@@ -9976,32 +9770,20 @@ export namespace Prisma {
 
   export type AggregateRapPhim = {
     _count: RapPhimCountAggregateOutputType | null
-    _avg: RapPhimAvgAggregateOutputType | null
-    _sum: RapPhimSumAggregateOutputType | null
     _min: RapPhimMinAggregateOutputType | null
     _max: RapPhimMaxAggregateOutputType | null
   }
 
-  export type RapPhimAvgAggregateOutputType = {
-    ma_rap: number | null
-    ma_cum_rap: number | null
-  }
-
-  export type RapPhimSumAggregateOutputType = {
-    ma_rap: number | null
-    ma_cum_rap: number | null
-  }
-
   export type RapPhimMinAggregateOutputType = {
-    ma_rap: number | null
+    ma_rap: string | null
     ten_rap: string | null
-    ma_cum_rap: number | null
+    ma_cum_rap: string | null
   }
 
   export type RapPhimMaxAggregateOutputType = {
-    ma_rap: number | null
+    ma_rap: string | null
     ten_rap: string | null
-    ma_cum_rap: number | null
+    ma_cum_rap: string | null
   }
 
   export type RapPhimCountAggregateOutputType = {
@@ -10011,16 +9793,6 @@ export namespace Prisma {
     _all: number
   }
 
-
-  export type RapPhimAvgAggregateInputType = {
-    ma_rap?: true
-    ma_cum_rap?: true
-  }
-
-  export type RapPhimSumAggregateInputType = {
-    ma_rap?: true
-    ma_cum_rap?: true
-  }
 
   export type RapPhimMinAggregateInputType = {
     ma_rap?: true
@@ -10079,18 +9851,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: RapPhimAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: RapPhimSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: RapPhimMinAggregateInputType
@@ -10121,19 +9881,15 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: RapPhimCountAggregateInputType | true
-    _avg?: RapPhimAvgAggregateInputType
-    _sum?: RapPhimSumAggregateInputType
     _min?: RapPhimMinAggregateInputType
     _max?: RapPhimMaxAggregateInputType
   }
 
   export type RapPhimGroupByOutputType = {
-    ma_rap: number
+    ma_rap: string
     ten_rap: string
-    ma_cum_rap: number
+    ma_cum_rap: string
     _count: RapPhimCountAggregateOutputType | null
-    _avg: RapPhimAvgAggregateOutputType | null
-    _sum: RapPhimSumAggregateOutputType | null
     _min: RapPhimMinAggregateOutputType | null
     _max: RapPhimMaxAggregateOutputType | null
   }
@@ -10186,9 +9942,9 @@ export namespace Prisma {
       CumRap: Prisma.$CumRapPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      ma_rap: number
+      ma_rap: string
       ten_rap: string
-      ma_cum_rap: number
+      ma_cum_rap: string
     }, ExtArgs["result"]["rapPhim"]>
     composites: {}
   }
@@ -10561,9 +10317,9 @@ export namespace Prisma {
    * Fields of the RapPhim model
    */
   interface RapPhimFieldRefs {
-    readonly ma_rap: FieldRef<"RapPhim", 'Int'>
+    readonly ma_rap: FieldRef<"RapPhim", 'String'>
     readonly ten_rap: FieldRef<"RapPhim", 'String'>
-    readonly ma_cum_rap: FieldRef<"RapPhim", 'Int'>
+    readonly ma_cum_rap: FieldRef<"RapPhim", 'String'>
   }
     
 
@@ -13005,6 +12761,8 @@ export namespace Prisma {
 
 
   export const BannerOrderByRelevanceFieldEnum: {
+    ma_banner: 'ma_banner',
+    ma_phim: 'ma_phim',
     hinh_anh: 'hinh_anh'
   };
 
@@ -13012,34 +12770,51 @@ export namespace Prisma {
 
 
   export const CumRapOrderByRelevanceFieldEnum: {
+    ma_cum_rap: 'ma_cum_rap',
     ten_cum_rap: 'ten_cum_rap',
-    dia_chi: 'dia_chi'
+    dia_chi: 'dia_chi',
+    ma_he_thong_rap: 'ma_he_thong_rap'
   };
 
   export type CumRapOrderByRelevanceFieldEnum = (typeof CumRapOrderByRelevanceFieldEnum)[keyof typeof CumRapOrderByRelevanceFieldEnum]
 
 
   export const DatVeOrderByRelevanceFieldEnum: {
-    tai_khoan: 'tai_khoan'
+    ma_dat_ve: 'ma_dat_ve',
+    tai_khoan: 'tai_khoan',
+    ma_lich_chieu: 'ma_lich_chieu',
+    ma_ghe: 'ma_ghe'
   };
 
   export type DatVeOrderByRelevanceFieldEnum = (typeof DatVeOrderByRelevanceFieldEnum)[keyof typeof DatVeOrderByRelevanceFieldEnum]
 
 
   export const GheOrderByRelevanceFieldEnum: {
+    ma_ghe: 'ma_ghe',
     ten_ghe: 'ten_ghe',
-    loai_ghe: 'loai_ghe'
+    loai_ghe: 'loai_ghe',
+    ma_rap: 'ma_rap'
   };
 
   export type GheOrderByRelevanceFieldEnum = (typeof GheOrderByRelevanceFieldEnum)[keyof typeof GheOrderByRelevanceFieldEnum]
 
 
   export const HeThongRapOrderByRelevanceFieldEnum: {
+    ma_he_thong_rap: 'ma_he_thong_rap',
     ten_he_thong_rap: 'ten_he_thong_rap',
     logo: 'logo'
   };
 
   export type HeThongRapOrderByRelevanceFieldEnum = (typeof HeThongRapOrderByRelevanceFieldEnum)[keyof typeof HeThongRapOrderByRelevanceFieldEnum]
+
+
+  export const LichChieuOrderByRelevanceFieldEnum: {
+    ma_lich_chieu: 'ma_lich_chieu',
+    ma_rap: 'ma_rap',
+    ma_phim: 'ma_phim'
+  };
+
+  export type LichChieuOrderByRelevanceFieldEnum = (typeof LichChieuOrderByRelevanceFieldEnum)[keyof typeof LichChieuOrderByRelevanceFieldEnum]
 
 
   export const NguoiDungOrderByRelevanceFieldEnum: {
@@ -13056,6 +12831,7 @@ export namespace Prisma {
 
 
   export const PhimOrderByRelevanceFieldEnum: {
+    ma_phim: 'ma_phim',
     ten_phim: 'ten_phim',
     trailer: 'trailer',
     hinh_anh: 'hinh_anh',
@@ -13067,7 +12843,9 @@ export namespace Prisma {
 
 
   export const RapPhimOrderByRelevanceFieldEnum: {
-    ten_rap: 'ten_rap'
+    ma_rap: 'ma_rap',
+    ten_rap: 'ten_rap',
+    ma_cum_rap: 'ma_cum_rap'
   };
 
   export type RapPhimOrderByRelevanceFieldEnum = (typeof RapPhimOrderByRelevanceFieldEnum)[keyof typeof RapPhimOrderByRelevanceFieldEnum]
@@ -13095,13 +12873,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Int'
-   */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
-
-  /**
    * Reference to a field of type 'String'
    */
   export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
@@ -13112,6 +12883,13 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int'
+   */
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
     
 
 
@@ -13136,8 +12914,8 @@ export namespace Prisma {
     AND?: BannerWhereInput | BannerWhereInput[]
     OR?: BannerWhereInput[]
     NOT?: BannerWhereInput | BannerWhereInput[]
-    ma_banner?: IntFilter<"Banner"> | number
-    ma_phim?: IntFilter<"Banner"> | number
+    ma_banner?: StringFilter<"Banner"> | string
+    ma_phim?: StringFilter<"Banner"> | string
     hinh_anh?: StringNullableFilter<"Banner"> | string | null
     Phim?: XOR<PhimScalarRelationFilter, PhimWhereInput>
   }
@@ -13151,11 +12929,11 @@ export namespace Prisma {
   }
 
   export type BannerWhereUniqueInput = Prisma.AtLeast<{
-    ma_banner?: number
+    ma_banner?: string
     AND?: BannerWhereInput | BannerWhereInput[]
     OR?: BannerWhereInput[]
     NOT?: BannerWhereInput | BannerWhereInput[]
-    ma_phim?: IntFilter<"Banner"> | number
+    ma_phim?: StringFilter<"Banner"> | string
     hinh_anh?: StringNullableFilter<"Banner"> | string | null
     Phim?: XOR<PhimScalarRelationFilter, PhimWhereInput>
   }, "ma_banner">
@@ -13165,18 +12943,16 @@ export namespace Prisma {
     ma_phim?: SortOrder
     hinh_anh?: SortOrderInput | SortOrder
     _count?: BannerCountOrderByAggregateInput
-    _avg?: BannerAvgOrderByAggregateInput
     _max?: BannerMaxOrderByAggregateInput
     _min?: BannerMinOrderByAggregateInput
-    _sum?: BannerSumOrderByAggregateInput
   }
 
   export type BannerScalarWhereWithAggregatesInput = {
     AND?: BannerScalarWhereWithAggregatesInput | BannerScalarWhereWithAggregatesInput[]
     OR?: BannerScalarWhereWithAggregatesInput[]
     NOT?: BannerScalarWhereWithAggregatesInput | BannerScalarWhereWithAggregatesInput[]
-    ma_banner?: IntWithAggregatesFilter<"Banner"> | number
-    ma_phim?: IntWithAggregatesFilter<"Banner"> | number
+    ma_banner?: StringWithAggregatesFilter<"Banner"> | string
+    ma_phim?: StringWithAggregatesFilter<"Banner"> | string
     hinh_anh?: StringNullableWithAggregatesFilter<"Banner"> | string | null
   }
 
@@ -13184,10 +12960,10 @@ export namespace Prisma {
     AND?: CumRapWhereInput | CumRapWhereInput[]
     OR?: CumRapWhereInput[]
     NOT?: CumRapWhereInput | CumRapWhereInput[]
-    ma_cum_rap?: IntFilter<"CumRap"> | number
+    ma_cum_rap?: StringFilter<"CumRap"> | string
     ten_cum_rap?: StringFilter<"CumRap"> | string
     dia_chi?: StringNullableFilter<"CumRap"> | string | null
-    ma_he_thong_rap?: IntFilter<"CumRap"> | number
+    ma_he_thong_rap?: StringFilter<"CumRap"> | string
     HeThongRap?: XOR<HeThongRapScalarRelationFilter, HeThongRapWhereInput>
     RapPhim?: RapPhimListRelationFilter
   }
@@ -13203,13 +12979,13 @@ export namespace Prisma {
   }
 
   export type CumRapWhereUniqueInput = Prisma.AtLeast<{
-    ma_cum_rap?: number
+    ma_cum_rap?: string
     AND?: CumRapWhereInput | CumRapWhereInput[]
     OR?: CumRapWhereInput[]
     NOT?: CumRapWhereInput | CumRapWhereInput[]
     ten_cum_rap?: StringFilter<"CumRap"> | string
     dia_chi?: StringNullableFilter<"CumRap"> | string | null
-    ma_he_thong_rap?: IntFilter<"CumRap"> | number
+    ma_he_thong_rap?: StringFilter<"CumRap"> | string
     HeThongRap?: XOR<HeThongRapScalarRelationFilter, HeThongRapWhereInput>
     RapPhim?: RapPhimListRelationFilter
   }, "ma_cum_rap">
@@ -13220,30 +12996,28 @@ export namespace Prisma {
     dia_chi?: SortOrderInput | SortOrder
     ma_he_thong_rap?: SortOrder
     _count?: CumRapCountOrderByAggregateInput
-    _avg?: CumRapAvgOrderByAggregateInput
     _max?: CumRapMaxOrderByAggregateInput
     _min?: CumRapMinOrderByAggregateInput
-    _sum?: CumRapSumOrderByAggregateInput
   }
 
   export type CumRapScalarWhereWithAggregatesInput = {
     AND?: CumRapScalarWhereWithAggregatesInput | CumRapScalarWhereWithAggregatesInput[]
     OR?: CumRapScalarWhereWithAggregatesInput[]
     NOT?: CumRapScalarWhereWithAggregatesInput | CumRapScalarWhereWithAggregatesInput[]
-    ma_cum_rap?: IntWithAggregatesFilter<"CumRap"> | number
+    ma_cum_rap?: StringWithAggregatesFilter<"CumRap"> | string
     ten_cum_rap?: StringWithAggregatesFilter<"CumRap"> | string
     dia_chi?: StringNullableWithAggregatesFilter<"CumRap"> | string | null
-    ma_he_thong_rap?: IntWithAggregatesFilter<"CumRap"> | number
+    ma_he_thong_rap?: StringWithAggregatesFilter<"CumRap"> | string
   }
 
   export type DatVeWhereInput = {
     AND?: DatVeWhereInput | DatVeWhereInput[]
     OR?: DatVeWhereInput[]
     NOT?: DatVeWhereInput | DatVeWhereInput[]
-    ma_dat_ve?: IntFilter<"DatVe"> | number
+    ma_dat_ve?: StringFilter<"DatVe"> | string
     tai_khoan?: StringFilter<"DatVe"> | string
-    ma_lich_chieu?: IntFilter<"DatVe"> | number
-    ma_ghe?: IntFilter<"DatVe"> | number
+    ma_lich_chieu?: StringFilter<"DatVe"> | string
+    ma_ghe?: StringFilter<"DatVe"> | string
     Ghe?: XOR<GheScalarRelationFilter, GheWhereInput>
     LichChieu?: XOR<LichChieuScalarRelationFilter, LichChieuWhereInput>
     NguoiDung?: XOR<NguoiDungScalarRelationFilter, NguoiDungWhereInput>
@@ -13261,14 +13035,14 @@ export namespace Prisma {
   }
 
   export type DatVeWhereUniqueInput = Prisma.AtLeast<{
-    ma_dat_ve?: number
+    ma_dat_ve?: string
     ma_lich_chieu_ma_ghe?: DatVeMa_lich_chieuMa_gheCompoundUniqueInput
     AND?: DatVeWhereInput | DatVeWhereInput[]
     OR?: DatVeWhereInput[]
     NOT?: DatVeWhereInput | DatVeWhereInput[]
     tai_khoan?: StringFilter<"DatVe"> | string
-    ma_lich_chieu?: IntFilter<"DatVe"> | number
-    ma_ghe?: IntFilter<"DatVe"> | number
+    ma_lich_chieu?: StringFilter<"DatVe"> | string
+    ma_ghe?: StringFilter<"DatVe"> | string
     Ghe?: XOR<GheScalarRelationFilter, GheWhereInput>
     LichChieu?: XOR<LichChieuScalarRelationFilter, LichChieuWhereInput>
     NguoiDung?: XOR<NguoiDungScalarRelationFilter, NguoiDungWhereInput>
@@ -13280,30 +13054,28 @@ export namespace Prisma {
     ma_lich_chieu?: SortOrder
     ma_ghe?: SortOrder
     _count?: DatVeCountOrderByAggregateInput
-    _avg?: DatVeAvgOrderByAggregateInput
     _max?: DatVeMaxOrderByAggregateInput
     _min?: DatVeMinOrderByAggregateInput
-    _sum?: DatVeSumOrderByAggregateInput
   }
 
   export type DatVeScalarWhereWithAggregatesInput = {
     AND?: DatVeScalarWhereWithAggregatesInput | DatVeScalarWhereWithAggregatesInput[]
     OR?: DatVeScalarWhereWithAggregatesInput[]
     NOT?: DatVeScalarWhereWithAggregatesInput | DatVeScalarWhereWithAggregatesInput[]
-    ma_dat_ve?: IntWithAggregatesFilter<"DatVe"> | number
+    ma_dat_ve?: StringWithAggregatesFilter<"DatVe"> | string
     tai_khoan?: StringWithAggregatesFilter<"DatVe"> | string
-    ma_lich_chieu?: IntWithAggregatesFilter<"DatVe"> | number
-    ma_ghe?: IntWithAggregatesFilter<"DatVe"> | number
+    ma_lich_chieu?: StringWithAggregatesFilter<"DatVe"> | string
+    ma_ghe?: StringWithAggregatesFilter<"DatVe"> | string
   }
 
   export type GheWhereInput = {
     AND?: GheWhereInput | GheWhereInput[]
     OR?: GheWhereInput[]
     NOT?: GheWhereInput | GheWhereInput[]
-    ma_ghe?: IntFilter<"Ghe"> | number
+    ma_ghe?: StringFilter<"Ghe"> | string
     ten_ghe?: StringFilter<"Ghe"> | string
     loai_ghe?: StringNullableFilter<"Ghe"> | string | null
-    ma_rap?: IntFilter<"Ghe"> | number
+    ma_rap?: StringFilter<"Ghe"> | string
     DatVe?: DatVeListRelationFilter
     RapPhim?: XOR<RapPhimScalarRelationFilter, RapPhimWhereInput>
   }
@@ -13319,14 +13091,14 @@ export namespace Prisma {
   }
 
   export type GheWhereUniqueInput = Prisma.AtLeast<{
-    ma_ghe?: number
+    ma_ghe?: string
     ma_rap_ten_ghe?: GheMa_rapTen_gheCompoundUniqueInput
     AND?: GheWhereInput | GheWhereInput[]
     OR?: GheWhereInput[]
     NOT?: GheWhereInput | GheWhereInput[]
     ten_ghe?: StringFilter<"Ghe"> | string
     loai_ghe?: StringNullableFilter<"Ghe"> | string | null
-    ma_rap?: IntFilter<"Ghe"> | number
+    ma_rap?: StringFilter<"Ghe"> | string
     DatVe?: DatVeListRelationFilter
     RapPhim?: XOR<RapPhimScalarRelationFilter, RapPhimWhereInput>
   }, "ma_ghe" | "ma_rap_ten_ghe">
@@ -13337,27 +13109,25 @@ export namespace Prisma {
     loai_ghe?: SortOrderInput | SortOrder
     ma_rap?: SortOrder
     _count?: GheCountOrderByAggregateInput
-    _avg?: GheAvgOrderByAggregateInput
     _max?: GheMaxOrderByAggregateInput
     _min?: GheMinOrderByAggregateInput
-    _sum?: GheSumOrderByAggregateInput
   }
 
   export type GheScalarWhereWithAggregatesInput = {
     AND?: GheScalarWhereWithAggregatesInput | GheScalarWhereWithAggregatesInput[]
     OR?: GheScalarWhereWithAggregatesInput[]
     NOT?: GheScalarWhereWithAggregatesInput | GheScalarWhereWithAggregatesInput[]
-    ma_ghe?: IntWithAggregatesFilter<"Ghe"> | number
+    ma_ghe?: StringWithAggregatesFilter<"Ghe"> | string
     ten_ghe?: StringWithAggregatesFilter<"Ghe"> | string
     loai_ghe?: StringNullableWithAggregatesFilter<"Ghe"> | string | null
-    ma_rap?: IntWithAggregatesFilter<"Ghe"> | number
+    ma_rap?: StringWithAggregatesFilter<"Ghe"> | string
   }
 
   export type HeThongRapWhereInput = {
     AND?: HeThongRapWhereInput | HeThongRapWhereInput[]
     OR?: HeThongRapWhereInput[]
     NOT?: HeThongRapWhereInput | HeThongRapWhereInput[]
-    ma_he_thong_rap?: IntFilter<"HeThongRap"> | number
+    ma_he_thong_rap?: StringFilter<"HeThongRap"> | string
     ten_he_thong_rap?: StringFilter<"HeThongRap"> | string
     logo?: StringNullableFilter<"HeThongRap"> | string | null
     CumRap?: CumRapListRelationFilter
@@ -13372,7 +13142,7 @@ export namespace Prisma {
   }
 
   export type HeThongRapWhereUniqueInput = Prisma.AtLeast<{
-    ma_he_thong_rap?: number
+    ma_he_thong_rap?: string
     AND?: HeThongRapWhereInput | HeThongRapWhereInput[]
     OR?: HeThongRapWhereInput[]
     NOT?: HeThongRapWhereInput | HeThongRapWhereInput[]
@@ -13386,17 +13156,15 @@ export namespace Prisma {
     ten_he_thong_rap?: SortOrder
     logo?: SortOrderInput | SortOrder
     _count?: HeThongRapCountOrderByAggregateInput
-    _avg?: HeThongRapAvgOrderByAggregateInput
     _max?: HeThongRapMaxOrderByAggregateInput
     _min?: HeThongRapMinOrderByAggregateInput
-    _sum?: HeThongRapSumOrderByAggregateInput
   }
 
   export type HeThongRapScalarWhereWithAggregatesInput = {
     AND?: HeThongRapScalarWhereWithAggregatesInput | HeThongRapScalarWhereWithAggregatesInput[]
     OR?: HeThongRapScalarWhereWithAggregatesInput[]
     NOT?: HeThongRapScalarWhereWithAggregatesInput | HeThongRapScalarWhereWithAggregatesInput[]
-    ma_he_thong_rap?: IntWithAggregatesFilter<"HeThongRap"> | number
+    ma_he_thong_rap?: StringWithAggregatesFilter<"HeThongRap"> | string
     ten_he_thong_rap?: StringWithAggregatesFilter<"HeThongRap"> | string
     logo?: StringNullableWithAggregatesFilter<"HeThongRap"> | string | null
   }
@@ -13405,9 +13173,9 @@ export namespace Prisma {
     AND?: LichChieuWhereInput | LichChieuWhereInput[]
     OR?: LichChieuWhereInput[]
     NOT?: LichChieuWhereInput | LichChieuWhereInput[]
-    ma_lich_chieu?: IntFilter<"LichChieu"> | number
-    ma_rap?: IntFilter<"LichChieu"> | number
-    ma_phim?: IntFilter<"LichChieu"> | number
+    ma_lich_chieu?: StringFilter<"LichChieu"> | string
+    ma_rap?: StringFilter<"LichChieu"> | string
+    ma_phim?: StringFilter<"LichChieu"> | string
     ngay_gio_chieu?: DateTimeFilter<"LichChieu"> | Date | string
     gia_ve?: IntFilter<"LichChieu"> | number
     DatVe?: DatVeListRelationFilter
@@ -13424,15 +13192,16 @@ export namespace Prisma {
     DatVe?: DatVeOrderByRelationAggregateInput
     Phim?: PhimOrderByWithRelationInput
     RapPhim?: RapPhimOrderByWithRelationInput
+    _relevance?: LichChieuOrderByRelevanceInput
   }
 
   export type LichChieuWhereUniqueInput = Prisma.AtLeast<{
-    ma_lich_chieu?: number
+    ma_lich_chieu?: string
     AND?: LichChieuWhereInput | LichChieuWhereInput[]
     OR?: LichChieuWhereInput[]
     NOT?: LichChieuWhereInput | LichChieuWhereInput[]
-    ma_rap?: IntFilter<"LichChieu"> | number
-    ma_phim?: IntFilter<"LichChieu"> | number
+    ma_rap?: StringFilter<"LichChieu"> | string
+    ma_phim?: StringFilter<"LichChieu"> | string
     ngay_gio_chieu?: DateTimeFilter<"LichChieu"> | Date | string
     gia_ve?: IntFilter<"LichChieu"> | number
     DatVe?: DatVeListRelationFilter
@@ -13457,9 +13226,9 @@ export namespace Prisma {
     AND?: LichChieuScalarWhereWithAggregatesInput | LichChieuScalarWhereWithAggregatesInput[]
     OR?: LichChieuScalarWhereWithAggregatesInput[]
     NOT?: LichChieuScalarWhereWithAggregatesInput | LichChieuScalarWhereWithAggregatesInput[]
-    ma_lich_chieu?: IntWithAggregatesFilter<"LichChieu"> | number
-    ma_rap?: IntWithAggregatesFilter<"LichChieu"> | number
-    ma_phim?: IntWithAggregatesFilter<"LichChieu"> | number
+    ma_lich_chieu?: StringWithAggregatesFilter<"LichChieu"> | string
+    ma_rap?: StringWithAggregatesFilter<"LichChieu"> | string
+    ma_phim?: StringWithAggregatesFilter<"LichChieu"> | string
     ngay_gio_chieu?: DateTimeWithAggregatesFilter<"LichChieu"> | Date | string
     gia_ve?: IntWithAggregatesFilter<"LichChieu"> | number
   }
@@ -13540,7 +13309,7 @@ export namespace Prisma {
     AND?: PhimWhereInput | PhimWhereInput[]
     OR?: PhimWhereInput[]
     NOT?: PhimWhereInput | PhimWhereInput[]
-    ma_phim?: IntFilter<"Phim"> | number
+    ma_phim?: StringFilter<"Phim"> | string
     ten_phim?: StringFilter<"Phim"> | string
     trailer?: StringNullableFilter<"Phim"> | string | null
     hinh_anh?: StringNullableFilter<"Phim"> | string | null
@@ -13575,7 +13344,7 @@ export namespace Prisma {
   }
 
   export type PhimWhereUniqueInput = Prisma.AtLeast<{
-    ma_phim?: number
+    ma_phim?: string
     AND?: PhimWhereInput | PhimWhereInput[]
     OR?: PhimWhereInput[]
     NOT?: PhimWhereInput | PhimWhereInput[]
@@ -13617,7 +13386,7 @@ export namespace Prisma {
     AND?: PhimScalarWhereWithAggregatesInput | PhimScalarWhereWithAggregatesInput[]
     OR?: PhimScalarWhereWithAggregatesInput[]
     NOT?: PhimScalarWhereWithAggregatesInput | PhimScalarWhereWithAggregatesInput[]
-    ma_phim?: IntWithAggregatesFilter<"Phim"> | number
+    ma_phim?: StringWithAggregatesFilter<"Phim"> | string
     ten_phim?: StringWithAggregatesFilter<"Phim"> | string
     trailer?: StringNullableWithAggregatesFilter<"Phim"> | string | null
     hinh_anh?: StringNullableWithAggregatesFilter<"Phim"> | string | null
@@ -13634,9 +13403,9 @@ export namespace Prisma {
     AND?: RapPhimWhereInput | RapPhimWhereInput[]
     OR?: RapPhimWhereInput[]
     NOT?: RapPhimWhereInput | RapPhimWhereInput[]
-    ma_rap?: IntFilter<"RapPhim"> | number
+    ma_rap?: StringFilter<"RapPhim"> | string
     ten_rap?: StringFilter<"RapPhim"> | string
-    ma_cum_rap?: IntFilter<"RapPhim"> | number
+    ma_cum_rap?: StringFilter<"RapPhim"> | string
     Ghe?: GheListRelationFilter
     LichChieu?: LichChieuListRelationFilter
     CumRap?: XOR<CumRapScalarRelationFilter, CumRapWhereInput>
@@ -13653,12 +13422,12 @@ export namespace Prisma {
   }
 
   export type RapPhimWhereUniqueInput = Prisma.AtLeast<{
-    ma_rap?: number
+    ma_rap?: string
     AND?: RapPhimWhereInput | RapPhimWhereInput[]
     OR?: RapPhimWhereInput[]
     NOT?: RapPhimWhereInput | RapPhimWhereInput[]
     ten_rap?: StringFilter<"RapPhim"> | string
-    ma_cum_rap?: IntFilter<"RapPhim"> | number
+    ma_cum_rap?: StringFilter<"RapPhim"> | string
     Ghe?: GheListRelationFilter
     LichChieu?: LichChieuListRelationFilter
     CumRap?: XOR<CumRapScalarRelationFilter, CumRapWhereInput>
@@ -13669,19 +13438,17 @@ export namespace Prisma {
     ten_rap?: SortOrder
     ma_cum_rap?: SortOrder
     _count?: RapPhimCountOrderByAggregateInput
-    _avg?: RapPhimAvgOrderByAggregateInput
     _max?: RapPhimMaxOrderByAggregateInput
     _min?: RapPhimMinOrderByAggregateInput
-    _sum?: RapPhimSumOrderByAggregateInput
   }
 
   export type RapPhimScalarWhereWithAggregatesInput = {
     AND?: RapPhimScalarWhereWithAggregatesInput | RapPhimScalarWhereWithAggregatesInput[]
     OR?: RapPhimScalarWhereWithAggregatesInput[]
     NOT?: RapPhimScalarWhereWithAggregatesInput | RapPhimScalarWhereWithAggregatesInput[]
-    ma_rap?: IntWithAggregatesFilter<"RapPhim"> | number
+    ma_rap?: StringWithAggregatesFilter<"RapPhim"> | string
     ten_rap?: StringWithAggregatesFilter<"RapPhim"> | string
-    ma_cum_rap?: IntWithAggregatesFilter<"RapPhim"> | number
+    ma_cum_rap?: StringWithAggregatesFilter<"RapPhim"> | string
   }
 
   export type NhomWhereInput = {
@@ -13770,44 +13537,48 @@ export namespace Prisma {
   }
 
   export type BannerCreateInput = {
+    ma_banner: string
     hinh_anh?: string | null
     Phim: PhimCreateNestedOneWithoutBannerInput
   }
 
   export type BannerUncheckedCreateInput = {
-    ma_banner?: number
-    ma_phim: number
+    ma_banner: string
+    ma_phim: string
     hinh_anh?: string | null
   }
 
   export type BannerUpdateInput = {
+    ma_banner?: StringFieldUpdateOperationsInput | string
     hinh_anh?: NullableStringFieldUpdateOperationsInput | string | null
     Phim?: PhimUpdateOneRequiredWithoutBannerNestedInput
   }
 
   export type BannerUncheckedUpdateInput = {
-    ma_banner?: IntFieldUpdateOperationsInput | number
-    ma_phim?: IntFieldUpdateOperationsInput | number
+    ma_banner?: StringFieldUpdateOperationsInput | string
+    ma_phim?: StringFieldUpdateOperationsInput | string
     hinh_anh?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type BannerCreateManyInput = {
-    ma_banner?: number
-    ma_phim: number
+    ma_banner: string
+    ma_phim: string
     hinh_anh?: string | null
   }
 
   export type BannerUpdateManyMutationInput = {
+    ma_banner?: StringFieldUpdateOperationsInput | string
     hinh_anh?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type BannerUncheckedUpdateManyInput = {
-    ma_banner?: IntFieldUpdateOperationsInput | number
-    ma_phim?: IntFieldUpdateOperationsInput | number
+    ma_banner?: StringFieldUpdateOperationsInput | string
+    ma_phim?: StringFieldUpdateOperationsInput | string
     hinh_anh?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CumRapCreateInput = {
+    ma_cum_rap: string
     ten_cum_rap: string
     dia_chi?: string | null
     HeThongRap: HeThongRapCreateNestedOneWithoutCumRapInput
@@ -13815,14 +13586,15 @@ export namespace Prisma {
   }
 
   export type CumRapUncheckedCreateInput = {
-    ma_cum_rap?: number
+    ma_cum_rap: string
     ten_cum_rap: string
     dia_chi?: string | null
-    ma_he_thong_rap: number
+    ma_he_thong_rap: string
     RapPhim?: RapPhimUncheckedCreateNestedManyWithoutCumRapInput
   }
 
   export type CumRapUpdateInput = {
+    ma_cum_rap?: StringFieldUpdateOperationsInput | string
     ten_cum_rap?: StringFieldUpdateOperationsInput | string
     dia_chi?: NullableStringFieldUpdateOperationsInput | string | null
     HeThongRap?: HeThongRapUpdateOneRequiredWithoutCumRapNestedInput
@@ -13830,77 +13602,81 @@ export namespace Prisma {
   }
 
   export type CumRapUncheckedUpdateInput = {
-    ma_cum_rap?: IntFieldUpdateOperationsInput | number
+    ma_cum_rap?: StringFieldUpdateOperationsInput | string
     ten_cum_rap?: StringFieldUpdateOperationsInput | string
     dia_chi?: NullableStringFieldUpdateOperationsInput | string | null
-    ma_he_thong_rap?: IntFieldUpdateOperationsInput | number
+    ma_he_thong_rap?: StringFieldUpdateOperationsInput | string
     RapPhim?: RapPhimUncheckedUpdateManyWithoutCumRapNestedInput
   }
 
   export type CumRapCreateManyInput = {
-    ma_cum_rap?: number
+    ma_cum_rap: string
     ten_cum_rap: string
     dia_chi?: string | null
-    ma_he_thong_rap: number
+    ma_he_thong_rap: string
   }
 
   export type CumRapUpdateManyMutationInput = {
+    ma_cum_rap?: StringFieldUpdateOperationsInput | string
     ten_cum_rap?: StringFieldUpdateOperationsInput | string
     dia_chi?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CumRapUncheckedUpdateManyInput = {
-    ma_cum_rap?: IntFieldUpdateOperationsInput | number
+    ma_cum_rap?: StringFieldUpdateOperationsInput | string
     ten_cum_rap?: StringFieldUpdateOperationsInput | string
     dia_chi?: NullableStringFieldUpdateOperationsInput | string | null
-    ma_he_thong_rap?: IntFieldUpdateOperationsInput | number
+    ma_he_thong_rap?: StringFieldUpdateOperationsInput | string
   }
 
   export type DatVeCreateInput = {
+    ma_dat_ve: string
     Ghe: GheCreateNestedOneWithoutDatVeInput
     LichChieu: LichChieuCreateNestedOneWithoutDatVeInput
     NguoiDung: NguoiDungCreateNestedOneWithoutDatVeInput
   }
 
   export type DatVeUncheckedCreateInput = {
-    ma_dat_ve?: number
+    ma_dat_ve: string
     tai_khoan: string
-    ma_lich_chieu: number
-    ma_ghe: number
+    ma_lich_chieu: string
+    ma_ghe: string
   }
 
   export type DatVeUpdateInput = {
+    ma_dat_ve?: StringFieldUpdateOperationsInput | string
     Ghe?: GheUpdateOneRequiredWithoutDatVeNestedInput
     LichChieu?: LichChieuUpdateOneRequiredWithoutDatVeNestedInput
     NguoiDung?: NguoiDungUpdateOneRequiredWithoutDatVeNestedInput
   }
 
   export type DatVeUncheckedUpdateInput = {
-    ma_dat_ve?: IntFieldUpdateOperationsInput | number
+    ma_dat_ve?: StringFieldUpdateOperationsInput | string
     tai_khoan?: StringFieldUpdateOperationsInput | string
-    ma_lich_chieu?: IntFieldUpdateOperationsInput | number
-    ma_ghe?: IntFieldUpdateOperationsInput | number
+    ma_lich_chieu?: StringFieldUpdateOperationsInput | string
+    ma_ghe?: StringFieldUpdateOperationsInput | string
   }
 
   export type DatVeCreateManyInput = {
-    ma_dat_ve?: number
+    ma_dat_ve: string
     tai_khoan: string
-    ma_lich_chieu: number
-    ma_ghe: number
+    ma_lich_chieu: string
+    ma_ghe: string
   }
 
   export type DatVeUpdateManyMutationInput = {
-
+    ma_dat_ve?: StringFieldUpdateOperationsInput | string
   }
 
   export type DatVeUncheckedUpdateManyInput = {
-    ma_dat_ve?: IntFieldUpdateOperationsInput | number
+    ma_dat_ve?: StringFieldUpdateOperationsInput | string
     tai_khoan?: StringFieldUpdateOperationsInput | string
-    ma_lich_chieu?: IntFieldUpdateOperationsInput | number
-    ma_ghe?: IntFieldUpdateOperationsInput | number
+    ma_lich_chieu?: StringFieldUpdateOperationsInput | string
+    ma_ghe?: StringFieldUpdateOperationsInput | string
   }
 
   export type GheCreateInput = {
+    ma_ghe: string
     ten_ghe: string
     loai_ghe?: string | null
     DatVe?: DatVeCreateNestedManyWithoutGheInput
@@ -13908,14 +13684,15 @@ export namespace Prisma {
   }
 
   export type GheUncheckedCreateInput = {
-    ma_ghe?: number
+    ma_ghe: string
     ten_ghe: string
     loai_ghe?: string | null
-    ma_rap: number
+    ma_rap: string
     DatVe?: DatVeUncheckedCreateNestedManyWithoutGheInput
   }
 
   export type GheUpdateInput = {
+    ma_ghe?: StringFieldUpdateOperationsInput | string
     ten_ghe?: StringFieldUpdateOperationsInput | string
     loai_ghe?: NullableStringFieldUpdateOperationsInput | string | null
     DatVe?: DatVeUpdateManyWithoutGheNestedInput
@@ -13923,76 +13700,81 @@ export namespace Prisma {
   }
 
   export type GheUncheckedUpdateInput = {
-    ma_ghe?: IntFieldUpdateOperationsInput | number
+    ma_ghe?: StringFieldUpdateOperationsInput | string
     ten_ghe?: StringFieldUpdateOperationsInput | string
     loai_ghe?: NullableStringFieldUpdateOperationsInput | string | null
-    ma_rap?: IntFieldUpdateOperationsInput | number
+    ma_rap?: StringFieldUpdateOperationsInput | string
     DatVe?: DatVeUncheckedUpdateManyWithoutGheNestedInput
   }
 
   export type GheCreateManyInput = {
-    ma_ghe?: number
+    ma_ghe: string
     ten_ghe: string
     loai_ghe?: string | null
-    ma_rap: number
+    ma_rap: string
   }
 
   export type GheUpdateManyMutationInput = {
+    ma_ghe?: StringFieldUpdateOperationsInput | string
     ten_ghe?: StringFieldUpdateOperationsInput | string
     loai_ghe?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type GheUncheckedUpdateManyInput = {
-    ma_ghe?: IntFieldUpdateOperationsInput | number
+    ma_ghe?: StringFieldUpdateOperationsInput | string
     ten_ghe?: StringFieldUpdateOperationsInput | string
     loai_ghe?: NullableStringFieldUpdateOperationsInput | string | null
-    ma_rap?: IntFieldUpdateOperationsInput | number
+    ma_rap?: StringFieldUpdateOperationsInput | string
   }
 
   export type HeThongRapCreateInput = {
+    ma_he_thong_rap: string
     ten_he_thong_rap: string
     logo?: string | null
     CumRap?: CumRapCreateNestedManyWithoutHeThongRapInput
   }
 
   export type HeThongRapUncheckedCreateInput = {
-    ma_he_thong_rap?: number
+    ma_he_thong_rap: string
     ten_he_thong_rap: string
     logo?: string | null
     CumRap?: CumRapUncheckedCreateNestedManyWithoutHeThongRapInput
   }
 
   export type HeThongRapUpdateInput = {
+    ma_he_thong_rap?: StringFieldUpdateOperationsInput | string
     ten_he_thong_rap?: StringFieldUpdateOperationsInput | string
     logo?: NullableStringFieldUpdateOperationsInput | string | null
     CumRap?: CumRapUpdateManyWithoutHeThongRapNestedInput
   }
 
   export type HeThongRapUncheckedUpdateInput = {
-    ma_he_thong_rap?: IntFieldUpdateOperationsInput | number
+    ma_he_thong_rap?: StringFieldUpdateOperationsInput | string
     ten_he_thong_rap?: StringFieldUpdateOperationsInput | string
     logo?: NullableStringFieldUpdateOperationsInput | string | null
     CumRap?: CumRapUncheckedUpdateManyWithoutHeThongRapNestedInput
   }
 
   export type HeThongRapCreateManyInput = {
-    ma_he_thong_rap?: number
+    ma_he_thong_rap: string
     ten_he_thong_rap: string
     logo?: string | null
   }
 
   export type HeThongRapUpdateManyMutationInput = {
+    ma_he_thong_rap?: StringFieldUpdateOperationsInput | string
     ten_he_thong_rap?: StringFieldUpdateOperationsInput | string
     logo?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type HeThongRapUncheckedUpdateManyInput = {
-    ma_he_thong_rap?: IntFieldUpdateOperationsInput | number
+    ma_he_thong_rap?: StringFieldUpdateOperationsInput | string
     ten_he_thong_rap?: StringFieldUpdateOperationsInput | string
     logo?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type LichChieuCreateInput = {
+    ma_lich_chieu: string
     ngay_gio_chieu: Date | string
     gia_ve: number
     DatVe?: DatVeCreateNestedManyWithoutLichChieuInput
@@ -14001,15 +13783,16 @@ export namespace Prisma {
   }
 
   export type LichChieuUncheckedCreateInput = {
-    ma_lich_chieu?: number
-    ma_rap: number
-    ma_phim: number
+    ma_lich_chieu: string
+    ma_rap: string
+    ma_phim: string
     ngay_gio_chieu: Date | string
     gia_ve: number
     DatVe?: DatVeUncheckedCreateNestedManyWithoutLichChieuInput
   }
 
   export type LichChieuUpdateInput = {
+    ma_lich_chieu?: StringFieldUpdateOperationsInput | string
     ngay_gio_chieu?: DateTimeFieldUpdateOperationsInput | Date | string
     gia_ve?: IntFieldUpdateOperationsInput | number
     DatVe?: DatVeUpdateManyWithoutLichChieuNestedInput
@@ -14018,31 +13801,32 @@ export namespace Prisma {
   }
 
   export type LichChieuUncheckedUpdateInput = {
-    ma_lich_chieu?: IntFieldUpdateOperationsInput | number
-    ma_rap?: IntFieldUpdateOperationsInput | number
-    ma_phim?: IntFieldUpdateOperationsInput | number
+    ma_lich_chieu?: StringFieldUpdateOperationsInput | string
+    ma_rap?: StringFieldUpdateOperationsInput | string
+    ma_phim?: StringFieldUpdateOperationsInput | string
     ngay_gio_chieu?: DateTimeFieldUpdateOperationsInput | Date | string
     gia_ve?: IntFieldUpdateOperationsInput | number
     DatVe?: DatVeUncheckedUpdateManyWithoutLichChieuNestedInput
   }
 
   export type LichChieuCreateManyInput = {
-    ma_lich_chieu?: number
-    ma_rap: number
-    ma_phim: number
+    ma_lich_chieu: string
+    ma_rap: string
+    ma_phim: string
     ngay_gio_chieu: Date | string
     gia_ve: number
   }
 
   export type LichChieuUpdateManyMutationInput = {
+    ma_lich_chieu?: StringFieldUpdateOperationsInput | string
     ngay_gio_chieu?: DateTimeFieldUpdateOperationsInput | Date | string
     gia_ve?: IntFieldUpdateOperationsInput | number
   }
 
   export type LichChieuUncheckedUpdateManyInput = {
-    ma_lich_chieu?: IntFieldUpdateOperationsInput | number
-    ma_rap?: IntFieldUpdateOperationsInput | number
-    ma_phim?: IntFieldUpdateOperationsInput | number
+    ma_lich_chieu?: StringFieldUpdateOperationsInput | string
+    ma_rap?: StringFieldUpdateOperationsInput | string
+    ma_phim?: StringFieldUpdateOperationsInput | string
     ngay_gio_chieu?: DateTimeFieldUpdateOperationsInput | Date | string
     gia_ve?: IntFieldUpdateOperationsInput | number
   }
@@ -14120,6 +13904,7 @@ export namespace Prisma {
   }
 
   export type PhimCreateInput = {
+    ma_phim: string
     ten_phim: string
     trailer?: string | null
     hinh_anh?: string | null
@@ -14135,7 +13920,7 @@ export namespace Prisma {
   }
 
   export type PhimUncheckedCreateInput = {
-    ma_phim?: number
+    ma_phim: string
     ten_phim: string
     trailer?: string | null
     hinh_anh?: string | null
@@ -14151,6 +13936,7 @@ export namespace Prisma {
   }
 
   export type PhimUpdateInput = {
+    ma_phim?: StringFieldUpdateOperationsInput | string
     ten_phim?: StringFieldUpdateOperationsInput | string
     trailer?: NullableStringFieldUpdateOperationsInput | string | null
     hinh_anh?: NullableStringFieldUpdateOperationsInput | string | null
@@ -14166,7 +13952,7 @@ export namespace Prisma {
   }
 
   export type PhimUncheckedUpdateInput = {
-    ma_phim?: IntFieldUpdateOperationsInput | number
+    ma_phim?: StringFieldUpdateOperationsInput | string
     ten_phim?: StringFieldUpdateOperationsInput | string
     trailer?: NullableStringFieldUpdateOperationsInput | string | null
     hinh_anh?: NullableStringFieldUpdateOperationsInput | string | null
@@ -14182,7 +13968,7 @@ export namespace Prisma {
   }
 
   export type PhimCreateManyInput = {
-    ma_phim?: number
+    ma_phim: string
     ten_phim: string
     trailer?: string | null
     hinh_anh?: string | null
@@ -14196,6 +13982,7 @@ export namespace Prisma {
   }
 
   export type PhimUpdateManyMutationInput = {
+    ma_phim?: StringFieldUpdateOperationsInput | string
     ten_phim?: StringFieldUpdateOperationsInput | string
     trailer?: NullableStringFieldUpdateOperationsInput | string | null
     hinh_anh?: NullableStringFieldUpdateOperationsInput | string | null
@@ -14208,7 +13995,7 @@ export namespace Prisma {
   }
 
   export type PhimUncheckedUpdateManyInput = {
-    ma_phim?: IntFieldUpdateOperationsInput | number
+    ma_phim?: StringFieldUpdateOperationsInput | string
     ten_phim?: StringFieldUpdateOperationsInput | string
     trailer?: NullableStringFieldUpdateOperationsInput | string | null
     hinh_anh?: NullableStringFieldUpdateOperationsInput | string | null
@@ -14222,6 +14009,7 @@ export namespace Prisma {
   }
 
   export type RapPhimCreateInput = {
+    ma_rap: string
     ten_rap: string
     Ghe?: GheCreateNestedManyWithoutRapPhimInput
     LichChieu?: LichChieuCreateNestedManyWithoutRapPhimInput
@@ -14229,14 +14017,15 @@ export namespace Prisma {
   }
 
   export type RapPhimUncheckedCreateInput = {
-    ma_rap?: number
+    ma_rap: string
     ten_rap: string
-    ma_cum_rap: number
+    ma_cum_rap: string
     Ghe?: GheUncheckedCreateNestedManyWithoutRapPhimInput
     LichChieu?: LichChieuUncheckedCreateNestedManyWithoutRapPhimInput
   }
 
   export type RapPhimUpdateInput = {
+    ma_rap?: StringFieldUpdateOperationsInput | string
     ten_rap?: StringFieldUpdateOperationsInput | string
     Ghe?: GheUpdateManyWithoutRapPhimNestedInput
     LichChieu?: LichChieuUpdateManyWithoutRapPhimNestedInput
@@ -14244,27 +14033,28 @@ export namespace Prisma {
   }
 
   export type RapPhimUncheckedUpdateInput = {
-    ma_rap?: IntFieldUpdateOperationsInput | number
+    ma_rap?: StringFieldUpdateOperationsInput | string
     ten_rap?: StringFieldUpdateOperationsInput | string
-    ma_cum_rap?: IntFieldUpdateOperationsInput | number
+    ma_cum_rap?: StringFieldUpdateOperationsInput | string
     Ghe?: GheUncheckedUpdateManyWithoutRapPhimNestedInput
     LichChieu?: LichChieuUncheckedUpdateManyWithoutRapPhimNestedInput
   }
 
   export type RapPhimCreateManyInput = {
-    ma_rap?: number
+    ma_rap: string
     ten_rap: string
-    ma_cum_rap: number
+    ma_cum_rap: string
   }
 
   export type RapPhimUpdateManyMutationInput = {
+    ma_rap?: StringFieldUpdateOperationsInput | string
     ten_rap?: StringFieldUpdateOperationsInput | string
   }
 
   export type RapPhimUncheckedUpdateManyInput = {
-    ma_rap?: IntFieldUpdateOperationsInput | number
+    ma_rap?: StringFieldUpdateOperationsInput | string
     ten_rap?: StringFieldUpdateOperationsInput | string
-    ma_cum_rap?: IntFieldUpdateOperationsInput | number
+    ma_cum_rap?: StringFieldUpdateOperationsInput | string
   }
 
   export type NhomCreateInput = {
@@ -14349,15 +14139,19 @@ export namespace Prisma {
     ten_loai_nguoi_dung?: StringFieldUpdateOperationsInput | string
   }
 
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
+  export type StringFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[]
+    notIn?: string[]
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringFilter<$PrismaModel> | string
   }
 
   export type StringNullableFilter<$PrismaModel = never> = {
@@ -14397,11 +14191,6 @@ export namespace Prisma {
     hinh_anh?: SortOrder
   }
 
-  export type BannerAvgOrderByAggregateInput = {
-    ma_banner?: SortOrder
-    ma_phim?: SortOrder
-  }
-
   export type BannerMaxOrderByAggregateInput = {
     ma_banner?: SortOrder
     ma_phim?: SortOrder
@@ -14414,25 +14203,22 @@ export namespace Prisma {
     hinh_anh?: SortOrder
   }
 
-  export type BannerSumOrderByAggregateInput = {
-    ma_banner?: SortOrder
-    ma_phim?: SortOrder
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+  export type StringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[]
+    notIn?: string[]
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
     _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
   }
 
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -14451,21 +14237,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type StringFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[]
-    notIn?: string[]
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
-    not?: NestedStringFilter<$PrismaModel> | string
   }
 
   export type HeThongRapScalarRelationFilter = {
@@ -14496,11 +14267,6 @@ export namespace Prisma {
     ma_he_thong_rap?: SortOrder
   }
 
-  export type CumRapAvgOrderByAggregateInput = {
-    ma_cum_rap?: SortOrder
-    ma_he_thong_rap?: SortOrder
-  }
-
   export type CumRapMaxOrderByAggregateInput = {
     ma_cum_rap?: SortOrder
     ten_cum_rap?: SortOrder
@@ -14513,29 +14279,6 @@ export namespace Prisma {
     ten_cum_rap?: SortOrder
     dia_chi?: SortOrder
     ma_he_thong_rap?: SortOrder
-  }
-
-  export type CumRapSumOrderByAggregateInput = {
-    ma_cum_rap?: SortOrder
-    ma_he_thong_rap?: SortOrder
-  }
-
-  export type StringWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[]
-    notIn?: string[]
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
-    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
   }
 
   export type GheScalarRelationFilter = {
@@ -14560,19 +14303,13 @@ export namespace Prisma {
   }
 
   export type DatVeMa_lich_chieuMa_gheCompoundUniqueInput = {
-    ma_lich_chieu: number
-    ma_ghe: number
+    ma_lich_chieu: string
+    ma_ghe: string
   }
 
   export type DatVeCountOrderByAggregateInput = {
     ma_dat_ve?: SortOrder
     tai_khoan?: SortOrder
-    ma_lich_chieu?: SortOrder
-    ma_ghe?: SortOrder
-  }
-
-  export type DatVeAvgOrderByAggregateInput = {
-    ma_dat_ve?: SortOrder
     ma_lich_chieu?: SortOrder
     ma_ghe?: SortOrder
   }
@@ -14587,12 +14324,6 @@ export namespace Prisma {
   export type DatVeMinOrderByAggregateInput = {
     ma_dat_ve?: SortOrder
     tai_khoan?: SortOrder
-    ma_lich_chieu?: SortOrder
-    ma_ghe?: SortOrder
-  }
-
-  export type DatVeSumOrderByAggregateInput = {
-    ma_dat_ve?: SortOrder
     ma_lich_chieu?: SortOrder
     ma_ghe?: SortOrder
   }
@@ -14619,7 +14350,7 @@ export namespace Prisma {
   }
 
   export type GheMa_rapTen_gheCompoundUniqueInput = {
-    ma_rap: number
+    ma_rap: string
     ten_ghe: string
   }
 
@@ -14627,11 +14358,6 @@ export namespace Prisma {
     ma_ghe?: SortOrder
     ten_ghe?: SortOrder
     loai_ghe?: SortOrder
-    ma_rap?: SortOrder
-  }
-
-  export type GheAvgOrderByAggregateInput = {
-    ma_ghe?: SortOrder
     ma_rap?: SortOrder
   }
 
@@ -14646,11 +14372,6 @@ export namespace Prisma {
     ma_ghe?: SortOrder
     ten_ghe?: SortOrder
     loai_ghe?: SortOrder
-    ma_rap?: SortOrder
-  }
-
-  export type GheSumOrderByAggregateInput = {
-    ma_ghe?: SortOrder
     ma_rap?: SortOrder
   }
 
@@ -14676,10 +14397,6 @@ export namespace Prisma {
     logo?: SortOrder
   }
 
-  export type HeThongRapAvgOrderByAggregateInput = {
-    ma_he_thong_rap?: SortOrder
-  }
-
   export type HeThongRapMaxOrderByAggregateInput = {
     ma_he_thong_rap?: SortOrder
     ten_he_thong_rap?: SortOrder
@@ -14690,10 +14407,6 @@ export namespace Prisma {
     ma_he_thong_rap?: SortOrder
     ten_he_thong_rap?: SortOrder
     logo?: SortOrder
-  }
-
-  export type HeThongRapSumOrderByAggregateInput = {
-    ma_he_thong_rap?: SortOrder
   }
 
   export type DateTimeFilter<$PrismaModel = never> = {
@@ -14707,6 +14420,23 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type LichChieuOrderByRelevanceInput = {
+    fields: LichChieuOrderByRelevanceFieldEnum | LichChieuOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
   export type LichChieuCountOrderByAggregateInput = {
     ma_lich_chieu?: SortOrder
     ma_rap?: SortOrder
@@ -14716,9 +14446,6 @@ export namespace Prisma {
   }
 
   export type LichChieuAvgOrderByAggregateInput = {
-    ma_lich_chieu?: SortOrder
-    ma_rap?: SortOrder
-    ma_phim?: SortOrder
     gia_ve?: SortOrder
   }
 
@@ -14739,9 +14466,6 @@ export namespace Prisma {
   }
 
   export type LichChieuSumOrderByAggregateInput = {
-    ma_lich_chieu?: SortOrder
-    ma_rap?: SortOrder
-    ma_phim?: SortOrder
     gia_ve?: SortOrder
   }
 
@@ -14757,6 +14481,22 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type LoaiNguoiDungScalarRelationFilter = {
@@ -14873,7 +14613,6 @@ export namespace Prisma {
   }
 
   export type PhimAvgOrderByAggregateInput = {
-    ma_phim?: SortOrder
     danh_gia?: SortOrder
   }
 
@@ -14906,7 +14645,6 @@ export namespace Prisma {
   }
 
   export type PhimSumOrderByAggregateInput = {
-    ma_phim?: SortOrder
     danh_gia?: SortOrder
   }
 
@@ -14975,11 +14713,6 @@ export namespace Prisma {
     ma_cum_rap?: SortOrder
   }
 
-  export type RapPhimAvgOrderByAggregateInput = {
-    ma_rap?: SortOrder
-    ma_cum_rap?: SortOrder
-  }
-
   export type RapPhimMaxOrderByAggregateInput = {
     ma_rap?: SortOrder
     ten_rap?: SortOrder
@@ -14989,11 +14722,6 @@ export namespace Prisma {
   export type RapPhimMinOrderByAggregateInput = {
     ma_rap?: SortOrder
     ten_rap?: SortOrder
-    ma_cum_rap?: SortOrder
-  }
-
-  export type RapPhimSumOrderByAggregateInput = {
-    ma_rap?: SortOrder
     ma_cum_rap?: SortOrder
   }
 
@@ -15065,6 +14793,10 @@ export namespace Prisma {
     connect?: PhimWhereUniqueInput
   }
 
+  export type StringFieldUpdateOperationsInput = {
+    set?: string
+  }
+
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
   }
@@ -15075,14 +14807,6 @@ export namespace Prisma {
     upsert?: PhimUpsertWithoutBannerInput
     connect?: PhimWhereUniqueInput
     update?: XOR<XOR<PhimUpdateToOneWithWhereWithoutBannerInput, PhimUpdateWithoutBannerInput>, PhimUncheckedUpdateWithoutBannerInput>
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type HeThongRapCreateNestedOneWithoutCumRapInput = {
@@ -15103,10 +14827,6 @@ export namespace Prisma {
     connectOrCreate?: RapPhimCreateOrConnectWithoutCumRapInput | RapPhimCreateOrConnectWithoutCumRapInput[]
     createMany?: RapPhimCreateManyCumRapInputEnvelope
     connect?: RapPhimWhereUniqueInput | RapPhimWhereUniqueInput[]
-  }
-
-  export type StringFieldUpdateOperationsInput = {
-    set?: string
   }
 
   export type HeThongRapUpdateOneRequiredWithoutCumRapNestedInput = {
@@ -15313,6 +15033,14 @@ export namespace Prisma {
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type DatVeUpdateManyWithoutLichChieuNestedInput = {
@@ -15767,15 +15495,19 @@ export namespace Prisma {
     deleteMany?: NguoiDungScalarWhereInput | NguoiDungScalarWhereInput[]
   }
 
-  export type NestedIntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
+  export type NestedStringFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[]
+    notIn?: string[]
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringFilter<$PrismaModel> | string
   }
 
   export type NestedStringNullableFilter<$PrismaModel = never> = {
@@ -15793,7 +15525,25 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+  export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[]
+    notIn?: string[]
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type NestedIntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[]
     notIn?: number[]
@@ -15801,23 +15551,7 @@ export namespace Prisma {
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
+    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -15849,39 +15583,6 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
-  export type NestedStringFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[]
-    notIn?: string[]
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
-    not?: NestedStringFilter<$PrismaModel> | string
-  }
-
-  export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[]
-    notIn?: string[]
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
-    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
-  }
-
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[]
@@ -15905,6 +15606,33 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
@@ -15973,6 +15701,7 @@ export namespace Prisma {
   }
 
   export type PhimCreateWithoutBannerInput = {
+    ma_phim: string
     ten_phim: string
     trailer?: string | null
     hinh_anh?: string | null
@@ -15987,7 +15716,7 @@ export namespace Prisma {
   }
 
   export type PhimUncheckedCreateWithoutBannerInput = {
-    ma_phim?: number
+    ma_phim: string
     ten_phim: string
     trailer?: string | null
     hinh_anh?: string | null
@@ -16018,6 +15747,7 @@ export namespace Prisma {
   }
 
   export type PhimUpdateWithoutBannerInput = {
+    ma_phim?: StringFieldUpdateOperationsInput | string
     ten_phim?: StringFieldUpdateOperationsInput | string
     trailer?: NullableStringFieldUpdateOperationsInput | string | null
     hinh_anh?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16032,7 +15762,7 @@ export namespace Prisma {
   }
 
   export type PhimUncheckedUpdateWithoutBannerInput = {
-    ma_phim?: IntFieldUpdateOperationsInput | number
+    ma_phim?: StringFieldUpdateOperationsInput | string
     ten_phim?: StringFieldUpdateOperationsInput | string
     trailer?: NullableStringFieldUpdateOperationsInput | string | null
     hinh_anh?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16047,12 +15777,13 @@ export namespace Prisma {
   }
 
   export type HeThongRapCreateWithoutCumRapInput = {
+    ma_he_thong_rap: string
     ten_he_thong_rap: string
     logo?: string | null
   }
 
   export type HeThongRapUncheckedCreateWithoutCumRapInput = {
-    ma_he_thong_rap?: number
+    ma_he_thong_rap: string
     ten_he_thong_rap: string
     logo?: string | null
   }
@@ -16063,13 +15794,14 @@ export namespace Prisma {
   }
 
   export type RapPhimCreateWithoutCumRapInput = {
+    ma_rap: string
     ten_rap: string
     Ghe?: GheCreateNestedManyWithoutRapPhimInput
     LichChieu?: LichChieuCreateNestedManyWithoutRapPhimInput
   }
 
   export type RapPhimUncheckedCreateWithoutCumRapInput = {
-    ma_rap?: number
+    ma_rap: string
     ten_rap: string
     Ghe?: GheUncheckedCreateNestedManyWithoutRapPhimInput
     LichChieu?: LichChieuUncheckedCreateNestedManyWithoutRapPhimInput
@@ -16097,12 +15829,13 @@ export namespace Prisma {
   }
 
   export type HeThongRapUpdateWithoutCumRapInput = {
+    ma_he_thong_rap?: StringFieldUpdateOperationsInput | string
     ten_he_thong_rap?: StringFieldUpdateOperationsInput | string
     logo?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type HeThongRapUncheckedUpdateWithoutCumRapInput = {
-    ma_he_thong_rap?: IntFieldUpdateOperationsInput | number
+    ma_he_thong_rap?: StringFieldUpdateOperationsInput | string
     ten_he_thong_rap?: StringFieldUpdateOperationsInput | string
     logo?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -16127,22 +15860,23 @@ export namespace Prisma {
     AND?: RapPhimScalarWhereInput | RapPhimScalarWhereInput[]
     OR?: RapPhimScalarWhereInput[]
     NOT?: RapPhimScalarWhereInput | RapPhimScalarWhereInput[]
-    ma_rap?: IntFilter<"RapPhim"> | number
+    ma_rap?: StringFilter<"RapPhim"> | string
     ten_rap?: StringFilter<"RapPhim"> | string
-    ma_cum_rap?: IntFilter<"RapPhim"> | number
+    ma_cum_rap?: StringFilter<"RapPhim"> | string
   }
 
   export type GheCreateWithoutDatVeInput = {
+    ma_ghe: string
     ten_ghe: string
     loai_ghe?: string | null
     RapPhim: RapPhimCreateNestedOneWithoutGheInput
   }
 
   export type GheUncheckedCreateWithoutDatVeInput = {
-    ma_ghe?: number
+    ma_ghe: string
     ten_ghe: string
     loai_ghe?: string | null
-    ma_rap: number
+    ma_rap: string
   }
 
   export type GheCreateOrConnectWithoutDatVeInput = {
@@ -16151,6 +15885,7 @@ export namespace Prisma {
   }
 
   export type LichChieuCreateWithoutDatVeInput = {
+    ma_lich_chieu: string
     ngay_gio_chieu: Date | string
     gia_ve: number
     Phim: PhimCreateNestedOneWithoutLichChieuInput
@@ -16158,9 +15893,9 @@ export namespace Prisma {
   }
 
   export type LichChieuUncheckedCreateWithoutDatVeInput = {
-    ma_lich_chieu?: number
-    ma_rap: number
-    ma_phim: number
+    ma_lich_chieu: string
+    ma_rap: string
+    ma_phim: string
     ngay_gio_chieu: Date | string
     gia_ve: number
   }
@@ -16207,16 +15942,17 @@ export namespace Prisma {
   }
 
   export type GheUpdateWithoutDatVeInput = {
+    ma_ghe?: StringFieldUpdateOperationsInput | string
     ten_ghe?: StringFieldUpdateOperationsInput | string
     loai_ghe?: NullableStringFieldUpdateOperationsInput | string | null
     RapPhim?: RapPhimUpdateOneRequiredWithoutGheNestedInput
   }
 
   export type GheUncheckedUpdateWithoutDatVeInput = {
-    ma_ghe?: IntFieldUpdateOperationsInput | number
+    ma_ghe?: StringFieldUpdateOperationsInput | string
     ten_ghe?: StringFieldUpdateOperationsInput | string
     loai_ghe?: NullableStringFieldUpdateOperationsInput | string | null
-    ma_rap?: IntFieldUpdateOperationsInput | number
+    ma_rap?: StringFieldUpdateOperationsInput | string
   }
 
   export type LichChieuUpsertWithoutDatVeInput = {
@@ -16231,6 +15967,7 @@ export namespace Prisma {
   }
 
   export type LichChieuUpdateWithoutDatVeInput = {
+    ma_lich_chieu?: StringFieldUpdateOperationsInput | string
     ngay_gio_chieu?: DateTimeFieldUpdateOperationsInput | Date | string
     gia_ve?: IntFieldUpdateOperationsInput | number
     Phim?: PhimUpdateOneRequiredWithoutLichChieuNestedInput
@@ -16238,9 +15975,9 @@ export namespace Prisma {
   }
 
   export type LichChieuUncheckedUpdateWithoutDatVeInput = {
-    ma_lich_chieu?: IntFieldUpdateOperationsInput | number
-    ma_rap?: IntFieldUpdateOperationsInput | number
-    ma_phim?: IntFieldUpdateOperationsInput | number
+    ma_lich_chieu?: StringFieldUpdateOperationsInput | string
+    ma_rap?: StringFieldUpdateOperationsInput | string
+    ma_phim?: StringFieldUpdateOperationsInput | string
     ngay_gio_chieu?: DateTimeFieldUpdateOperationsInput | Date | string
     gia_ve?: IntFieldUpdateOperationsInput | number
   }
@@ -16277,14 +16014,15 @@ export namespace Prisma {
   }
 
   export type DatVeCreateWithoutGheInput = {
+    ma_dat_ve: string
     LichChieu: LichChieuCreateNestedOneWithoutDatVeInput
     NguoiDung: NguoiDungCreateNestedOneWithoutDatVeInput
   }
 
   export type DatVeUncheckedCreateWithoutGheInput = {
-    ma_dat_ve?: number
+    ma_dat_ve: string
     tai_khoan: string
-    ma_lich_chieu: number
+    ma_lich_chieu: string
   }
 
   export type DatVeCreateOrConnectWithoutGheInput = {
@@ -16298,15 +16036,16 @@ export namespace Prisma {
   }
 
   export type RapPhimCreateWithoutGheInput = {
+    ma_rap: string
     ten_rap: string
     LichChieu?: LichChieuCreateNestedManyWithoutRapPhimInput
     CumRap: CumRapCreateNestedOneWithoutRapPhimInput
   }
 
   export type RapPhimUncheckedCreateWithoutGheInput = {
-    ma_rap?: number
+    ma_rap: string
     ten_rap: string
-    ma_cum_rap: number
+    ma_cum_rap: string
     LichChieu?: LichChieuUncheckedCreateNestedManyWithoutRapPhimInput
   }
 
@@ -16335,10 +16074,10 @@ export namespace Prisma {
     AND?: DatVeScalarWhereInput | DatVeScalarWhereInput[]
     OR?: DatVeScalarWhereInput[]
     NOT?: DatVeScalarWhereInput | DatVeScalarWhereInput[]
-    ma_dat_ve?: IntFilter<"DatVe"> | number
+    ma_dat_ve?: StringFilter<"DatVe"> | string
     tai_khoan?: StringFilter<"DatVe"> | string
-    ma_lich_chieu?: IntFilter<"DatVe"> | number
-    ma_ghe?: IntFilter<"DatVe"> | number
+    ma_lich_chieu?: StringFilter<"DatVe"> | string
+    ma_ghe?: StringFilter<"DatVe"> | string
   }
 
   export type RapPhimUpsertWithoutGheInput = {
@@ -16353,26 +16092,28 @@ export namespace Prisma {
   }
 
   export type RapPhimUpdateWithoutGheInput = {
+    ma_rap?: StringFieldUpdateOperationsInput | string
     ten_rap?: StringFieldUpdateOperationsInput | string
     LichChieu?: LichChieuUpdateManyWithoutRapPhimNestedInput
     CumRap?: CumRapUpdateOneRequiredWithoutRapPhimNestedInput
   }
 
   export type RapPhimUncheckedUpdateWithoutGheInput = {
-    ma_rap?: IntFieldUpdateOperationsInput | number
+    ma_rap?: StringFieldUpdateOperationsInput | string
     ten_rap?: StringFieldUpdateOperationsInput | string
-    ma_cum_rap?: IntFieldUpdateOperationsInput | number
+    ma_cum_rap?: StringFieldUpdateOperationsInput | string
     LichChieu?: LichChieuUncheckedUpdateManyWithoutRapPhimNestedInput
   }
 
   export type CumRapCreateWithoutHeThongRapInput = {
+    ma_cum_rap: string
     ten_cum_rap: string
     dia_chi?: string | null
     RapPhim?: RapPhimCreateNestedManyWithoutCumRapInput
   }
 
   export type CumRapUncheckedCreateWithoutHeThongRapInput = {
-    ma_cum_rap?: number
+    ma_cum_rap: string
     ten_cum_rap: string
     dia_chi?: string | null
     RapPhim?: RapPhimUncheckedCreateNestedManyWithoutCumRapInput
@@ -16408,21 +16149,22 @@ export namespace Prisma {
     AND?: CumRapScalarWhereInput | CumRapScalarWhereInput[]
     OR?: CumRapScalarWhereInput[]
     NOT?: CumRapScalarWhereInput | CumRapScalarWhereInput[]
-    ma_cum_rap?: IntFilter<"CumRap"> | number
+    ma_cum_rap?: StringFilter<"CumRap"> | string
     ten_cum_rap?: StringFilter<"CumRap"> | string
     dia_chi?: StringNullableFilter<"CumRap"> | string | null
-    ma_he_thong_rap?: IntFilter<"CumRap"> | number
+    ma_he_thong_rap?: StringFilter<"CumRap"> | string
   }
 
   export type DatVeCreateWithoutLichChieuInput = {
+    ma_dat_ve: string
     Ghe: GheCreateNestedOneWithoutDatVeInput
     NguoiDung: NguoiDungCreateNestedOneWithoutDatVeInput
   }
 
   export type DatVeUncheckedCreateWithoutLichChieuInput = {
-    ma_dat_ve?: number
+    ma_dat_ve: string
     tai_khoan: string
-    ma_ghe: number
+    ma_ghe: string
   }
 
   export type DatVeCreateOrConnectWithoutLichChieuInput = {
@@ -16436,6 +16178,7 @@ export namespace Prisma {
   }
 
   export type PhimCreateWithoutLichChieuInput = {
+    ma_phim: string
     ten_phim: string
     trailer?: string | null
     hinh_anh?: string | null
@@ -16450,7 +16193,7 @@ export namespace Prisma {
   }
 
   export type PhimUncheckedCreateWithoutLichChieuInput = {
-    ma_phim?: number
+    ma_phim: string
     ten_phim: string
     trailer?: string | null
     hinh_anh?: string | null
@@ -16470,15 +16213,16 @@ export namespace Prisma {
   }
 
   export type RapPhimCreateWithoutLichChieuInput = {
+    ma_rap: string
     ten_rap: string
     Ghe?: GheCreateNestedManyWithoutRapPhimInput
     CumRap: CumRapCreateNestedOneWithoutRapPhimInput
   }
 
   export type RapPhimUncheckedCreateWithoutLichChieuInput = {
-    ma_rap?: number
+    ma_rap: string
     ten_rap: string
-    ma_cum_rap: number
+    ma_cum_rap: string
     Ghe?: GheUncheckedCreateNestedManyWithoutRapPhimInput
   }
 
@@ -16515,6 +16259,7 @@ export namespace Prisma {
   }
 
   export type PhimUpdateWithoutLichChieuInput = {
+    ma_phim?: StringFieldUpdateOperationsInput | string
     ten_phim?: StringFieldUpdateOperationsInput | string
     trailer?: NullableStringFieldUpdateOperationsInput | string | null
     hinh_anh?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16529,7 +16274,7 @@ export namespace Prisma {
   }
 
   export type PhimUncheckedUpdateWithoutLichChieuInput = {
-    ma_phim?: IntFieldUpdateOperationsInput | number
+    ma_phim?: StringFieldUpdateOperationsInput | string
     ten_phim?: StringFieldUpdateOperationsInput | string
     trailer?: NullableStringFieldUpdateOperationsInput | string | null
     hinh_anh?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16555,27 +16300,29 @@ export namespace Prisma {
   }
 
   export type RapPhimUpdateWithoutLichChieuInput = {
+    ma_rap?: StringFieldUpdateOperationsInput | string
     ten_rap?: StringFieldUpdateOperationsInput | string
     Ghe?: GheUpdateManyWithoutRapPhimNestedInput
     CumRap?: CumRapUpdateOneRequiredWithoutRapPhimNestedInput
   }
 
   export type RapPhimUncheckedUpdateWithoutLichChieuInput = {
-    ma_rap?: IntFieldUpdateOperationsInput | number
+    ma_rap?: StringFieldUpdateOperationsInput | string
     ten_rap?: StringFieldUpdateOperationsInput | string
-    ma_cum_rap?: IntFieldUpdateOperationsInput | number
+    ma_cum_rap?: StringFieldUpdateOperationsInput | string
     Ghe?: GheUncheckedUpdateManyWithoutRapPhimNestedInput
   }
 
   export type DatVeCreateWithoutNguoiDungInput = {
+    ma_dat_ve: string
     Ghe: GheCreateNestedOneWithoutDatVeInput
     LichChieu: LichChieuCreateNestedOneWithoutDatVeInput
   }
 
   export type DatVeUncheckedCreateWithoutNguoiDungInput = {
-    ma_dat_ve?: number
-    ma_lich_chieu: number
-    ma_ghe: number
+    ma_dat_ve: string
+    ma_lich_chieu: string
+    ma_ghe: string
   }
 
   export type DatVeCreateOrConnectWithoutNguoiDungInput = {
@@ -16681,11 +16428,12 @@ export namespace Prisma {
   }
 
   export type BannerCreateWithoutPhimInput = {
+    ma_banner: string
     hinh_anh?: string | null
   }
 
   export type BannerUncheckedCreateWithoutPhimInput = {
-    ma_banner?: number
+    ma_banner: string
     hinh_anh?: string | null
   }
 
@@ -16700,6 +16448,7 @@ export namespace Prisma {
   }
 
   export type LichChieuCreateWithoutPhimInput = {
+    ma_lich_chieu: string
     ngay_gio_chieu: Date | string
     gia_ve: number
     DatVe?: DatVeCreateNestedManyWithoutLichChieuInput
@@ -16707,8 +16456,8 @@ export namespace Prisma {
   }
 
   export type LichChieuUncheckedCreateWithoutPhimInput = {
-    ma_lich_chieu?: number
-    ma_rap: number
+    ma_lich_chieu: string
+    ma_rap: string
     ngay_gio_chieu: Date | string
     gia_ve: number
     DatVe?: DatVeUncheckedCreateNestedManyWithoutLichChieuInput
@@ -16761,8 +16510,8 @@ export namespace Prisma {
     AND?: BannerScalarWhereInput | BannerScalarWhereInput[]
     OR?: BannerScalarWhereInput[]
     NOT?: BannerScalarWhereInput | BannerScalarWhereInput[]
-    ma_banner?: IntFilter<"Banner"> | number
-    ma_phim?: IntFilter<"Banner"> | number
+    ma_banner?: StringFilter<"Banner"> | string
+    ma_phim?: StringFilter<"Banner"> | string
     hinh_anh?: StringNullableFilter<"Banner"> | string | null
   }
 
@@ -16786,9 +16535,9 @@ export namespace Prisma {
     AND?: LichChieuScalarWhereInput | LichChieuScalarWhereInput[]
     OR?: LichChieuScalarWhereInput[]
     NOT?: LichChieuScalarWhereInput | LichChieuScalarWhereInput[]
-    ma_lich_chieu?: IntFilter<"LichChieu"> | number
-    ma_rap?: IntFilter<"LichChieu"> | number
-    ma_phim?: IntFilter<"LichChieu"> | number
+    ma_lich_chieu?: StringFilter<"LichChieu"> | string
+    ma_rap?: StringFilter<"LichChieu"> | string
+    ma_phim?: StringFilter<"LichChieu"> | string
     ngay_gio_chieu?: DateTimeFilter<"LichChieu"> | Date | string
     gia_ve?: IntFilter<"LichChieu"> | number
   }
@@ -16817,13 +16566,14 @@ export namespace Prisma {
   }
 
   export type GheCreateWithoutRapPhimInput = {
+    ma_ghe: string
     ten_ghe: string
     loai_ghe?: string | null
     DatVe?: DatVeCreateNestedManyWithoutGheInput
   }
 
   export type GheUncheckedCreateWithoutRapPhimInput = {
-    ma_ghe?: number
+    ma_ghe: string
     ten_ghe: string
     loai_ghe?: string | null
     DatVe?: DatVeUncheckedCreateNestedManyWithoutGheInput
@@ -16840,6 +16590,7 @@ export namespace Prisma {
   }
 
   export type LichChieuCreateWithoutRapPhimInput = {
+    ma_lich_chieu: string
     ngay_gio_chieu: Date | string
     gia_ve: number
     DatVe?: DatVeCreateNestedManyWithoutLichChieuInput
@@ -16847,8 +16598,8 @@ export namespace Prisma {
   }
 
   export type LichChieuUncheckedCreateWithoutRapPhimInput = {
-    ma_lich_chieu?: number
-    ma_phim: number
+    ma_lich_chieu: string
+    ma_phim: string
     ngay_gio_chieu: Date | string
     gia_ve: number
     DatVe?: DatVeUncheckedCreateNestedManyWithoutLichChieuInput
@@ -16865,16 +16616,17 @@ export namespace Prisma {
   }
 
   export type CumRapCreateWithoutRapPhimInput = {
+    ma_cum_rap: string
     ten_cum_rap: string
     dia_chi?: string | null
     HeThongRap: HeThongRapCreateNestedOneWithoutCumRapInput
   }
 
   export type CumRapUncheckedCreateWithoutRapPhimInput = {
-    ma_cum_rap?: number
+    ma_cum_rap: string
     ten_cum_rap: string
     dia_chi?: string | null
-    ma_he_thong_rap: number
+    ma_he_thong_rap: string
   }
 
   export type CumRapCreateOrConnectWithoutRapPhimInput = {
@@ -16902,10 +16654,10 @@ export namespace Prisma {
     AND?: GheScalarWhereInput | GheScalarWhereInput[]
     OR?: GheScalarWhereInput[]
     NOT?: GheScalarWhereInput | GheScalarWhereInput[]
-    ma_ghe?: IntFilter<"Ghe"> | number
+    ma_ghe?: StringFilter<"Ghe"> | string
     ten_ghe?: StringFilter<"Ghe"> | string
     loai_ghe?: StringNullableFilter<"Ghe"> | string | null
-    ma_rap?: IntFilter<"Ghe"> | number
+    ma_rap?: StringFilter<"Ghe"> | string
   }
 
   export type LichChieuUpsertWithWhereUniqueWithoutRapPhimInput = {
@@ -16936,16 +16688,17 @@ export namespace Prisma {
   }
 
   export type CumRapUpdateWithoutRapPhimInput = {
+    ma_cum_rap?: StringFieldUpdateOperationsInput | string
     ten_cum_rap?: StringFieldUpdateOperationsInput | string
     dia_chi?: NullableStringFieldUpdateOperationsInput | string | null
     HeThongRap?: HeThongRapUpdateOneRequiredWithoutCumRapNestedInput
   }
 
   export type CumRapUncheckedUpdateWithoutRapPhimInput = {
-    ma_cum_rap?: IntFieldUpdateOperationsInput | number
+    ma_cum_rap?: StringFieldUpdateOperationsInput | string
     ten_cum_rap?: StringFieldUpdateOperationsInput | string
     dia_chi?: NullableStringFieldUpdateOperationsInput | string | null
-    ma_he_thong_rap?: IntFieldUpdateOperationsInput | number
+    ma_he_thong_rap?: StringFieldUpdateOperationsInput | string
   }
 
   export type NguoiDungCreateWithoutNhomInput = {
@@ -16979,6 +16732,7 @@ export namespace Prisma {
   }
 
   export type PhimCreateWithoutNhomInput = {
+    ma_phim: string
     ten_phim: string
     trailer?: string | null
     hinh_anh?: string | null
@@ -16993,7 +16747,7 @@ export namespace Prisma {
   }
 
   export type PhimUncheckedCreateWithoutNhomInput = {
-    ma_phim?: number
+    ma_phim: string
     ten_phim: string
     trailer?: string | null
     hinh_anh?: string | null
@@ -17066,7 +16820,7 @@ export namespace Prisma {
     AND?: PhimScalarWhereInput | PhimScalarWhereInput[]
     OR?: PhimScalarWhereInput[]
     NOT?: PhimScalarWhereInput | PhimScalarWhereInput[]
-    ma_phim?: IntFilter<"Phim"> | number
+    ma_phim?: StringFilter<"Phim"> | string
     ten_phim?: StringFilter<"Phim"> | string
     trailer?: StringNullableFilter<"Phim"> | string | null
     hinh_anh?: StringNullableFilter<"Phim"> | string | null
@@ -17126,149 +16880,156 @@ export namespace Prisma {
   }
 
   export type RapPhimCreateManyCumRapInput = {
-    ma_rap?: number
+    ma_rap: string
     ten_rap: string
   }
 
   export type RapPhimUpdateWithoutCumRapInput = {
+    ma_rap?: StringFieldUpdateOperationsInput | string
     ten_rap?: StringFieldUpdateOperationsInput | string
     Ghe?: GheUpdateManyWithoutRapPhimNestedInput
     LichChieu?: LichChieuUpdateManyWithoutRapPhimNestedInput
   }
 
   export type RapPhimUncheckedUpdateWithoutCumRapInput = {
-    ma_rap?: IntFieldUpdateOperationsInput | number
+    ma_rap?: StringFieldUpdateOperationsInput | string
     ten_rap?: StringFieldUpdateOperationsInput | string
     Ghe?: GheUncheckedUpdateManyWithoutRapPhimNestedInput
     LichChieu?: LichChieuUncheckedUpdateManyWithoutRapPhimNestedInput
   }
 
   export type RapPhimUncheckedUpdateManyWithoutCumRapInput = {
-    ma_rap?: IntFieldUpdateOperationsInput | number
+    ma_rap?: StringFieldUpdateOperationsInput | string
     ten_rap?: StringFieldUpdateOperationsInput | string
   }
 
   export type DatVeCreateManyGheInput = {
-    ma_dat_ve?: number
+    ma_dat_ve: string
     tai_khoan: string
-    ma_lich_chieu: number
+    ma_lich_chieu: string
   }
 
   export type DatVeUpdateWithoutGheInput = {
+    ma_dat_ve?: StringFieldUpdateOperationsInput | string
     LichChieu?: LichChieuUpdateOneRequiredWithoutDatVeNestedInput
     NguoiDung?: NguoiDungUpdateOneRequiredWithoutDatVeNestedInput
   }
 
   export type DatVeUncheckedUpdateWithoutGheInput = {
-    ma_dat_ve?: IntFieldUpdateOperationsInput | number
+    ma_dat_ve?: StringFieldUpdateOperationsInput | string
     tai_khoan?: StringFieldUpdateOperationsInput | string
-    ma_lich_chieu?: IntFieldUpdateOperationsInput | number
+    ma_lich_chieu?: StringFieldUpdateOperationsInput | string
   }
 
   export type DatVeUncheckedUpdateManyWithoutGheInput = {
-    ma_dat_ve?: IntFieldUpdateOperationsInput | number
+    ma_dat_ve?: StringFieldUpdateOperationsInput | string
     tai_khoan?: StringFieldUpdateOperationsInput | string
-    ma_lich_chieu?: IntFieldUpdateOperationsInput | number
+    ma_lich_chieu?: StringFieldUpdateOperationsInput | string
   }
 
   export type CumRapCreateManyHeThongRapInput = {
-    ma_cum_rap?: number
+    ma_cum_rap: string
     ten_cum_rap: string
     dia_chi?: string | null
   }
 
   export type CumRapUpdateWithoutHeThongRapInput = {
+    ma_cum_rap?: StringFieldUpdateOperationsInput | string
     ten_cum_rap?: StringFieldUpdateOperationsInput | string
     dia_chi?: NullableStringFieldUpdateOperationsInput | string | null
     RapPhim?: RapPhimUpdateManyWithoutCumRapNestedInput
   }
 
   export type CumRapUncheckedUpdateWithoutHeThongRapInput = {
-    ma_cum_rap?: IntFieldUpdateOperationsInput | number
+    ma_cum_rap?: StringFieldUpdateOperationsInput | string
     ten_cum_rap?: StringFieldUpdateOperationsInput | string
     dia_chi?: NullableStringFieldUpdateOperationsInput | string | null
     RapPhim?: RapPhimUncheckedUpdateManyWithoutCumRapNestedInput
   }
 
   export type CumRapUncheckedUpdateManyWithoutHeThongRapInput = {
-    ma_cum_rap?: IntFieldUpdateOperationsInput | number
+    ma_cum_rap?: StringFieldUpdateOperationsInput | string
     ten_cum_rap?: StringFieldUpdateOperationsInput | string
     dia_chi?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type DatVeCreateManyLichChieuInput = {
-    ma_dat_ve?: number
+    ma_dat_ve: string
     tai_khoan: string
-    ma_ghe: number
+    ma_ghe: string
   }
 
   export type DatVeUpdateWithoutLichChieuInput = {
+    ma_dat_ve?: StringFieldUpdateOperationsInput | string
     Ghe?: GheUpdateOneRequiredWithoutDatVeNestedInput
     NguoiDung?: NguoiDungUpdateOneRequiredWithoutDatVeNestedInput
   }
 
   export type DatVeUncheckedUpdateWithoutLichChieuInput = {
-    ma_dat_ve?: IntFieldUpdateOperationsInput | number
+    ma_dat_ve?: StringFieldUpdateOperationsInput | string
     tai_khoan?: StringFieldUpdateOperationsInput | string
-    ma_ghe?: IntFieldUpdateOperationsInput | number
+    ma_ghe?: StringFieldUpdateOperationsInput | string
   }
 
   export type DatVeUncheckedUpdateManyWithoutLichChieuInput = {
-    ma_dat_ve?: IntFieldUpdateOperationsInput | number
+    ma_dat_ve?: StringFieldUpdateOperationsInput | string
     tai_khoan?: StringFieldUpdateOperationsInput | string
-    ma_ghe?: IntFieldUpdateOperationsInput | number
+    ma_ghe?: StringFieldUpdateOperationsInput | string
   }
 
   export type DatVeCreateManyNguoiDungInput = {
-    ma_dat_ve?: number
-    ma_lich_chieu: number
-    ma_ghe: number
+    ma_dat_ve: string
+    ma_lich_chieu: string
+    ma_ghe: string
   }
 
   export type DatVeUpdateWithoutNguoiDungInput = {
+    ma_dat_ve?: StringFieldUpdateOperationsInput | string
     Ghe?: GheUpdateOneRequiredWithoutDatVeNestedInput
     LichChieu?: LichChieuUpdateOneRequiredWithoutDatVeNestedInput
   }
 
   export type DatVeUncheckedUpdateWithoutNguoiDungInput = {
-    ma_dat_ve?: IntFieldUpdateOperationsInput | number
-    ma_lich_chieu?: IntFieldUpdateOperationsInput | number
-    ma_ghe?: IntFieldUpdateOperationsInput | number
+    ma_dat_ve?: StringFieldUpdateOperationsInput | string
+    ma_lich_chieu?: StringFieldUpdateOperationsInput | string
+    ma_ghe?: StringFieldUpdateOperationsInput | string
   }
 
   export type DatVeUncheckedUpdateManyWithoutNguoiDungInput = {
-    ma_dat_ve?: IntFieldUpdateOperationsInput | number
-    ma_lich_chieu?: IntFieldUpdateOperationsInput | number
-    ma_ghe?: IntFieldUpdateOperationsInput | number
+    ma_dat_ve?: StringFieldUpdateOperationsInput | string
+    ma_lich_chieu?: StringFieldUpdateOperationsInput | string
+    ma_ghe?: StringFieldUpdateOperationsInput | string
   }
 
   export type BannerCreateManyPhimInput = {
-    ma_banner?: number
+    ma_banner: string
     hinh_anh?: string | null
   }
 
   export type LichChieuCreateManyPhimInput = {
-    ma_lich_chieu?: number
-    ma_rap: number
+    ma_lich_chieu: string
+    ma_rap: string
     ngay_gio_chieu: Date | string
     gia_ve: number
   }
 
   export type BannerUpdateWithoutPhimInput = {
+    ma_banner?: StringFieldUpdateOperationsInput | string
     hinh_anh?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type BannerUncheckedUpdateWithoutPhimInput = {
-    ma_banner?: IntFieldUpdateOperationsInput | number
+    ma_banner?: StringFieldUpdateOperationsInput | string
     hinh_anh?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type BannerUncheckedUpdateManyWithoutPhimInput = {
-    ma_banner?: IntFieldUpdateOperationsInput | number
+    ma_banner?: StringFieldUpdateOperationsInput | string
     hinh_anh?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type LichChieuUpdateWithoutPhimInput = {
+    ma_lich_chieu?: StringFieldUpdateOperationsInput | string
     ngay_gio_chieu?: DateTimeFieldUpdateOperationsInput | Date | string
     gia_ve?: IntFieldUpdateOperationsInput | number
     DatVe?: DatVeUpdateManyWithoutLichChieuNestedInput
@@ -17276,53 +17037,55 @@ export namespace Prisma {
   }
 
   export type LichChieuUncheckedUpdateWithoutPhimInput = {
-    ma_lich_chieu?: IntFieldUpdateOperationsInput | number
-    ma_rap?: IntFieldUpdateOperationsInput | number
+    ma_lich_chieu?: StringFieldUpdateOperationsInput | string
+    ma_rap?: StringFieldUpdateOperationsInput | string
     ngay_gio_chieu?: DateTimeFieldUpdateOperationsInput | Date | string
     gia_ve?: IntFieldUpdateOperationsInput | number
     DatVe?: DatVeUncheckedUpdateManyWithoutLichChieuNestedInput
   }
 
   export type LichChieuUncheckedUpdateManyWithoutPhimInput = {
-    ma_lich_chieu?: IntFieldUpdateOperationsInput | number
-    ma_rap?: IntFieldUpdateOperationsInput | number
+    ma_lich_chieu?: StringFieldUpdateOperationsInput | string
+    ma_rap?: StringFieldUpdateOperationsInput | string
     ngay_gio_chieu?: DateTimeFieldUpdateOperationsInput | Date | string
     gia_ve?: IntFieldUpdateOperationsInput | number
   }
 
   export type GheCreateManyRapPhimInput = {
-    ma_ghe?: number
+    ma_ghe: string
     ten_ghe: string
     loai_ghe?: string | null
   }
 
   export type LichChieuCreateManyRapPhimInput = {
-    ma_lich_chieu?: number
-    ma_phim: number
+    ma_lich_chieu: string
+    ma_phim: string
     ngay_gio_chieu: Date | string
     gia_ve: number
   }
 
   export type GheUpdateWithoutRapPhimInput = {
+    ma_ghe?: StringFieldUpdateOperationsInput | string
     ten_ghe?: StringFieldUpdateOperationsInput | string
     loai_ghe?: NullableStringFieldUpdateOperationsInput | string | null
     DatVe?: DatVeUpdateManyWithoutGheNestedInput
   }
 
   export type GheUncheckedUpdateWithoutRapPhimInput = {
-    ma_ghe?: IntFieldUpdateOperationsInput | number
+    ma_ghe?: StringFieldUpdateOperationsInput | string
     ten_ghe?: StringFieldUpdateOperationsInput | string
     loai_ghe?: NullableStringFieldUpdateOperationsInput | string | null
     DatVe?: DatVeUncheckedUpdateManyWithoutGheNestedInput
   }
 
   export type GheUncheckedUpdateManyWithoutRapPhimInput = {
-    ma_ghe?: IntFieldUpdateOperationsInput | number
+    ma_ghe?: StringFieldUpdateOperationsInput | string
     ten_ghe?: StringFieldUpdateOperationsInput | string
     loai_ghe?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type LichChieuUpdateWithoutRapPhimInput = {
+    ma_lich_chieu?: StringFieldUpdateOperationsInput | string
     ngay_gio_chieu?: DateTimeFieldUpdateOperationsInput | Date | string
     gia_ve?: IntFieldUpdateOperationsInput | number
     DatVe?: DatVeUpdateManyWithoutLichChieuNestedInput
@@ -17330,16 +17093,16 @@ export namespace Prisma {
   }
 
   export type LichChieuUncheckedUpdateWithoutRapPhimInput = {
-    ma_lich_chieu?: IntFieldUpdateOperationsInput | number
-    ma_phim?: IntFieldUpdateOperationsInput | number
+    ma_lich_chieu?: StringFieldUpdateOperationsInput | string
+    ma_phim?: StringFieldUpdateOperationsInput | string
     ngay_gio_chieu?: DateTimeFieldUpdateOperationsInput | Date | string
     gia_ve?: IntFieldUpdateOperationsInput | number
     DatVe?: DatVeUncheckedUpdateManyWithoutLichChieuNestedInput
   }
 
   export type LichChieuUncheckedUpdateManyWithoutRapPhimInput = {
-    ma_lich_chieu?: IntFieldUpdateOperationsInput | number
-    ma_phim?: IntFieldUpdateOperationsInput | number
+    ma_lich_chieu?: StringFieldUpdateOperationsInput | string
+    ma_phim?: StringFieldUpdateOperationsInput | string
     ngay_gio_chieu?: DateTimeFieldUpdateOperationsInput | Date | string
     gia_ve?: IntFieldUpdateOperationsInput | number
   }
@@ -17354,7 +17117,7 @@ export namespace Prisma {
   }
 
   export type PhimCreateManyNhomInput = {
-    ma_phim?: number
+    ma_phim: string
     ten_phim: string
     trailer?: string | null
     hinh_anh?: string | null
@@ -17396,6 +17159,7 @@ export namespace Prisma {
   }
 
   export type PhimUpdateWithoutNhomInput = {
+    ma_phim?: StringFieldUpdateOperationsInput | string
     ten_phim?: StringFieldUpdateOperationsInput | string
     trailer?: NullableStringFieldUpdateOperationsInput | string | null
     hinh_anh?: NullableStringFieldUpdateOperationsInput | string | null
@@ -17410,7 +17174,7 @@ export namespace Prisma {
   }
 
   export type PhimUncheckedUpdateWithoutNhomInput = {
-    ma_phim?: IntFieldUpdateOperationsInput | number
+    ma_phim?: StringFieldUpdateOperationsInput | string
     ten_phim?: StringFieldUpdateOperationsInput | string
     trailer?: NullableStringFieldUpdateOperationsInput | string | null
     hinh_anh?: NullableStringFieldUpdateOperationsInput | string | null
@@ -17425,7 +17189,7 @@ export namespace Prisma {
   }
 
   export type PhimUncheckedUpdateManyWithoutNhomInput = {
-    ma_phim?: IntFieldUpdateOperationsInput | number
+    ma_phim?: StringFieldUpdateOperationsInput | string
     ten_phim?: StringFieldUpdateOperationsInput | string
     trailer?: NullableStringFieldUpdateOperationsInput | string | null
     hinh_anh?: NullableStringFieldUpdateOperationsInput | string | null
