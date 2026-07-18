@@ -1,0 +1,324 @@
+{
+  "info": {
+    "_postman_id": "ab982c01-e896-459e-9518-5c9eb244d333",
+    "name": "Quản lý Người dùng",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "32381291",
+    "_collection_link": "https://go.postman.co/collection/32381291-ab982c01-e896-459e-9518-5c9eb244d333?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Đăng ký",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \r\n    \"tai_khoan\": \"TL\",\r\n    \"mat_khau\":\"Lam@12345\",\r\n    \"email\":\"Lam@gmail.com\",\r\n    \"so_dt\":\"0367797348\",\r\n    \"ma_nhom\":\"GP02\",\r\n    \"ho_ten\":\"TL2\" \r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{Register}}",
+          "host": [
+            "{{Register}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Đăng nhập",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"tai_khoan\": \"dantethegodslayer2000\",\r\n  \"mat_khau\": \"Lam@12345\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{Login}}",
+          "host": [
+            "{{Login}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Danh sách người dùng",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"Dantethegodslayer2000@gmail.com\",\r\n    \"mat_khau\": \"Lam@0367797348\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{Users list}}?ma_nhom=GP01",
+          "host": [
+            "{{Users list}}"
+          ],
+          "query": [
+            {
+              "key": "ma_nhom",
+              "value": "GP01"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Danh sách người dùng phân trang",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"Dantethegodslayer2000@gmail.com\",\r\n    \"mat_khau\": \"Lam@0367797348\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{Users list pagination}}?ma_nhom=GP01&page=1&pageSize=3",
+          "host": [
+            "{{Users list pagination}}"
+          ],
+          "query": [
+            {
+              "key": "ma_nhom",
+              "value": "GP01"
+            },
+            {
+              "key": "page",
+              "value": "1"
+            },
+            {
+              "key": "pageSize",
+              "value": "3"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Thông tin tài khoản",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"Dantethegodslayer2000@gmail.com\",\r\n    \"mat_khau\": \"Lam@0367797348\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{User info}}",
+          "host": [
+            "{{User info}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Tìm kiếm người dùng",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"Dantethegodslayer2000@gmail.com\",\r\n    \"mat_khau\": \"Lam@0367797348\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{Users search}}?ma_nhom=GP01&tu_khoa=nguyen",
+          "host": [
+            "{{Users search}}"
+          ],
+          "query": [
+            {
+              "key": "ma_nhom",
+              "value": "GP01"
+            },
+            {
+              "key": "tu_khoa",
+              "value": "nguyen"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Tìm kiếm người dùng phân trang",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"Dantethegodslayer2000@gmail.com\",\r\n    \"mat_khau\": \"Lam@0367797348\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{Users search pagination}}?ma_nhom=GP01&tu_khoa=la&page=1&pageSize=5",
+          "host": [
+            "{{Users search pagination}}"
+          ],
+          "query": [
+            {
+              "key": "ma_nhom",
+              "value": "GP01"
+            },
+            {
+              "key": "tu_khoa",
+              "value": "la"
+            },
+            {
+              "key": "page",
+              "value": "1"
+            },
+            {
+              "key": "pageSize",
+              "value": "5"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Thêm tài khoản",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"tai_khoan\": \"admin02\",\r\n  \"mat_khau\": \"123456\",\r\n  \"email\": \"admin02@gmail.com\",\r\n  \"so_dt\": \"0901234567\",\r\n  \"ma_nhom\": \"GP01\",\r\n  \"ho_ten\": \"Nguyễn Văn Admin\",\r\n  \"loai_nguoi_dung\": \"QUAN_TRI\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{Add account}}",
+          "host": [
+            "{{Add account}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Cập nhật thông tin người dùng",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"tai_khoan\": \"admin02\",\r\n  \"ho_ten\": \"Nguyễn Văn Admin Updated\",\r\n  \"so_dt\": \"0912345678\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{Update account}}",
+          "host": [
+            "{{Update account}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Xóa người dùng",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"tai_khoan\": \"admin02\",\r\n  \"ho_ten\": \"Nguyễn Văn Admin Updated\",\r\n  \"so_dt\": \"0912345678\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{Delete account}}?tai_khoan=admin02",
+          "host": [
+            "{{Delete account}}"
+          ],
+          "query": [
+            {
+              "key": "tai_khoan",
+              "value": "admin02"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Danh sách loại người dùng",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{Users  types list}}",
+          "host": [
+            "{{Users  types list}}"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

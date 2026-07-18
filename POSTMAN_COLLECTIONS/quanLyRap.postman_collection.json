@@ -1,0 +1,89 @@
+{
+  "info": {
+    "_postman_id": "fc7d0bd8-2940-44d1-9a1a-298e41ba0481",
+    "name": "Quản lý Rạp",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "32381291",
+    "_collection_link": "https://go.postman.co/collection/32381291-fc7d0bd8-2940-44d1-9a1a-298e41ba0481?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Lấy thông tin hệ thống rạp",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{Cinemas list}}",
+          "host": [
+            "{{Cinemas list}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Lấy thông tin cụm rạp theo hệ thống",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{Cinemas group list}}?maHeThongRap=HTR_CGV",
+          "host": [
+            "{{Cinemas group list}}"
+          ],
+          "query": [
+            {
+              "key": "maHeThongRap",
+              "value": "HTR_CGV"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Lấy thông tin lịch chiếu hệ thống rạp",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{Schedule list by Cinema system}}?ma_nhom=GP01&maHeThongRap=HTR_CGV",
+          "host": [
+            "{{Schedule list by Cinema system}}"
+          ],
+          "query": [
+            {
+              "key": "ma_nhom",
+              "value": "GP01"
+            },
+            {
+              "key": "maHeThongRap",
+              "value": "HTR_CGV"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Lấy thông tin lịch chiếu phim",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{Schedule list by Movie ID}}?maPhim=PHIM_AVATAR_3",
+          "host": [
+            "{{Schedule list by Movie ID}}"
+          ],
+          "query": [
+            {
+              "key": "maPhim",
+              "value": "PHIM_AVATAR_3"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
