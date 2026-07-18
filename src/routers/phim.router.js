@@ -34,7 +34,7 @@ phimRouter.post(
 );
 
 // Lấy thông tin phim theo mã phim
-phimRouter.get("/layThongTinPhim/:maPhim", phimController.layThongTinPhim);
+phimRouter.get("/layThongTinPhim", phimController.layThongTinPhim);
 
 // Cập nhật phim Upload Hình
 phimRouter.put(
@@ -47,7 +47,7 @@ phimRouter.put(
 
 // Xóa phim
 phimRouter.delete(
-  "/xoaPhim/:maPhim",
+  "/xoaPhim",
   authCookie,
   authAdmin,
   phimController.xoaPhim,

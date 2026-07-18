@@ -324,24 +324,6 @@ export const phimService = {
 
   // Thêm phim Upload Hình Service
   async themPhimUploadHinh(req) {
-    const { frm } = req.body;
-
-    if (!frm?.trim()) {
-      throw new BadRequestError("Thông tin phim frm không được để trống");
-    }
-
-    if (!req.file) {
-      throw new BadRequestError("Hình ảnh phim không được để trống");
-    }
-
-    let thongTinPhim;
-
-    try {
-      thongTinPhim = JSON.parse(frm);
-    } catch {
-      throw new BadRequestError("Dữ liệu frm phải là JSON hợp lệ");
-    }
-
     const {
       maPhim,
       tenPhim,
@@ -353,18 +335,30 @@ export const phimService = {
       hot,
       dangChieu,
       sapChieu,
-    } = thongTinPhim;
+    } = req.body;
 
-    if (!tenPhim?.trim()) {
+    const maPhimValue = String(maPhim || "").trim();
+    const tenPhimValue = String(tenPhim || "").trim();
+    const maNhomValue = String(maNhom || "").trim();
+
+    if (!maPhimValue) {
+      throw new BadRequestError("Mã phim không được để trống");
+    }
+
+    if (!tenPhimValue) {
       throw new BadRequestError("Tên phim không được để trống");
     }
 
-    if (!maNhom?.trim()) {
+    if (!maNhomValue) {
       throw new BadRequestError("Mã nhóm không được để trống");
     }
 
-    if (!ngayKhoiChieu?.trim()) {
+    if (!ngayKhoiChieu) {
       throw new BadRequestError("Ngày khởi chiếu không được để trống");
+    }
+
+    if (!req.file) {
+      throw new BadRequestError("Hình ảnh phim không được để trống");
     }
 
     const ngayKhoiChieuValue = new Date(ngayKhoiChieu);
@@ -383,50 +377,48 @@ export const phimService = {
       throw new BadRequestError("Đánh giá phải là số nguyên từ 0 đến 10");
     }
 
-    if (typeof hot !== "boolean") {
-      throw new BadRequestError("Hot phải có giá trị true hoặc false");
-    }
-
-    if (typeof dangChieu !== "boolean") {
-      throw new BadRequestError("Đang chiếu phải có giá trị true hoặc false");
-    }
-
-    if (typeof sapChieu !== "boolean") {
-      throw new BadRequestError("Sắp chiếu phải có giá trị true hoặc false");
-    }
-
-    const nhomTonTai = await prisma.nhom.findUnique({
-      where: {
-        ma_nhom: maNhom.trim(),
-      },
-      select: {
-        ma_nhom: true,
-      },
-    });
-
-    if (!nhomTonTai) {
-      throw new BadRequestError(`Nhóm có mã ${maNhom.trim()} không tồn tại`);
-    }
-
-    if (maPhim !== undefined && maPhim !== null) {
-      const maPhimValue = Number(maPhim);
-
-      if (!Number.isInteger(maPhimValue) || maPhimValue < 1) {
-        throw new BadRequestError("Mã phim phải là số nguyên lớn hơn 0");
+    const chuyenBoolean = (value, tenTruong) => {
+      if (value === true || value === "true") {
+        return true;
       }
 
-      const phimTonTai = await prisma.phim.findUnique({
+      if (value === false || value === "false") {
+        return false;
+      }
+
+      throw new BadRequestError(`${tenTruong} phải có giá trị true hoặc false`);
+    };
+
+    const hotValue = chuyenBoolean(hot, "Hot");
+    const dangChieuValue = chuyenBoolean(dangChieu, "Đang chiếu");
+    const sapChieuValue = chuyenBoolean(sapChieu, "Sắp chiếu");
+
+    const [nhomTonTai, phimTonTai] = await Promise.all([
+      prisma.nhom.findUnique({
+        where: {
+          ma_nhom: maNhomValue,
+        },
+        select: {
+          ma_nhom: true,
+        },
+      }),
+
+      prisma.phim.findUnique({
         where: {
           ma_phim: maPhimValue,
         },
         select: {
           ma_phim: true,
         },
-      });
+      }),
+    ]);
 
-      if (phimTonTai) {
-        throw new BadRequestError(`Phim có mã ${maPhimValue} đã tồn tại`);
-      }
+    if (!nhomTonTai) {
+      throw new BadRequestError(`Nhóm có mã ${maNhomValue} không tồn tại`);
+    }
+
+    if (phimTonTai) {
+      throw new BadRequestError(`Phim có mã ${maPhimValue} đã tồn tại`);
     }
 
     const hinhAnh = `${req.protocol}://${req.get(
@@ -435,19 +427,20 @@ export const phimService = {
 
     const phimMoi = await prisma.phim.create({
       data: {
-        ten_phim: tenPhim.trim(),
-        trailer: trailer?.trim() || null,
+        ma_phim: maPhimValue,
+        ten_phim: tenPhimValue,
+        trailer: String(trailer || "").trim() || null,
         hinh_anh: hinhAnh,
-        mo_ta: moTa?.trim() || "",
+        mo_ta: String(moTa || "").trim(),
         ngay_khoi_chieu: ngayKhoiChieuValue,
         danh_gia: danhGiaValue,
-        hot,
-        dang_chieu: dangChieu,
-        sap_chieu: sapChieu,
+        hot: hotValue,
+        dang_chieu: dangChieuValue,
+        sap_chieu: sapChieuValue,
 
         Nhom: {
           connect: {
-            ma_nhom: maNhom.trim(),
+            ma_nhom: maNhomValue,
           },
         },
       },
@@ -489,12 +482,12 @@ export const phimService = {
 
   // Lấy thông tin phim theo mã phim Service
   async layThongTinPhim(req) {
-    const { maPhim } = req.params;
+    const { maPhim } = req.query;
 
-    const maPhimValue = Number(maPhim);
+    const maPhimValue = String(maPhim || "").trim();
 
-    if (!Number.isInteger(maPhimValue) || maPhimValue < 1) {
-      throw new BadRequestError("Mã phim phải là số nguyên lớn hơn 0");
+    if (!maPhimValue) {
+      throw new BadRequestError("Mã phim không được để trống");
     }
 
     const phim = await prisma.phim.findUnique({
@@ -544,24 +537,25 @@ export const phimService = {
   // Cập nhật phim Upload Hình Service
   async capNhatPhimUpload(req) {
     const { maPhim } = req.params;
-    const { frm } = req.body;
 
-    const maPhimValue = Number(maPhim);
+    const {
+      tenPhim,
+      trailer,
+      moTa,
+      maNhom,
+      ngayKhoiChieu,
+      danhGia,
+      hot,
+      dangChieu,
+      sapChieu,
+    } = req.body;
 
-    if (!Number.isInteger(maPhimValue) || maPhimValue < 1) {
-      throw new BadRequestError("Mã phim phải là số nguyên lớn hơn 0");
-    }
+    const maPhimValue = String(maPhim || "").trim();
+    const tenPhimValue = String(tenPhim || "").trim();
+    const maNhomValue = String(maNhom || "").trim();
 
-    if (!frm?.trim()) {
-      throw new BadRequestError("Thông tin phim frm không được để trống");
-    }
-
-    let thongTinPhim;
-
-    try {
-      thongTinPhim = JSON.parse(frm);
-    } catch {
-      throw new BadRequestError("Dữ liệu frm phải là JSON hợp lệ");
+    if (!maPhimValue) {
+      throw new BadRequestError("Mã phim không được để trống");
     }
 
     const phimTonTai = await prisma.phim.findUnique({
@@ -580,27 +574,15 @@ export const phimService = {
       throw new BadRequestError(`Phim có mã ${maPhimValue} không tồn tại`);
     }
 
-    const {
-      tenPhim,
-      trailer,
-      moTa,
-      maNhom,
-      ngayKhoiChieu,
-      danhGia,
-      hot,
-      dangChieu,
-      sapChieu,
-    } = thongTinPhim;
-
-    if (!tenPhim?.trim()) {
+    if (!tenPhimValue) {
       throw new BadRequestError("Tên phim không được để trống");
     }
 
-    if (!maNhom?.trim()) {
+    if (!maNhomValue) {
       throw new BadRequestError("Mã nhóm không được để trống");
     }
 
-    if (!ngayKhoiChieu?.trim()) {
+    if (!ngayKhoiChieu) {
       throw new BadRequestError("Ngày khởi chiếu không được để trống");
     }
 
@@ -620,19 +602,21 @@ export const phimService = {
       throw new BadRequestError("Đánh giá phải là số nguyên từ 0 đến 10");
     }
 
-    if (typeof hot !== "boolean") {
-      throw new BadRequestError("Hot phải có giá trị true hoặc false");
-    }
+    const chuyenBoolean = (value, tenTruong) => {
+      if (value === true || value === "true") {
+        return true;
+      }
 
-    if (typeof dangChieu !== "boolean") {
-      throw new BadRequestError("Đang chiếu phải có giá trị true hoặc false");
-    }
+      if (value === false || value === "false") {
+        return false;
+      }
 
-    if (typeof sapChieu !== "boolean") {
-      throw new BadRequestError("Sắp chiếu phải có giá trị true hoặc false");
-    }
+      throw new BadRequestError(`${tenTruong} phải có giá trị true hoặc false`);
+    };
 
-    const maNhomValue = maNhom.trim();
+    const hotValue = chuyenBoolean(hot, "Hot");
+    const dangChieuValue = chuyenBoolean(dangChieu, "Đang chiếu");
+    const sapChieuValue = chuyenBoolean(sapChieu, "Sắp chiếu");
 
     const nhomTonTai = await prisma.nhom.findUnique({
       where: {
@@ -648,8 +632,7 @@ export const phimService = {
       throw new BadRequestError(`Nhóm có mã ${maNhomValue} không tồn tại`);
     }
 
-    // Nếu có upload ảnh mới thì sử dụng ảnh mới.
-    // Nếu không có thì giữ lại ảnh cũ.
+    // Có ảnh mới thì dùng ảnh mới, không có thì giữ ảnh cũ.
     const hinhAnh = req.file
       ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
       : phimTonTai.hinh_anh;
@@ -660,15 +643,15 @@ export const phimService = {
       },
 
       data: {
-        ten_phim: tenPhim.trim(),
-        trailer: trailer?.trim() || null,
+        ten_phim: tenPhimValue,
+        trailer: String(trailer || "").trim() || null,
         hinh_anh: hinhAnh,
-        mo_ta: moTa?.trim() || "",
+        mo_ta: String(moTa || "").trim(),
         ngay_khoi_chieu: ngayKhoiChieuValue,
         danh_gia: danhGiaValue,
-        hot,
-        dang_chieu: dangChieu,
-        sap_chieu: sapChieu,
+        hot: hotValue,
+        dang_chieu: dangChieuValue,
+        sap_chieu: sapChieuValue,
 
         Nhom: {
           connect: {
@@ -714,12 +697,12 @@ export const phimService = {
 
   // Xóa phim Service
   async xoaPhim(req) {
-    const { maPhim } = req.params;
+    const { maPhim } = req.query;
 
-    const maPhimValue = Number(maPhim);
+    const maPhimValue = String(maPhim || "").trim();
 
-    if (!Number.isInteger(maPhimValue) || maPhimValue < 1) {
-      throw new BadRequestError("Mã phim phải là số nguyên lớn hơn 0");
+    if (!maPhimValue) {
+      throw new BadRequestError("Mã phim không được để trống");
     }
 
     const phimTonTai = await prisma.phim.findUnique({
