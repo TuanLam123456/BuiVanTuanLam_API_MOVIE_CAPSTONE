@@ -3,7 +3,7 @@ import {
   BadRequestError,
   UnauthorizedError,
 } from "../common/helpers/exception.helper.js";
-
+import { randomUUID } from "node:crypto";
 export const datVeService = {
   // Đặt vé Service
   async datVe(req) {
@@ -16,10 +16,10 @@ export const datVeService = {
       );
     }
 
-    const maLichChieuNumber = Number(maLichChieu);
+    const maLichChieuString = String(maLichChieu || "").trim();
 
-    if (!Number.isInteger(maLichChieuNumber) || maLichChieuNumber < 1) {
-      throw new BadRequestError("Mã lịch chiếu phải là số nguyên lớn hơn 0");
+    if (!maLichChieuString) {
+      throw new BadRequestError("Mã lịch chiếu không hợp lệ");
     }
 
     if (!Array.isArray(danhSachVe) || danhSachVe.length === 0) {
@@ -27,10 +27,10 @@ export const datVeService = {
     }
 
     const danhSachVeDaXuLy = danhSachVe.map((ve, index) => {
-      const maGhe = Number(ve?.maGhe);
+      const maGhe = String(ve?.maGhe || "").trim();
       const giaVe = Number(ve?.giaVe);
 
-      if (!Number.isInteger(maGhe) || maGhe < 1) {
+      if (!maGhe) {
         throw new BadRequestError(
           `Mã ghế tại vị trí ${index + 1} không hợp lệ`,
         );
@@ -74,7 +74,7 @@ export const datVeService = {
       // Kiểm tra lịch chiếu
       const lichChieuExisting = await tx.lichChieu.findUnique({
         where: {
-          ma_lich_chieu: maLichChieuNumber,
+          ma_lich_chieu: maLichChieuString,
         },
         select: {
           ma_lich_chieu: true,
@@ -103,7 +103,7 @@ export const datVeService = {
 
       if (!lichChieuExisting) {
         throw new BadRequestError(
-          `Lịch chiếu ${maLichChieuNumber} không tồn tại`,
+          `Lịch chiếu ${maLichChieuString} không tồn tại`,
         );
       }
 
@@ -149,7 +149,7 @@ export const datVeService = {
       // Kiểm tra ghế đã được đặt trong lịch chiếu
       const danhSachGheDaDat = await tx.datVe.findMany({
         where: {
-          ma_lich_chieu: maLichChieuNumber,
+          ma_lich_chieu: maLichChieuString,
           ma_ghe: {
             in: danhSachMaGheKhongTrung,
           },
@@ -173,14 +173,17 @@ export const datVeService = {
       }
 
       // Tạo các bản ghi đặt vé
+      const thoiDiemTao = Date.now();
+
       await tx.datVe.createMany({
-        data: danhSachMaGheKhongTrung.map((maGhe) => ({
+        data: danhSachMaGheKhongTrung.map((maGhe, index) => ({
+          ma_dat_ve: `DV_${thoiDiemTao}_${index + 1}`,
           tai_khoan: taiKhoan,
-          ma_lich_chieu: maLichChieuNumber,
+          ma_lich_chieu: maLichChieuString,
           ma_ghe: maGhe,
         })),
       });
-
+      
       return {
         tai_khoan: taiKhoan,
         maLichChieu: lichChieuExisting.ma_lich_chieu,
@@ -206,14 +209,10 @@ export const datVeService = {
   async layDanhSachPhongVe(req) {
     const { ma_lich_chieu } = req.query;
 
-    if (!ma_lich_chieu?.trim()) {
+    const maLichChieu = String(ma_lich_chieu || "").trim();
+
+    if (!maLichChieu) {
       throw new BadRequestError("Mã lịch chiếu không được để trống");
-    }
-
-    const maLichChieu = Number(ma_lich_chieu);
-
-    if (!Number.isInteger(maLichChieu) || maLichChieu < 1) {
-      throw new BadRequestError("Mã lịch chiếu phải là số nguyên lớn hơn 0");
     }
 
     const lichChieu = await prisma.lichChieu.findUnique({
@@ -342,10 +341,14 @@ export const datVeService = {
   async taoLichChieu(req) {
     const { maPhim, ngayChieuGioChieu, maRap, giaVe } = req.body || {};
 
+    const maPhimString = String(maPhim || "").trim();
+    const maRapString = String(maRap || "").trim();
+    const ngayChieuGioChieuString = String(ngayChieuGioChieu || "").trim();
+
     if (
-      maPhim === undefined ||
-      !ngayChieuGioChieu?.trim() ||
-      maRap === undefined ||
+      !maPhimString ||
+      !ngayChieuGioChieuString ||
+      !maRapString ||
       giaVe === undefined
     ) {
       throw new BadRequestError(
@@ -353,23 +356,13 @@ export const datVeService = {
       );
     }
 
-    const maPhimNumber = Number(maPhim);
-    const maRapNumber = Number(maRap);
     const giaVeNumber = Number(giaVe);
-
-    if (!Number.isInteger(maPhimNumber) || maPhimNumber < 1) {
-      throw new BadRequestError("Mã phim phải là số nguyên lớn hơn 0");
-    }
-
-    if (!Number.isInteger(maRapNumber) || maRapNumber < 1) {
-      throw new BadRequestError("Mã rạp phải là số nguyên lớn hơn 0");
-    }
 
     if (!Number.isInteger(giaVeNumber) || giaVeNumber < 1) {
       throw new BadRequestError("Giá vé phải là số nguyên lớn hơn 0");
     }
 
-    const ngayGioChieu = new Date(ngayChieuGioChieu);
+    const ngayGioChieu = new Date(ngayChieuGioChieuString);
 
     if (Number.isNaN(ngayGioChieu.getTime())) {
       throw new BadRequestError("Ngày chiếu giờ chiếu không đúng định dạng");
@@ -384,7 +377,7 @@ export const datVeService = {
     const [phimExisting, rapExisting] = await prisma.$transaction([
       prisma.phim.findUnique({
         where: {
-          ma_phim: maPhimNumber,
+          ma_phim: maPhimString,
         },
 
         select: {
@@ -395,7 +388,7 @@ export const datVeService = {
 
       prisma.rapPhim.findUnique({
         where: {
-          ma_rap: maRapNumber,
+          ma_rap: maRapString,
         },
 
         select: {
@@ -407,17 +400,17 @@ export const datVeService = {
     ]);
 
     if (!phimExisting) {
-      throw new BadRequestError(`Phim có mã ${maPhimNumber} không tồn tại`);
+      throw new BadRequestError(`Phim có mã ${maPhimString} không tồn tại`);
     }
 
     if (!rapExisting) {
-      throw new BadRequestError(`Rạp có mã ${maRapNumber} không tồn tại`);
+      throw new BadRequestError(`Rạp có mã ${maRapString} không tồn tại`);
     }
 
     // Kiểm tra rạp đã có lịch chiếu đúng thời điểm đó chưa
     const lichChieuTrung = await prisma.lichChieu.findFirst({
       where: {
-        ma_rap: maRapNumber,
+        ma_rap: maRapString,
         ngay_gio_chieu: ngayGioChieu,
       },
     });
@@ -428,8 +421,9 @@ export const datVeService = {
 
     const lichChieuMoi = await prisma.lichChieu.create({
       data: {
-        ma_phim: maPhimNumber,
-        ma_rap: maRapNumber,
+        ma_lich_chieu: randomUUID(),
+        ma_phim: maPhimString,
+        ma_rap: maRapString,
         ngay_gio_chieu: ngayGioChieu,
         gia_ve: giaVeNumber,
       },
