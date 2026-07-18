@@ -171,41 +171,55 @@ export const nguoiDungService = {
 
   // Lấy danh sách người dùng Service
   async layDanhSachNguoiDung(req) {
-    const { ma_nhom, tu_khoa } = req.query;
+    const maNhom = req.query.ma_nhom?.trim();
+    const keyword = req.query.tu_khoa?.trim();
 
-    if (!ma_nhom?.trim()) {
+    if (!maNhom) {
       throw new BadRequestError("Mã nhóm không được để trống");
     }
 
-    const keyword = tu_khoa?.trim();
+    const nhomTonTai = await prisma.nhom.findUnique({
+      where: {
+        ma_nhom: maNhom,
+      },
+      select: {
+        ma_nhom: true,
+      },
+    });
+
+    if (!nhomTonTai) {
+      throw new BadRequestError(`Mã nhóm ${maNhom} không tồn tại`);
+    }
 
     const danhSachNguoiDung = await prisma.nguoiDung.findMany({
       where: {
-        ma_nhom: ma_nhom.trim(),
-        ...(keyword && {
-          OR: [
-            {
-              tai_khoan: {
-                contains: keyword,
-              },
-            },
-            {
-              email: {
-                contains: keyword,
-              },
-            },
-            {
-              so_dt: {
-                contains: keyword,
-              },
-            },
-            {
-              ho_ten: {
-                contains: keyword,
-              },
-            },
-          ],
-        }),
+        ma_nhom: maNhom,
+        ...(keyword
+          ? {
+              OR: [
+                {
+                  tai_khoan: {
+                    contains: keyword,
+                  },
+                },
+                {
+                  email: {
+                    contains: keyword,
+                  },
+                },
+                {
+                  so_dt: {
+                    contains: keyword,
+                  },
+                },
+                {
+                  ho_ten: {
+                    contains: keyword,
+                  },
+                },
+              ],
+            }
+          : {}),
       },
       select: {
         tai_khoan: true,
@@ -227,7 +241,10 @@ export const nguoiDungService = {
   async layDanhSachNguoiDungPhanTrang(req) {
     const { ma_nhom, tu_khoa, page = "1", pageSize = "10" } = req.query;
 
-    if (!ma_nhom?.trim()) {
+    const maNhom = ma_nhom?.trim();
+    const keyword = tu_khoa?.trim();
+
+    if (!maNhom) {
       throw new BadRequestError("Mã nhóm không được để trống");
     }
 
@@ -243,41 +260,58 @@ export const nguoiDungService = {
       throw new BadRequestError("page và pageSize phải là số nguyên lớn hơn 0");
     }
 
-    const keyword = tu_khoa?.trim();
+    if (currentPageSize > 100) {
+      throw new BadRequestError("pageSize không được lớn hơn 100");
+    }
+
+    const nhomTonTai = await prisma.nhom.findUnique({
+      where: {
+        ma_nhom: maNhom,
+      },
+      select: {
+        ma_nhom: true,
+      },
+    });
+
+    if (!nhomTonTai) {
+      throw new BadRequestError(`Mã nhóm ${maNhom} không tồn tại`);
+    }
 
     const whereCondition = {
-      ma_nhom: ma_nhom.trim(),
-
-      ...(keyword && {
-        OR: [
-          {
-            tai_khoan: {
-              contains: keyword,
-            },
-          },
-          {
-            email: {
-              contains: keyword,
-            },
-          },
-          {
-            so_dt: {
-              contains: keyword,
-            },
-          },
-          {
-            ho_ten: {
-              contains: keyword,
-            },
-          },
-        ],
-      }),
+      ma_nhom: maNhom,
+      ...(keyword
+        ? {
+            OR: [
+              {
+                tai_khoan: {
+                  contains: keyword,
+                },
+              },
+              {
+                email: {
+                  contains: keyword,
+                },
+              },
+              {
+                so_dt: {
+                  contains: keyword,
+                },
+              },
+              {
+                ho_ten: {
+                  contains: keyword,
+                },
+              },
+            ],
+          }
+        : {}),
     };
+
+    const skip = (currentPage - 1) * currentPageSize;
 
     const [danhSachNguoiDung, tongSoNguoiDung] = await prisma.$transaction([
       prisma.nguoiDung.findMany({
         where: whereCondition,
-
         select: {
           tai_khoan: true,
           ho_ten: true,
@@ -286,12 +320,10 @@ export const nguoiDungService = {
           loai_nguoi_dung: true,
           ma_nhom: true,
         },
-
         orderBy: {
           tai_khoan: "asc",
         },
-
-        skip: (currentPage - 1) * currentPageSize,
+        skip,
         take: currentPageSize,
       }),
 
@@ -414,16 +446,18 @@ export const nguoiDungService = {
   async timKiemNguoiDungPhanTrang(req) {
     const { ma_nhom, tu_khoa, page = "1", pageSize = "10" } = req.query;
 
-    if (!ma_nhom?.trim()) {
+    const maNhom = ma_nhom?.trim();
+    const keyword = tu_khoa?.trim();
+    const currentPage = Number(page);
+    const currentPageSize = Number(pageSize);
+
+    if (!maNhom) {
       throw new BadRequestError("Mã nhóm không được để trống");
     }
 
-    if (!tu_khoa?.trim()) {
+    if (!keyword) {
       throw new BadRequestError("Từ khóa không được để trống");
     }
-
-    const currentPage = Number(page);
-    const currentPageSize = Number(pageSize);
 
     if (
       !Number.isInteger(currentPage) ||
@@ -434,8 +468,22 @@ export const nguoiDungService = {
       throw new BadRequestError("page và pageSize phải là số nguyên lớn hơn 0");
     }
 
-    const maNhom = ma_nhom.trim();
-    const keyword = tu_khoa.trim();
+    if (currentPageSize > 100) {
+      throw new BadRequestError("pageSize không được lớn hơn 100");
+    }
+
+    const nhomTonTai = await prisma.nhom.findUnique({
+      where: {
+        ma_nhom: maNhom,
+      },
+      select: {
+        ma_nhom: true,
+      },
+    });
+
+    if (!nhomTonTai) {
+      throw new BadRequestError(`Mã nhóm ${maNhom} không tồn tại`);
+    }
 
     const whereCondition = {
       ma_nhom: maNhom,
@@ -463,6 +511,8 @@ export const nguoiDungService = {
       ],
     };
 
+    const skip = (currentPage - 1) * currentPageSize;
+
     const [danhSachNguoiDung, tongSoNguoiDung] = await prisma.$transaction([
       prisma.nguoiDung.findMany({
         where: whereCondition,
@@ -477,7 +527,7 @@ export const nguoiDungService = {
         orderBy: {
           tai_khoan: "asc",
         },
-        skip: (currentPage - 1) * currentPageSize,
+        skip,
         take: currentPageSize,
       }),
 
@@ -509,50 +559,64 @@ export const nguoiDungService = {
       loai_nguoi_dung,
     } = req.body;
 
-    if (
-      !tai_khoan?.trim() ||
-      !mat_khau.trim() ||
-      !email?.trim() ||
-      !ho_ten?.trim() ||
-      !loai_nguoi_dung?.trim()
-    ) {
+    const taiKhoan = tai_khoan?.trim();
+    const matKhau = mat_khau?.trim();
+    const emailNguoiDung = email?.trim().toLowerCase();
+    const soDienThoai = so_dt?.trim() || null;
+    const maNhom = ma_nhom?.trim() || "GP01";
+    const hoTen = ho_ten?.trim();
+    const loaiNguoiDung = loai_nguoi_dung?.trim();
+
+    if (!taiKhoan || !matKhau || !emailNguoiDung || !hoTen || !loaiNguoiDung) {
       throw new BadRequestError("Các trường bắt buộc không được để trống");
     }
 
-    const taiKhoan = tai_khoan.trim();
-    const emailNguoiDung = email.trim();
-    const hoTen = ho_ten.trim();
-    const maNhom = ma_nhom?.trim() || "GP01";
-    const loaiNguoiDung = loai_nguoi_dung.trim();
-
-    // Kiểm tra tài khoản đã tồn tại
-    const taiKhoanExisting = await prisma.nguoiDung.findUnique({
+    // Kiểm tra tài khoản hoặc email đã tồn tại
+    const nguoiDungExisting = await prisma.nguoiDung.findFirst({
       where: {
-        tai_khoan: taiKhoan,
+        OR: [
+          {
+            tai_khoan: taiKhoan,
+          },
+          {
+            email: emailNguoiDung,
+          },
+        ],
+      },
+      select: {
+        tai_khoan: true,
+        email: true,
       },
     });
 
-    if (taiKhoanExisting) {
+    if (nguoiDungExisting?.tai_khoan === taiKhoan) {
       throw new BadRequestError(`Tài khoản ${taiKhoan} đã tồn tại`);
     }
 
-    // Kiểm tra email đã tồn tại
-    const emailExisting = await prisma.nguoiDung.findUnique({
-      where: {
-        email: emailNguoiDung,
-      },
-    });
-
-    if (emailExisting) {
+    if (nguoiDungExisting?.email === emailNguoiDung) {
       throw new BadRequestError(`Email ${emailNguoiDung} đã tồn tại`);
     }
 
-    // Kiểm tra loại người dùng có tồn tại
-    const loaiNguoiDungExisting = await prisma.loaiNguoiDung.findUnique({
-      where: {
-        ma_loai_nguoi_dung: loaiNguoiDung,
-      },
-    });
+    // Kiểm tra loại người dùng và mã nhóm cùng lúc
+    const [loaiNguoiDungExisting, nhomExisting] = await prisma.$transaction([
+      prisma.loaiNguoiDung.findUnique({
+        where: {
+          ma_loai_nguoi_dung: loaiNguoiDung,
+        },
+        select: {
+          ma_loai_nguoi_dung: true,
+        },
+      }),
+
+      prisma.nhom.findUnique({
+        where: {
+          ma_nhom: maNhom,
+        },
+        select: {
+          ma_nhom: true,
+        },
+      }),
+    ]);
 
     if (!loaiNguoiDungExisting) {
       throw new BadRequestError(
@@ -560,30 +624,22 @@ export const nguoiDungService = {
       );
     }
 
-    // Kiểm tra mã nhóm có tồn tại
-    const nhomExisting = await prisma.nhom.findUnique({
-      where: {
-        ma_nhom: maNhom,
-      },
-    });
-
     if (!nhomExisting) {
       throw new BadRequestError(`Mã nhóm ${maNhom} không tồn tại`);
     }
 
-    const hashPassword = bcrypt.hashSync(mat_khau, 10);
+    const hashPassword = await bcrypt.hash(matKhau, 10);
 
     const nguoiDungMoi = await prisma.nguoiDung.create({
       data: {
         tai_khoan: taiKhoan,
         mat_khau: hashPassword,
         email: emailNguoiDung,
-        so_dt: so_dt?.trim() || null,
+        so_dt: soDienThoai,
         ma_nhom: maNhom,
         ho_ten: hoTen,
         loai_nguoi_dung: loaiNguoiDung,
       },
-
       select: {
         tai_khoan: true,
         ho_ten: true,
@@ -609,16 +665,18 @@ export const nguoiDungService = {
       loai_nguoi_dung,
     } = req.body;
 
-    if (!tai_khoan?.trim()) {
+    const taiKhoan = tai_khoan?.trim();
+
+    if (!taiKhoan) {
       throw new BadRequestError("Tài khoản không được để trống");
     }
 
-    const taiKhoan = tai_khoan.trim();
-
-    // Kiểm tra người dùng cần cập nhật có tồn tại
     const nguoiDungExisting = await prisma.nguoiDung.findUnique({
       where: {
         tai_khoan: taiKhoan,
+      },
+      select: {
+        tai_khoan: true,
       },
     });
 
@@ -626,103 +684,121 @@ export const nguoiDungService = {
       throw new BadRequestError(`Tài khoản ${taiKhoan} không tồn tại`);
     }
 
-    // Kiểm tra email nếu Admin muốn cập nhật email
+    const dataCapNhat = {};
+
+    // Cập nhật email
     if (email !== undefined) {
-      if (!email?.trim()) {
+      const emailMoi = email?.trim().toLowerCase();
+
+      if (!emailMoi) {
         throw new BadRequestError("Email không được để trống");
       }
 
       const emailExisting = await prisma.nguoiDung.findFirst({
         where: {
-          email: email.trim(),
+          email: emailMoi,
           NOT: {
             tai_khoan: taiKhoan,
           },
         },
+        select: {
+          tai_khoan: true,
+        },
       });
 
       if (emailExisting) {
-        throw new BadRequestError(`Email ${email.trim()} đã tồn tại`);
+        throw new BadRequestError(`Email ${emailMoi} đã tồn tại`);
       }
+
+      dataCapNhat.email = emailMoi;
     }
 
-    // Kiểm tra họ tên nếu được gửi lên
-    if (ho_ten !== undefined && !ho_ten?.trim()) {
-      throw new BadRequestError("Họ tên không được để trống");
+    // Cập nhật họ tên
+    if (ho_ten !== undefined) {
+      const hoTenMoi = ho_ten?.trim();
+
+      if (!hoTenMoi) {
+        throw new BadRequestError("Họ tên không được để trống");
+      }
+
+      dataCapNhat.ho_ten = hoTenMoi;
     }
 
-    // Kiểm tra mật khẩu nếu được gửi lên
-    if (mat_khau !== undefined && !mat_khau?.trim()) {
-      throw new BadRequestError("Mật khẩu không được để trống");
+    // Cập nhật mật khẩu
+    if (mat_khau !== undefined) {
+      const matKhauMoi = mat_khau?.trim();
+
+      if (!matKhauMoi) {
+        throw new BadRequestError("Mật khẩu không được để trống");
+      }
+
+      dataCapNhat.mat_khau = await bcrypt.hash(matKhauMoi, 10);
     }
 
-    // Kiểm tra loại người dùng nếu được gửi lên
+    // Cập nhật số điện thoại
+    if (so_dt !== undefined) {
+      dataCapNhat.so_dt = so_dt?.trim() || null;
+    }
+
+    // Cập nhật loại người dùng
     if (loai_nguoi_dung !== undefined) {
-      if (!loai_nguoi_dung?.trim()) {
+      const loaiNguoiDungMoi = loai_nguoi_dung?.trim();
+
+      if (!loaiNguoiDungMoi) {
         throw new BadRequestError("Loại người dùng không được để trống");
       }
 
       const loaiNguoiDungExisting = await prisma.loaiNguoiDung.findUnique({
         where: {
-          ma_loai_nguoi_dung: loai_nguoi_dung.trim(),
+          ma_loai_nguoi_dung: loaiNguoiDungMoi,
+        },
+        select: {
+          ma_loai_nguoi_dung: true,
         },
       });
 
       if (!loaiNguoiDungExisting) {
         throw new BadRequestError(
-          `Loại người dùng ${loai_nguoi_dung.trim()} không tồn tại`,
+          `Loại người dùng ${loaiNguoiDungMoi} không tồn tại`,
         );
       }
+
+      dataCapNhat.loai_nguoi_dung = loaiNguoiDungMoi;
     }
 
-    // Kiểm tra mã nhóm nếu được gửi lên
+    // Cập nhật mã nhóm
     if (ma_nhom !== undefined) {
-      if (!ma_nhom?.trim()) {
+      const maNhomMoi = ma_nhom?.trim();
+
+      if (!maNhomMoi) {
         throw new BadRequestError("Mã nhóm không được để trống");
       }
 
       const nhomExisting = await prisma.nhom.findUnique({
         where: {
-          ma_nhom: ma_nhom.trim(),
+          ma_nhom: maNhomMoi,
+        },
+        select: {
+          ma_nhom: true,
         },
       });
 
       if (!nhomExisting) {
-        throw new BadRequestError(`Mã nhóm ${ma_nhom.trim()} không tồn tại`);
+        throw new BadRequestError(`Mã nhóm ${maNhomMoi} không tồn tại`);
       }
+
+      dataCapNhat.ma_nhom = maNhomMoi;
+    }
+
+    if (Object.keys(dataCapNhat).length === 0) {
+      throw new BadRequestError("Không có thông tin nào để cập nhật");
     }
 
     const nguoiDungCapNhat = await prisma.nguoiDung.update({
       where: {
         tai_khoan: taiKhoan,
       },
-
-      data: {
-        ...(mat_khau !== undefined && {
-          mat_khau: bcrypt.hashSync(mat_khau.trim(), 10),
-        }),
-
-        ...(email !== undefined && {
-          email: email.trim(),
-        }),
-
-        ...(so_dt !== undefined && {
-          so_dt: so_dt?.trim() || null,
-        }),
-
-        ...(ma_nhom !== undefined && {
-          ma_nhom: ma_nhom.trim(),
-        }),
-
-        ...(ho_ten !== undefined && {
-          ho_ten: ho_ten.trim(),
-        }),
-
-        ...(loai_nguoi_dung !== undefined && {
-          loai_nguoi_dung: loai_nguoi_dung.trim(),
-        }),
-      },
-
+      data: dataCapNhat,
       select: {
         tai_khoan: true,
         ho_ten: true,
@@ -738,22 +814,39 @@ export const nguoiDungService = {
 
   // Xóa người dùng Service
   async xoaNguoiDung(req) {
-    const { tai_khoan } = req.query;
+    const taiKhoan = req.query.tai_khoan?.trim();
 
-    if (!tai_khoan?.trim()) {
+    if (!taiKhoan) {
       throw new BadRequestError("Tài khoản không được để trống");
     }
-
-    const taiKhoan = tai_khoan.trim();
 
     const nguoiDungExisting = await prisma.nguoiDung.findUnique({
       where: {
         tai_khoan: taiKhoan,
       },
+      select: {
+        tai_khoan: true,
+        ho_ten: true,
+        email: true,
+        so_dt: true,
+        loai_nguoi_dung: true,
+        ma_nhom: true,
+        _count: {
+          select: {
+            DatVe: true,
+          },
+        },
+      },
     });
 
     if (!nguoiDungExisting) {
       throw new BadRequestError(`Tài khoản ${taiKhoan} không tồn tại`);
+    }
+
+    if (nguoiDungExisting._count.DatVe > 0) {
+      throw new BadRequestError(
+        `Không thể xóa tài khoản ${taiKhoan} vì người dùng đã có lịch sử đặt vé`,
+      );
     }
 
     const nguoiDungDaXoa = await prisma.nguoiDung.delete({

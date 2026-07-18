@@ -7,7 +7,7 @@ export const authAdmin = (req, res, next) => {
       throw new ForbiddenError("Không tìm thấy thông tin người dùng");
     }
     // Kiểm tra quyền quản trị
-    if (nguoiDung.loai_nguoi_dung !== "QuanTri") {
+    if (nguoiDung.loai_nguoi_dung !== "QUAN_TRI") {
       throw new ForbiddenError("Bạn không có quyền thực hiện chức năng này");
     }
     next();
