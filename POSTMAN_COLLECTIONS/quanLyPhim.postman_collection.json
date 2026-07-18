@@ -1,0 +1,362 @@
+{
+  "info": {
+    "_postman_id": "d7495250-f38a-4f83-8f87-572647994fdc",
+    "name": "Quản lý Phim",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "32381291",
+    "_collection_link": "https://go.postman.co/collection/32381291-d7495250-f38a-4f83-8f87-572647994fdc?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Lấy danh sách Banner",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{Banner list}}",
+          "host": [
+            "{{Banner list}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Lấy danh sách Phim",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{Movies list}}?maNhom=GP01",
+          "host": [
+            "{{Movies list}}"
+          ],
+          "query": [
+            {
+              "key": "maNhom",
+              "value": "GP01"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Lấy danh sách Phim phân trang",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{Movies list pagination}}?maNhom=GP01&page=1&pageSize=10",
+          "host": [
+            "{{Movies list pagination}}"
+          ],
+          "query": [
+            {
+              "key": "maNhom",
+              "value": "GP01"
+            },
+            {
+              "key": "page",
+              "value": "1"
+            },
+            {
+              "key": "pageSize",
+              "value": "10"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Lấy danh sách Phim phân trang theo ngày",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{Domain}}/phim/layDanhSachPhimTheoNgay?maNhom=GP01&page=1&pageSize=10&tuNgay=2024-01-01&denNgay=2024-12-31",
+          "host": [
+            "{{Domain}}"
+          ],
+          "path": [
+            "phim",
+            "layDanhSachPhimTheoNgay"
+          ],
+          "query": [
+            {
+              "key": "maNhom",
+              "value": "GP01"
+            },
+            {
+              "key": "page",
+              "value": "1"
+            },
+            {
+              "key": "pageSize",
+              "value": "10"
+            },
+            {
+              "key": "tuNgay",
+              "value": "2024-01-01"
+            },
+            {
+              "key": "denNgay",
+              "value": "2024-12-31"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Thêm phim Upload Hình",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "maPhim",
+              "value": "PHIM_AVENGERS_01",
+              "type": "text",
+              "uuid": "2b8721ed-83fa-4c98-aacd-3faf56a18d7e"
+            },
+            {
+              "key": "tenPhim",
+              "value": "Avengers: Endgame",
+              "type": "text",
+              "uuid": "58441e1d-480f-4aee-b2e3-450fbf68ee00"
+            },
+            {
+              "key": "trailer",
+              "value": "https://youtube.com/...",
+              "type": "text",
+              "uuid": "6cc4ad63-8ded-4b8a-8795-7a2e3c13903c"
+            },
+            {
+              "key": "moTa",
+              "value": "Nội dung phim...",
+              "type": "text",
+              "uuid": "900c4262-1443-43c6-8181-aeeb3cfe0f2f"
+            },
+            {
+              "key": "maNhom",
+              "value": "GP01",
+              "type": "text",
+              "uuid": "b205da93-2c88-43c2-a292-d3c03931accf"
+            },
+            {
+              "key": "ngayKhoiChieu",
+              "value": "2026-07-20",
+              "type": "text",
+              "uuid": "c0dfdd22-7e80-4af9-9217-556a187c4b1e"
+            },
+            {
+              "key": "danhGia",
+              "value": "9",
+              "type": "text",
+              "uuid": "6e1d4fdd-fbb4-468d-ac7f-2845f1acf061"
+            },
+            {
+              "key": "hot",
+              "value": "true",
+              "type": "text",
+              "uuid": "d11f96a1-fde2-4fc2-8ed6-c7d5be4346f7"
+            },
+            {
+              "key": "dangChieu",
+              "value": "true",
+              "type": "text",
+              "uuid": "570ea7be-5435-4d5e-8814-fc32282eb02f"
+            },
+            {
+              "key": "sapChieu",
+              "value": "false",
+              "type": "text",
+              "uuid": "6d9d638b-af81-4c69-aa95-05c8986acab7"
+            },
+            {
+              "key": "hinhAnh",
+              "type": "file",
+              "uuid": "388de793-12f5-4611-b287-bbf6c3ed98ec",
+              "src": "/C:/Users/dante/OneDrive/Pictures/PGR Wallpapers/0lh4t2cs5iogkak3vh-1766655448792英文.jpg"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{Add and Upload pictures of Movie}}",
+          "host": [
+            "{{Add and Upload pictures of Movie}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Cập nhật Upload hình",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "tenPhim",
+              "value": "Avengers: Endgame",
+              "type": "text",
+              "uuid": "58441e1d-480f-4aee-b2e3-450fbf68ee00"
+            },
+            {
+              "key": "trailer",
+              "value": "https://youtube.com/...",
+              "type": "text",
+              "uuid": "6cc4ad63-8ded-4b8a-8795-7a2e3c13903c"
+            },
+            {
+              "key": "moTa",
+              "value": "Nội dung phim...",
+              "type": "text",
+              "uuid": "900c4262-1443-43c6-8181-aeeb3cfe0f2f"
+            },
+            {
+              "key": "maNhom",
+              "value": "GP01",
+              "type": "text",
+              "uuid": "b205da93-2c88-43c2-a292-d3c03931accf"
+            },
+            {
+              "key": "ngayKhoiChieu",
+              "value": "2026-07-20",
+              "type": "text",
+              "uuid": "c0dfdd22-7e80-4af9-9217-556a187c4b1e"
+            },
+            {
+              "key": "danhGia",
+              "value": "9",
+              "type": "text",
+              "uuid": "6e1d4fdd-fbb4-468d-ac7f-2845f1acf061"
+            },
+            {
+              "key": "hot",
+              "value": "true",
+              "type": "text",
+              "uuid": "d11f96a1-fde2-4fc2-8ed6-c7d5be4346f7"
+            },
+            {
+              "key": "dangChieu",
+              "value": "true",
+              "type": "text",
+              "uuid": "570ea7be-5435-4d5e-8814-fc32282eb02f"
+            },
+            {
+              "key": "sapChieu",
+              "value": "false",
+              "type": "text",
+              "uuid": "6d9d638b-af81-4c69-aa95-05c8986acab7"
+            },
+            {
+              "key": "hinhAnh",
+              "type": "file",
+              "uuid": "388de793-12f5-4611-b287-bbf6c3ed98ec",
+              "src": "/C:/Users/dante/OneDrive/Pictures/PGR Wallpapers/4fqb5k8cv9qk4zsjke-1744972487687天赐之城.jpg"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{Update and Upload pictures of Movie}}/PHIM_AVATAR_3",
+          "host": [
+            "{{Update and Upload pictures of Movie}}"
+          ],
+          "path": [
+            "PHIM_AVATAR_3"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Xóa phim",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "frm",
+              "value": "{\n  \"tenPhim\": \"Avengers: Endgame cập nhật\",\n  \"trailer\": \"https://youtube.com/watch?v=example\",\n  \"moTa\": \"Nội dung phim đã cập nhật\",\n  \"maNhom\": \"GP01\",\n  \"ngayKhoiChieu\": \"2026-08-20\",\n  \"danhGia\": 9,\n  \"hot\": true,\n  \"dangChieu\": true,\n  \"sapChieu\": false\n}",
+              "type": "text",
+              "uuid": "ade46491-502b-4dc6-87c5-c753cd35c20e"
+            },
+            {
+              "key": "hinhAnh",
+              "type": "file",
+              "uuid": "ae308d7c-891b-4b0f-a75f-02518632983d",
+              "src": "/C:/Users/dante/OneDrive/Pictures/PGR Wallpapers/0tm5zw0cgwpc04m13l-1749091536542洛莎的信.jpg"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{Domain}}/phim/xoaPhim?maPhim=PHIM_YOUR_NAME",
+          "host": [
+            "{{Domain}}"
+          ],
+          "path": [
+            "phim",
+            "xoaPhim"
+          ],
+          "query": [
+            {
+              "key": "maPhim",
+              "value": "PHIM_YOUR_NAME"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Lấy thông tin phim",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "frm",
+              "value": "{\n  \"tenPhim\": \"Avengers: Endgame cập nhật\",\n  \"trailer\": \"https://youtube.com/watch?v=example\",\n  \"moTa\": \"Nội dung phim đã cập nhật\",\n  \"maNhom\": \"GP01\",\n  \"ngayKhoiChieu\": \"2026-08-20\",\n  \"danhGia\": 9,\n  \"hot\": true,\n  \"dangChieu\": true,\n  \"sapChieu\": false\n}",
+              "type": "text",
+              "uuid": "ade46491-502b-4dc6-87c5-c753cd35c20e"
+            },
+            {
+              "key": "hinhAnh",
+              "type": "file",
+              "uuid": "ae308d7c-891b-4b0f-a75f-02518632983d",
+              "src": "/C:/Users/dante/OneDrive/Pictures/PGR Wallpapers/0tm5zw0cgwpc04m13l-1749091536542洛莎的信.jpg"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{Movie info}}?maPhim=PHIM_AVATAR_3",
+          "host": [
+            "{{Movie info}}"
+          ],
+          "query": [
+            {
+              "key": "maPhim",
+              "value": "PHIM_AVATAR_3",
+              "type": "text"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
